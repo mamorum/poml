@@ -6,23 +6,23 @@ lib=\
   org.sql2o:sql2o:1.5.4,\
   org.flywaydb:flyway-core:4.0.3
 prop=project.build.sourceEncoding:UTF-8
-+javac=source:1.8, target:1.8
-+fatjar=\
+javac=source:1.8, target:1.8
+fatjar=\
   name: kaze-sample-rdb-exe-${version},\
   mainClass: kaze.sample.rdb.Main
-+java=\
+exe=\
   mainClass: kaze.sample.rdb.Main
 
 ---
-{{#prj:4.0.0}}
+{{#prj}}
   {{dist}}
   {{lib}}
   {{prop}}
-  <build>    
+  <build>
     <plugins>
-      {{+javac}}
-      {{+fatjar}}
-      {{+java}}
+      {{javac}}
+      {{fatjar}}
+      {{exe}}
     </plugins>
   </build>
 {{/prj}}

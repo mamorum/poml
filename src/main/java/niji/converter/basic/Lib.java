@@ -2,6 +2,8 @@ package niji.converter.basic;
 
 import java.util.function.Function;
 
+import niji.converter.util.Tag;
+
 public class Lib implements Function<String, String>{
 
   static String[] tmpls = {
@@ -13,33 +15,27 @@ public class Lib implements Function<String, String>{
       "<type>5</type>"
   };     
 
-  public static String dependency(String v) {
-    String[] vals = v.split(":");
-    StringBuilder sb = new StringBuilder();
-    sb.append("<dependency>").append(System.lineSeparator());
-    for (int i = 0; i < vals.length; i++) {
-      sb.append(
+  public static void addChild(String lib, Tag parent) {
+    Tag child =Tag.init("<dependency>", "</dependency>");
+    String[] childVals = lib.split(":");
+    for (int i = 0; i < childVals.length; i++) {
+      child.line(
         tmpls[i].replace(
-            Integer.toString(i), vals[i].trim()
+            Integer.toString(i),
+            childVals[i].trim()
         )
       );
-      sb.append(System.lineSeparator());
     }
-    sb.append("</dependency>").append(System.lineSeparator());
-    return sb.toString();
+    parent.child(child);
   }
 
   @Override public String apply(String v) {
-    StringBuilder xml = new StringBuilder();
-    String [] deps = v.split(",");
-    xml.append("<dependencies>").append(System.lineSeparator());
-    for (String dep: deps) {
-      xml.append(
-        dependency(dep.trim())
-      );
+    Tag parent = Tag.init(
+      "<dependencies>", "</dependencies>"
+    );
+    for (String lib: v.split(",")) {
+      addChild(lib.trim(), parent);
     }
-    xml.append("</dependencies>").append(System.lineSeparator());
-    return xml.toString();
+    return parent.string();
   }
-
 }

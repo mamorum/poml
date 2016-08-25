@@ -17,70 +17,73 @@ public class Main {
     );
   }
   
-  static Properties properties = new Properties();
+  static String line = null;
+  static long start = System.currentTimeMillis();
   
-  public static void buildProperties(String in) throws IOException {
-     try (StringReader sr = new StringReader(in)) {
-       properties.load(sr);
-    } catch (IOException e) {
-      throw e;
+  static Properties properties = null;
+  private static class Property {
+    Properties pp = new Properties();
+    StringBuilder sb = new StringBuilder();
+    public void add(String line) {
+      sb.append(line);
+      sb.append(System.lineSeparator());
+    }
+    public Properties build() throws IOException {
+      try (StringReader sr = new StringReader(sb.toString())) {
+        this.pp.load(sr);
+        return this.pp;
+      }
     }
   }
   
-  public static void main(String[] args)  {
-
-    long start = System.currentTimeMillis();
-    
+  public static void main(String[] args) throws IOException {
     try (BufferedReader br = reader()) {
-      
-      StringBuilder
-          pp = new StringBuilder(),
-          xml = new StringBuilder(); 
-      String line = null;
-      boolean firstSection = true;
-      
+      // first section
+      Property property = new Property();
       while ((line = br.readLine()) != null) {
-        if ("---".equals(line)) {
-          buildProperties(pp.toString());
-          firstSection = false;
-          continue;
-        }
-        // process properties.
-        if (firstSection) {
-          pp.append(line + System.lineSeparator());
-          continue;
-        }
-        // process template.
-        if (line.contains("{{")) {
-          if (line.contains("dist}}")) {
-            String replaced = line.replace(
-                "{{dist}}", Converter.tags("dist", properties)
-            );
-            xml.append(replaced);
-            continue;
-          }
-          if (line.contains("lib}}")) {
-            String replaced = line.replace(
-                "{{lib}}", Converter.tags("lib", properties)
-            );
-            xml.append(replaced);
-            continue;
-          }
-        }
-        // read tmpl and process properties.      
-        xml.append(line).append(System.lineSeparator());
+        if (line.equals("---")) break;
+        property.add(line);
       }
+      properties = property.build();
       
-      System.out.println(xml.toString());
-      System.out.println(
-          "Finesed " +
-          (System.currentTimeMillis() - start) +
-          "msec."
-      );
-      
+      // second section
+      while ((line = br.readLine()) != null) {
+        processTmpl();
+      }
+      finish();
     }
-    catch (IOException e) {
-      throw new RuntimeException(e);
+  }
+  
+  
+  static StringBuilder xml = new StringBuilder();
+  
+  private static void processTmpl() throws IOException {
+    int start = line.indexOf("{{");
+    int end = line.indexOf("}}");
+    if (start == -1 || end == -1) {
+      appendOnly();
+      return;
     }
+    String key = line.substring(start+2, end);
+    String mark = line.substring(start, end+2);
+    String replaced = line.replace(
+        mark, Converter.tags(key, properties)
+    );
+    xml.append(replaced);      
+  }
+  
+  private static void appendOnly() {
+    xml.append(line);
+    xml.append(System.lineSeparator());
+  }
+
+  private static void finish() {
+    // TODO output pom.xml.
+    System.out.println(xml.toString());
+    System.out.println(
+        "Finished " +
+        (System.currentTimeMillis() - start) +
+        "msec."
+    );
   }
 }
