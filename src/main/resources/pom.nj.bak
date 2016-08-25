@@ -1,0 +1,65 @@
+artifact=com.github.mamorum:kaze-sample-rdb:0.0.1:jar
+dependencies=\
+  com.github.mamorum:kaze:0.0.3-SNAPSHOT,\
+  ch.qos.logback:postgresql:9.4.1209,\
+  com.zaxxer:HikariCP:2.4.7,\
+  org.sql2o:sql2o:1.5.4,\
+  org.flywaydb:flyway-core:4.0.3
+_compiler=:maven-compiler-plugin:3.5.1
+_assembly=:maven-assembly-plugin:2.6
+_exec=org.codehaus.mojo:exec-maven-plugin:1.5.0
+
+---
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  {{artifact}}
+  {{dependencies}}
+  
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>    
+    <plugins>
+      <plugin>
+        {{_compiler}}
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        {{_assembly}}
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <finalName>kaze-sample-rdb-exe-${version}</finalName>
+          <appendAssemblyId>false</appendAssemblyId>
+          <archive>
+            <manifest>
+              <mainClass>kaze.sample.rdb.Main</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin> <!-- usage: mvn exec:java  -->
+        {{_exec}}
+        <configuration>
+          <mainClass>kaze.sample.rdb.Main</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
