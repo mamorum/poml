@@ -5,7 +5,7 @@ lib=\
   com.zaxxer:HikariCP:2.4.7,\
   org.sql2o:sql2o:1.5.4,\
   org.flywaydb:flyway-core:4.0.3
-prop=project.build.sourceEncoding:UTF-8
+pp=project.build.sourceEncoding:UTF-8
 javac=source:1.8, target:1.8
 fatjar=\
   name: kaze-sample-rdb-exe-${version},\
@@ -17,7 +17,7 @@ exe=\
 {{#prj}}
   {{dist}}
   {{lib}}
-  {{prop}}
+  {{pp}}
   <build>
     <plugins>
       {{javac}}
