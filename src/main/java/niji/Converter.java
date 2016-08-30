@@ -8,6 +8,7 @@ import niji.converter.Src;
 import niji.converter.func.Prj;
 import niji.converter.func.basic.Dist;
 import niji.converter.func.basic.Lib;
+import niji.converter.func.basic.Pp;
 
 public class Converter {
 
@@ -24,6 +25,7 @@ public class Converter {
     key2func.put(Prj.End.key, new Prj.End());
     key2func.put(Dist.key, new Dist());
     key2func.put(Lib.key, new Lib());
+    key2func.put(Pp.key, new Pp());
   }  
   public void delegate(
     String key, Src src, StringBuilder xml
