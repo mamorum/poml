@@ -15,6 +15,7 @@ public class Converters {
       @Override public void toXml(
           Src src, StringBuilder xml
       ) {
+        xml.append("{{NoConverter}}");
         xml.append(System.lineSeparator());
       }
     };
