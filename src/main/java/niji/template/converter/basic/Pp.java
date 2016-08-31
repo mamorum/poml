@@ -1,14 +1,14 @@
-package niji.converter.func.basic;
+package niji.template.converter.basic;
 
-import niji.Converter.Func;
-import niji.converter.Src;
-import niji.converter.util.Tag;
+import niji.template.Converter;
+import niji.template.Src;
+import niji.template.converter.util.Tag;
 
-public class Pp implements Func {
+public class Pp implements Converter {
 
   public static String key = "pp";
   
-  @Override public void accept(Src src, StringBuilder xml) {
+  @Override public void toXml(Src src, StringBuilder xml) {
     String ppv = src.p.getProperty(key);
     Tag tag = Tag.init(src.indent, "<properties>", "</properties>");
     

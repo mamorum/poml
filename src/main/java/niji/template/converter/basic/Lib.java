@@ -1,10 +1,10 @@
-package niji.converter.func.basic;
+package niji.template.converter.basic;
 
-import niji.Converter.Func;
-import niji.converter.Src;
-import niji.converter.util.Tag;
+import niji.template.Converter;
+import niji.template.Src;
+import niji.template.converter.util.Tag;
 
-public class Lib implements Func {
+public class Lib implements Converter {
 
   public static String key = "lib";
   
@@ -31,7 +31,7 @@ public class Lib implements Func {
     parent.child(child);
   }
 
-  @Override public void accept(Src src, StringBuilder xml) {
+  @Override public void toXml(Src src, StringBuilder xml) {
     String ppv = src.p.getProperty(key);
     Tag parent = Tag.init(
         src.indent, "<dependencies>", "</dependencies>"

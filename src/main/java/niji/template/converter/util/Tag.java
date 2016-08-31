@@ -1,4 +1,4 @@
-package niji.converter.util;
+package niji.template.converter.util;
 
 public class Tag {
 

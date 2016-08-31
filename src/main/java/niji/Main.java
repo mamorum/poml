@@ -3,6 +3,7 @@ package niji;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 public class Main {
 
@@ -20,7 +21,8 @@ public class Main {
   public static void main(String[] args) throws IOException {
     String xml = null;
     try (BufferedReader br = reader()) {
-      xml = Processor.process(br);
+      Properties p = Property.process(br);  // first section
+      xml = Template.process(br, p);  // second section
     }
     finish(xml);
   }

@@ -1,4 +1,4 @@
-package niji.converter;
+package niji.template;
 
 import java.util.Properties;
 
