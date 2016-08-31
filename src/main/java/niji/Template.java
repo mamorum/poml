@@ -35,16 +35,10 @@ public class Template {
       return;
     }
     
+    // convert
     String key = line.substring(start+2, end);
-    Converter c = Converters.get(key);
-    if (c != null) c.toXml(
-        Src.of(p, start), xml
-    );
-    else xml.append("{{" +key + "}}" + System.lineSeparator());
-    // TODO temporary ->.
-//    throw new RuntimeException(
-//      "Property Not Found [template key={{" + "}}]"
-//    );
-    // <-
+    Converter converter = Converters.get(key);
+    Src src = Src.of(p, start);
+    converter.toXml(src, xml);
   }
 }

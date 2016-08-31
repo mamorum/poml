@@ -10,10 +10,23 @@ import niji.template.converter.basic.Pp;
 public class Converters {
 
   public static Converter get(String key) {
-    return key2func.get(key);
+    Converter c = key2func.get(key);
+    if (c == null) return new Converter() {
+      @Override public void toXml(
+          Src src, StringBuilder xml
+      ) {
+        xml.append(System.lineSeparator());
+      }
+    };
+    // TODO above, change to ->.
+//  throw new RuntimeException(
+//    "Property Not Found [template key={{" + "}}]"
+//  );
+    return c;
   }
 
-  static HashMap<String, Converter> key2func = new HashMap<>();
+  static HashMap<String, Converter>
+    key2func = new HashMap<>();
   static {
     key2func.put(Prj.Start.key, new Prj.Start());
     key2func.put(Prj.End.key, new Prj.End());
