@@ -2,7 +2,7 @@ package niji.template.converter.basic;
 
 import niji.template.Converter;
 import niji.template.Src;
-import niji.template.converter.util.Tag;
+import niji.util.Str;
 
 public class Lib implements Converter {
 
@@ -17,28 +17,30 @@ public class Lib implements Converter {
       "<type>5</type>"
   };
 
-  public static void addChild(int depth, String lib, Tag parent) {
-    Tag child =Tag.init(depth+2, "<dependency>", "</dependency>");
-    String[] childVals = lib.split(":");
-    for (int i = 0; i < childVals.length; i++) {
-      child.line(
-        tmpls[i].replace(
-            Integer.toString(i),
-            childVals[i].trim()
-        )
-      );
+  @Override public void toXml(Src src, StringBuilder xml) {
+    Str.ln(src.indent, "<dependencies>", xml);
+    for (String lib: src.propertyList(key)) {
+      addChild(src.indent+2, lib.trim(), xml);
     }
-    parent.child(child);
+    Str.ln(src.indent, "</dependencies>", xml);
   }
 
-  @Override public void toXml(Src src, StringBuilder xml) {
-    String ppv = src.p.getProperty(key);
-    Tag parent = Tag.init(
-        src.indent, "<dependencies>", "</dependencies>"
-    );
-    for (String lib: ppv.split(",")) {
-      addChild(src.indent, lib.trim(), parent);
+  public void addChild(
+      int indent, String lib, StringBuilder xml
+  ) {
+    Str.ln(indent, "<dependency>", xml);
+    String[] vals = lib.split(":");
+    for (int i = 0; i < vals.length; i++) {
+      String tag = tag(i, vals[i]);
+      Str.ln(indent+2, tag, xml);
     }
-    xml.append(parent.string());
+    Str.ln(indent, "</dependency>", xml);
+  }
+
+  public String tag(int index, String val) {
+    return tmpls[index].replace(
+        Integer.toString(index),
+        val.trim()
+    );
   }
 }

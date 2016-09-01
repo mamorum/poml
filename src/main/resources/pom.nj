@@ -12,7 +12,6 @@ fatjar=\
   mainClass: kaze.sample.rdb.Main
 exe=\
   mainClass: kaze.sample.rdb.Main
-
 ---
 {{#prj}}
   {{dist}}

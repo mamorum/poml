@@ -2,7 +2,7 @@ package niji.template.converter.basic;
 
 import niji.template.Converter;
 import niji.template.Src;
-import niji.template.converter.util.Tag;
+import niji.util.Str;
 
 public class Dist implements Converter {
 
@@ -16,16 +16,17 @@ public class Dist implements Converter {
   };
 
   @Override public void toXml(Src src, StringBuilder xml) {
-    String ppv = src.p.getProperty(key);
-    String[] vals = ppv.split(":");
-    Tag tag = Tag.init(src.indent);
+    String[] vals = src.property(key).split(":");
     for (int i = 0; i < vals.length; i++) {
-      tag.line(
-        tmpls[i].replace(
-            Integer.toString(i), vals[i].trim()
-        )
-      );
+      String tag = tag(i, vals[i]);
+      Str.ln(src.indent, tag, xml);
     }
-    xml.append(tag.string());
+  }
+  
+  public String tag(int index, String val) {
+    return tmpls[index].replace(
+        Integer.toString(index),
+        val.trim()
+    );
   }
 }
