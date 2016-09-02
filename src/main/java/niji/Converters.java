@@ -1,23 +1,27 @@
-package niji.template;
+package niji;
 
 import java.util.HashMap;
 
-import niji.template.converter.Prj;
-import niji.template.converter.basic.Dist;
-import niji.template.converter.basic.Lib;
-import niji.template.converter.basic.Pp;
-import niji.template.converter.build.plugin.Javac;
+import niji.converter.Prj;
+import niji.converter.basic.Dist;
+import niji.converter.basic.Lib;
+import niji.converter.basic.Pp;
+import niji.converter.build.plugin.Javac;
 
 public class Converters {
 
+  @FunctionalInterface
+  public static interface Converter {
+    void convert(Src src, Dst dst);
+  }
+  
   public static Converter get(String key) {
     Converter c = key2func.get(key);
     if (c == null) return new Converter() {
-      @Override public void toXml(
-          Src src, StringBuilder xml
+      @Override public void convert(
+          Src src, Dst dst
       ) {
-        xml.append("{{NoConverter}}");
-        xml.append(System.lineSeparator());
+        dst.out.println("{{NoConverter}}");
       }
     };
     // TODO above, change to ->.

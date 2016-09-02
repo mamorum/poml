@@ -1,7 +1,8 @@
-package niji.template.converter;
+package niji.converter;
 
-import niji.template.Converter;
-import niji.template.Src;
+import niji.Dst;
+import niji.Src;
+import niji.Converters.Converter;
 
 public class Prj {
   
@@ -15,16 +16,16 @@ public class Prj {
         System.lineSeparator() +
         "  <modelVersion>4.0.0</modelVersion>" +
         System.lineSeparator();
-    @Override public void toXml(Src src, StringBuilder xml) {
-      xml.append(model4); 
+    @Override public void convert(Src src, Dst dst) {
+      dst.out.println(model4); 
     }
   }
   
   public static class End implements Converter {
     public static final String key = "/prj";
     final String tag = "</project>";
-    @Override public void toXml(Src src, StringBuilder xml) {
-      xml.append(tag);
+    @Override public void convert(Src src, Dst dst) {
+      dst.out.println(tag);
     }
   }
 }
