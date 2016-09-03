@@ -16,7 +16,7 @@ public class Dist implements Converter {
   };
 
   @Override public void convert(Src src, Dst dst) {
-    String[] vals = src.property(key).split(":");
+    String[] vals = src.p(key).split(":");
     for (int i = 0; i < vals.length; i++) {
       dst.out.println(
           tag(i, vals[i])

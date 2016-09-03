@@ -6,7 +6,7 @@ import niji.converter.Prj;
 import niji.converter.basic.Dist;
 import niji.converter.basic.Lib;
 import niji.converter.basic.Pp;
-import niji.converter.build.plugin.Javac;
+import niji.converter.build.plugin.Compile;
 
 public class Converters {
 
@@ -39,6 +39,6 @@ public class Converters {
     key2func.put(Dist.key, new Dist());
     key2func.put(Lib.key, new Lib());
     key2func.put(Pp.key, new Pp());
-    key2func.put(Javac.key, new Javac());
+    key2func.put(Compile.key, new Compile());
   }
 }

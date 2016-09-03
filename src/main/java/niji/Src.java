@@ -45,17 +45,17 @@ public class Src {
     return this;
   }
   
-  public String property(String key) {
+  public String p(String key) {
     return p.getProperty(key);
   }
-  public String[] propertyList(String key) {
-    String pp = property(key);
+  public String[] pList(String key) {
+    String pp = p(key);
     if (pp == null) return null;
     else return pp.split(",");
   }
-  public Map<String, String> propertyMap(String key) {
+  public Map<String, String> pMap(String key) {
     Map<String, String> map = new LinkedHashMap<>();
-    for (String pp :propertyList(key)) {
+    for (String pp :pList(key)) {
       String[] kv = pp.split(":");
       String k = kv[0].trim();
       String v = kv[1].trim();

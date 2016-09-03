@@ -1,19 +1,23 @@
 package niji.converter.build.plugin;
 
-import java.util.Map;
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
 
+import niji.Converters.Converter;
 import niji.Dst;
 import niji.Src;
-import niji.Converters.Converter;
 
-public class Javac implements Converter {
+public class Compile implements Converter {
   
-  public static String key = "javac";
+  public static String key = "compile";
   
   @Override public void convert(Src src, Dst dst) {
-    Map<String, String> prop = src.propertyMap(key);
-    
-    dst.out.println("{{javac}}");
+    MustacheFactory mf = new DefaultMustacheFactory();
+    Mustache m = mf.compile("compile.mustache");
+    m.execute(
+      dst.out, src.pMap(key)
+    );
     
 //    int indent = src.indent;
 //    Str.ln(indent, "<plugin>", dst);

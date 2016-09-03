@@ -19,7 +19,7 @@ public class Lib implements Converter {
 
   @Override public void convert(Src src, Dst dst) {
     dst.out.println("  <dependencies>");
-    for (String lib: src.propertyList(key)) {
+    for (String lib: src.pList(key)) {
       addChild(lib.trim(), dst);
     }
     dst.out.println("  </dependencies>");

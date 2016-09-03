@@ -12,7 +12,7 @@ public class Pp implements Converter {
   
   @Override public void convert(Src src, Dst dst) {
     dst.out.println("  <properties>");
-    Map<String, String> prop = src.propertyMap(key);
+    Map<String, String> prop = src.pMap(key);
     for (String k: prop.keySet()) {
       String v = prop.get(k);
       dst.out.print("    ");
