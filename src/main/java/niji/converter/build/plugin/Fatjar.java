@@ -7,14 +7,14 @@ import niji.Dst;
 import niji.Src;
 import niji.lib.Mst;
 
-public class Compile implements Converter {
+public class Fatjar implements Converter {
   
-  public static String key = "compile";
+  public static String key = "fatjar";
   
   @Override public void convert(Src src, Dst dst) {
     // prepare default value.
     Map<String, String> map = src.pMap(key);
-    if (map.get("ver") == null) map.put("ver", "3.5.1");
-    Mst.render("compile.mustache", map, dst.out);
+    if (map.get("ver") == null) map.put("ver", "2.6");
+    Mst.render("fatjar.mustache", map, dst.out);
   }
 }

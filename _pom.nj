@@ -6,7 +6,7 @@ lib=\
   org.sql2o:sql2o:1.5.4,\
   org.flywaydb:flyway-core:4.0.3
 pp=project.build.sourceEncoding:UTF-8
-compile=ver:3.5.1, source:1.8, target:1.8
+compile=source:1.8, target:1.8
 fatjar=\
   name: kaze-sample-rdb-exe-${version},\
   mainClass: kaze.sample.rdb.Main
