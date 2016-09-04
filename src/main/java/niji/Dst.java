@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
-import niji.Converters.Converter;
-
 public class Dst {
   
   public PrintWriter out;
@@ -38,12 +36,11 @@ public class Dst {
       out.println(src.c.line);
       return;
     }
-    
+
     // convert
     src.c.indent = start;
     String key = src.c.line.substring(start+2, end);
-    Converter c = Converters.get(key);
-    c.convert(src, this);
+    Converters.convert(key, src, this);
   }
 
   public void close() {

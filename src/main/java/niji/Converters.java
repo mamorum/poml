@@ -2,39 +2,43 @@ package niji;
 
 import java.util.HashMap;
 
-import niji.converter.Prj;
-import niji.converter.basic.Dist;
-import niji.converter.basic.Lib;
-import niji.converter.basic.Pp;
-import niji.converter.build.plugin.Compile;
-import niji.converter.build.plugin.Exe;
-import niji.converter.build.plugin.Fatjar;
+import org.reflections.Reflections;
 
 public class Converters {
 
-  @FunctionalInterface
   public static interface Converter {
+    String key();
     void convert(Src src, Dst dst);
   }
   
-  public static Converter get(String key) {
-    Converter c = key2func.get(key);
+  public static void convert(String key, Src src, Dst dst) {
+    get(key).convert(src, dst);
+  }
+  
+  private static Converter get(String key) {
+    Converter c = converters.get(key);
     if (c == null) throw new RuntimeException(
-      "Property Not Found [template key={{" + key + "}}]"
+      "Property not found for {{" + key + "}}"
     );
     return c;
   }
 
-  static HashMap<String, Converter>
-    key2func = new HashMap<>();
-  static {
-    key2func.put(Prj.Start.key, new Prj.Start());
-    key2func.put(Prj.End.key, new Prj.End());
-    key2func.put(Dist.key, new Dist());
-    key2func.put(Lib.key, new Lib());
-    key2func.put(Pp.key, new Pp());
-    key2func.put(Compile.key, new Compile());
-    key2func.put(Fatjar.key, new Fatjar());
-    key2func.put(Exe.key, new Exe());
+  private static HashMap<String, Converter>
+    converters = new HashMap<>();
+  static { init(); }
+  
+  private static void init() {
+    Reflections r = new Reflections("niji.converter");
+    r.getSubTypesOf(Converter.class).forEach((c) -> {
+      try {
+        Converter obj = c.newInstance();
+        converters.put(obj.key(), obj);
+      } catch (
+          InstantiationException |
+          IllegalAccessException e
+      ) {
+        throw new RuntimeException(e);
+      }
+    });
   }
 }

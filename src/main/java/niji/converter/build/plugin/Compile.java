@@ -9,11 +9,11 @@ import niji.lib.Mst;
 
 public class Compile implements Converter {
   
-  public static String key = "compile";
+  public String key() {return "compile";}
   
   @Override public void convert(Src src, Dst dst) {
     // prepare default value.
-    Map<String, String> map = src.pMap(key);
+    Map<String, String> map = src.pMap(key());
     if (map.get("ver") == null) map.put("ver", "3.5.1");
     Mst.render("compile.mustache", map, dst.out);
   }

@@ -8,11 +8,11 @@ import niji.Converters.Converter;
 
 public class Pp implements Converter {
 
-  public static String key = "pp";
+  public String key() {return "pp";}
   
   @Override public void convert(Src src, Dst dst) {
     dst.out.println("  <properties>");
-    Map<String, String> prop = src.pMap(key);
+    Map<String, String> prop = src.pMap(key());
     for (String k: prop.keySet()) {
       String v = prop.get(k);
       dst.out.print("    ");

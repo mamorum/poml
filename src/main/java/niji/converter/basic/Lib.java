@@ -6,7 +6,7 @@ import niji.Converters.Converter;
 
 public class Lib implements Converter {
 
-  public static String key = "lib";
+  public String key() {return "lib";}
   
   static String[] tmpls = {
       "      <groupId>0</groupId>", 
@@ -19,7 +19,7 @@ public class Lib implements Converter {
 
   @Override public void convert(Src src, Dst dst) {
     dst.out.println("  <dependencies>");
-    for (String lib: src.pList(key)) {
+    for (String lib: src.pList(key())) {
       addChild(lib.trim(), dst);
     }
     dst.out.println("  </dependencies>");

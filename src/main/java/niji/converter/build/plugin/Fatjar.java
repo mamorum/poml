@@ -9,11 +9,11 @@ import niji.lib.Mst;
 
 public class Fatjar implements Converter {
   
-  public static String key = "fatjar";
+  public String key() {return "fatjar";}
   
   @Override public void convert(Src src, Dst dst) {
     // prepare default value.
-    Map<String, String> map = src.pMap(key);
+    Map<String, String> map = src.pMap(key());
     if (map.get("ver") == null) map.put("ver", "2.6");
     Mst.render("fatjar.mustache", map, dst.out);
   }

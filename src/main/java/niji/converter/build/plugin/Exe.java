@@ -9,11 +9,11 @@ import niji.lib.Mst;
 
 public class Exe implements Converter {
   
-  public static String key = "exe";
+  public String key() {return "exe";}
   
   @Override public void convert(Src src, Dst dst) {
     // prepare default value.
-    Map<String, String> map = src.pMap(key);
+    Map<String, String> map = src.pMap(key());
     if (map.get("ver") == null) map.put("ver", "1.5.0");
     Mst.render("exe.mustache", map, dst.out);
   }

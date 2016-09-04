@@ -7,7 +7,7 @@ import niji.Converters.Converter;
 public class Prj {
   
   public static class Start implements Converter {
-    public static final String key = "#prj";
+    public String key() {return "#prj";}
     final String model4 =  // for maven2.
       "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" " +
         "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
@@ -22,7 +22,7 @@ public class Prj {
   }
   
   public static class End implements Converter {
-    public static final String key = "/prj";
+    public String key() {return "/prj";}
     final String tag = "</project>";
     @Override public void convert(Src src, Dst dst) {
       dst.out.println(tag);
