@@ -8,7 +8,7 @@ lib=\
 pp=project.build.sourceEncoding:UTF-8
 compile=source:1.8, target:1.8
 fatjar=\
-  name: kaze-sample-rdb-exe-${version},\
+  name: kaze-sample-rdb-exe-${project.version},\
   mainClass: kaze.sample.rdb.Main
 exe=\
   mainClass: kaze.sample.rdb.Main
