@@ -1,8 +1,8 @@
-package niji.converter;
+package poml.converter;
 
-import niji.Dst;
-import niji.Src;
-import niji.Converters.Converter;
+import poml.Dst;
+import poml.Src;
+import poml.Converters.Converter;
 
 public class Prj {
   

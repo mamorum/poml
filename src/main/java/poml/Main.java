@@ -1,4 +1,4 @@
-package niji;
+package poml;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
@@ -29,7 +29,7 @@ public class Main {
   }
 
   private static void inform() {
-    System.out.print("Generated pom.xml @");
+    System.out.print("pom.xml generated @");
     System.out.print(
         ManagementFactory
           .getRuntimeMXBean().getUptime());

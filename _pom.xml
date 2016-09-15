@@ -9,7 +9,7 @@
     <dependency>
       <groupId>com.github.mamorum</groupId>
       <artifactId>kaze</artifactId>
-      <version>0.0.3-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -54,7 +54,7 @@
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
-          <finalName>kaze-sample-rdb-exe-${version}</finalName>
+          <finalName>kaze-sample-rdb-exe-${project.version}</finalName>
           <appendAssemblyId>false</appendAssemblyId>
           <archive>
             <manifest>

@@ -1,11 +1,11 @@
-package niji.converter.build.plugin;
+package poml.converter.build.plugin;
 
 import java.util.Map;
 
-import niji.Converters.Converter;
-import niji.Dst;
-import niji.Src;
-import niji.lib.Mst;
+import poml.Dst;
+import poml.Src;
+import poml.Converters.Converter;
+import poml.lib.Mst;
 
 public class Compile implements Converter {
   
@@ -13,7 +13,7 @@ public class Compile implements Converter {
   
   @Override public void convert(Src src, Dst dst) {
     // prepare default value.
-    Map<String, String> map = src.pMap(key());
+    Map<String, String> map = src.propMap(key());
     if (map.get("ver") == null) map.put("ver", "3.5.1");
     Mst.render("compile.mustache", map, dst.out);
   }

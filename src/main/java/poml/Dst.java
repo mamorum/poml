@@ -1,4 +1,4 @@
-package niji;
+package poml;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -21,25 +21,25 @@ public class Dst {
   }
 
   public Dst from(Src src) throws IOException {
-    while ((src.c.line = src.in.readLine()) != null) {
+    while ((src.ctxt.line = src.in.readLine()) != null) {
       process(src);
     }
     return this;
   }
 
   private void process(Src src) {
-    int start = src.c.line.indexOf("{{");
-    int end = src.c.line.indexOf("}}");
+    int start = src.ctxt.line.indexOf("{{");
+    int end = src.ctxt.line.indexOf("}}");
     
     // no conversion
     if (start == -1 || end == -1) {
-      out.println(src.c.line);
+      out.println(src.ctxt.line);
       return;
     }
 
     // convert
-    src.c.indent = start;
-    String key = src.c.line.substring(start+2, end);
+    src.ctxt.indent = start;
+    String key = src.ctxt.line.substring(start+2, end);
     Converters.convert(key, src, this);
   }
 

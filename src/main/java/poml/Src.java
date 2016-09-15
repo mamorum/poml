@@ -1,4 +1,4 @@
-package niji;
+package poml;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -12,8 +12,8 @@ import java.util.Properties;
 public class Src {
 
   public BufferedReader in;
-  public Properties p = new Properties();
-  public Context c = new Context();
+  public Properties prop = new Properties();
+  public Context ctxt = new Context();
   
   public class Context {
     public String line;
@@ -40,22 +40,22 @@ public class Src {
       StringReader r
         = new StringReader(txt.toString())
     ) {
-      p.load(r);
+      prop.load(r);
     }
     return this;
   }
   
-  public String p(String key) {
-    return p.getProperty(key);
+  public String prop(String key) {
+    return prop.getProperty(key);
   }
-  public String[] pList(String key) {
-    String pp = p(key);
+  public String[] propList(String key, String delim) {
+    String pp = prop(key);
     if (pp == null) return null;
-    else return pp.split(",");
+    else return pp.split(delim);
   }
-  public Map<String, String> pMap(String key) {
+  public Map<String, String> propMap(String key) {
     Map<String, String> map = new LinkedHashMap<>();
-    for (String pp :pList(key)) {
+    for (String pp :propList(key, ",")) {
       String[] kv = pp.split(":");
       String k = kv[0].trim();
       String v = kv[1].trim();

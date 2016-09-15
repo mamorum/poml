@@ -1,14 +1,14 @@
-package niji.converter.basic;
+package poml.converter.basic;
 
-import niji.Dst;
-import niji.Src;
-import niji.Converters.Converter;
+import poml.Dst;
+import poml.Src;
+import poml.Converters.Converter;
 
 public class Dist implements Converter {
 
   public String key() {return "dist";}
 
-  private static String[] tmpls = {
+  private static final String[] tmpls = {
       "  <groupId>0</groupId>", 
       "  <artifactId>1</artifactId>",
       "  <version>2</version>",
@@ -16,7 +16,7 @@ public class Dist implements Converter {
   };
 
   public void convert(Src src, Dst dst) {
-    String[] vals = src.p(key()).split(":");
+    String[] vals = src.propList(key(), ":");
     for (int i = 0; i < vals.length; i++) {
       dst.out.println(
           tag(i, vals[i])

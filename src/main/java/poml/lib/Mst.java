@@ -1,4 +1,4 @@
-package niji.lib;
+package poml.lib;
 
 import java.io.PrintWriter;
 

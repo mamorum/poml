@@ -1,8 +1,8 @@
-package niji.converter.basic;
+package poml.converter.basic;
 
-import niji.Dst;
-import niji.Src;
-import niji.Converters.Converter;
+import poml.Dst;
+import poml.Src;
+import poml.Converters.Converter;
 
 public class Lib implements Converter {
 
@@ -19,7 +19,7 @@ public class Lib implements Converter {
 
   @Override public void convert(Src src, Dst dst) {
     dst.out.println("  <dependencies>");
-    for (String lib: src.pList(key())) {
+    for (String lib: src.propList(key(), ",")) {
       addChild(lib.trim(), dst);
     }
     dst.out.println("  </dependencies>");

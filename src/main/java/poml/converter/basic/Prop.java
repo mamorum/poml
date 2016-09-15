@@ -1,18 +1,18 @@
-package niji.converter.basic;
+package poml.converter.basic;
 
 import java.util.Map;
 
-import niji.Dst;
-import niji.Src;
-import niji.Converters.Converter;
+import poml.Dst;
+import poml.Src;
+import poml.Converters.Converter;
 
-public class Pp implements Converter {
+public class Prop implements Converter {
 
-  public String key() {return "pp";}
+  public String key() {return "prop";}
   
   @Override public void convert(Src src, Dst dst) {
     dst.out.println("  <properties>");
-    Map<String, String> prop = src.pMap(key());
+    Map<String, String> prop = src.propMap(key());
     for (String k: prop.keySet()) {
       String v = prop.get(k);
       dst.out.print("    ");

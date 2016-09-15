@@ -1,4 +1,4 @@
-package niji;
+package poml;
 
 import java.util.HashMap;
 
@@ -28,7 +28,7 @@ public class Converters {
   static { init(); }
   
   private static void init() {
-    Reflections r = new Reflections("niji.converter");
+    Reflections r = new Reflections("poml.converter");
     r.getSubTypesOf(Converter.class).forEach((c) -> {
       try {
         Converter obj = c.newInstance();
