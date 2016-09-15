@@ -4,10 +4,10 @@ import poml.Dst;
 import poml.Src;
 import poml.Converters.Converter;
 
-public class Prj {
+public class Model4 {
   
   public static class Start implements Converter {
-    public String key() {return "#prj";}
+    public String key() {return "#model4";}
     final String model4 =  // for maven2.
       "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" " +
         "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
@@ -22,7 +22,7 @@ public class Prj {
   }
   
   public static class End implements Converter {
-    public String key() {return "/prj";}
+    public String key() {return "/model4";}
     final String tag = "</project>";
     @Override public void convert(Src src, Dst dst) {
       dst.out.println(tag);

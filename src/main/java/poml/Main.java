@@ -2,8 +2,6 @@ package poml;
 
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Main {
 
@@ -11,16 +9,14 @@ public class Main {
   static Dst dst;
   
   public static void main(String[] args) throws IOException {
+    Console.start();
     try {
-      // TODO Get file path from args ?
-      src = Src.open("_pom.nj").loadProperties();
-      dst = Dst.open("_pom.xml").from(src);
-    }
-    finally {
+      src = Src.open(args[0]).loadProperties();
+      dst = Dst.open(args[1]).load(src);
+    } finally {
       close();
-      inform();
-      debug();
     }
+    Console.end();
   }
 
   private static void close() throws IOException {
@@ -28,17 +24,16 @@ public class Main {
     finally { if (dst != null) dst.close(); }
   }
 
-  private static void inform() {
-    System.out.print("pom.xml generated @");
-    System.out.print(
-        ManagementFactory
-          .getRuntimeMXBean().getUptime());
-    System.out.println("ms.");
-  }
-  
-  private static void debug() throws IOException {
-    Files.lines(Paths.get("_pom.xml")).forEach(s -> {
-      System.out.println(s);
-    });
+  private static class Console {
+    static void start() {
+      System.out.println("Start to process poml ...");
+    }
+    static void end() {
+      System.out.print("pom.xml generated @");
+      System.out.print(
+          ManagementFactory
+            .getRuntimeMXBean().getUptime());
+      System.out.println("ms.");
+    }
   }
 }

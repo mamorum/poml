@@ -1,0 +1,21 @@
+dist=com.github.mamorum:poml:0.0.1:jar
+lib=\
+  org.reflections:reflections:0.9.10,\
+  com.github.spullara.mustache.java:compiler:0.9.2,\
+  junit:junit:4.12:test,\
+  org.assertj:assertj-core:3.2.0:test
+compile=source:1.8, target:1.8, encoding:UTF-8
+fatjar=\
+  name: poml-exe-${project.version},\
+  mainClass: poml.Main
+---
+{{#model4}}
+  {{dist}}
+  {{lib}}
+  <build>
+    <plugins>
+      {{compile}}
+      {{fatjar}}
+    </plugins>
+  </build>
+{{/model4}}

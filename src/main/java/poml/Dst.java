@@ -20,7 +20,7 @@ public class Dst {
     return d;
   }
 
-  public Dst from(Src src) throws IOException {
+  public Dst load(Src src) throws IOException {
     while ((src.ctxt.line = src.in.readLine()) != null) {
       process(src);
     }
