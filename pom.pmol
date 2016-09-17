@@ -8,12 +8,12 @@ fatjar=\
   name: poml-exe-${project.version},\
   mainClass: poml.Main
 ---
-{{#model4}}
-  {{dist}}
-  {{lib}}
+{{#model4 }}
+  {{dist }}
+  {{lib }}
   <build>
     <plugins>
-      {{compile}}
+      {{compile }}
       {{fatjar}}
     </plugins>
   </build>

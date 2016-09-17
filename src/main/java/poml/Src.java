@@ -12,13 +12,8 @@ import java.util.Properties;
 public class Src {
 
   public BufferedReader in;
+  public String line;
   public Properties prop = new Properties();
-  public Context ctxt = new Context();
-  
-  public class Context {
-    public String line;
-    public int indent;
-  }
   
   public static Src open(String path) throws IOException {
     Src s = new Src();
