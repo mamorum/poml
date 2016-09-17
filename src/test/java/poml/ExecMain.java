@@ -2,11 +2,9 @@ package poml;
 
 import java.io.IOException;
 
-import org.junit.Test;
+public class ExecMain {
 
-public class MainTest {
-
-  @Test public void test() throws IOException {
+  public static void main(String[] args) throws IOException {
     Main.main(
       new String[]{"pom.pmol", "pom.xml"}
     );

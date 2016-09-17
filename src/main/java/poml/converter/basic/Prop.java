@@ -2,9 +2,9 @@ package poml.converter.basic;
 
 import java.util.Map;
 
+import poml.Converter;
 import poml.Dst;
 import poml.Src;
-import poml.Converters.Converter;
 
 public class Prop implements Converter {
 

@@ -2,9 +2,9 @@ package poml.converter.build.plugin;
 
 import java.util.Map;
 
+import poml.Converter;
 import poml.Dst;
 import poml.Src;
-import poml.Converters.Converter;
 import poml.lib.Mst;
 
 public class Fatjar implements Converter {

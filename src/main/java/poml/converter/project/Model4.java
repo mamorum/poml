@@ -1,8 +1,8 @@
-package poml.converter;
+package poml.converter.project;
 
+import poml.Converter;
 import poml.Dst;
 import poml.Src;
-import poml.Converters.Converter;
 
 public class Model4 {
   
@@ -14,8 +14,7 @@ public class Model4 {
         "xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 " +
         "http://maven.apache.org/xsd/maven-4.0.0.xsd\">" +
         System.lineSeparator() +
-        "  <modelVersion>4.0.0</modelVersion>" +
-        System.lineSeparator();
+        "  <modelVersion>4.0.0</modelVersion>";
     @Override public void convert(Src src, Dst dst) {
       dst.out.println(model4); 
     }

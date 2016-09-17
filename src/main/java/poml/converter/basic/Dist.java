@@ -1,8 +1,8 @@
 package poml.converter.basic;
 
+import poml.Converter;
 import poml.Dst;
 import poml.Src;
-import poml.Converters.Converter;
 
 public class Dist implements Converter {
 
