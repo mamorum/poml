@@ -1,4 +1,5 @@
 # POML
+[![Build Status](https://travis-ci.org/mamorum/poml.svg?branch=master)](https://travis-ci.org/mamorum/poml)
 
 POM (pom.xml) 's Obvious, Minimal Language.
 
