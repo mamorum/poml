@@ -7,8 +7,8 @@ import poml.Src;
 public class Model4 {
   
   public static class Start implements Converter {
-    public String key() {return "#model4";}
-    final String model4 =  // for maven2.
+    public String key() { return "#model4"; }
+    private static final String model4 =  // for maven2.
       "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" " +
         "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
         "xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 " +
@@ -21,8 +21,8 @@ public class Model4 {
   }
   
   public static class End implements Converter {
-    public String key() {return "/model4";}
-    final String tag = "</project>";
+    public String key() { return "/model4"; }
+    private static final String tag = "</project>";
     @Override public void convert(Src src, Dst dst) {
       dst.out.println(tag);
     }

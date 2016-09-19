@@ -8,7 +8,7 @@ public class Lib implements Converter {
 
   public String key() { return "lib"; }
   
-  private static String[] tmpls = {
+  private static final String[] tmpls = {
       "      <groupId>0</groupId>", 
       "      <artifactId>1</artifactId>",
       "      <version>2</version>",
