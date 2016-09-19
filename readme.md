@@ -4,15 +4,15 @@ POM (pom.xml) 's Obvious, Minimal Language.
 
 Poml is a conversion tool from text to [maven](https://maven.apache.org/) pom.xml. There are two things in poml.
 
-1. Text syntax for writing `pom.pml` (poml file).
-2. Processor for converting `pom.pml` to `pom.xml`.
+1. Text syntax for writing `pom.poml` (poml file).
+2. Processor for converting `pom.poml` to `pom.xml`.
 
 
 
 ## Example
-Like following, `pom.pml` is converted to `pom.xml`.
+Like following, `pom.poml` is converted to `pom.xml`.
 
-`pom.pml`
+`pom.poml`
 
 ```txt
 dist=com.example:demo:0.0.1:jar
