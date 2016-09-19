@@ -37,7 +37,6 @@ compile=source:1.8, target:1.8, encoding:UTF-8
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>com.example</groupId>
   <artifactId>demo</artifactId>
   <version>0.0.1</version>
@@ -72,3 +71,9 @@ compile=source:1.8, target:1.8, encoding:UTF-8
   </build>
 </project>
 ```
+
+And in this project, [pom.xml](pom.xml) is converted from [pom.pml](pom.pml).
+
+
+## Guides
+[Getting Started](doc/getting-started.md)
