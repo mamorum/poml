@@ -6,9 +6,9 @@ import poml.Src;
 
 public class Lib implements Converter {
 
-  public String key() {return "lib";}
+  public String key() { return "lib"; }
   
-  static String[] tmpls = {
+  private static String[] tmpls = {
       "      <groupId>0</groupId>", 
       "      <artifactId>1</artifactId>",
       "      <version>2</version>",
@@ -20,12 +20,12 @@ public class Lib implements Converter {
   @Override public void convert(Src src, Dst dst) {
     dst.out.println("  <dependencies>");
     for (String lib: src.propList(key(), ",")) {
-      addChild(lib.trim(), dst);
+      addLib(lib.trim(), dst);
     }
     dst.out.println("  </dependencies>");
   }
 
-  public void addChild(String lib, Dst dst) {
+  public void addLib(String lib, Dst dst) {
     dst.out.println("    <dependency>");
     String[] vals = lib.split(":");
     for (int i = 0; i < vals.length; i++) {

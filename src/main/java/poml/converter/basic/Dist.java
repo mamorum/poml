@@ -6,9 +6,9 @@ import poml.Src;
 
 public class Dist implements Converter {
 
-  public String key() {return "dist";}
+  public String key() { return "dist"; }
 
-  private static final String[] tmpls = {
+  private final String[] tmpls = {
       "  <groupId>0</groupId>", 
       "  <artifactId>1</artifactId>",
       "  <version>2</version>",
