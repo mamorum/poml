@@ -72,7 +72,7 @@ compile=source:1.8, target:1.8, encoding:UTF-8
 </project>
 ```
 
-And in this project, [pom.xml](pom.xml) is converted from [pom.pml](pom.pml).
+And in this project, [pom.xml](pom.xml) is converted from [pom.poml](pom.poml).
 
 
 ## Guides
