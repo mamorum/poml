@@ -6,7 +6,7 @@ import poml.Src;
 
 public class Dist extends Converter {
 
-  public String key() { return "dist"; }
+  public String name() { return "dist"; }
 
   private static final String[] tmpls = {
       "  <groupId>0</groupId>", 
@@ -16,7 +16,7 @@ public class Dist extends Converter {
   };
 
   public void convert(Src src, Dst dst) {
-    String[] vals = src.propList(key(), ":");
+    String[] vals = src.propList(name(), ":");
     for (int i = 0; i < vals.length; i++) {
       dst.out.println(
           tag(i, vals[i])

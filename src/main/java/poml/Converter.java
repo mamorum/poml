@@ -4,7 +4,7 @@ import java.util.Map;
 
 public abstract class Converter {
 
-  public abstract String key();
+  public abstract String name();
   public abstract void convert(Src src, Dst dst);
   
   public static String nl = System.lineSeparator();

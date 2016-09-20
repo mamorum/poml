@@ -8,10 +8,10 @@ import poml.Src;
 
 public class Prop extends Converter {
 
-  public String key() { return "prop"; }
+  public String name() { return "prop"; }
   
   @Override public void convert(Src src, Dst dst) {
-    Map<String, String> prop = src.propMap(key());
+    Map<String, String> prop = src.propMap(name());
     if (prop.size() == 0) return;    
     dst.out.println("  <properties>");
     printKvTags(sp4, prop, dst);

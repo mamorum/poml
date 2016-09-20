@@ -6,7 +6,7 @@ import poml.Src;
 
 public class Lib extends Converter {
 
-  public String key() { return "lib"; }
+  public String name() { return "lib"; }
   
   private static final String[] tmpls = {
       "      <groupId>0</groupId>", 
@@ -19,7 +19,7 @@ public class Lib extends Converter {
 
   @Override public void convert(Src src, Dst dst) {
     dst.out.println("  <dependencies>");
-    for (String lib: src.propList(key(), ",")) {
+    for (String lib: src.propList(name(), ",")) {
       addLib(lib.trim(), dst);
     }
     dst.out.println("  </dependencies>");

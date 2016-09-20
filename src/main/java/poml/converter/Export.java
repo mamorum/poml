@@ -29,7 +29,7 @@ public class Export {
 
   public static HashMap<String, Converter> converters() {
     HashMap<String, Converter> map = new HashMap<>();
-    for (Converter c: export) map.put(c.key(), c);
+    for (Converter c: export) map.put(c.name(), c);
     return map;
   }
 }

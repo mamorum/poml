@@ -8,7 +8,7 @@ import poml.Src;
 
 public class Compiler extends Converter {
   
-  @Override public String key() { return "compiler"; }
+  @Override public String name() { return "compiler"; }
 
   private static final String startTag = 
     sp6 + "<plugin>" + nl +
@@ -25,13 +25,13 @@ public class Compiler extends Converter {
   
   private void appendPlugin(Src src, Dst dst) {
     dst.out.println(startTag);
-    Map<String, String> prop = src.propMap(key());
+    Map<String, String> prop = src.propMap(name());
     putDefault("version", "3.5.1", prop);
     printKvTags(sp8, prop, dst);
   }
 
   private void appendConf(Src src, Dst dst) {
-    Map<String, String> prop = src.propMap(key() + ".conf");
+    Map<String, String> prop = src.propMap(name() + ".conf");
     if (prop.size() == 0) return;
     dst.out.println("        <configuration>");
     printKvTags(sp10, prop, dst);
