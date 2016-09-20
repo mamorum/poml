@@ -14,7 +14,7 @@ public class Prop extends Converter {
     Map<String, String> prop = src.propMap(key());
     if (prop.size() == 0) return;    
     dst.out.println("  <properties>");
-    dst.out.print(kvTags(sp4, prop));
+    printKvTags(sp4, prop, dst);
     dst.out.println("  </properties>");
   }
 }

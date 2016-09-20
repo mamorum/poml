@@ -27,14 +27,14 @@ public class Compiler extends Converter {
     dst.out.println(startTag);
     Map<String, String> prop = src.propMap(key());
     putDefault("version", "3.5.1", prop);
-    dst.out.print(kvTags(sp8, prop));
+    printKvTags(sp8, prop, dst);
   }
 
   private void appendConf(Src src, Dst dst) {
     Map<String, String> prop = src.propMap(key() + ".conf");
     if (prop.size() == 0) return;
     dst.out.println("        <configuration>");
-    dst.out.print(kvTags(sp10, prop));
+    printKvTags(sp10, prop, dst);
     dst.out.println("        </configuration>");
   }
 }

@@ -22,20 +22,17 @@ public abstract class Converter {
     if (to.get(k) == null) to.put(k, v);
   }
   
-  public String kvTags(
-    String space, Map<String, String> kv
+  public void printKvTags(
+    String space, Map<String, String> kv, Dst dst
   ) {
-    StringBuilder buf = new StringBuilder();
-    String renderd;
     for (String k: kv.keySet()) {
-      renderd = kvTagTmpl
+      dst.out.print(space);
+      dst.out.println(
+        kvTagTmpl
           .replace("{{k}}", k) 
-          .replace("{{v}}", kv.get(k));
-      buf.append(space);
-      buf.append(renderd);
-      buf.append(nl);
+          .replace("{{v}}", kv.get(k))
+      );
     }
-    return buf.toString();
   }
   public static final String kvTagTmpl
     = "<{{k}}>{{v}}</{{k}}>";
