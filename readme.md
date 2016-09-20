@@ -23,14 +23,16 @@ dist=com.example:demo:0.0.1:jar
 lib=\
   junit:junit:4.12:test,\
   org.assertj:assertj-core:3.2.0:test
-compile=source:1.8, target:1.8, encoding:UTF-8
+prop=project.build.sourceEncoding:UTF-8
+compiler=source:1.8, target:1.8
 ---
 {{#model4}}
   {{dist}}
   {{lib}}
+  {{prop}}
   <build>
     <plugins>
-      {{compile}}
+      {{compiler}}
     </plugins>
   </build>
 {{/model4}}
@@ -59,6 +61,9 @@ compile=source:1.8, target:1.8, encoding:UTF-8
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <build>
     <plugins>
       <plugin>
@@ -68,7 +73,6 @@ compile=source:1.8, target:1.8, encoding:UTF-8
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
-          <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
     </plugins>
