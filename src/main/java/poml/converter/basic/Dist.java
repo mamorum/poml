@@ -4,7 +4,7 @@ import poml.Converter;
 import poml.Dst;
 import poml.Src;
 
-public class Dist implements Converter {
+public class Dist extends Converter {
 
   public String key() { return "dist"; }
 

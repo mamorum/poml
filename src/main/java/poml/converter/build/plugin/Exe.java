@@ -7,9 +7,9 @@ import poml.Dst;
 import poml.Src;
 import poml.lib.Mst;
 
-public class Exe implements Converter {
+public class Exe extends Converter {
   
-  public String key() {return "exe";}
+  public String key() { return "exe"; }
   
   @Override public void convert(Src src, Dst dst) {
     // prepare default value.

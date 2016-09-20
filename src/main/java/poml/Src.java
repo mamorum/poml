@@ -50,7 +50,9 @@ public class Src {
   }
   public Map<String, String> propMap(String key) {
     Map<String, String> map = new LinkedHashMap<>();
-    for (String pp :propList(key, ",")) {
+    String[] propList = propList(key, ",");
+    if (propList == null) return map;
+    for (String pp: propList) {
       String[] kv = pp.split(":");
       String k = kv[0].trim();
       String v = kv[1].trim();

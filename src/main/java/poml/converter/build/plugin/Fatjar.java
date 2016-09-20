@@ -7,7 +7,7 @@ import poml.Dst;
 import poml.Src;
 import poml.lib.Mst;
 
-public class Fatjar implements Converter {
+public class Fatjar extends Converter {
   
   public String key() {return "fatjar";}
   

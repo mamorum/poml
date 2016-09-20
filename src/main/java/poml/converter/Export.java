@@ -6,7 +6,7 @@ import poml.Converter;
 import poml.converter.basic.Dist;
 import poml.converter.basic.Lib;
 import poml.converter.basic.Prop;
-import poml.converter.build.plugin.Compile;
+import poml.converter.build.plugin.Compiler;
 import poml.converter.build.plugin.Exe;
 import poml.converter.build.plugin.Fatjar;
 import poml.converter.project.Model4;
@@ -22,7 +22,7 @@ public class Export {
       new Lib(),
       new Prop(),
       // build.plugin
-      new Compile(),
+      new Compiler(),
       new Fatjar(),
       new Exe()
   };
