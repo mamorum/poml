@@ -21,7 +21,7 @@ public abstract class Plugin extends Converter {
   ) {
     Map<String, String> prop = src.propMap(name());
     putDefault("version", defaultVer, prop);
-    printKvTags(sp8, prop, dst);
+    dst.printKvTags(sp8, prop);
   }
   
   // -> configuration
@@ -29,7 +29,7 @@ public abstract class Plugin extends Converter {
     Map<String, String> prop = src.propMap(name() + ".conf");
     if (prop.size() == 0) return;
     dst.out.println(sp8 + "<configuration>");
-    printKvTags(sp10, prop, dst);
+    dst.printKvTags(sp10, prop);
     dst.out.println(sp8 + "</configuration>");
   }
 }

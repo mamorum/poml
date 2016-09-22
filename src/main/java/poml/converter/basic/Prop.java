@@ -11,10 +11,10 @@ public class Prop extends Converter {
   @Override public String name() { return "prop"; }
   
   @Override public void convert(Src src, Dst dst) {
-    Map<String, String> prop = src.propMap(name());
-    if (prop.size() == 0) return;    
+    Map<String, String> kv = src.propMap(name());
+    if (kv.size() == 0) return;    
     dst.out.println(sp2 + "<properties>");
-    printKvTags(sp4, prop, dst);
+    dst.printKvTags(sp4, kv);
     dst.out.println(sp2 + "</properties>");
   }
 }

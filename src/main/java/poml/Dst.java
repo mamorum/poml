@@ -5,11 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.Map;
 
 public class Dst {
   
   public PrintWriter out;
-  
+
   public static Dst open(String path) throws IOException {    
     Dst d = new Dst();
     d.out = new PrintWriter(
@@ -53,4 +54,20 @@ public class Dst {
   public void close() {
     if (out != null) out.close();
   }
+
+  // output methods ->
+  public void printKvTags(
+    String space, Map<String, String> kv
+  ) {
+    for (String k: kv.keySet()) {
+      out.print(space);
+      out.println(
+        kvTagTmpl
+          .replace("{{k}}", k) 
+          .replace("{{v}}", kv.get(k))
+      );
+    }
+  }
+  public static final String kvTagTmpl
+    = "<{{k}}>{{v}}</{{k}}>";
 }
