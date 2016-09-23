@@ -7,7 +7,7 @@ import poml.converter.basic.Dist;
 import poml.converter.basic.Lib;
 import poml.converter.basic.Prop;
 import poml.converter.build.plugin.Compiler;
-import poml.converter.build.plugin.Exe;
+import poml.converter.build.plugin.Exec;
 import poml.converter.build.plugin.Fatjar;
 import poml.converter.project.Model4;
 
@@ -24,7 +24,7 @@ public class Export {
       // build.plugin
       new Compiler(),
       new Fatjar(),
-      new Exe()
+      new Exec()
   };
 
   public static HashMap<String, Converter> converters() {
