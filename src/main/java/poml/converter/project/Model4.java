@@ -6,7 +6,7 @@ import poml.Src;
 
 public class Model4 {
 
-  public static class Start extends Converter {
+  public static class Start implements Converter {
     @Override public String name() { return "#model4"; }
     @Override public void convert(Src src, Dst dst) {
       dst.out.println(
@@ -17,7 +17,7 @@ public class Model4 {
       dst.out.println(sp2 + "<modelVersion>4.0.0</modelVersion>");
     }
   }
-  public static class End extends Converter {
+  public static class End implements Converter {
     @Override public String name() { return "/model4"; }
     @Override public void convert(Src src, Dst dst) {
       dst.out.println("</project>");

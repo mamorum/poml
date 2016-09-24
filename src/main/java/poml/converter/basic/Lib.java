@@ -7,7 +7,7 @@ import poml.Converter;
 import poml.Dst;
 import poml.Src;
 
-public class Lib extends Converter {
+public class Lib implements Converter {
 
   @Override public String name() { return "lib"; }
   

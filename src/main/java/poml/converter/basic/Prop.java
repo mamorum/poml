@@ -6,7 +6,7 @@ import poml.Converter;
 import poml.Dst;
 import poml.Src;
 
-public class Prop extends Converter {
+public class Prop implements Converter {
 
   @Override public String name() { return "prop"; }
   

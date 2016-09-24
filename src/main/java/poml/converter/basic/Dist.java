@@ -7,7 +7,7 @@ import poml.Converter;
 import poml.Dst;
 import poml.Src;
 
-public class Dist extends Converter {
+public class Dist implements Converter {
 
   @Override public String name() { return "dist"; }
 

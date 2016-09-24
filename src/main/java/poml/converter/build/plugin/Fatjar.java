@@ -5,23 +5,18 @@ import java.util.Map;
 import poml.Converter;
 import poml.Dst;
 import poml.Src;
-import poml.converter.Assert;
-import poml.converter.Tmpl;
+import poml.tools.Assert;
+import poml.tools.Put;
+import poml.tools.Tmpl;
 
-public class Fatjar extends Converter {
-  
+public class Fatjar implements Converter {
+
   @Override public String name() { return "fatjar"; }
-  
+
   @Override public void convert(Src src, Dst dst) {
     Map<String, String> map = src.propMap(name());
-    Assert.exist(
-      map.get("mainClass"),
-      "mainClass is required @fatjar."
-    );
-    putDefault("ver", "2.6", map);
-    dst.out.print(
-      Tmpl.render("/tmpl/fatjar.tmpl", map)
-    );
+    Assert.exists("mainClass", map, name());
+    Put.defaults("ver", "2.6", map);
+    Tmpl.render("/tmpl/fatjar.tmpl", map, dst);
   }
-  
 }
