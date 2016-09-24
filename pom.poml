@@ -1,13 +1,11 @@
 dist=com.github.mamorum:poml:0.0.1:jar
 lib=\
-  com.github.spullara.mustache.java:compiler:0.9.2,\
   junit:junit:4.12:test,\
   org.assertj:assertj-core:3.2.0:test
 prop=project.build.sourceEncoding:UTF-8
-compiler.conf=source:1.8, target:1.8
-fatjar=\
-  name: poml-exe-${project.version},\
-  mainClass: poml.Main
+javac=source:1.8, target:1.8
+fatjar=mainClass:poml.Main
+exe=mainClass:poml.Main
 ---
 {{#model4 }}
   {{dist }}
@@ -15,8 +13,11 @@ fatjar=\
   {{prop }}
   <build>
     <plugins>
-      {{compiler }}
-      {{fatjar}}
+      {{javac }}
+      <!-- ↓java -jar target\poml-0.0.1-fat.jar pom.poml pom.xml -->
+      {{fatjar }}
+      <!-- ↓mvn exec:java -Dexec.args="pom.poml pom.xml" -->
+      {{exe}}
     </plugins>
   </build>
 {{/model4}}

@@ -3,11 +3,12 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <version>{{ver}}</version>
         <configuration>
+          <finalName>${project.build.finalName}-fat</finalName>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
-          <finalName>{{name}}</finalName>
           <appendAssemblyId>false</appendAssemblyId>
+          <attach>false</attach>
           <archive>
             <manifest>
               <mainClass>{{mainClass}}</mainClass>
@@ -18,9 +19,7 @@
           <execution>
             <id>make-assembly</id>
             <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
+            <goals><goal>single</goal></goals>
           </execution>
         </executions>
       </plugin>
