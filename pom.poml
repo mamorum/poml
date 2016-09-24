@@ -4,7 +4,9 @@ lib=\
   org.assertj:assertj-core:3.2.0:test
 prop=project.build.sourceEncoding:UTF-8
 javac=source:1.8, target:1.8
-fatjar=mainClass:poml.Main
+fatjar=\
+  mainClass:poml.Main,\
+  jarName:${project.artifactId}
 exe=mainClass:poml.Main
 ---
 {{#model4 }}
@@ -14,9 +16,9 @@ exe=mainClass:poml.Main
   <build>
     <plugins>
       {{javac }}
-      <!-- ↓java -jar target\poml-0.0.1-fat.jar pom.poml pom.xml -->
+      <!-- fatjar: java -jar target/poml.jar pom.poml pom.xml -->
       {{fatjar }}
-      <!-- ↓mvn exec:java -Dexec.args="pom.poml pom.xml" -->
+      <!-- exe: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
       {{exe}}
     </plugins>
   </build>
