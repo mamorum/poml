@@ -24,7 +24,7 @@ lib=\
   junit:junit:4.12:test,\
   org.assertj:assertj-core:3.2.0:test
 prop=project.build.sourceEncoding:UTF-8
-compiler.conf=source:1.8, target:1.8
+javac=source:1.8, target:1.8
 ---
 {{#model4}}
   {{dist}}
@@ -32,7 +32,7 @@ compiler.conf=source:1.8, target:1.8
   {{prop}}
   <build>
     <plugins>
-      {{compiler}}
+      {{javac}}
     </plugins>
   </build>
 {{/model4}}

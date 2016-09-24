@@ -41,15 +41,4 @@ public class JavacTest extends ConverterCase {
         "      </plugin>" + nl
       );
   }
-  
-  @Test public void err() {
-    src.prop.put("javac","target:1.8");
-    try {
-      conveter.convert(src, dst);
-    } catch (RuntimeException e) {
-      (new ErrMsg(e)).is(
-        "[ERROR] \"source\" is required in \"javac\" property."
-      );
-    }
-  }
 }

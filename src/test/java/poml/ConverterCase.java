@@ -36,11 +36,4 @@ public class ConverterCase {
       assertThat(sw.toString()).isEqualTo(s);
     }
   }
-  public class ErrMsg {
-    Exception e;
-    public ErrMsg(Exception e) {this.e = e;}
-    public void is(String msg) {
-      assertThat(e.getMessage()).isEqualTo(msg);
-    }
-  }
 }
