@@ -5,19 +5,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Map;
 
 public class Dst {
   
+  public StringWriter sw;
   public PrintWriter out;
 
-  public static Dst open(String path) throws IOException {    
+  public static Dst open() {
     Dst d = new Dst();
-    d.out = new PrintWriter(
-      new BufferedWriter(new OutputStreamWriter
-        (new FileOutputStream(path), "UTF-8")
-      )
-    );
+    d.sw = new StringWriter();
+    d.out= new PrintWriter(d.sw);
     return d;
   }
 
@@ -49,6 +48,25 @@ public class Dst {
       if (scan[i-1] != ' ') break;
       out.println();
     }
+  }
+
+  public Dst save(String path) {
+    try (PrintWriter xml = xml(path)) {
+      xml.write(sw.toString());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    return this;
+  }
+  
+  private PrintWriter xml(String path)
+    throws IOException
+  {
+    return  new PrintWriter(
+      new BufferedWriter(new OutputStreamWriter
+        (new FileOutputStream(path), "UTF-8")
+      )
+    );
   }
 
   public void close() {

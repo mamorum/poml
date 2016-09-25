@@ -7,8 +7,8 @@ public class Assert {
     String k, Map<String, String> in, String cname
   ) {
     if (in.get(k) == null) throw new RuntimeException(
-      "[ERROR] \"" +
-      k + "\" is required in \"" + cname + "\" property."
+      "\"" + cname + "\" requires \"" + k + "\"" +
+      " in property section"
     );
   }
   public static void exists(

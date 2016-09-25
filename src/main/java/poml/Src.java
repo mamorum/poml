@@ -39,7 +39,19 @@ public class Src {
     }
     return this;
   }
-  
+
+  public void close() {
+    try {
+      if (in != null) in.close();
+    } catch (IOException e) {
+      // Ignore, because ...
+      // - no idea to recover.
+      // - xml is generated.
+      // - this process ends soon.
+    }
+  }
+
+  // --> utilities
   public String prop(String key) {
     return prop.getProperty(key);
   }
@@ -61,7 +73,4 @@ public class Src {
     return map;
   }
 
-  public void close() throws IOException {
-    if (in != null) in.close();
-  }
 }

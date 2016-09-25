@@ -16,7 +16,7 @@ public class AssertTest {
       Assert.exists("source", map, "javac");
     } catch (RuntimeException e) {
       assertThat(e.getMessage()).isEqualTo(
-        "[ERROR] \"source\" is required in \"javac\" property."
+        "\"javac\" requires \"source\" in property section"
       );
     }
   }
@@ -30,7 +30,7 @@ public class AssertTest {
         map, "javac");
     } catch (RuntimeException e) {
       assertThat(e.getMessage()).isEqualTo(
-        "[ERROR] \"ver\" is required in \"javac\" property."
+          "\"javac\" requires \"ver\" in property section"
       );
     }
   }

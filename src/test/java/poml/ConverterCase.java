@@ -3,7 +3,6 @@ package poml;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import org.junit.After;
@@ -13,15 +12,12 @@ public class ConverterCase {
   public Src src;
   public Dst dst;
   public Output output;
-  public StringWriter buf;
   public static String nl = System.lineSeparator();
   
   @Before public void before() {
     src = new Src();
-    dst = new Dst();
-    buf = new StringWriter();
-    output = new Output(buf);
-    dst.out = new PrintWriter(buf);
+    dst = Dst.open();
+    output = new Output(dst.sw);
   }
   
   @After public void after() throws IOException {
