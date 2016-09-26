@@ -84,4 +84,4 @@ javac=source:1.8, target:1.8
 ## Showcase
 POML eats its own poml.
 
-In this project, [pom.xml](pom.xml) is converted from [pom.poml](pom.poml).
+In this project, [pom.poml](pom.poml) is converted to [pom.xml](pom.xml).
