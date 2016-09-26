@@ -8,7 +8,14 @@ public class Main {
   static Dst dst;
   static String srcFile, dstFile;
   
+  private static boolean isOptional(String arg) {
+    if ("-v".equals(arg)) { Console.version(); return true; }
+    if ("-h".equals(arg)) { Console.help(); return true; }
+    return false;
+  }
+  
   public static void main(String[] args) throws Throwable {
+    if (isOptional(args[0])) return;
     srcFile = args[0];
     dstFile = args[1];
 

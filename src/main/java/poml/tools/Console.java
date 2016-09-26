@@ -2,7 +2,26 @@ package poml.tools;
 
 import java.lang.management.ManagementFactory;
 
+import poml.Version;
+
 public class Console {
+  public static void version() {
+    System.out.print("Version ");
+    System.out.println(Version.num);
+  }
+  public static void help() {
+    System.out.println(
+      "Poml converts \"./pom.poml\" to \"./pom.xml\""
+    );
+    System.out.println();
+    System.out.println("Usage: poml [arg-of-mvn]");
+    System.out.println();
+    System.out.println(
+      "If [arg-of-mvn] is set," + 
+      " poml executes maven with it after conversion"
+    );
+  }
+
   public static void start(String srcFile) {
     System.out.print("[POML:INFO] Processing \"");
     System.out.print(srcFile);
