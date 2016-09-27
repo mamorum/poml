@@ -7,15 +7,18 @@ public class Main {
   static Src src;
   static Dst dst;
   static String srcFile, dstFile;
-  
-  private static boolean isOptional(String arg) {
-    if ("-v".equals(arg)) { Console.version(); return true; }
-    if ("-h".equals(arg)) { Console.help(); return true; }
-    return false;
+
+  private static void check(String[] args) {
+    if (args.length == 2) return; // -> convert
+    if (args.length == 1) { // -> option
+      if ("-h".equals(args[0])) { Console.help(); System.exit(0);}
+      if ("-v".equals(args[0])) { Console.version(); System.exit(0); }
+    }
+    Console.help(); System.exit(1);
   }
-  
+
   public static void main(String[] args) throws Throwable {
-    if (isOptional(args[0])) return;
+    check(args);
     srcFile = args[0];
     dstFile = args[1];
 

@@ -6,20 +6,20 @@ import poml.Version;
 
 public class Console {
   public static void version() {
-    System.out.print("Version ");
+    System.out.println();
+    System.out.print("Version: ");
     System.out.println(Version.num);
   }
   public static void help() {
-    System.out.println(
-      "Poml converts \"./pom.poml\" to \"./pom.xml\""
-    );
     System.out.println();
-    System.out.println("Usage: poml [arg-of-mvn]");
+    System.out.println("Usage: poml [option]");
     System.out.println();
-    System.out.println(
-      "If [arg-of-mvn] is set," + 
-      " poml executes maven with it after conversion"
-    );
+    System.out.print("poml   ");
+    System.out.println("\t   convert pom.poml to pom.xml");
+    System.out.print("poml -h");
+    System.out.println("\t   display this help");
+    System.out.print("poml -v");
+    System.out.println("\t   display version");
   }
 
   public static void start(String srcFile) {
