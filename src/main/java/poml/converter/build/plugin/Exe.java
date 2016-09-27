@@ -6,7 +6,6 @@ import poml.Converter;
 import poml.Dst;
 import poml.Src;
 import poml.tools.Assert;
-import poml.tools.Put;
 import poml.tools.Tmpl;
 
 public class Exe implements Converter {
