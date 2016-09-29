@@ -1,3 +1,4 @@
 #!/bin/sh
 
-
+POML_JAVA="`which java`"
+echo $POML_JAVA
