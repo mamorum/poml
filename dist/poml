@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-DIR=`dirname $0`
-
 if [ "$*" = "" ];then
-  java -jar $DIR/poml.jar pom.poml pom.xml
+  java -jar `dirname $0`/poml.jar pom.poml pom.xml
 else
-  java -jar $DIR/poml.jar $*
+  java -jar `dirname $0`/poml.jar $*
 fi
  
