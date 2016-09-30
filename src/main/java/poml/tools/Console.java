@@ -6,8 +6,6 @@ import poml.Version;
 
 public class Console {
   public static void version() {
-    System.out.println();
-    System.out.print("Version: ");
     System.out.println(Version.num);
   }
   public static void help() {
