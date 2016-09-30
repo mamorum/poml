@@ -1,4 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-POML_JAVA="`which java`"
-echo $POML_JAVA
+DIR=`dirname $0`
+
+if [ "$*" = "" ];then
+  java -jar $DIR/poml.jar pom.poml pom.xml
+else
+  java -jar $DIR/poml.jar $*
+fi
+ 
