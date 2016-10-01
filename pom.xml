@@ -3,7 +3,7 @@
 
   <groupId>com.github.mamorum</groupId>
   <artifactId>poml</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <packaging>jar</packaging>
 
   <dependencies>
@@ -37,12 +37,23 @@
         </configuration>
       </plugin>
 
-      <!-- fatjar: java -jar target/poml.jar pom.poml pom.xml -->
+      <!-- exe: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.5.0</version>
+        <configuration>
+          <mainClass>poml.Main</mainClass>
+        </configuration>
+      </plugin>
+      
+      <!-- fatjar: java -jar dist/poml.jar pom.poml pom.xml -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.6</version>
         <configuration>
+          <outputDirectory>dist</outputDirectory>
           <finalName>${project.artifactId}</finalName>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -50,9 +61,11 @@
           <appendAssemblyId>false</appendAssemblyId>
           <attach>false</attach>
           <archive>
-            <manifest>
-              <mainClass>poml.Main</mainClass>
-            </manifest>
+            <manifestEntries>
+              <Implementation-Version>${project.version}</Implementation-Version>
+              <Built-By>poml</Built-By>
+              <Main-Class>poml.Main</Main-Class>
+            </manifestEntries>
           </archive>
         </configuration>
         <executions>
@@ -62,16 +75,6 @@
             <goals><goal>single</goal></goals>
           </execution>
         </executions>
-      </plugin>
-
-      <!-- exe: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.5.0</version>
-        <configuration>
-          <mainClass>poml.Main</mainClass>
-        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -2,11 +2,14 @@ package poml.tools;
 
 import java.lang.management.ManagementFactory;
 
-import poml.Version;
+import poml.Main;
 
 public class Console {
   public static void version() {
-    System.out.println(Version.num);
+    System.out.println(
+      Main.class.getPackage()
+        .getImplementationVersion()
+    );
   }
   public static void help() {
     System.out.println();
