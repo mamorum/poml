@@ -6,9 +6,9 @@ import poml.Converter;
 import poml.Dst;
 import poml.Src;
 
-public class Prop implements Converter {
+public class Property implements Converter {
 
-  @Override public String name() { return "prop"; }
+  @Override public String name() { return "property"; }
   
   @Override public void convert(Src src, Dst dst) {
     Map<String, String> kv = src.propMap(name());

@@ -6,10 +6,10 @@ import poml.ConverterCase;
 
 public class PropTest extends ConverterCase {
 
-  Prop conveter = new Prop();
+  Property conveter = new Property();
   
   @Test public void single() {
-    src.prop.put("prop", "project.build.sourceEncoding:UTF-8");
+    src.prop.put("property", "project.build.sourceEncoding:UTF-8");
     conveter.convert(src, dst);
     output.is(
       "  <properties>" + nl + 
@@ -19,7 +19,7 @@ public class PropTest extends ConverterCase {
   }
   
   @Test public void multi() {
-    src.prop.put("prop",
+    src.prop.put("property",
         "  property:value," +
         "  project.build.sourceEncoding:UTF-8");
     conveter.convert(src, dst);

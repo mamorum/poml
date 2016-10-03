@@ -7,24 +7,17 @@ import poml.Converter;
 import poml.Dst;
 import poml.Src;
 
-public class Lib implements Converter {
+public class Depend implements Converter {
 
-  @Override public String name() { return "lib"; }
-  
-  private static final String[] tags = {
-    "groupId", "artifactId", "version",
-    "scope", "optional", "type"
-  };
+  @Override public String name() { return "depend"; }
 
   @Override public void convert(Src src, Dst dst) {
-    dst.out.println(sp2 + "<dependencies>");
     for (String lib: src.propList(name(), ",")) {
       printDependncy(lib.trim(), dst);
     }
-    dst.out.println(sp2 + "</dependencies>");
   }
 
-  public void printDependncy(String lib, Dst dst) {
+  private void printDependncy(String lib, Dst dst) {
     dst.out.println(sp4 + "<dependency>");
     Map<String, String> kv = new LinkedHashMap<>();
     String[] vals = lib.split(":");
@@ -34,5 +27,10 @@ public class Lib implements Converter {
     }
     dst.printKvTags(sp6, kv);
     dst.out.println(sp4 + "</dependency>");
-  }
+  }  
+
+  private static final String[] tags = {
+    "groupId", "artifactId", "version",
+    "scope", "optional", "type"
+  };
 }

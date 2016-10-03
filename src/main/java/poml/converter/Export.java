@@ -3,9 +3,10 @@ package poml.converter;
 import java.util.HashMap;
 
 import poml.Converter;
+import poml.converter.basic.Depend;
+import poml.converter.basic.Depends;
 import poml.converter.basic.Dist;
-import poml.converter.basic.Lib;
-import poml.converter.basic.Prop;
+import poml.converter.basic.Property;
 import poml.converter.build.plugin.Exe;
 import poml.converter.build.plugin.Fatjar;
 import poml.converter.build.plugin.Javac;
@@ -20,8 +21,9 @@ public class Export {
       new Model4.End(),
       // basic
       new Dist(),
-      new Lib(),
-      new Prop(),
+      new Depends(),
+      new Depend(),
+      new Property(),
       // build.plugin
       new Javac(),
       new Fatjar(),

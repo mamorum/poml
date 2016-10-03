@@ -4,26 +4,12 @@ import org.junit.Test;
 
 import poml.ConverterCase;
 
-public class LibTest extends ConverterCase {
+public class DependsTest extends ConverterCase {
 
-  Lib conveter = new Lib();
-  
-  @Test public void id2ver() {
-    src.prop.put("lib", "group.com:artifact:0.0.1");
-    conveter.convert(src, dst);
-    output.is(
-      "  <dependencies>" + nl +
-      "    <dependency>" + nl +
-      "      <groupId>group.com</groupId>" + nl + 
-      "      <artifactId>artifact</artifactId>" + nl +
-      "      <version>0.0.1</version>" + nl +
-      "    </dependency>" + nl +
-      "  </dependencies>" + nl
-    );
-  }
-  
+  Depends conveter = new Depends();
+
   @Test public void id2type() {
-    src.prop.put("lib", "group.com:artifact:0.0.1:test:true:jar");
+    src.prop.put("depends", "group.com:artifact:0.0.1:test:true:jar");
     conveter.convert(src, dst);
     output.is(
         "  <dependencies>" + nl +
@@ -40,7 +26,7 @@ public class LibTest extends ConverterCase {
   }
 
   @Test public void multi() {
-    src.prop.put("lib",
+    src.prop.put("depends",
       "  demo.com:demo:0.0.1," +
       "  sample.com:sample:0.0.1:provided," +
       "  group.com:artifact:0.0.1:test:true:jar");
