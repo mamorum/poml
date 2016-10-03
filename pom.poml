@@ -9,8 +9,8 @@ exe=mainClass:poml.Main
 info=\
   name: POML,\
   description: POM's Obvious Minimal Language,\
-  url: https://github.com/mamorum/poml
-license=MIT
+  url: https://github.com/mamorum/poml,\
+  license: MIT
 ---
 {{#model4 }}
   {{dist }}
@@ -55,5 +55,4 @@ license=MIT
   </build>
   
   {{info}}
-  {{license}}
 {{/model4}}
