@@ -64,13 +64,21 @@ public class Src {
     Map<String, String> map = new LinkedHashMap<>();
     String[] propList = propList(key, ",");
     if (propList == null) return map;
-    for (String pp: propList) {
-      String[] kv = pp.split(":");
-      String k = kv[0].trim();
-      String v = kv[1].trim();
-      map.put(k, v);
+    for (String prop: propList) {
+      map.put(key(prop), value(prop));
     }
     return map;
   }
 
+  private static String key(String kv) {
+    return kv.substring(
+      0, kv.indexOf(':')
+    ).trim();
+  }
+
+  private static String value(String kv) {
+    return kv.substring(
+      kv.indexOf(':') + 1
+    ).trim();
+  }
 }

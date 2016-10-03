@@ -6,6 +6,10 @@
   <version>0.1.0</version>
   <packaging>jar</packaging>
 
+  <name>POML</name>
+  <description>POM's Obvious Minimal Language</description>
+  <url>https://github.com/mamorum/poml</url>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

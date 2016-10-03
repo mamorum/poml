@@ -1,4 +1,8 @@
 dist=com.github.mamorum:poml:0.1.0:jar
+info=\
+  name: POML,\
+  description: POM's Obvious Minimal Language,\
+  url: https://github.com/mamorum/poml
 lib=\
   junit:junit:4.12:test,\
   org.assertj:assertj-core:3.2.0:test
@@ -8,6 +12,7 @@ exe=mainClass:poml.Main
 ---
 {{#model4 }}
   {{dist }}
+  {{info }}
   {{lib }}
   {{prop }}
   <build>
