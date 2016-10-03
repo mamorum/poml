@@ -10,6 +10,7 @@ import poml.converter.build.plugin.Exe;
 import poml.converter.build.plugin.Fatjar;
 import poml.converter.build.plugin.Javac;
 import poml.converter.more.Info;
+import poml.converter.more.License;
 import poml.converter.project.Model4;
 
 public class Export {
@@ -27,7 +28,8 @@ public class Export {
       new Fatjar(),
       new Exe(),
       // more
-      new Info()
+      new Info(),
+      new License()
   };
 
   public static HashMap<String, Converter> converters() {
