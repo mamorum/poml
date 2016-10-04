@@ -12,7 +12,7 @@ public class Converters {
   public static void convert(String key, Src src, Dst dst) {
     Converter c = converters.get(key);
     if (c == null) throw new RuntimeException(
-      "Property not found for {{" + key + "}}"
+      "Converter not found for {{" + key + "}}"
     );
     c.convert(src, dst);
   }
