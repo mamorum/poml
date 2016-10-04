@@ -22,13 +22,12 @@ info=\
       <!-- exe: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
       {{exe}}
       
-      <!-- fatjar: java -jar dist/poml.jar pom.poml pom.xml -->
+      <!-- fatjar: java -jar target/poml.jar pom.poml pom.xml -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.6</version>
         <configuration>
-          <outputDirectory>dist</outputDirectory>
           <finalName>${project.artifactId}</finalName>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -36,10 +35,12 @@ info=\
           <appendAssemblyId>false</appendAssemblyId>
           <attach>false</attach>
           <archive>
+            <manifest>
+              <mainClass>poml.Main</mainClass>
+            </manifest>
             <manifestEntries>
               <Implementation-Version>${project.version}</Implementation-Version>
-              <Built-By>poml</Built-By>
-              <Main-Class>poml.Main</Main-Class>
+              <Built-By>Poml Authors</Built-By>
             </manifestEntries>
           </archive>
         </configuration>
