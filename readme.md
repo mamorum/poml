@@ -5,31 +5,31 @@ POM (pom.xml) 's Obvious, Minimal Language.
 
 Poml is a conversion tool from text to [maven](https://maven.apache.org/) pom.xml. There are two things in poml.
 
-1. Text syntax for writing `pom.poml` (poml file).
-2. Processor for converting `pom.poml` to `pom.xml`.
+1. Text syntax for writing poml file named `pom.poml`.
+2. Processor converting `pom.poml` to `pom.xml`.
 
 
-## Guides
-[Getting Started](doc/getting-started.md)
+## Install
+[Installation Guide](doc/installation-guide.md)
 
 
 ## Example
-Like following, `pom.poml` is converted to `pom.xml`.
+First, Create project root directory named `demo`. In this directory, create new file named `pom.poml` and save following text.
 
-`pom.poml`
+`demo/pom.poml`
 
 ```txt
 dist=com.example:demo:0.0.1:jar
-lib=\
+depends=\
   junit:junit:4.12:test,\
   org.assertj:assertj-core:3.2.0:test
-prop=project.build.sourceEncoding:UTF-8
+property=project.build.sourceEncoding:UTF-8
 javac=source:1.8, target:1.8
 ---
 {{#model4}}
   {{dist}}
-  {{lib}}
-  {{prop}}
+  {{depends}}
+  {{property}}
   <build>
     <plugins>
       {{javac}}
@@ -38,7 +38,15 @@ javac=source:1.8, target:1.8
 {{/model4}}
 ```
 
-`pom.xml`
+Next, execute `poml` command in the same directory.
+
+```
+demo$ poml
+```
+
+When the command is completed, pom.xml is generated .
+
+`demo/pom.xml`
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -79,6 +87,10 @@ javac=source:1.8, target:1.8
   </build>
 </project>
 ```
+
+## Guide
+- [User Guide](doc/user-guide.md)
+- [Installation Guide](doc/installation-guide.md)
 
 
 ## Showcase
