@@ -7,9 +7,9 @@ import poml.converter.basic.Depend;
 import poml.converter.basic.Depends;
 import poml.converter.basic.Dist;
 import poml.converter.basic.Property;
-import poml.converter.build.plugin.Exe;
+import poml.converter.build.plugin.Exec;
 import poml.converter.build.plugin.Fatjar;
-import poml.converter.build.plugin.Javac;
+import poml.converter.build.plugin.Compiler;
 import poml.converter.more.Info;
 import poml.converter.project.Model4;
 
@@ -25,9 +25,9 @@ public class Export {
       new Depend(),
       new Property(),
       // build.plugin
-      new Javac(),
+      new Compiler(),
       new Fatjar(),
-      new Exe(),
+      new Exec(),
       // more
       new Info()
   };

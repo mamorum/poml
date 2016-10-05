@@ -3,8 +3,8 @@ depends=\
   junit:junit:4.12:test,\
   org.assertj:assertj-core:3.2.0:test
 property=project.build.sourceEncoding:UTF-8
-javac=source:1.8, target:1.8
-exe=mainClass:poml.Main
+compiler=source:1.8, target:1.8
+exec=mainClass:poml.Main
 
 info=\
   name: POML,\
@@ -18,9 +18,9 @@ info=\
   {{property }}
   <build>
     <plugins>
-      {{javac }}
-      <!-- exe: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
-      {{exe}}
+      {{compiler }}
+      <!-- exec: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
+      {{exec}}
       
       <!-- fatjar: java -jar target/poml.jar pom.poml pom.xml -->
       <plugin>

@@ -6,7 +6,7 @@ import poml.ConverterCase;
 
 public class JavacTest extends ConverterCase {
 
-  Javac conveter = new Javac();
+  Compiler conveter = new Compiler();
 
   @Test public void defaultVer() {
     src.prop.put("javac", "source:1.8, target:1.8");

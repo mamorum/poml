@@ -5,7 +5,7 @@
     - Example
 - Poml File
     - Overview
-    - Config Section (fix name?)
+    - Property Section (fix name?)
     - Layout Section (fix name?)
 - Converters
     - Project Model
@@ -15,8 +15,8 @@
         - depends
         - property
     - Build Plugins
-        - compiler（fix name?）
-        - exec（fix name?）
+        - compiler
+        - exec
         - fatjar
     - More Project Infomation
         - info

@@ -37,7 +37,7 @@
         </configuration>
       </plugin>
 
-      <!-- exe: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
+      <!-- exec: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>

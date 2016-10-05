@@ -8,9 +8,9 @@ import poml.Src;
 import poml.tools.Assert;
 import poml.tools.Tmpl;
 
-public class Javac implements Converter {
+public class Compiler implements Converter {
 
-  @Override public String name() { return "javac"; }
+  @Override public String name() { return "compiler"; }
 
   @Override public void convert(Src src, Dst dst) {
     Map<String, String> map = src.propMap(name());
@@ -19,6 +19,6 @@ public class Javac implements Converter {
       map, name()
     );
     Put.defaults("ver", "3.5.1", map);
-    Tmpl.render("/tmpl/javac.tmpl", map, dst);
+    Tmpl.render("/tmpl/compiler.tmpl", map, dst);
   }
 }

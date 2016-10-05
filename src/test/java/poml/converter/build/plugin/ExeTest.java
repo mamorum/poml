@@ -6,7 +6,7 @@ import poml.ConverterCase;
 
 public class ExeTest extends ConverterCase {
 
-  Exe conveter = new Exe();
+  Exec conveter = new Exec();
 
   @Test public void defaultVer() {
     src.prop.put("exe", "mainClass:org.Main");
