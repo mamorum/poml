@@ -44,7 +44,7 @@ Next, execute `poml` command in the same directory.
 demo$ poml
 ```
 
-When the command is completed, pom.xml is generated .
+When the command is completed, pom.xml is generated.
 
 `demo/pom.xml`
 
@@ -88,9 +88,17 @@ When the command is completed, pom.xml is generated .
 </project>
 ```
 
-## Guide
-- [User Guide](doc/user-guide.md)
-- [Installation Guide](doc/installation-guide.md)
+Combined command like `poml && mvn test` is convenient to execute Maven, after `pom.xml` generated successfully. 
+
+```
+demo$ poml && mvn <goal>
+```
+
+Operater `&&` is also available in Windows (XP or higher).
+
+
+## User Guide
+[User Guide](doc/user-guide.md)
 
 
 ## Showcase
