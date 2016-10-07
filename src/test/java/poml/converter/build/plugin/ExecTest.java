@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import poml.ConverterCase;
 
-public class ExeTest extends ConverterCase {
+public class ExecTest extends ConverterCase {
 
   Exec conveter = new Exec();
 
   @Test public void defaultVer() {
-    src.prop.put("exe", "mainClass:org.Main");
+    src.conf.put("exec", "mainClass:org.Main");
     conveter.convert(src, dst);
     output.is(
         "      <plugin>" + nl +
@@ -24,7 +24,7 @@ public class ExeTest extends ConverterCase {
   }
 
   @Test public void ver() {
-    src.prop.put("exe", "ver:1.0.0, mainClass:org.Main");
+    src.conf.put("exec", "ver:1.0.0, mainClass:org.Main");
     conveter.convert(src, dst);
     output.is(
         "      <plugin>" + nl +  

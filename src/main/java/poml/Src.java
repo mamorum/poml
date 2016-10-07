@@ -13,7 +13,7 @@ public class Src {
 
   public BufferedReader in;
   public String line;
-  public Properties prop = new Properties();
+  public Properties conf = new Properties();
   
   public static Src open(String path) throws IOException {
     Src s = new Src();
@@ -35,7 +35,7 @@ public class Src {
       StringReader r
         = new StringReader(txt.toString())
     ) {
-      prop.load(r);
+      conf.load(r);
     }
     return this;
   }
@@ -53,7 +53,7 @@ public class Src {
 
   // --> utilities
   public String prop(String key) {
-    return prop.getProperty(key);
+    return conf.getProperty(key);
   }
   public String[] propList(String key, String delim) {
     String pp = prop(key);

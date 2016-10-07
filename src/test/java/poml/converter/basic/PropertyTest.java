@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import poml.ConverterCase;
 
-public class PropTest extends ConverterCase {
+public class PropertyTest extends ConverterCase {
 
   Property conveter = new Property();
   
   @Test public void single() {
-    src.prop.put("property", "project.build.sourceEncoding:UTF-8");
+    src.conf.put("property", "project.build.sourceEncoding:UTF-8");
     conveter.convert(src, dst);
     output.is(
       "  <properties>" + nl + 
@@ -19,7 +19,7 @@ public class PropTest extends ConverterCase {
   }
   
   @Test public void multi() {
-    src.prop.put("property",
+    src.conf.put("property",
         "  property:value," +
         "  project.build.sourceEncoding:UTF-8");
     conveter.convert(src, dst);

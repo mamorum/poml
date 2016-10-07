@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import poml.ConverterCase;
 
-public class JavacTest extends ConverterCase {
+public class CompilerTest extends ConverterCase {
 
   Compiler conveter = new Compiler();
 
   @Test public void defaultVer() {
-    src.prop.put("javac", "source:1.8, target:1.8");
+    src.conf.put("compiler", "source:1.8, target:1.8");
     conveter.convert(src, dst);
     output.is(
         "      <plugin>" + nl + 
@@ -25,7 +25,7 @@ public class JavacTest extends ConverterCase {
   }
   
   @Test public void ver() {
-    src.prop.put("javac",
+    src.conf.put("compiler",
       "ver:1.0.0, source:1.8, target:1.8"
     );
     conveter.convert(src, dst);

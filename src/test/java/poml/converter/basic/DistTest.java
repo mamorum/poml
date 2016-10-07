@@ -9,7 +9,7 @@ public class DistTest extends ConverterCase {
   Dist conveter = new Dist();
   
   @Test public void id_ver() {
-    src.prop.put("dist", "group.com:artifact:0.0.1");
+    src.conf.put("dist", "group.com:artifact:0.0.1");
     conveter.convert(src, dst);
     output.is(
       "  <groupId>group.com</groupId>" + nl + 
@@ -19,7 +19,7 @@ public class DistTest extends ConverterCase {
   }
   
   @Test public void id_ver_pkg() {
-    src.prop.put("dist", "group.com:artifact:0.0.1:jar");
+    src.conf.put("dist", "group.com:artifact:0.0.1:jar");
     conveter.convert(src, dst);
     output.is(
       "  <groupId>group.com</groupId>" + nl + 
