@@ -95,7 +95,7 @@ Combined command like `poml && mvn test` is convenient to execute Maven, after `
 demo$ poml && mvn <goal>
 ```
 
-Operater `&&` is also available in Windows (XP or higher).
+Operater `&&` seems available also in the Windows (see [Command shell overview - MS TechNet](https://technet.microsoft.com/en-us/library/bb490954.aspx)).
 
 
 ## Showcase
