@@ -5,12 +5,11 @@ depends=\
 property=project.build.sourceEncoding:UTF-8
 compiler=source:1.8, target:1.8
 exec=mainClass:poml.Main
-
 info=\
-  name: POML,\
-  description: POM's Obvious Minimal Language,\
-  url: https://github.com/mamorum/poml,\
-  license: MIT
+  name:POML,\
+  description:POM's Obvious Minimal Language,\
+  url:https://github.com/mamorum/poml,\
+  license:MIT
 ---
 {{#model4 }}
   {{dist }}
@@ -20,9 +19,8 @@ info=\
     <plugins>
       {{compiler }}
       <!-- exec: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
-      {{exec}}
-      
-      <!-- fatjar: java -jar target/poml.jar pom.poml pom.xml -->
+      {{exec }}
+      <!-- assembly: create target/poml.jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -54,6 +52,6 @@ info=\
       </plugin>
     </plugins>
   </build>
-  
+
   {{info}}
 {{/model4}}
