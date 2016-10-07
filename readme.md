@@ -9,8 +9,9 @@ Poml is a conversion tool from text to [maven](https://maven.apache.org/) pom.xm
 2. Processor converting `pom.poml` to `pom.xml`.
 
 
-## Install
-[Installation Guide](doc/installation-guide.md)
+## Guide
+- [Installation Guide](doc/installation-guide.md)
+- [User Guide](doc/user-guide.md)
 
 
 ## Example
@@ -95,10 +96,6 @@ demo$ poml && mvn <goal>
 ```
 
 Operater `&&` is also available in Windows (XP or higher).
-
-
-## User Guide
-[User Guide](doc/user-guide.md)
 
 
 ## Showcase
