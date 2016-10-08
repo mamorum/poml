@@ -46,8 +46,8 @@
           <mainClass>poml.Main</mainClass>
         </configuration>
       </plugin>
-      
-      <!-- fatjar: java -jar target/poml.jar pom.poml pom.xml -->
+
+      <!-- assembly: create target/poml.jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -79,7 +79,7 @@
       </plugin>
     </plugins>
   </build>
-  
+
   <name>POML</name>
   <description>POM's Obvious Minimal Language</description>
   <url>https://github.com/mamorum/poml</url>

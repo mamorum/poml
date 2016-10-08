@@ -6,7 +6,7 @@ public class Main {
 
   static Src src;
   static Dst dst;
-  static String srcFile, dstFile;
+  static String srcPath, dstPath;
 
   private static void check(String[] args) {
     if (args.length == 2) return; // -> convert
@@ -19,26 +19,28 @@ public class Main {
 
   public static void main(String[] args) throws Throwable {
     check(args);
-    srcFile = args[0];
-    dstFile = args[1];
+    srcPath = args[0];
+    dstPath = args[1];
 
-    Console.start(srcFile);
+    Console.start(srcPath);
     try {
-      src = Src.open(srcFile).loadConfig();
-      dst = Dst.open().load(src).save(dstFile);
+      src = Src.open(srcPath);
+      dst = Dst.openBuffer();
+      src.toXml(dst);
+      dst.save(dstPath);
     }
     catch (Throwable e) {
-      Console.error(e, dstFile);
+      Console.error(e, dstPath);
       throw e;
     }
     finally {
       close();
     }
-    Console.end(dstFile);
+    Console.end(dstPath);
   }
 
   private static void close() {
-    try { if (dst != null) dst.close(); }
+    try { if (dst != null) dst.closeBuffer(); }
     finally { if (src != null) src.close(); }
   }
 }

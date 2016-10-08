@@ -1,13 +1,29 @@
 package poml;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
 public class Config {
-  
+
   public Properties p = new Properties();
+  public StringBuilder lines = new StringBuilder();
   
+  // -> for loading.
+  public void append(String line) {
+    lines.append(line);
+    lines.append(System.lineSeparator());
+  }
+  public void load() throws IOException {
+    try (
+      StringReader r
+        = new StringReader(lines.toString())
+    ) { p.load(r); }
+  }
+  
+  // -> for getting config values.
   // key=val
   public String val(String key) {
     return p.getProperty(key);

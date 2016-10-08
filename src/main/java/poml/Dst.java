@@ -13,41 +13,11 @@ public class Dst {
   public StringWriter sw;
   public PrintWriter out;
 
-  public static Dst open() {
+  public static Dst openBuffer() {
     Dst d = new Dst();
     d.sw = new StringWriter();
     d.out= new PrintWriter(d.sw);
     return d;
-  }
-
-  public Dst load(Src src) throws IOException {
-    while ((src.line = src.in.readLine()) != null) {
-      process(src);
-    }
-    return this;
-  }
-
-  private void process(Src src) {
-    int start = src.line.indexOf("{{");
-    int end = src.line.indexOf("}}");
-    
-    // not convert
-    if (start == -1 || end == -1) {
-      out.println(src.line);
-      return;
-    }
-
-    // convert
-    String key = src.line.substring(start+2, end);
-    Converters.convert(key.trim(), src, this);
-    
-    // convert spaces after key to new line
-    if (!key.contains(" ")) return;
-    char[] scan = key.toCharArray();
-    for (int i = scan.length; i > 0; i--) {
-      if (scan[i-1] != ' ') break;
-      out.println();
-    }
   }
 
   public Dst save(String path) {
@@ -69,7 +39,7 @@ public class Dst {
     );
   }
 
-  public void close() {
+  public void closeBuffer() {
     if (out != null) out.close();
   }
 

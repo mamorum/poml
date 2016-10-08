@@ -16,14 +16,13 @@ public class ConverterCase {
   
   @Before public void before() {
     src = new Src();
-    src.conf = new Config();
-    dst = Dst.open();
+    dst = Dst.openBuffer();
     output = new Output(dst.sw);
   }
   
   @After public void after() throws IOException {
     if (src != null) src.close();
-    if (dst != null) dst.close();
+    if (dst != null) dst.closeBuffer();
   }
   
   public class Output {
