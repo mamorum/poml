@@ -9,7 +9,7 @@ public class FatjarTest extends ConverterCase {
   Fatjar conveter = new Fatjar();
 
   @Test public void defaultVer() {
-    src.conf.put("fatjar",
+    src.conf.p.put("fatjar",
       "  jarName:${project.artifactId}," + 
       "  mainClass:org.sample.Main");
     conveter.convert(src, dst);
@@ -43,7 +43,7 @@ public class FatjarTest extends ConverterCase {
   }
   
   @Test public void ver() {
-    src.conf.put("fatjar",
+    src.conf.p.put("fatjar",
         "  ver:1.0.0," +
         "  jarName:${project.artifactId}," + 
         "  mainClass:org.sample.Main");

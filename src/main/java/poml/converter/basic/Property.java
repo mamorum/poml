@@ -11,7 +11,7 @@ public class Property implements Converter {
   @Override public String name() { return "property"; }
   
   @Override public void convert(Src src, Dst dst) {
-    Map<String, String> kv = src.propMap(name());
+    Map<String, String> kv = src.conf.map(name());
     if (kv.size() == 0) return;    
     dst.out.println(sp2 + "<properties>");
     dst.printKvTags(sp4, kv);

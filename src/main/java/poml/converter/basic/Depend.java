@@ -12,7 +12,7 @@ public class Depend implements Converter {
   @Override public String name() { return "depend"; }
 
   @Override public void convert(Src src, Dst dst) {
-    for (String lib: src.propList(name(), ",")) {
+    for (String lib: src.conf.vals(name(), ",")) {
       printDependncy(lib.trim(), dst);
     }
   }

@@ -9,7 +9,7 @@ public class CompilerTest extends ConverterCase {
   Compiler conveter = new Compiler();
 
   @Test public void defaultVer() {
-    src.conf.put("compiler", "source:1.8, target:1.8");
+    src.conf.p.put("compiler", "source:1.8, target:1.8");
     conveter.convert(src, dst);
     output.is(
         "      <plugin>" + nl + 
@@ -25,7 +25,7 @@ public class CompilerTest extends ConverterCase {
   }
   
   @Test public void ver() {
-    src.conf.put("compiler",
+    src.conf.p.put("compiler",
       "ver:1.0.0, source:1.8, target:1.8"
     );
     conveter.convert(src, dst);

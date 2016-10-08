@@ -16,7 +16,7 @@ public class Dist implements Converter {
   };
 
   @Override public void convert(Src src, Dst dst) {
-    String[] vals = src.propList(name(), ":");
+    String[] vals = src.conf.vals(name(), ":");
     Map<String, String> kv = new LinkedHashMap<>();
     // TODO check vals (null, length)
     for (int i = 0; i < vals.length; i++) {

@@ -24,7 +24,7 @@ public class Main {
 
     Console.start(srcFile);
     try {
-      src = Src.open(srcFile).loadProperties();
+      src = Src.open(srcFile).loadConfig();
       dst = Dst.open().load(src).save(dstFile);
     }
     catch (Throwable e) {

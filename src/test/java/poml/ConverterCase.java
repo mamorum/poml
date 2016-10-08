@@ -16,6 +16,7 @@ public class ConverterCase {
   
   @Before public void before() {
     src = new Src();
+    src.conf = new Config();
     dst = Dst.open();
     output = new Output(dst.sw);
   }

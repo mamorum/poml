@@ -9,7 +9,7 @@ public class PropertyTest extends ConverterCase {
   Property conveter = new Property();
   
   @Test public void single() {
-    src.conf.put("property", "project.build.sourceEncoding:UTF-8");
+    src.conf.p.put("property", "project.build.sourceEncoding:UTF-8");
     conveter.convert(src, dst);
     output.is(
       "  <properties>" + nl + 
@@ -19,7 +19,7 @@ public class PropertyTest extends ConverterCase {
   }
   
   @Test public void multi() {
-    src.conf.put("property",
+    src.conf.p.put("property",
         "  property:value," +
         "  project.build.sourceEncoding:UTF-8");
     conveter.convert(src, dst);

@@ -13,7 +13,7 @@ public class Fatjar implements Converter {
   @Override public String name() { return "fatjar"; }
 
   @Override public void convert(Src src, Dst dst) {
-    Map<String, String> map = src.propMap(name());
+    Map<String, String> map = src.conf.map(name());
     Assert.exists(
         new String[] {"mainClass", "jarName"},
         map, name()

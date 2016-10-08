@@ -9,7 +9,7 @@ public class DependTest extends ConverterCase {
   Depend conveter = new Depend();
   
   @Test public void id2ver() {
-    src.conf.put("depend", "group.com:artifact:0.0.1");
+    src.conf.p.put("depend", "group.com:artifact:0.0.1");
     conveter.convert(src, dst);
     output.is(
       "    <dependency>" + nl +
@@ -21,7 +21,7 @@ public class DependTest extends ConverterCase {
   }
   
   @Test public void id2type() {
-    src.conf.put("depend", "group.com:artifact:0.0.1:test:true:jar");
+    src.conf.p.put("depend", "group.com:artifact:0.0.1:test:true:jar");
     conveter.convert(src, dst);
     output.is(
         "    <dependency>" + nl +
@@ -36,7 +36,7 @@ public class DependTest extends ConverterCase {
   }
 
   @Test public void multi() {
-    src.conf.put("depend",
+    src.conf.p.put("depend",
       "  demo.com:demo:0.0.1," +
       "  sample.com:sample:0.0.1:provided," +
       "  group.com:artifact:0.0.1:test:true:jar");
