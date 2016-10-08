@@ -1,4 +1,4 @@
-package poml.tools;
+package poml.tools.converter;
 
 import java.io.BufferedReader;
 import java.io.IOException;

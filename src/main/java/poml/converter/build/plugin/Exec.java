@@ -5,8 +5,8 @@ import java.util.Map;
 import poml.Converter;
 import poml.Dst;
 import poml.Src;
-import poml.tools.Assert;
-import poml.tools.Tmpl;
+import poml.tools.converter.Assert;
+import poml.tools.converter.Tmpl;
 
 public class Exec implements Converter {
   
