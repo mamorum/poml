@@ -30,6 +30,7 @@ public class Info implements Converter {
     
     // license
     String license = map.get(licenseKey);
+    if (license == null) return;
     String licenseTag = licenses.get(license.trim());
     if (licenseTag == null) throw new IllegalStateException(
       "License \"" + license + "\" not found"
