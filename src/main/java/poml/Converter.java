@@ -5,7 +5,7 @@ import java.util.Map;
 public interface Converter {
 
   String name();
-  void convert(Poml poml, Pom pom);
+  void convert(Poml poml, Xml xml);
 
   public static String nl = System.lineSeparator();
   public static String

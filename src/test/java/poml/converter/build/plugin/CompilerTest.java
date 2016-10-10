@@ -10,7 +10,7 @@ public class CompilerTest extends ConverterCase {
 
   @Test public void defaultVer() {
     poml.conf.p.put("compiler", "source:1.8, target:1.8");
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl + 
         "        <groupId>org.apache.maven.plugins</groupId>" + nl +
@@ -28,7 +28,7 @@ public class CompilerTest extends ConverterCase {
     poml.conf.p.put("compiler",
       "ver:1.0.0, source:1.8, target:1.8"
     );
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl + 
         "        <groupId>org.apache.maven.plugins</groupId>" + nl +

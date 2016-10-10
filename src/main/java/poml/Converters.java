@@ -9,11 +9,13 @@ public class Converters {
   private static HashMap<String, Converter>
     converters = Export.converters();
   
-  public static void convert(String key, Poml src, Pom dst) {
-    Converter c = converters.get(key);
+  public static void convert(
+    String name, Poml poml, Xml xml
+  ) {
+    Converter c = converters.get(name);
     if (c == null) throw new RuntimeException(
-      "Converter not found for {{" + key + "}}"
+      "Converter not found for {{" + name + "}}"
     );
-    c.convert(src, dst);
+    c.convert(poml, xml);
   }
 }

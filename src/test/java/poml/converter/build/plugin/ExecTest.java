@@ -10,7 +10,7 @@ public class ExecTest extends ConverterCase {
 
   @Test public void defaultVer() {
     poml.conf.p.put("exec", "mainClass:org.Main");
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl +
         "        <groupId>org.codehaus.mojo</groupId>" + nl +
@@ -25,7 +25,7 @@ public class ExecTest extends ConverterCase {
 
   @Test public void ver() {
     poml.conf.p.put("exec", "ver:1.0.0, mainClass:org.Main");
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl +  
         "        <groupId>org.codehaus.mojo</groupId>" + nl +

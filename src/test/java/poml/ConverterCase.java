@@ -10,19 +10,19 @@ import org.junit.Before;
 
 public class ConverterCase {
   public Poml poml;
-  public Pom pom;
+  public Xml xml;
   public Output output;
   public static String nl = System.lineSeparator();
   
   @Before public void before() {
     poml = new Poml();
-    pom = Pom.openBuffer();
-    output = new Output(pom.sw);
+    xml = Xml.openBuffer();
+    output = new Output(xml.sw);
   }
   
   @After public void after() throws IOException {
     if (poml != null) poml.close();
-    if (pom != null) pom.closeBuffer();
+    if (xml != null) xml.closeBuffer();
   }
   
   public class Output {

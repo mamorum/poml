@@ -12,7 +12,7 @@ public class FatjarTest extends ConverterCase {
     poml.conf.p.put("fatjar",
       "  jarName:${project.artifactId}," + 
       "  mainClass:org.sample.Main");
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl + 
         "        <groupId>org.apache.maven.plugins</groupId>" + nl +
@@ -47,7 +47,7 @@ public class FatjarTest extends ConverterCase {
         "  ver:1.0.0," +
         "  jarName:${project.artifactId}," + 
         "  mainClass:org.sample.Main");
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl + 
         "        <groupId>org.apache.maven.plugins</groupId>" + nl +

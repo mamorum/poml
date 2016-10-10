@@ -9,28 +9,27 @@ import java.io.StringWriter;
 import java.util.Map;
 
 // pom.xml
-public class Pom {
+public class Xml {
   
   public StringWriter sw;
   public PrintWriter out;
 
-  public static Pom openBuffer() {
-    Pom p = new Pom();
-    p.sw = new StringWriter();
-    p.out= new PrintWriter(p.sw);
-    return p;
+  public static Xml openBuffer() {
+    Xml x = new Xml();
+    x.sw = new StringWriter();
+    x.out= new PrintWriter(x.sw);
+    return x;
   }
 
-  public Pom save(String path) {
-    try (PrintWriter xml = xml(path)) {
-      xml.write(sw.toString());
+  public void save(String path) {
+    try (PrintWriter file = file(path)) {
+      file.write(sw.toString());
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    return this;
   }
   
-  private PrintWriter xml(String path)
+  private PrintWriter file(String path)
     throws IOException
   {
     return  new PrintWriter(

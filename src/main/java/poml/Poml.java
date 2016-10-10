@@ -30,9 +30,9 @@ public class Poml {
     conf.load();
   }
 
-  public void layoutTo(Pom pom) throws IOException {
+  public void layoutTo(Xml xml) throws IOException {
     while ((line = in.readLine()) != null) {
-      layout.processLine(this, pom);
+      layout.processLine(this, xml);
     }
   }
 

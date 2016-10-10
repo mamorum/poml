@@ -10,7 +10,7 @@ public class DependTest extends ConverterCase {
   
   @Test public void id2ver() {
     poml.conf.p.put("depend", "group.com:artifact:0.0.1");
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl + 
@@ -22,7 +22,7 @@ public class DependTest extends ConverterCase {
   
   @Test public void id2type() {
     poml.conf.p.put("depend", "group.com:artifact:0.0.1:test:true:jar");
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
         "    <dependency>" + nl +
         "      <groupId>group.com</groupId>" + nl + 
@@ -40,7 +40,7 @@ public class DependTest extends ConverterCase {
       "  demo.com:demo:0.0.1," +
       "  sample.com:sample:0.0.1:provided," +
       "  group.com:artifact:0.0.1:test:true:jar");
-    conveter.convert(poml, pom);
+    conveter.convert(poml, xml);
     output.is(
         "    <dependency>" + nl +
         "      <groupId>demo.com</groupId>" + nl + 

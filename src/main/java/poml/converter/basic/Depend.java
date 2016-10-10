@@ -4,29 +4,29 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Pom;
+import poml.Xml;
 import poml.Poml;
 
 public class Depend implements Converter {
 
   @Override public String name() { return "depend"; }
 
-  @Override public void convert(Poml poml, Pom pom) {
+  @Override public void convert(Poml poml, Xml xml) {
     for (String lib: poml.conf.vals(name(), ",")) {
-      printDependncy(lib.trim(), pom);
+      printDependncy(lib.trim(), xml);
     }
   }
 
-  private void printDependncy(String lib, Pom pom) {
-    pom.out.println(sp4 + "<dependency>");
+  private void printDependncy(String lib, Xml xml) {
+    xml.out.println(sp4 + "<dependency>");
     Map<String, String> kv = new LinkedHashMap<>();
     String[] vals = lib.split(":");
     // TODO check vals (null, length)
     for (int i = 0; i < vals.length; i++) {
       kv.put(tags[i], vals[i]);
     }
-    pom.printKvTags(sp6, kv);
-    pom.out.println(sp4 + "</dependency>");
+    xml.printKvTags(sp6, kv);
+    xml.out.println(sp4 + "</dependency>");
   }  
 
   private static final String[] tags = {

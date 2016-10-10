@@ -5,8 +5,8 @@ import java.lang.management.ManagementFactory;
 public class Main {
 
   static Poml poml;
-  static Pom pom;
-  static String pomlPath, pomPath;
+  static Xml xml;
+  static String pomlPath, xmlPath;
 
   private static void check(String[] args) {
     if (args.length == 2) return; // -> convert
@@ -17,19 +17,19 @@ public class Main {
     Console.help(); System.exit(1);
   }
 
-  // Convert poml to pom.
+  // Convert pom.poml to pom.xml.
   public static void main(String[] args) throws Throwable {
     check(args);
     pomlPath = args[0];
-    pomPath = args[1];
+    xmlPath = args[1];
 
     Console.start();
     try {
       poml = Poml.open(pomlPath);
-      pom = Pom.openBuffer();
+      xml = Xml.openBuffer();
       poml.loadConfig();
-      poml.layoutTo(pom);
-      pom.save(pomPath);
+      poml.layoutTo(xml);
+      xml.save(xmlPath);
     }
     catch (Throwable e) {
       Console.error(e);
@@ -40,7 +40,7 @@ public class Main {
   }
 
   private static void close() {
-    try { if (pom != null) pom.closeBuffer(); }
+    try { if (xml != null) xml.closeBuffer(); }
     finally { if (poml != null) poml.close(); }
   }
   
@@ -72,12 +72,12 @@ public class Main {
       System.err.print("[POML:ERROR] ");
       System.err.println(e.getMessage());
       System.err.print("[POML:ERROR] Could not generate \"");
-      System.err.print(pomPath);
+      System.err.print(xmlPath);
       System.err.println("\"");
     }
     public static void end() {
       System.out.print("[POML:INFO] Genarated \"");
-      System.out.print(pomPath);
+      System.out.print(xmlPath);
       System.out.print("\" @");
       System.out.print(
           ManagementFactory

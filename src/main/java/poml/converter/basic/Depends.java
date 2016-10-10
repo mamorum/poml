@@ -1,15 +1,15 @@
 package poml.converter.basic;
 
-import poml.Pom;
+import poml.Xml;
 import poml.Poml;
 
 public class Depends extends Depend {
 
   @Override public String name() { return "depends"; }
   
-  @Override public void convert(Poml poml, Pom pom) {
-    pom.out.println(sp2 + "<dependencies>");
-    super.convert(poml, pom);
-    pom.out.println(sp2 + "</dependencies>");
+  @Override public void convert(Poml poml, Xml xml) {
+    xml.out.println(sp2 + "<dependencies>");
+    super.convert(poml, xml);
+    xml.out.println(sp2 + "</dependencies>");
   }
 }
