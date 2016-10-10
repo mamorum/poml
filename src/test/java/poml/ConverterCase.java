@@ -9,20 +9,20 @@ import org.junit.After;
 import org.junit.Before;
 
 public class ConverterCase {
-  public Src src;
-  public Dst dst;
+  public Poml poml;
+  public Pom pom;
   public Output output;
   public static String nl = System.lineSeparator();
   
   @Before public void before() {
-    src = new Src();
-    dst = Dst.openBuffer();
-    output = new Output(dst.sw);
+    poml = new Poml();
+    pom = Pom.openBuffer();
+    output = new Output(pom.sw);
   }
   
   @After public void after() throws IOException {
-    if (src != null) src.close();
-    if (dst != null) dst.closeBuffer();
+    if (poml != null) poml.close();
+    if (pom != null) pom.closeBuffer();
   }
   
   public class Output {

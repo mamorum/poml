@@ -4,8 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Dst;
-import poml.Src;
+import poml.Pom;
+import poml.Poml;
 
 public class Dist implements Converter {
 
@@ -15,13 +15,13 @@ public class Dist implements Converter {
     "groupId", "artifactId", "version", "packaging"
   };
 
-  @Override public void convert(Src src, Dst dst) {
-    String[] vals = src.conf.vals(name(), ":");
+  @Override public void convert(Poml poml, Pom pom) {
+    String[] vals = poml.conf.vals(name(), ":");
     Map<String, String> kv = new LinkedHashMap<>();
     // TODO check vals (null, length)
     for (int i = 0; i < vals.length; i++) {
       kv.put(tags[i], vals[i]);
     }
-    dst.printKvTags(sp2, kv);
+    pom.printKvTags(sp2, kv);
   }
 }

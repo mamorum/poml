@@ -4,9 +4,9 @@ import java.lang.management.ManagementFactory;
 
 public class Main {
 
-  static Src src;
-  static Dst dst;
-  static String srcPath, dstPath;
+  static Poml poml;
+  static Pom pom;
+  static String pomlPath, pomPath;
 
   private static void check(String[] args) {
     if (args.length == 2) return; // -> convert
@@ -17,31 +17,31 @@ public class Main {
     Console.help(); System.exit(1);
   }
 
+  // Convert poml to pom.
   public static void main(String[] args) throws Throwable {
     check(args);
-    srcPath = args[0];
-    dstPath = args[1];
+    pomlPath = args[0];
+    pomPath = args[1];
 
-    Console.start(srcPath);
+    Console.start();
     try {
-      src = Src.open(srcPath);
-      dst = Dst.openBuffer();
-      src.toXml(dst);
-      dst.save(dstPath);
+      poml = Poml.open(pomlPath);
+      pom = Pom.openBuffer();
+      poml.loadConfig();
+      poml.layoutTo(pom);
+      pom.save(pomPath);
     }
     catch (Throwable e) {
-      Console.error(e, dstPath);
+      Console.error(e);
       throw e;
     }
-    finally {
-      close();
-    }
-    Console.end(dstPath);
+    finally { close(); }
+    Console.end();
   }
 
   private static void close() {
-    try { if (dst != null) dst.closeBuffer(); }
-    finally { if (src != null) src.close(); }
+    try { if (pom != null) pom.closeBuffer(); }
+    finally { if (poml != null) poml.close(); }
   }
   
   public static class Console {
@@ -63,25 +63,26 @@ public class Main {
       System.out.println("\t   display version");
     }
 
-    public static void start(String srcFile) {
+    public static void start() {
       System.out.print("[POML:INFO] Processing \"");
-      System.out.print(srcFile);
+      System.out.print(pomlPath);
       System.out.println("\"");
     }
-    public static void error(Throwable e, String dstFile) {
+    public static void error(Throwable e) {
       System.err.print("[POML:ERROR] ");
       System.err.println(e.getMessage());
       System.err.print("[POML:ERROR] Could not generate \"");
-      System.err.print(dstFile);
+      System.err.print(pomPath);
       System.err.println("\"");
     }
-    public static void end(String dstFile) {
+    public static void end() {
       System.out.print("[POML:INFO] Genarated \"");
-      System.out.print(dstFile);
+      System.out.print(pomPath);
       System.out.print("\" @");
       System.out.print(
           ManagementFactory
-            .getRuntimeMXBean().getUptime());
+            .getRuntimeMXBean().getUptime()
+      );
       System.out.println("ms");
     }
   }

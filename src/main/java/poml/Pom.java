@@ -8,19 +8,20 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
 
-public class Dst {
+// pom.xml
+public class Pom {
   
   public StringWriter sw;
   public PrintWriter out;
 
-  public static Dst openBuffer() {
-    Dst d = new Dst();
-    d.sw = new StringWriter();
-    d.out= new PrintWriter(d.sw);
-    return d;
+  public static Pom openBuffer() {
+    Pom p = new Pom();
+    p.sw = new StringWriter();
+    p.out= new PrintWriter(p.sw);
+    return p;
   }
 
-  public Dst save(String path) {
+  public Pom save(String path) {
     try (PrintWriter xml = xml(path)) {
       xml.write(sw.toString());
     } catch (IOException e) {

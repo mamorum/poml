@@ -5,7 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Src {
+// pom.poml
+public class Poml {
 
   public BufferedReader in;
   public String line;
@@ -13,20 +14,15 @@ public class Src {
   public Config conf = new Config();
   public Layout layout = new Layout();
   
-  public static Src open(String path) throws IOException {
-    Src s = new Src();
-    s.in = new BufferedReader(new InputStreamReader
+  public static Poml open(String path) throws IOException {
+    Poml p = new Poml();
+    p.in = new BufferedReader(new InputStreamReader
       (new FileInputStream(path), "UTF-8")
     );
-    return s;
+    return p;
   }
   
-  public void toXml(Dst dst) throws IOException {
-    loadConfig();
-    processLayout(dst);
-  }
-
-  private void loadConfig() throws IOException {
+  public void loadConfig() throws IOException {
     while ((line = in.readLine()) != null) {
       if (line.equals("---")) break;
       conf.append(line);
@@ -34,11 +30,11 @@ public class Src {
     conf.load();
   }
 
-  private void processLayout(Dst dst) throws IOException {
+  public void layoutTo(Pom pom) throws IOException {
     while ((line = in.readLine()) != null) {
-      layout.processLine(this, dst);
+      layout.processLine(this, pom);
     }
-  }  
+  }
 
   public void close() {
     try {

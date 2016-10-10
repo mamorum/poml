@@ -5,8 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Dst;
-import poml.Src;
+import poml.Pom;
+import poml.Poml;
 
 // More Project Infomation
 //   -> name, desc, url, inceptYear, license
@@ -14,8 +14,8 @@ public class Info implements Converter {
     
   @Override public String name() { return "info"; }
     
-  @Override public void convert(Src src, Dst dst) {
-    Map<String, String> map = src.conf.map(name());
+  @Override public void convert(Poml poml, Pom pom) {
+    Map<String, String> map = poml.conf.map(name());
     if (map.size() == 0) return;
     
     // name, description, url, inceptionYear
@@ -26,7 +26,7 @@ public class Info implements Converter {
       if (value == null) continue;
       kv.put(key, value);
     }
-    dst.printKvTags(sp2, kv);
+    pom.printKvTags(sp2, kv);
     
     // license
     String license = map.get(licenseKey);
@@ -34,7 +34,7 @@ public class Info implements Converter {
     if (licenseTag == null) throw new IllegalStateException(
       "License \"" + license + "\" not found"
     );
-    dst.out.println(licenseTag);
+    pom.out.println(licenseTag);
   }
   
   // --> property keys

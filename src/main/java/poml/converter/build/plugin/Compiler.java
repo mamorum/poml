@@ -3,8 +3,8 @@ package poml.converter.build.plugin;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Dst;
-import poml.Src;
+import poml.Pom;
+import poml.Poml;
 import poml.tools.converter.Assert;
 import poml.tools.converter.Tmpl;
 
@@ -12,13 +12,13 @@ public class Compiler implements Converter {
 
   @Override public String name() { return "compiler"; }
 
-  @Override public void convert(Src src, Dst dst) {
-    Map<String, String> map = src.conf.map(name());
+  @Override public void convert(Poml poml, Pom pom) {
+    Map<String, String> map = poml.conf.map(name());
     Assert.exists(
       new String[]{"source", "target"},
       map, name()
     );
     Put.defaults("ver", "3.5.1", map);
-    Tmpl.render("/tmpl/compiler.tmpl", map, dst);
+    Tmpl.render("/tmpl/compiler.tmpl", map, pom);
   }
 }

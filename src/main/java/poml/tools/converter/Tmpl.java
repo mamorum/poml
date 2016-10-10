@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Dst;
+import poml.Pom;
 
 public class Tmpl {
 
@@ -14,7 +14,7 @@ public class Tmpl {
   
   public static void render(
     String path, Map<String, String> mkv,
-    Dst dst
+    Pom dst
   ) {
     String str = tmpl(path);
     for (String mk: mkv.keySet()) {

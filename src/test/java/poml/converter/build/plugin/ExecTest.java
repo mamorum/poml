@@ -9,8 +9,8 @@ public class ExecTest extends ConverterCase {
   Exec conveter = new Exec();
 
   @Test public void defaultVer() {
-    src.conf.p.put("exec", "mainClass:org.Main");
-    conveter.convert(src, dst);
+    poml.conf.p.put("exec", "mainClass:org.Main");
+    conveter.convert(poml, pom);
     output.is(
         "      <plugin>" + nl +
         "        <groupId>org.codehaus.mojo</groupId>" + nl +
@@ -24,8 +24,8 @@ public class ExecTest extends ConverterCase {
   }
 
   @Test public void ver() {
-    src.conf.p.put("exec", "ver:1.0.0, mainClass:org.Main");
-    conveter.convert(src, dst);
+    poml.conf.p.put("exec", "ver:1.0.0, mainClass:org.Main");
+    conveter.convert(poml, pom);
     output.is(
         "      <plugin>" + nl +  
         "        <groupId>org.codehaus.mojo</groupId>" + nl +

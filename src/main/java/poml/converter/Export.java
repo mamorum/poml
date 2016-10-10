@@ -15,7 +15,7 @@ import poml.converter.project.Model4;
 
 public class Export {
 
-  private static Converter[] export = new Converter[] {
+  private static Converter[] target = new Converter[] {
       // project
       new Model4.Start(),
       new Model4.End(),
@@ -34,7 +34,7 @@ public class Export {
 
   public static HashMap<String, Converter> converters() {
     HashMap<String, Converter> map = new HashMap<>();
-    for (Converter c: export) map.put(c.name(), c);
+    for (Converter c: target) map.put(c.name(), c);
     return map;
   }
 }
