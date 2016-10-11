@@ -1,5 +1,6 @@
 package poml;
 
+import java.io.PrintStream;
 import java.lang.management.ManagementFactory;
 
 public class Main {
@@ -45,45 +46,47 @@ public class Main {
   }
   
   public static class Console {
+    static PrintStream out = System.out;
+    static PrintStream err = System.err;
     public static void version() {
-      System.out.println(
+      out.println(
         Main.class.getPackage()
           .getImplementationVersion()
       );
     }
     public static void help() {
-      System.out.println();
-      System.out.println("Usage: poml [option]");
-      System.out.println();
-      System.out.print("poml   ");
-      System.out.println("\t   convert pom.poml to pom.xml");
-      System.out.print("poml -h");
-      System.out.println("\t   display this help");
-      System.out.print("poml -v");
-      System.out.println("\t   display version");
+      out.println();
+      out.println("Usage: poml [option]");
+      out.println();
+      out.print("poml   ");
+      out.println("\t   convert pom.poml to pom.xml");
+      out.print("poml -h");
+      out.println("\t   display this help");
+      out.print("poml -v");
+      out.println("\t   display version");
     }
 
     public static void start() {
-      System.out.print("[POML:INFO] Processing \"");
-      System.out.print(pomlPath);
-      System.out.println("\"");
+      out.print("[POML:INFO] Processing \"");
+      out.print(pomlPath);
+      out.println("\"");
     }
     public static void error(Throwable e) {
-      System.err.print("[POML:ERROR] ");
-      System.err.println(e.getMessage());
-      System.err.print("[POML:ERROR] Could not generate \"");
-      System.err.print(xmlPath);
-      System.err.println("\"");
+      err.print("[POML:ERROR] ");
+      err.println(e.getMessage());
+      err.print("[POML:ERROR] Could not generate \"");
+      err.print(xmlPath);
+      err.println("\"");
     }
     public static void end() {
-      System.out.print("[POML:INFO] Genarated \"");
-      System.out.print(xmlPath);
-      System.out.print("\" @");
-      System.out.print(
-          ManagementFactory
-            .getRuntimeMXBean().getUptime()
+      out.print("[POML:INFO] Genarated \"");
+      out.print(xmlPath);
+      out.print("\" @");
+      out.print(
+        ManagementFactory
+          .getRuntimeMXBean().getUptime()
       );
-      System.out.println("ms");
+      out.println("ms");
     }
   }
 }
