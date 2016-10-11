@@ -48,5 +48,7 @@ public class Info implements Converter {
   //  http://central.sonatype.org/pages/requirements.html#license-information
   private static Map<String, String> licenses = new HashMap<>();  
   static {
+    licenses.put("MIT", "/converter/more/info/mit.txt");
+    licenses.put("Apache 2.0", "/converter/more/info/apache2.txt");
   }
 }
