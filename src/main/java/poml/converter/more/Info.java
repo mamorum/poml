@@ -6,6 +6,7 @@ import java.util.Map;
 
 import poml.Converter;
 import poml.Xml;
+import poml.tool.converter.Tmpl;
 import poml.Poml;
 
 // More Project Infomation
@@ -31,11 +32,11 @@ public class Info implements Converter {
     // license
     String license = map.get(licenseKey);
     if (license == null) return;
-    String licenseTag = licenses.get(license.trim());
-    if (licenseTag == null) throw new IllegalStateException(
+    String licensePath = licenses.get(license.trim());
+    if (licensePath == null) throw new IllegalStateException(
       "License \"" + license + "\" not found"
     );
-    xml.out.println(licenseTag);
+    xml.out.print(Tmpl.text(licensePath));
   }
   
   // --> property keys
@@ -43,25 +44,9 @@ public class Info implements Converter {
     {"name", "description", "url", "inceptionYear", };
   private static final String licenseKey = "license";
   
-  // --> license tags
+  // --> licenses
   //  http://central.sonatype.org/pages/requirements.html#license-information
-  private static final String mit = 
-    sp2 + "<licenses>" + nl +
-      sp4 + "<license>" + nl +
-        sp6 + "<name>MIT License</name>" + nl +
-        sp6 + "<url>http://www.opensource.org/licenses/mit-license.php</url>" + nl +
-      sp4 + "</license>" + nl +
-    sp2 + "</licenses>";
-  private static final String apache2 = 
-    sp2 + "<licenses>" + nl +
-      sp4 + "<license>" + nl +
-        sp6 + "<name>The Apache License, Version 2.0</name>" + nl +
-        sp6 + "<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>" + nl +
-      sp4 + "</license>" + nl +
-    sp2 + "</licenses>";
   private static Map<String, String> licenses = new HashMap<>();  
   static {
-    licenses.put("MIT", mit);
-    licenses.put("Apache 2.0", apache2);
   }
 }

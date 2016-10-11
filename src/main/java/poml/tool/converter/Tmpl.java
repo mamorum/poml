@@ -1,4 +1,4 @@
-package poml.tools.converter;
+package poml.tool.converter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,26 +6,30 @@ import java.io.InputStreamReader;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Xml;
 
 public class Tmpl {
 
   private static String nl = Converter.nl;
   
-  public static void render(
-    String path, Map<String, String> mkv,
-    Xml dst
+  // change map "key" to "{{key}}"
+  private static String key(String mk) {
+    StringBuilder sb = new StringBuilder("{{");
+    return sb.append(mk).append("}}").toString();
+  }
+
+  public static String render(
+    String path, Map<String, String> mkv
   ) {
-    String str = tmpl(path);
+    String tmpl = text(path);
     for (String mk: mkv.keySet()) {
       String v = mkv.get(mk);
       String k = key(mk);
-      str = str.replace(k, v);
+      tmpl = tmpl.replace(k, v);
     }    
-    dst.out.print(str);
+    return tmpl;
   }
 
-  private static String tmpl(String path) {
+  public static String text(String path) {
     StringBuilder sb = new StringBuilder();
     try (BufferedReader br =br(path)) {
       String line = null;
@@ -44,11 +48,5 @@ public class Tmpl {
         Tmpl.class.getResourceAsStream(path)
       )
     );
-  }
-  
-  // change map "key" to "{{key}}"
-  private static String key(String mk) {
-    StringBuilder sb = new StringBuilder("{{");
-    return sb.append(mk).append("}}").toString();
   }
 }

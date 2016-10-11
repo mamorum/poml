@@ -1,4 +1,4 @@
-package poml.tools.converter;
+package poml.tool.converter;
 
 import java.util.Map;
 

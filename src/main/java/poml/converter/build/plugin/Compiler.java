@@ -4,9 +4,9 @@ import java.util.Map;
 
 import poml.Converter;
 import poml.Xml;
+import poml.tool.converter.Assert;
+import poml.tool.converter.Tmpl;
 import poml.Poml;
-import poml.tools.converter.Assert;
-import poml.tools.converter.Tmpl;
 
 public class Compiler implements Converter {
 
@@ -19,6 +19,9 @@ public class Compiler implements Converter {
       map, name()
     );
     Put.defaults("ver", "3.5.1", map);
-    Tmpl.render("/tmpl/compiler.tmpl", map, xml);
+    xml.out.print(Tmpl.render(
+      "/converter/build/plugin/compiler.tmpl",
+      map
+    ));
   }
 }

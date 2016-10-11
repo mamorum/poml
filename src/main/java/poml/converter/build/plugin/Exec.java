@@ -4,9 +4,9 @@ import java.util.Map;
 
 import poml.Converter;
 import poml.Xml;
+import poml.tool.converter.Assert;
+import poml.tool.converter.Tmpl;
 import poml.Poml;
-import poml.tools.converter.Assert;
-import poml.tools.converter.Tmpl;
 
 public class Exec implements Converter {
   
@@ -16,6 +16,9 @@ public class Exec implements Converter {
     Map<String, String> map = poml.conf.map(name());
     Assert.exists("mainClass", map, name());
     Put.defaults("ver", "1.5.0", map);
-    Tmpl.render("/tmpl/exec.tmpl", map, xml);
+    xml.out.print(Tmpl.render(
+      "/converter/build/plugin/exec.tmpl",
+      map
+    ));
   }
 }
