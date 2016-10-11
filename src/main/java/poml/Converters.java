@@ -6,16 +6,14 @@ import poml.converter.Export;
 
 public class Converters {
 
-  private static HashMap<String, Converter>
+  private static final HashMap<String, Converter>
     converters = Export.converters();
   
-  public static void convert(
-    String name, Poml poml, Xml xml
-  ) {
+  public static Converter get(String name) {
     Converter c = converters.get(name);
     if (c == null) throw new RuntimeException(
       "Converter not found for {{" + name + "}}"
     );
-    c.convert(poml, xml);
+    return c;
   }
 }

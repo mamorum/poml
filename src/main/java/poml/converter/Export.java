@@ -15,7 +15,8 @@ import poml.converter.project.Model4;
 
 public class Export {
 
-  private static Converter[] target = new Converter[] {
+  private static final Converter[] target
+    = new Converter[] {
       // project
       new Model4.Start(),
       new Model4.End(),

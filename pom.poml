@@ -52,6 +52,5 @@ info=\
       </plugin>
     </plugins>
   </build>
-
-  {{info}}
+  {{ info}}
 {{/model4}}

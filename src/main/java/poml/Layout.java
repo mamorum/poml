@@ -6,7 +6,7 @@ public class Layout {
     int start = poml.line.indexOf("{{");
     int end = poml.line.indexOf("}}");
     
-    // not convert
+    // no conversion.
     if (start == -1 || end == -1) {
       xml.out.println(poml.line);
       return;
@@ -14,14 +14,19 @@ public class Layout {
 
     // convert
     String key = poml.line.substring(start+2, end);
-    Converters.convert(key.trim(), poml, xml);
+    String name = key.trim();
+    
+    preNewLine(key, name, xml);
+    Converters.get(name).convert(poml, xml);
+    postNewLine(key, name, xml);
+  }
 
-    // convert spaces after key to new line
-    if (!key.contains(" ")) return;
-    char[] scan = key.toCharArray();
-    for (int i = scan.length; i > 0; i--) {
-      if (scan[i-1] != ' ') break;
-      xml.out.println();
-    }
+  private void preNewLine(String key, String name, Xml xml) {
+    int count = key.indexOf(name);
+    for (int i=0; i < count; i++) xml.out.println();
+  }
+  private void postNewLine(String key, String name, Xml xml) {
+    int count = key.length() - key.indexOf(name) - name.length();
+    for (int i=0; i < count; i++) xml.out.println();
   }
 }
