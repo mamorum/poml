@@ -11,9 +11,17 @@ public class Config {
   public Properties p = new Properties();
   public StringBuilder lines = new StringBuilder();
   
+  private boolean isContinue(String line) {
+    if (line.endsWith("=")) return true;
+    if (line.endsWith(":")) return true;
+    if (line.endsWith(",")) return true;
+    return false;
+  }
+  
   // -> for loading.
   public void append(String line) {
     lines.append(line);
+    if (isContinue(line)) return;
     lines.append(System.lineSeparator());
   }
   public void load() throws IOException {
@@ -33,7 +41,7 @@ public class Config {
   public String[] vals(String key, String delim) {
     String vals = val(key);
     if (vals == null) return null;
-    else return vals.split(delim);
+    return vals.split(delim);
   }
   
   // key=k:v, k:v, ...
