@@ -21,8 +21,8 @@ First, Create project root directory named `demo`. In this directory, create new
 
 ```txt
 dist=com.example:demo:0.0.1:jar
-depends=\
-  junit:junit:4.12:test,\
+depends=
+  junit:junit:4.12:test,
   org.assertj:assertj-core:3.2.0:test
 property=project.build.sourceEncoding:UTF-8
 compiler=source:1.8, target:1.8
