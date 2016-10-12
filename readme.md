@@ -15,9 +15,8 @@ Poml is a conversion tool from text to [maven](https://maven.apache.org/) pom.xm
 
 
 ## Example
-First, Create project root directory named `demo`. In this directory, create new file named `pom.poml` and save following text.
-
-`demo/pom.poml`
+### 1. Create Poml File
+Create `pom.poml` in the `demo` directory, and save the following text.
 
 ```txt
 dist=com.example:demo:0.0.1:jar
@@ -27,10 +26,10 @@ depends=
 property=project.build.sourceEncoding:UTF-8
 compiler=source:1.8, target:1.8
 ---
-{{#model4}}
-  {{dist}}
-  {{depends}}
-  {{property}}
+{{#model4 }}
+  {{dist }}
+  {{depends }}
+  {{property }}
   <build>
     <plugins>
       {{compiler}}
@@ -39,23 +38,26 @@ compiler=source:1.8, target:1.8
 {{/model4}}
 ```
 
-Next, execute `poml` command in the same directory.
+
+### 2. Execute Poml Command
+Execute `poml` command in the `demo` directory.
 
 ```
 demo$ poml
 ```
 
-When the command is completed, pom.xml is generated.
-
-`demo/pom.xml`
+### 3. Check Pom File
+After execution, following `pom.xml` is generated.
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>com.example</groupId>
   <artifactId>demo</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -70,9 +72,11 @@ When the command is completed, pom.xml is generated.
       <scope>test</scope>
     </dependency>
   </dependencies>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
   <build>
     <plugins>
       <plugin>
@@ -89,7 +93,8 @@ When the command is completed, pom.xml is generated.
 </project>
 ```
 
-Combined command like `poml && mvn test` is convenient to execute Maven, after `pom.xml` generated successfully. 
+### Note: With Maven Command
+Combined command like `poml && mvn test` is convenient to execute Maven with successfully generated `pom.xml`. 
 
 ```
 demo$ poml && mvn <goal>

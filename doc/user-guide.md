@@ -25,10 +25,10 @@
 
 ## Getting Started
 ### Install
-In the [Installation Guide](./installation-guide.md), download page, requirements and how to install are described.
+[Installation Guide](./installation-guide.md) describes how to install.
 
 ### Example
-In the 'Example' section of [Readme](../readme.md), Poml converts simple poml file to `pom.xml`.
+In the 'Example' section of [Readme](../readme.md), Poml converts a poml file to `pom.xml`.
 
 
 ## Overview
@@ -39,7 +39,9 @@ One 'Poml File' is created per a `pom.xml`. 'Poml Converters' are in the install
 
 ## Poml File
 ### Overview
-Poml file consists of two parts. First part is a 'Config Section', in which configurations for converters are written. Second part is a 'Layout Section', in which placeholders and XML elements are written.
+Poml file consists of two parts. First part is a 'Config Section', in which we write configurations for converters. Second part is a 'Layout Section', in which we write placeholders and XML elements.
+
+These two sections are separated by the delimiter `---`, like following.
 
 ```
 dist=com.example:demo:0.0.1:jar
@@ -50,7 +52,7 @@ dist=com.example:demo:0.0.1:jar
 {{#model4}}
 ```
 
-'Config Section' ends at a delimiter `---`, and then 'Layout Section' starts. The delimiter needs new lines on its front and behind.
+The delimiter needs new lines on its front and behind.
 
 
 ### Config Section
