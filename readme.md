@@ -16,7 +16,7 @@ Poml is a conversion tool from text to [maven](https://maven.apache.org/) pom.xm
 
 ## Example
 ### 1. Create Poml File
-Create `pom.poml` in the `demo` directory, and save the following text.
+In the `demo` directory, create a `pom.poml` and save the following text.
 
 ```txt
 dist=com.example:demo:0.0.1:jar

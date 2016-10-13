@@ -3,24 +3,14 @@
 - Getting Started
     - Install
     - Example
-- Overview
+- Poml Overview
 - Poml File
     - Overview
     - Config Section
     - Layout Section
 - Poml Converters
-    - Project Model
-        - model4
-    - Basics
-        - dist
-        - depends
-        - property
-    - Build Plugins
-        - compiler
-        - exec
-        - fatjar
-    - More Project Infomation
-        - info
+    - Overview
+    - 
 
 
 ## Getting Started
@@ -31,10 +21,8 @@
 In the 'Example' section of [Readme](../readme.md), Poml converts a poml file to `pom.xml`.
 
 
-## Overview
-This guide describes the usage of Poml, especially about the 'Poml File' (`pom.poml`) and 'Poml Converters'. Both are needed to generate a `pom.xml`.
-
-One 'Poml File' is created per a `pom.xml`. 'Poml Converters' are in the installed resources with poml command (`> poml`).
+## Poml Overview
+Poml generates a `pom.xml`, reading a 'Poml File' and calling  'Poml Converters'.
 
 
 ## Poml File
@@ -56,8 +44,32 @@ The delimiter needs new lines on its front and behind.
 
 
 ### Config Section
-...
+The syntax of this section is based on Java's property file.
+
+A configuration is defined as `key=value`. A `key` is a converter name, and `value` varies according to a converter. 
+
+```
+dist=com.example:demo:0.0.1:jar
+depends=
+  junit:junit:4.12:test,
+  org.assertj:assertj-core:3.2.0:test
+```
+
+Backslash `\` is not needed to escape newline, if a line ends with `=`, `:`, or `,`. In this case, Poml considers that the configuration continues to next line.
 
 
 ### Layout Section
-...
+The syntax of this section is based on XML.
+
+Writing placeholders are available to generate XML defined `{{key}}` 
+
+```
+  {{dist}}
+  <name>Demo</name>
+```
+
+If a placehoder has spaces at the front and back of the key like `{{ key }}`, Poml convert space to newline.
+
+
+## Poml Converters
+### Overview
