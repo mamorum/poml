@@ -21,7 +21,9 @@
 
 ## Project Model
 ### 1. model4
-This converter needs no config. Placeholders `{{#model4}}` and `{{/model4}}` in the layout section are converted to XML tags.
+This converter needs no config.
+
+Placeholders `{{#model4}}` and `{{/model4}}` in the layout section are converted to XML tags.
 
 ##### src
 ```
