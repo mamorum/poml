@@ -9,9 +9,10 @@ Poml is a conversion tool from text to [maven](https://maven.apache.org/) pom.xm
 2. Processor converting `pom.poml` to `pom.xml`.
 
 
-## Guide
+## Documents
 - [Installation Guide](doc/installation-guide.md)
 - [User Guide](doc/user-guide.md)
+- [Converter Reference](doc/converter-reference.md)
 
 
 ## Example
