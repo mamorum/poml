@@ -10,7 +10,7 @@ Poml is a conversion tool from text to [Maven](https://maven.apache.org/) `pom.x
 ## Documents
 - [Installation Guide](doc/installation-guide.md)
 - [User Guide](doc/user-guide.md)
-- [Converter Reference](/mamorum/poml/wiki)
+- [Converter Reference](https://github.com/mamorum/poml/wiki)
 - [Blog](http://java-poml.tumblr.com/)
 
 
