@@ -76,4 +76,4 @@ If a placehoder has spaces at the front and back of the key like `{{ key }}`, Po
 ...
 
 ### Reference
-Poml Converters are listed in [Converter Reference](converter-reference.md). It describes configuration values, sample usages and so on.
+Poml Converters are listed in [Converter Reference](/mamorum/poml/wiki). It describes configuration values, sample usages and so on.
