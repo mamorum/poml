@@ -18,21 +18,22 @@
 [Installation Guide](./installation-guide.md) describes how to install.
 
 ### Example
-In the 'Example' section of [Readme](../readme.md), Poml converts a poml file to `pom.xml`.
+"Example Section" of [Readme](../readme.md) describes how Poml works.
 
 
 ## Poml Overview
-Poml generates a `pom.xml`, reading a 'Poml File' and calling  'Poml Converters'.
+"Poml Processor" generates a Maven `pom.xml`, reading a "Poml File (`pom.poml`)" and calling  "Poml Converters".
 
 
 ## Poml File
 ### Overview
-Poml file consists of two parts. First part is a 'Config Section', in which we write configurations for converters. Second part is a 'Layout Section', in which we write placeholders and XML elements.
-
-These two sections are separated by the delimiter `---`, like following.
+Poml File consists of two parts. First part is "Config Section". Second part is "Layout Section". 
 
 ```
 dist=com.example:demo:0.0.1:jar
+depends=
+  junit:junit:4.12:test,
+  org.assertj:assertj-core:3.2.0:test
 ---
 {{#model4}}
   {{dist}}
@@ -40,13 +41,10 @@ dist=com.example:demo:0.0.1:jar
 {{#model4}}
 ```
 
-The delimiter needs new lines on its front and behind.
-
+The delimiter `---` separates two sections. And it needs newlines on its front and behind.
 
 ### Config Section
-The syntax of this section is based on Java's property file.
-
-A configuration is defined as `key=value`. A `key` is a converter name, and `value` varies according to a converter. 
+In this section, we can write the configuration as `key=value`. The `key` is a converter name (ex.`dist`,`depends`). The `value` varies according to a converter. 
 
 ```
 dist=com.example:demo:0.0.1:jar
@@ -55,25 +53,27 @@ depends=
   org.assertj:assertj-core:3.2.0:test
 ```
 
-Backslash `\` is not needed to escape newline, if a line ends with `=`, `:`, or `,`. In this case, Poml considers that the configuration continues to next line.
+The syntax is based on Java's property file. But a backslash `\` is not needed to escape newline, if a line ends with `=`, `:`, or `,`. In this case, Poml Processor considers that the configuration continues to next line.
 
 
 ### Layout Section
-The syntax of this section is based on XML.
-
-Writing placeholders are available to generate XML defined `{{key}}` 
+Poml Processor outputs this section to `pom.xml`, converting placeholders. The placeholder is expressed as `{{key}}`. The `key` is a converter name. Depending on the converter, placeholder contains specific symbols (ex.`#`,`/`).
 
 ```
+{{#model4}}
   {{dist}}
-  <name>Demo</name>
+  <name>Demo App</name>
+{{/model4}}
 ```
 
-If a placehoder has spaces at the front and back of the key like `{{ key }}`, Poml convert space to newline.
+We can add spaces around the `key` like `{{ dist }}`. Poml Processor converts the front spaces to newlines before converting placeholders and the behind spaces after converting.
+
+Now, we can write one pleceholder per one line. 
 
 
 ## Poml Converters
 ### Overview
-...
+Poml Converter is called when Poml Processor meets a placeholder in the layout section. Converter gets configuration from config section and generates the elements of `pom.xml`.
 
 ### Reference
-Poml Converters are listed in [Converter Reference](https://github.com/mamorum/poml/wiki). It describes configuration values, sample usages and so on.
+Poml Converters are listed in [Converter Reference](https://github.com/mamorum/poml/wiki). It describes converter configurations, examples and so on.
