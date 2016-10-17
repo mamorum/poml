@@ -1,8 +1,8 @@
 package poml.converter.project;
 
 import poml.Converter;
-import poml.Xml;
-import poml.Poml;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Model4 {
 

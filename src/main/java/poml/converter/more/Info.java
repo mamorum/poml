@@ -5,9 +5,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Xml;
+import poml.in.Poml;
+import poml.out.Xml;
 import poml.tool.converter.Tmpl;
-import poml.Poml;
 
 // More Project Infomation
 //   -> name, desc, url, inceptYear, license

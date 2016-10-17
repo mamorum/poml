@@ -3,10 +3,10 @@ package poml.converter.build.plugin;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Xml;
+import poml.in.Poml;
+import poml.out.Xml;
 import poml.tool.converter.Assert;
 import poml.tool.converter.Tmpl;
-import poml.Poml;
 
 public class Fatjar implements Converter {
 

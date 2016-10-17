@@ -1,7 +1,7 @@
 package poml.converter.basic;
 
-import poml.Xml;
-import poml.Poml;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Depends extends Depend {
 

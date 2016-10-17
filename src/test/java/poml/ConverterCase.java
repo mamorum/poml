@@ -8,6 +8,9 @@ import java.io.StringWriter;
 import org.junit.After;
 import org.junit.Before;
 
+import poml.in.Poml;
+import poml.out.Xml;
+
 public class ConverterCase {
   public Poml poml;
   public Xml xml;

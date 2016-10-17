@@ -3,8 +3,8 @@ package poml.converter.basic;
 import java.util.Map;
 
 import poml.Converter;
-import poml.Xml;
-import poml.Poml;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Property implements Converter {
 

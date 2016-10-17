@@ -1,4 +1,4 @@
-package poml;
+package poml.in;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -10,14 +10,7 @@ public class Config {
 
   public Properties p = new Properties();
   public StringBuilder lines = new StringBuilder();
-  
-  private boolean isContinue(String line) {
-    if (line.endsWith("=")) return true;
-    if (line.endsWith(":")) return true;
-    if (line.endsWith(",")) return true;
-    return false;
-  }
-  
+
   // -> for loading.
   public void append(String line) {
     lines.append(line);
@@ -30,20 +23,36 @@ public class Config {
         = new StringReader(lines.toString())
     ) { p.load(r); }
   }
-  
-  // -> for getting config values.
-  // key=val
-  public String val(String key) {
-    return p.getProperty(key);
+
+  private boolean isContinue(String line) {
+    if (line.endsWith("=")) return true;
+    if (line.endsWith(",")) return true;
+    return false;
   }
-  
+
+  // -> for getting config values.
+  private static final String cma = "&comma;";
+  private String[] split(String val, String delim) {
+    if (!val.contains(cma)) {
+      return val.split(delim);
+    }
+    String[] tmp = val.split(delim);
+    String[] vals = new String[tmp.length];
+    for (int i=0; i<tmp.length; i++) {
+      vals[i] = tmp[i].replace(
+          cma, ","
+      );
+    }
+    return vals;
+  }
+
   // key=val, val, ... ( if delim is "," )
   public String[] vals(String key, String delim) {
-    String vals = val(key);
-    if (vals == null) return null;
-    return vals.split(delim);
-  }
-  
+    String val = p.getProperty(key);
+    if (val == null) return null;
+    return split(val, delim);
+  }  
+
   // key=k:v, k:v, ...
   public Map<String, String> map(String key) {
     Map<String, String> map = new LinkedHashMap<>();

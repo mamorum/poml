@@ -2,6 +2,9 @@ package poml;
 
 import java.util.Map;
 
+import poml.in.Poml;
+import poml.out.Xml;
+
 public interface Converter {
 
   String name();

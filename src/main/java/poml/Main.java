@@ -3,6 +3,9 @@ package poml;
 import java.io.PrintStream;
 import java.lang.management.ManagementFactory;
 
+import poml.in.Poml;
+import poml.out.Xml;
+
 public class Main {
 
   static Poml poml;
@@ -18,7 +21,7 @@ public class Main {
     Console.help(); System.exit(1);
   }
 
-  // Convert pom.poml to pom.xml.
+  // Poml Processor starts to convert poml to xml.
   public static void main(String[] args) throws Throwable {
     check(args);
     pomlPath = args[0];

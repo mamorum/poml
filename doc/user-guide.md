@@ -48,13 +48,16 @@ In this section, we can write the configuration as `key=value`. The `key` is a c
 
 ```
 dist=com.example:demo:0.0.1:jar
+```
+
+
+```
 depends=
-  junit:junit:4.12:test,
+  junit:junit:[4.12&comma;):test,
   org.assertj:assertj-core:3.2.0:test
 ```
 
-The syntax is based on Java's property file. But a backslash `\` is not needed to escape newline, if a line ends with `=`, `:`, or `,`. In this case, Poml Processor considers that the configuration continues to next line.
-
+And, if a line ends with `=` or `,`, Poml Processor considers that the configuration (`key=value`) continues to next line.
 
 ### Layout Section
 Poml Processor outputs this section to `pom.xml`, converting placeholders. The placeholder is expressed as `{{key}}`. The `key` is a converter name. Depending on the converter, placeholder contains specific symbols (ex.`#`,`/`).
@@ -66,7 +69,7 @@ Poml Processor outputs this section to `pom.xml`, converting placeholders. The p
 {{/model4}}
 ```
 
-We can add spaces around the `key` like `{{ dist }}`. Poml Processor converts the front spaces to newlines before converting placeholders and the behind spaces after converting.
+We can add spaces around the `key` like `{{ dist }}`. Poml Processor converts the front spaces to newlines before converting placeholders and the behind spaces after converting. One space is converted one newline.
 
 Now, we can write one pleceholder per one line. 
 

@@ -10,7 +10,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>[4.12,)</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -81,7 +81,7 @@
   </build>
 
   <name>POML</name>
-  <description>POM's Obvious Minimal Language</description>
+  <description>POM's Minimal Language</description>
   <url>https://github.com/mamorum/poml</url>
   <licenses>
     <license>
