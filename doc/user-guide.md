@@ -50,6 +50,7 @@ In this section, we can write the configuration as `key=value`. The `key` is a c
 dist=com.example:demo:0.0.1:jar
 ```
 
+The `value` sometimes contains comma `,` as a separator. To use comma not as a separator, we can write `&comma;` instead of `,`. For example, to express the version `[4.12,)` (4.12 or over in maven), we can write `[4.12&comma;)`.
 
 ```
 depends=
