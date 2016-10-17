@@ -20,12 +20,13 @@ info=
       {{compiler }}
       <!-- exec: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
       {{exec }}
-      <!-- assembly: create target/poml.jar -->
+      <!-- assembly: create dist/poml.jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.6</version>
         <configuration>
+          <outputDirectory>dist</outputDirectory>
           <finalName>${project.artifactId}</finalName>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
