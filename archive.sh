@@ -9,7 +9,7 @@ mvn package -DskipTests=true
 ./dist/poml
 
 ## - Create poml.jar using generated pom.xml.
-mvn package
+mvn clean && mvn package
 
 
 # 2.Create tar.gz and zip.
