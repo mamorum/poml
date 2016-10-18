@@ -20,6 +20,8 @@ POML_NAME=poml-$POML_VER
 ## - Create dirs.
 SRC_DIR=$POML_NAME
 DST_DIR=archive
+rm -Rf $SRC_DIR
+rm -Rf $DST_DIR
 mkdir $SRC_DIR
 mkdir $DST_DIR
 
