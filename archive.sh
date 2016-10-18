@@ -25,8 +25,12 @@ rm -Rf $DST_DIR
 mkdir $SRC_DIR
 mkdir $DST_DIR
 
-## - Copy sh,cmd,jar to src.
-cp -p dist/* $SRC_DIR/
+## - Copy jar,sh to src.
+cp dist/poml.jar $SRC_DIR/
+cp dist/poml $SRC_DIR/
+
+## - Copy cmd to src, converting LF to CRLF.
+nkf -Lw dist/poml.cmd > $SRC_DIR/poml.cmd
 
 echo "[POML:INFO] Create tar.gz."
 tar zcvf $DST_DIR/$POML_NAME.tar.gz $SRC_DIR/*
