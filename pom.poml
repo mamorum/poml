@@ -1,18 +1,17 @@
 dist=com.github.mamorum:poml:0.1.0:jar
+info=name:POML, license:MIT,
+  description:POM's Minimal Language,
+  url:https://github.com/mamorum/poml
 depends=
   junit:junit:[4.12&comma;):test,
   org.assertj:assertj-core:3.2.0:test
 property=project.build.sourceEncoding:UTF-8
 compiler=source:1.8, target:1.8
 exec=mainClass:poml.Main
-info=
-  name:POML,
-  description:POM's Minimal Language,
-  url:https://github.com/mamorum/poml,
-  license:MIT
 ---
 {{#model4 }}
   {{dist }}
+  {{info }}
   {{depends }}
   {{property }}
   <build>
@@ -53,5 +52,4 @@ info=
       </plugin>
     </plugins>
   </build>
-  {{ info}}
 {{/model4}}
