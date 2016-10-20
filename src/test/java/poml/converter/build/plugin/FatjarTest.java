@@ -10,7 +10,6 @@ public class FatjarTest extends ConverterCase {
 
   @Test public void defaultVer() {
     poml.conf.p.put("fatjar",
-      "  jarName:${project.artifactId}," + 
       "  mainClass:org.sample.Main");
     conveter.convert(poml, xml);
     output.is(
@@ -42,10 +41,10 @@ public class FatjarTest extends ConverterCase {
       );
   }
   
-  @Test public void ver() {
+  @Test public void ver_jar() {
     poml.conf.p.put("fatjar",
         "  ver:1.0.0," +
-        "  jarName:${project.artifactId}," + 
+        "  jarName:sample.jar," + 
         "  mainClass:org.sample.Main");
     conveter.convert(poml, xml);
     output.is(
@@ -54,7 +53,7 @@ public class FatjarTest extends ConverterCase {
         "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
         "        <version>1.0.0</version>" + nl +
         "        <configuration>" + nl +
-        "          <finalName>${project.artifactId}</finalName>" + nl +
+        "          <finalName>sample.jar</finalName>" + nl +
         "          <descriptorRefs>" + nl +
         "            <descriptorRef>jar-with-dependencies</descriptorRef>" + nl +
         "          </descriptorRefs>" + nl +
