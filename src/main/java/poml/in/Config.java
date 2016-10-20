@@ -10,24 +10,28 @@ public class Config {
 
   public Properties p = new Properties();
   public StringBuilder lines = new StringBuilder();
-
+  
   // -> for loading.
   public void append(String line) {
+    if (line.endsWith(";")) {
+      terminate(line);
+      return;
+    }
     lines.append(line);
-    if (isContinue(line)) return;
+    if (line.endsWith(">")) lines.append(",");
+  }
+  private void terminate(String line) {
+    lines.append(
+      line.substring(0, line.length()-1)
+    );
     lines.append(System.lineSeparator());
   }
+  
   public void load() throws IOException {
     try (
       StringReader r
         = new StringReader(lines.toString())
     ) { p.load(r); }
-  }
-
-  private boolean isContinue(String line) {
-    if (line.endsWith("=")) return true;
-    if (line.endsWith(",")) return true;
-    return false;
   }
 
   // -> for getting config values.
@@ -46,6 +50,17 @@ public class Config {
     return vals;
   }
 
+  private static final String[] zeros = {};
+  public String[] tags(String key) {
+    String val = p.getProperty(key);
+    if (val == null) return zeros;
+    String tag = val.substring(
+      val.indexOf('{') + 1,
+      val.lastIndexOf('}')
+    ); 
+    return split(tag, ",");
+  }
+  
   // key=val, val, ... ( if delim is "," )
   public String[] vals(String key, String delim) {
     String val = p.getProperty(key);

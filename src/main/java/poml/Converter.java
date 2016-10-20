@@ -15,7 +15,8 @@ public interface Converter {
     sp2="  ",
     sp4=sp2+sp2,
     sp6=sp2+sp4,
-    sp8=sp2+sp6;
+    sp8=sp2+sp6,
+    sp10=sp2+sp8;
 
   public static class Put {
     public static void defaults(

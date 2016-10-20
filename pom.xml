@@ -3,7 +3,7 @@
 
   <groupId>com.github.mamorum</groupId>
   <artifactId>poml</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <packaging>jar</packaging>
 
   <name>POML</name>
@@ -63,7 +63,6 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.6</version>
         <configuration>
-          <outputDirectory>dist</outputDirectory>
           <finalName>${project.artifactId}</finalName>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -79,6 +78,7 @@
               <Built-By>Poml Authors</Built-By>
             </manifestEntries>
           </archive>
+          <outputDirectory>dist</outputDirectory>
         </configuration>
         <executions>
           <execution>
