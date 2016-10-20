@@ -17,19 +17,19 @@ Distribution archive is available on the [Release Page](https://github.com/mamor
 Extract the archive in any directory, like following.
 
 ```
-unzip poml-0.1.0.zip
+unzip poml-0.2.0.zip
 ```
 
 ```
-tar zxvf poml-0.1.0.tar.gz
+tar zxvf poml-0.2.0.tar.gz
 ```
 
 
 ### 5. Update PATH
-Add the extracted directory `poml-0.1.0` to the `PATH`, like following.
+Add the extracted directory `poml-0.2.0` to the `PATH`, like following.
 
 ```
-export PATH=$PATH:/opt/poml-0.1.0
+export PATH=$PATH:/opt/poml-0.2.0
 ```
 
 
