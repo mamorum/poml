@@ -5,7 +5,7 @@ import java.util.HashMap;
 import poml.Converter;
 import poml.converter.basic.Depend;
 import poml.converter.basic.Depends;
-import poml.converter.basic.Dist;
+import poml.converter.basic.Pkg;
 import poml.converter.basic.Property;
 import poml.converter.build.plugin.Exec;
 import poml.converter.build.plugin.Fatjar;
@@ -21,7 +21,7 @@ public class Export {
       new Model4.Start(),
       new Model4.End(),
       // basic
-      new Dist(),
+      new Pkg(),
       new Depends(),
       new Depend(),
       new Property(),

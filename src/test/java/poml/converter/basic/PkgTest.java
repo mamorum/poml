@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import poml.ConverterCase;
 
-public class DistTest extends ConverterCase {
+public class PkgTest extends ConverterCase {
 
-  Dist conveter = new Dist();
+  Pkg conveter = new Pkg();
   
   @Test public void id_ver() {
-    poml.conf.p.put("dist", "group.com:artifact:0.0.1");
+    poml.conf.p.put("pkg", "group.com:artifact:0.0.1");
     conveter.convert(poml, xml);
     output.is(
       "  <groupId>group.com</groupId>" + nl + 
@@ -19,7 +19,7 @@ public class DistTest extends ConverterCase {
   }
   
   @Test public void id_ver_pkg() {
-    poml.conf.p.put("dist", "group.com:artifact:0.0.1:jar");
+    poml.conf.p.put("pkg", "group.com:artifact:0.0.1:jar");
     conveter.convert(poml, xml);
     output.is(
       "  <groupId>group.com</groupId>" + nl + 

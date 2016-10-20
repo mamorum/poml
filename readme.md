@@ -19,7 +19,7 @@ Poml is a conversion tool from text to [Maven](https://maven.apache.org/) `pom.x
 In the `demo` directory, create a `pom.poml` and save the following text.
 
 ```txt
-dist=com.example:demo:0.0.1:jar
+pkg=com.example:demo:0.0.1:jar
 depends=
   junit:junit:4.12:test,
   org.assertj:assertj-core:3.2.0:test
@@ -27,7 +27,7 @@ property=project.build.sourceEncoding:UTF-8
 compiler=source:1.8, target:1.8
 ---
 {{#model4 }}
-  {{dist }}
+  {{pkg }}
   {{depends }}
   {{property }}
   <build>

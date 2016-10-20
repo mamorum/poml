@@ -7,9 +7,9 @@ import poml.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
 
-public class Dist implements Converter {
+public class Pkg implements Converter {
 
-  @Override public String name() { return "dist"; }
+  @Override public String name() { return "pkg"; }
 
   private static final String[] tags = {
     "groupId", "artifactId", "version", "packaging"
