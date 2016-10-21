@@ -9,7 +9,8 @@ public class InfoTest extends ConverterCase {
   Info conveter = new Info();
   
   @Test public void name() {
-    poml.conf.p.put("info", "name:INFO");
+    poml.conf.append("info=name:INFO");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
       "  <name>INFO</name>" + nl
@@ -17,12 +18,13 @@ public class InfoTest extends ConverterCase {
   }
   
   @Test public void name_license_mit() {
-    poml.conf.p.put("info",
+    poml.conf.append("info=" +
       "  name:INFO, " +
       "  description:More Project Infomation, " +
       "  url:https://github.com/mamorum/poml, " +
       "  inceptionYear:2016, " +
       "  license:MIT ");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
       "  <name>INFO</name>" + nl + 
@@ -39,7 +41,8 @@ public class InfoTest extends ConverterCase {
   }
   
   @Test public void license_apache() {
-    poml.conf.p.put("info", "license:Apache 2.0");
+    poml.conf.append("info=license:Apache 2.0");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
       "  <licenses>" + nl +

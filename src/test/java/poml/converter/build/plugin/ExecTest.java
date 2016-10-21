@@ -9,7 +9,8 @@ public class ExecTest extends ConverterCase {
   Exec conveter = new Exec();
 
   @Test public void defaultVer() {
-    poml.conf.p.put("exec", "mainClass:org.Main");
+    poml.conf.append("exec=mainClass:org.Main");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl +
@@ -24,7 +25,8 @@ public class ExecTest extends ConverterCase {
   }
 
   @Test public void ver() {
-    poml.conf.p.put("exec", "ver:1.0.0, mainClass:org.Main");
+    poml.conf.append("exec=ver:1.0.0, mainClass:org.Main");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl +  

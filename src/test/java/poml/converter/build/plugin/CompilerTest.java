@@ -9,7 +9,8 @@ public class CompilerTest extends ConverterCase {
   Compiler conveter = new Compiler();
 
   @Test public void defaultVer() {
-    poml.conf.p.put("compiler", "source:1.8, target:1.8");
+    poml.conf.append("compiler=source:1.8, target:1.8");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl + 
@@ -25,9 +26,8 @@ public class CompilerTest extends ConverterCase {
   }
   
   @Test public void ver() {
-    poml.conf.p.put("compiler",
-      "ver:1.0.0, source:1.8, target:1.8"
-    );
+    poml.conf.append("compiler=ver:1.0.0, source:1.8, target:1.8");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl + 

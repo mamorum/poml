@@ -9,8 +9,9 @@ public class FatjarTest extends ConverterCase {
   Fatjar conveter = new Fatjar();
 
   @Test public void defaultVer() {
-    poml.conf.p.put("fatjar",
+    poml.conf.append("fatjar=" +
       "  mainClass:org.sample.Main");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl + 
@@ -42,10 +43,11 @@ public class FatjarTest extends ConverterCase {
   }
   
   @Test public void ver_jar() {
-    poml.conf.p.put("fatjar",
+    poml.conf.append("fatjar=" +
         "  ver:1.0.0," +
         "  jarName:sample.jar," + 
         "  mainClass:org.sample.Main");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "      <plugin>" + nl + 

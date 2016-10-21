@@ -8,8 +8,8 @@ import java.util.Properties;
 
 public class Config {
 
-  public Properties p = new Properties();
-  public StringBuilder lines = new StringBuilder();
+  private Properties p = new Properties();
+  private StringBuilder lines = new StringBuilder();
   
   // -> for loading.
   public void append(String line) {
@@ -28,11 +28,17 @@ public class Config {
     }
     return false;
   }
-  public void load() throws IOException {
-    try (
-      StringReader r
-        = new StringReader(lines.toString())
-    ) { p.load(r); }
+  public void load() {
+    try (StringReader r = strdr()) {
+      p.load(r);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+  private StringReader strdr() {
+    return new StringReader(
+      lines.toString()
+    );
   }
 
   // -> for getting config values.

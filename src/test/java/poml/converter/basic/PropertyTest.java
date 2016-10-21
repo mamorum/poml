@@ -9,7 +9,8 @@ public class PropertyTest extends ConverterCase {
   Property conveter = new Property();
   
   @Test public void single() {
-    poml.conf.p.put("property", "project.build.sourceEncoding:UTF-8");
+    poml.conf.append("property=project.build.sourceEncoding:UTF-8");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
       "  <properties>" + nl + 
@@ -19,9 +20,10 @@ public class PropertyTest extends ConverterCase {
   }
   
   @Test public void multi() {
-    poml.conf.p.put("property",
+    poml.conf.append("property=" +
         "  property:value," +
         "  project.build.sourceEncoding:UTF-8");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "  <properties>" + nl + 

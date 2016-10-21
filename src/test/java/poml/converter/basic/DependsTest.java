@@ -9,7 +9,8 @@ public class DependsTest extends ConverterCase {
   Depends conveter = new Depends();
 
   @Test public void id2type() {
-    poml.conf.p.put("depends", "group.com:artifact:0.0.1:test:true:jar");
+    poml.conf.append("depends=group.com:artifact:0.0.1:test:true:jar");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "  <dependencies>" + nl +
@@ -26,10 +27,11 @@ public class DependsTest extends ConverterCase {
   }
 
   @Test public void multi() {
-    poml.conf.p.put("depends",
+    poml.conf.append("depends=" +
       "  demo.com:demo:0.0.1," +
       "  sample.com:sample:0.0.1:provided," +
       "  group.com:artifact:0.0.1:test:true:jar");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
         "  <dependencies>" + nl +

@@ -9,7 +9,8 @@ public class PkgTest extends ConverterCase {
   Pkg conveter = new Pkg();
   
   @Test public void id_ver() {
-    poml.conf.p.put("pkg", "group.com:artifact:0.0.1");
+    poml.conf.append("pkg=group.com:artifact:0.0.1");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
       "  <groupId>group.com</groupId>" + nl + 
@@ -19,7 +20,8 @@ public class PkgTest extends ConverterCase {
   }
   
   @Test public void id_ver_pkg() {
-    poml.conf.p.put("pkg", "group.com:artifact:0.0.1:jar");
+    poml.conf.append("pkg=group.com:artifact:0.0.1:jar");
+    poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
       "  <groupId>group.com</groupId>" + nl + 
