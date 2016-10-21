@@ -16,7 +16,7 @@ public class Pkg implements Converter {
   };
 
   @Override public void convert(Poml poml, Xml xml) {
-    String[] vals = poml.conf.vals(name(), ":");
+    String[] vals = poml.conf.val(name()).split(":");
     Map<String, String> kv = new LinkedHashMap<>();
     // TODO check vals (null, length)
     for (int i = 0; i < vals.length; i++) {

@@ -12,7 +12,7 @@ public class Depend implements Converter {
   @Override public String name() { return "depend"; }
 
   @Override public void convert(Poml poml, Xml xml) {
-    for (String lib: poml.conf.vals(name(), ",")) {
+    for (String lib: poml.conf.vals(name())) {
       printDependncy(lib.trim(), xml);
     }
   }

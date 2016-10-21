@@ -13,20 +13,21 @@ public class Config {
   
   // -> for loading.
   public void append(String line) {
-    if (line.endsWith(";")) {
-      terminate(line);
-      return;
-    }
     lines.append(line);
-    if (line.endsWith(">")) lines.append(",");
-  }
-  private void terminate(String line) {
-    lines.append(
-      line.substring(0, line.length()-1)
-    );
+    if (isContinue(line)) return;
     lines.append(System.lineSeparator());
   }
-  
+  private boolean isContinue(String line) {
+    char last = line.charAt(line.length()-1);
+    if (last == '=') return true;
+    if (last == ',') return true;
+    if (last == '{') return true;
+    if (last == '>') {
+      lines.append("&&");
+      return true;
+    }
+    return false;
+  }
   public void load() throws IOException {
     try (
       StringReader r
@@ -35,57 +36,63 @@ public class Config {
   }
 
   // -> for getting config values.
-  private static final String cma = "&comma;";
+  // key=val
+  public String val(String key) {
+    return p.getProperty(key);
+  }
+  // key=val, val, ... ( "\\," does not split val. )
+  public String[] vals(String key) {
+    String val = val(key);
+    if (val == null) return null;
+    return split(val, "(?<!\\\\),");
+  }
+  // key=k:v, k:v, ...
+  public Map<String, String> map(String key) {
+    Map<String, String> map = new LinkedHashMap<>();
+    String[] kvs = vals(key);
+    if (kvs == null) return map;
+    for (String kv: kvs) {
+      map.put(k(kv),v(kv));
+    }
+    return map;
+  }
+
+  // -> for getting config tags from "{ <k>v</k>  ... }"
+  private static final String[] zerosa = {};
+  public String[] tags(String key) {
+    String val = val(key);
+    if (val == null) return zerosa;
+    String tag = val.substring(
+      val.indexOf('{') + 1,
+      val.lastIndexOf('}')
+    ); 
+    return split(tag, "&&");
+  }
+  
+  // -> utils
+  // split with delim, converting "\\," to ","
+  private static final String escma = "\\,";
   private String[] split(String val, String delim) {
-    if (!val.contains(cma)) {
+    if (!val.contains(escma)) {
       return val.split(delim);
     }
     String[] tmp = val.split(delim);
     String[] vals = new String[tmp.length];
     for (int i=0; i<tmp.length; i++) {
       vals[i] = tmp[i].replace(
-          cma, ","
+          escma, ","
       );
     }
     return vals;
   }
-
-  private static final String[] zeros = {};
-  public String[] tags(String key) {
-    String val = p.getProperty(key);
-    if (val == null) return zeros;
-    String tag = val.substring(
-      val.indexOf('{') + 1,
-      val.lastIndexOf('}')
-    ); 
-    return split(tag, ",");
-  }
-  
-  // key=val, val, ... ( if delim is "," )
-  public String[] vals(String key, String delim) {
-    String val = p.getProperty(key);
-    if (val == null) return null;
-    return split(val, delim);
-  }  
-
-  // key=k:v, k:v, ...
-  public Map<String, String> map(String key) {
-    Map<String, String> map = new LinkedHashMap<>();
-    String[] kvs = vals(key, ",");
-    if (kvs == null) return map;
-    for (String kv: kvs) {
-      map.put(mapKey(kv), mapVal(kv));
-    }
-    return map;
-  }
-  // key from k:v
-  private static String mapKey(String kv) {
+  // get key from key:val
+  private static String k(String kv) {
     return kv.substring(
       0, kv.indexOf(':')
     ).trim();
   }
-  // val from k:v
-  private static String mapVal(String kv) {
+  // get val from key:val
+  private static String v(String kv) {
     return kv.substring(
       kv.indexOf(':') + 1
     ).trim();

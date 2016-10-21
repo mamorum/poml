@@ -50,15 +50,15 @@ In this section, we can write the configuration as `key=value`. The `key` is a c
 dist=com.example:demo:0.0.1:jar
 ```
 
-The `value` sometimes contains comma `,` as a separator. To use comma not as a separator, we can write `&comma;` instead of `,`. For example, to express the version `[4.12,)` (4.12 or over in maven), we can write `[4.12&comma;)`.
+The `value` sometimes contains comma `,` as a separator. To use comma not as a separator, we can write `\\,` instead of `,`. For example, to express the version `[4.12,)` (4.12 or over in maven), we can write `[4.12\\,)`.
 
 ```
 depends=
-  junit:junit:[4.12&comma;):test,
+  junit:junit:[4.12\\,):test,
   org.assertj:assertj-core:3.2.0:test
 ```
 
-And, if a line ends with `=` or `,`, Poml Processor considers that the configuration (`key=value`) continues to next line.
+And, if a line ends with `=`, `,`or `{`, Poml Processor considers that the configuration (`key=value`) continues to next line.
 
 ### Layout Section
 Poml Processor outputs this section to `pom.xml`, converting placeholders. The placeholder is expressed as `{{key}}`. The `key` is a converter name. Depending on the converter, placeholder contains specific symbols (ex.`#`,`/`).
