@@ -2,7 +2,7 @@
 ### 1. Requirement
 Poml requires a JDK8 or higher.
 
-Poml uses `java` command in the `PATH` (`Path`) evnvironment variable. Please add `$JAVA\_HOME/bin` (`%JAVA\_HOME%\bin`) to the `PATH`.
+Poml uses `java` command in the `PATH` (`Path`) evnvironment variable. Please add `$JAVA_HOME/bin` (`%JAVA_HOME%\bin`) to the `PATH`.
 
 
 ### 2. Recommendation
