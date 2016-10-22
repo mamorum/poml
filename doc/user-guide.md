@@ -30,13 +30,13 @@
 Poml File consists of two parts. First part is "Config Section". Second part is "Layout Section". 
 
 ```
-dist=com.example:demo:0.0.1:jar
+pkg=com.example:demo:0.0.1:jar
 depends=
   junit:junit:4.12:test,
   org.assertj:assertj-core:3.2.0:test
 ---
 {{#model4}}
-  {{dist}}
+  {{pkg}}
   <name>Demo</name>
 {{#model4}}
 ```
@@ -44,10 +44,10 @@ depends=
 The delimiter `---` separates two sections. And it needs newlines on its front and behind.
 
 ### Config Section
-In this section, we can write the configuration as `key=value`. The `key` is a converter name (ex.`dist`,`depends`). The `value` varies according to a converter. 
+In this section, we can write the configuration as `key=value`. The `key` is a converter name (ex.`pkg`,`depends`). The `value` varies according to a converter. 
 
 ```
-dist=com.example:demo:0.0.1:jar
+pkg=com.example:demo:0.0.1:jar
 ```
 
 The `value` sometimes contains comma `,` as a separator. To use comma not as a separator, we can write `\\,` instead of `,`. For example, to express the version `[4.12,)` (4.12 or over in maven), we can write `[4.12\\,)`.
@@ -65,12 +65,12 @@ Poml Processor outputs this section to `pom.xml`, converting placeholders. The p
 
 ```
 {{#model4}}
-  {{dist}}
+  {{pkg}}
   <name>Demo App</name>
 {{/model4}}
 ```
 
-We can add spaces around the `key` like `{{ dist }}`. Poml Processor converts the front spaces to newlines before converting placeholders and the behind spaces after converting. One space is converted one newline.
+We can add spaces around the `key` like `{{ pkg }}`. Poml Processor converts the front spaces to newlines before converting placeholders and the behind spaces after converting. One space is converted one newline.
 
 Now, we can write one pleceholder per one line. 
 
