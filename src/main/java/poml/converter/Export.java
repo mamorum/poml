@@ -9,6 +9,7 @@ import poml.converter.basic.Pkg;
 import poml.converter.basic.Property;
 import poml.converter.build.plugin.Exec;
 import poml.converter.build.plugin.Fatjar;
+import poml.converter.build.plugin.Javadoc;
 import poml.converter.build.plugin.Source;
 import poml.converter.build.plugin.Compiler;
 import poml.converter.more.Info;
@@ -24,7 +25,7 @@ public class Export {
       new Pkg(), new Depends(), new Depend(),
       new Property(),
       // build.plugin
-      new Compiler(), new Source(),
+      new Compiler(), new Source(), new Javadoc(),
       new Fatjar(), new Exec(),
       // more
       new Info()
