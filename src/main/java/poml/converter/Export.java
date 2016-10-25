@@ -13,6 +13,7 @@ import poml.converter.build.plugin.Fatjar;
 import poml.converter.build.plugin.Gpg;
 import poml.converter.build.plugin.Javadoc;
 import poml.converter.build.plugin.Source;
+import poml.converter.env.Dist;
 import poml.converter.more.Info;
 import poml.converter.project.Model4;
 
@@ -29,7 +30,9 @@ public class Export {
       new Compiler(), new Source(), new Javadoc(),
       new Gpg(), new Fatjar(), new Exec(),
       // more
-      new Info()
+      new Info(),
+      // env
+      new Dist()
   };
 
   public static HashMap<String, Converter> converters() {
