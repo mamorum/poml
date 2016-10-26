@@ -5,8 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import poml.Converters;
 import poml.out.Xml;
-import poml.tool.converter.Tmpl.Reader;
 
 // pom.poml
 public class Poml {
@@ -34,15 +34,13 @@ public class Poml {
   }
 
   public void layoutTo(Xml xml) throws IOException {
-    if (line == null) defaultLayout();
+    if (line == null) { noLayoutTo(xml); return; }
     while ((line = in.readLine()) != null) {
       layout.processLine(this, xml);
     }
   }
-  
-  private void defaultLayout() {
-    close();
-    in = Reader.from("/in/layout/default.txt");
+  private void noLayoutTo(Xml xml) {
+    Converters.convert(this, xml);
   }
 
   public void close() {

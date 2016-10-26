@@ -1,7 +1,7 @@
+# exec -> mvn exec:java -Dexec.args="pom.poml pom.xml"
+# fatjar -> dist/poml.jar
+
 pkg=com.github.mamorum:poml:0.2.1:jar
-info=name:POML, license:MIT,
-  description:POM's Minimal Language,
-  url:https://github.com/mamorum/poml
 depends=
   junit:junit:[4.12\\,):test,
   org.assertj:assertj-core:3.2.0:test
@@ -18,19 +18,7 @@ fatjar.conf.archive+={
     <Built-By>Poml Authors</Built-By>
   </manifestEntries>
 }
----
-{{#model4 }}
-  {{pkg }}
-  {{info }}
-  {{depends }}
-  {{property }}
-  <build>
-    <plugins>
-      {{compiler }}
-      <!-- exec: mvn exec:java -Dexec.args="pom.poml pom.xml" -->
-      {{exec }}
-      <!-- assembly: create dist/poml.jar -->
-      {{fatjar}}
-    </plugins>
-  </build>
-{{/model4}}
+info=name:POML, license:MIT,
+  description:POM's Minimal Language,
+  url:https://github.com/mamorum/poml
+  

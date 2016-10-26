@@ -31,7 +31,7 @@ public class Tmpl {
 
   public static String text(String path) {
     StringBuilder sb = new StringBuilder();
-    try (BufferedReader br = Reader.from(path)) {
+    try (BufferedReader br = reader(path)) {
       String line = null;
       while ((line = br.readLine()) != null) {
         sb.append(line).append(nl);
@@ -41,14 +41,12 @@ public class Tmpl {
     }
     return sb.toString();
   }
-  
-  public static class Reader {
-    public static BufferedReader from(String path) {
-      return  new BufferedReader(
-        new InputStreamReader(
-          Tmpl.class.getResourceAsStream(path)
-        )
-      );
-    }
+
+  public static BufferedReader reader(String path) {
+    return  new BufferedReader(
+      new InputStreamReader(
+        Tmpl.class.getResourceAsStream(path)
+      )
+    );
   }
 }

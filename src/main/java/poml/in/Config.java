@@ -13,6 +13,7 @@ public class Config {
   
   // -> for loading.
   public void append(String line) {
+    if ("".equals(line)) return;
     lines.append(line);
     if (isContinue(line)) return;
     lines.append(System.lineSeparator());
