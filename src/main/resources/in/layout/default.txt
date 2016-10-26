@@ -1,0 +1,8 @@
+{{#model4}}
+  {{pkg}}
+  {{depends}}
+  {{property}}
+  {{_build.plugins}}
+  {{info}}
+  {{dist}}
+{{/model4}}
