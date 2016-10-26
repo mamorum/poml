@@ -20,7 +20,7 @@ public class Model4 {
   public static class End implements Converter {
     @Override public String name() { return "/model4"; }
     @Override public void convert(Poml poml, Xml xml) {
-      xml.out.println("</project>");
+      xml.out.print("</project>");
     }
   }
 }
