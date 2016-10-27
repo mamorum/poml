@@ -13,11 +13,10 @@ import poml.Main;
 
 public class IntegrationTest {
 
-  @Test public void demo() throws Throwable {
+  @Test public void demo() {
     test("it/demo");
   }
-  @Test public void demoLayout() throws Throwable {
-    System.out.println(System.getProperty("user.dir"));
+  @Test public void demoLayout() {
     test("it/demo-layout");
   }
 
