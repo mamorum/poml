@@ -20,11 +20,24 @@ import poml.in.Poml;
 import poml.out.Xml;
 
 public class Converters {
-
+  
+  private static class Group {
+    private final Converter[] prj = {
+        new Model4.Start(), new Model4.End() };
+    private final Converter[] basic = {
+        new Pkg(), new Depends(), new Depend(),
+        new Property() };
+    private final Converter[] plgin = {
+        new Gpg(), new Compiler(), new Source(),
+        new Javadoc(), new Fatjar(), new Exec() };
+    private final Converter[] more = {
+        new Info() };
+    private final Converter[] env = {
+        new Dist() };  
+  }
+  private static final Group grp = new Group();
   private static final HashMap<String, Converter>
     all = new HashMap<>();
-
-  private static final Group grp = new Group();
   static {
     put(grp.prj); put(grp.basic); put(grp.plgin);
     put(grp.more); put(grp.env);
@@ -43,13 +56,13 @@ public class Converters {
 
   public static void convert(Poml poml, Xml xml) {
     grp.prj[0].convert(poml, xml);
-    delegate(grp.basic, poml, xml);
-    plugins(poml, xml);
-    delegate(grp.more, poml, xml);
-    delegate(grp.env, poml, xml);
+    convert(grp.basic, poml, xml);
+    convertPlugins(poml, xml);
+    convert(grp.more, poml, xml);
+    convert(grp.env, poml, xml);
     grp.prj[1].convert(poml, xml);
   }
-  private static void delegate(
+  private static void convert(
     Converter[] cs, Poml poml, Xml xml
   ) {
     for (Converter c: cs) {
@@ -59,7 +72,7 @@ public class Converters {
       c.convert(poml, xml);
     }
   }
-  private static void plugins(Poml poml, Xml xml) {
+  private static void convertPlugins(Poml poml, Xml xml) {
     ArrayList<Converter> targets = new ArrayList<>();
     for (Converter c: grp.plgin) {
       String config = poml.conf.val(c.name());
@@ -77,25 +90,5 @@ public class Converters {
     }
     xml.out.println("    </plugins>");
     xml.out.println("  </build>");
-  }
-  
-  private static class Group {
-    private final Converter[] prj = {
-        new Model4.Start(), new Model4.End()
-    };
-    private final Converter[] basic = {
-        new Pkg(), new Depends(), new Depend(),
-        new Property()
-    };
-    private final Converter[] plgin = {
-        new Gpg(), new Compiler(), new Source(),
-        new Javadoc(), new Fatjar(), new Exec()
-    };
-    private final Converter[] more = {
-        new Info()
-    };
-    private final Converter[] env = {
-        new Dist()
-    };  
   }
 }
