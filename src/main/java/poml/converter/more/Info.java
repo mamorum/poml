@@ -1,54 +1,50 @@
 package poml.converter.more;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import poml.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.converter.Tmpl;
 
-// More Project Infomation
-//   -> name, desc, url, inceptYear, license
 public class Info implements Converter {
-    
+
   @Override public String name() { return "info"; }
-    
+
+  private static final String[] keys =
+    {"name", "description", "url", "inceptionYear"};
+
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name());
     if (map.size() == 0) return;
-    
-    // name, description, url, inceptionYear
-    Map<String, String> kv = new LinkedHashMap<>();
-    for (int i = 0; i < flatKeys.length; i++) {
-      String key = flatKeys[i];
-      String value = map.get(key);
-      if (value == null) continue;
-      kv.put(key, value);
+
+    // name - inceptionYear
+    for (String k: keys) {
+      xml.printKvTag(sp2, k, map.get(k));
     }
-    xml.printKvTags(sp2, kv);
-    
     // license
-    String license = map.get(licenseKey);
-    if (license == null) return;
-    String licensePath = licenses.get(license.trim());
-    if (licensePath == null) throw new IllegalStateException(
-      "License \"" + license + "\" not found"
+    String lic = map.get("license");
+    if (lic == null) return;
+    if ("Apache 2.0".equals(lic)) xml.print(apache2);
+    else if ("MIT".equals(lic)) xml.print(mit);
+    else throw new IllegalStateException(
+      "License \"" + lic + "\" not found"
     );
-    xml.out.print(Tmpl.text(licensePath));
   }
-  
-  // --> property keys
-  private static final String[] flatKeys =
-    {"name", "description", "url", "inceptionYear", };
-  private static final String licenseKey = "license";
-  
-  // --> licenses
-  //  http://central.sonatype.org/pages/requirements.html#license-information
-  private static Map<String, String> licenses = new HashMap<>();  
-  static {
-    licenses.put("MIT", "/converter/more/info/mit.txt");
-    licenses.put("Apache 2.0", "/converter/more/info/apache2.txt");
-  }
+
+  private static final String[] mit = {
+    "  <licenses>",
+    "    <license>",
+    "      <name>MIT License</name>",
+    "      <url>http://www.opensource.org/licenses/mit-license.php</url>",
+    "    </license>",
+    "  </licenses>"
+  }; 
+  private static final String[] apache2 = {
+    "  <licenses>",
+    "    <license>",
+    "      <name>The Apache License, Version 2.0</name>",
+    "      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>",
+    "    </license>",
+    "  </licenses>"
+  };
 }

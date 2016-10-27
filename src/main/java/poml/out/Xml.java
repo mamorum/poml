@@ -44,18 +44,23 @@ public class Xml {
   }
 
   // output methods ->
+  public void print(String[] lines) {
+    for (String l: lines) out.println(l);
+  }
   public void printKvTags(
     String space, Map<String, String> kv
   ) {
     for (String k: kv.keySet()) {
-      out.print(space);
-      out.println(
-        kvTagTmpl
-          .replace("{{k}}", k) 
-          .replace("{{v}}", kv.get(k))
-      );
+      printKvTag(space, k, kv.get(k));
     }
   }
-  public static final String kvTagTmpl
-    = "<{{k}}>{{v}}</{{k}}>";
+  public void printKvTag(
+    String space, String k, String v
+  ) {
+    if (v == null) return;
+    out.print(space);
+    out.print("<"); out.print(k); out.print(">");
+    out.print(v);
+    out.print("</"); out.print(k); out.println(">");
+  }
 }
