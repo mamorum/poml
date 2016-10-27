@@ -6,12 +6,12 @@ import poml.ConverterCase;
 
 public class PkgTest extends ConverterCase {
 
-  Pkg conveter = new Pkg();
+  Pkg conv = new Pkg();
   
   @Test public void id_ver() {
     poml.conf.append("pkg=group.com:artifact:0.0.1");
     poml.conf.load();
-    conveter.convert(poml, xml);
+    conv.convert(poml, xml);
     output.is(
       "  <groupId>group.com</groupId>" + nl + 
       "  <artifactId>artifact</artifactId>" + nl +
@@ -22,7 +22,7 @@ public class PkgTest extends ConverterCase {
   @Test public void id_ver_pkg() {
     poml.conf.append("pkg=group.com:artifact:0.0.1:jar");
     poml.conf.load();
-    conveter.convert(poml, xml);
+    conv.convert(poml, xml);
     output.is(
       "  <groupId>group.com</groupId>" + nl + 
       "  <artifactId>artifact</artifactId>" + nl +
