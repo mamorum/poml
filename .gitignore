@@ -14,7 +14,10 @@
 *.war
 *.ear
 
-# poml distribution
+# Poml Integration Test
+/it/*/result.xml
+
+# Poml Distribution
 *.tar.gz
 *.zip
 
