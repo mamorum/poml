@@ -30,5 +30,4 @@ public class PkgTest extends ConverterCase {
       "  <packaging>jar</packaging>" + nl
     );
   }
-
 }

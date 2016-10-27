@@ -20,17 +20,16 @@ public class PropertyTest extends ConverterCase {
   }
   
   @Test public void multi() {
-    poml.conf.append("property=" +
-        "  property:value," +
-        "  project.build.sourceEncoding:UTF-8");
+    poml.conf.append("property=");
+    poml.conf.append("  property:value,");
+    poml.conf.append("  project.build.sourceEncoding:UTF-8");
     poml.conf.load();
     conveter.convert(poml, xml);
     output.is(
-        "  <properties>" + nl + 
-        "    <property>value</property>" + nl +
-        "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
-        "  </properties>" + nl
+      "  <properties>" + nl + 
+      "    <property>value</property>" + nl +
+      "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
+      "  </properties>" + nl
     );
   }
-
 }
