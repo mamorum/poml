@@ -6,26 +6,26 @@ import poml.ConverterCase;
 
 public class InfoTest extends ConverterCase {
 
-  Info conveter = new Info();
+  Info conv = new Info();
   
   @Test public void name() {
     poml.conf.append("info=name:INFO");
     poml.conf.load();
-    conveter.convert(poml, xml);
+    conv.convert(poml, xml);
     output.is(
       "  <name>INFO</name>" + nl
     );
   }
   
   @Test public void name_license_mit() {
-    poml.conf.append("info=" +
-      "  name:INFO, " +
-      "  description:More Project Infomation, " +
-      "  url:https://github.com/mamorum/poml, " +
-      "  inceptionYear:2016, " +
-      "  license:MIT ");
+    poml.conf.append("info=");
+    poml.conf.append("  name:INFO,");
+    poml.conf.append("  description:More Project Infomation,");
+    poml.conf.append("  url:https://github.com/mamorum/poml,");
+    poml.conf.append("  inceptionYear:2016,");
+    poml.conf.append("  license:MIT ");
     poml.conf.load();
-    conveter.convert(poml, xml);
+    conv.convert(poml, xml);
     output.is(
       "  <name>INFO</name>" + nl + 
       "  <description>More Project Infomation</description>" + nl +
@@ -43,7 +43,7 @@ public class InfoTest extends ConverterCase {
   @Test public void license_apache() {
     poml.conf.append("info=license:Apache 2.0");
     poml.conf.load();
-    conveter.convert(poml, xml);
+    conv.convert(poml, xml);
     output.is(
       "  <licenses>" + nl +
       "    <license>" + nl +
