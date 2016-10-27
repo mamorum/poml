@@ -20,20 +20,24 @@ import poml.in.Poml;
 import poml.out.Xml;
 
 public class Converters {
-  
   private static class Group {
     private final Converter[] prj = {
-        new Model4.Start(), new Model4.End() };
+      new Model4.Start(), new Model4.End()
+    };
     private final Converter[] basic = {
-        new Pkg(), new Depends(), new Depend(),
-        new Property() };
+      new Pkg(), new Depends(), new Depend(),
+      new Property()
+    };
     private final Converter[] plgin = {
-        new Gpg(), new Compiler(), new Source(),
-        new Javadoc(), new Fatjar(), new Exec() };
+      new Gpg(), new Compiler(), new Source(),
+      new Javadoc(), new Fatjar(), new Exec()
+    };
     private final Converter[] more = {
-        new Info() };
+      new Info()
+    };
     private final Converter[] env = {
-        new Dist() };  
+      new Dist()
+    };  
   }
   private static final Group grp = new Group();
   private static final HashMap<String, Converter>
@@ -42,7 +46,7 @@ public class Converters {
     put(grp.prj); put(grp.basic); put(grp.plgin);
     put(grp.more); put(grp.env);
   }
-  public static void put(Converter[] cs) {
+  private static void put(Converter[] cs) {
     for (Converter c: cs) all.put(c.name(), c);
   }
   

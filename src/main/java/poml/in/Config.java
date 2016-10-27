@@ -43,6 +43,10 @@ public class Config {
   }
 
   // -> for getting config values.
+  // ? key=_none
+  public boolean none(String key) {
+    return "_none".equals(val(key));
+  }
   // key=val
   public String val(String key) {
     return p.getProperty(key);

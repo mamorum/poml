@@ -8,10 +8,28 @@ public class JavadocTest extends ConverterCase {
 
   Javadoc conv = new Javadoc();
 
-  @Test public void defaultVer() {
+  @Test public void none() {
     // Nothing to configure. 
-    //   poml.conf.append("source=");
-    //   poml.conf.load();
+    poml.conf.append("source=_none");
+    poml.conf.load();
+    conv.convert(poml, xml);
+    output.is(
+      "      <plugin>" + nl +
+      "        <groupId>org.apache.maven.plugins</groupId>" + nl +
+      "        <artifactId>maven-javadoc-plugin</artifactId>" + nl +
+      "        <version>2.10.4</version>" + nl +
+      "        <executions>" + nl +
+      "          <execution>" + nl +
+      "            <id>attach-javadocs</id>" + nl +
+      "            <goals><goal>jar</goal></goals>" + nl +
+      "          </execution>" + nl +
+      "        </executions>" + nl +
+      "      </plugin>" + nl
+    );
+  }
+  
+  @Test public void defaultVer() {
+    // Nothing to configure.
     conv.convert(poml, xml);
     output.is(
       "      <plugin>" + nl +
