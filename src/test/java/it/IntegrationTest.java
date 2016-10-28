@@ -19,6 +19,12 @@ public class IntegrationTest {
   @Test public void demoLayout() {
     test("it/demo-layout");
   }
+  @Test public void all() {
+    test("it/all");
+  }
+  @Test public void allLayout() {
+    test("it/all-layout");
+  }
 
   private static void test(String dir) {
     // prepare.
