@@ -11,10 +11,6 @@ public class Pkg implements Converter {
 
   @Override public String name() { return "pkg"; }
 
-  private static final String[] tags = {
-    "groupId", "artifactId", "version", "packaging"
-  };
-
   @Override public void convert(Poml poml, Xml xml) {
     String[] vals = poml.conf.val(name()).split(":");
     Map<String, String> kv = new LinkedHashMap<>();
@@ -24,4 +20,8 @@ public class Pkg implements Converter {
     }
     xml.printKvTags(sp2, kv);
   }
+
+  private static final String[] tags = {
+    "groupId", "artifactId", "version", "packaging"
+  };
 }

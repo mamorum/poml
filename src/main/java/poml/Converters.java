@@ -3,7 +3,6 @@ package poml;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import poml.converter.basic.Depend;
 import poml.converter.basic.Depends;
 import poml.converter.basic.Pkg;
 import poml.converter.basic.Property;
@@ -20,31 +19,30 @@ import poml.in.Poml;
 import poml.out.Xml;
 
 public class Converters {
-  private static class Group {
-    private final Converter[] prj = {
+  private static final class Grp {
+    private static final Converter[] prj = {
       new Model4.Start(), new Model4.End()
     };
-    private final Converter[] basic = {
-      new Pkg(), new Depends(), new Depend(),
+    private static final Converter[] basic = {
+      new Pkg(), new Depends(), Depends.depend,
       new Property()
     };
-    private final Converter[] plgin = {
+    private static final Converter[] plgin = {
       new Gpg(), new Compiler(), new Source(),
       new Javadoc(), new Exec(), new Fatjar()
     };
-    private final Converter[] more = {
+    private static final Converter[] more = {
       new Info()
     };
-    private final Converter[] env = {
+    private static final Converter[] env = {
       new Dist()
     };  
   }
-  private static final Group grp = new Group();
   private static final HashMap<String, Converter>
     all = new HashMap<>();
   static {
-    put(grp.prj); put(grp.basic); put(grp.plgin);
-    put(grp.more); put(grp.env);
+    put(Grp.prj); put(Grp.basic); put(Grp.plgin);
+    put(Grp.more); put(Grp.env);
   }
   private static void put(Converter[] cs) {
     for (Converter c: cs) all.put(c.name(), c);
@@ -59,12 +57,12 @@ public class Converters {
   }
 
   public static void convert(Poml poml, Xml xml) {
-    grp.prj[0].convert(poml, xml);
-    convert(grp.basic, poml, xml);
+    Grp.prj[0].convert(poml, xml);
+    convert(Grp.basic, poml, xml);
     convertPlugins(poml, xml);
-    convert(grp.more, poml, xml);
-    convert(grp.env, poml, xml);
-    grp.prj[1].convert(poml, xml);
+    convert(Grp.more, poml, xml);
+    convert(Grp.env, poml, xml);
+    Grp.prj[1].convert(poml, xml);
   }
   private static void convert(
     Converter[] cs, Poml poml, Xml xml
@@ -78,7 +76,7 @@ public class Converters {
   }
   private static void convertPlugins(Poml poml, Xml xml) {
     ArrayList<Converter> targets = new ArrayList<>();
-    for (Converter c: grp.plgin) {
+    for (Converter c: Grp.plgin) {
       String config = poml.conf.val(c.name());
       if (config == null) continue;
       targets.add(c);
