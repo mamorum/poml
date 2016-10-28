@@ -30,7 +30,7 @@ public class Converters {
     };
     private final Converter[] plgin = {
       new Gpg(), new Compiler(), new Source(),
-      new Javadoc(), new Fatjar(), new Exec()
+      new Javadoc(), new Exec(), new Fatjar()
     };
     private final Converter[] more = {
       new Info()
