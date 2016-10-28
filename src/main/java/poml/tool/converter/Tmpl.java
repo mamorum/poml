@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
-import poml.Converter;
-
 public class Tmpl {
 
-  private static String nl = Converter.nl;
+  private static String nl = System.lineSeparator();
   
   // change map "key" to "{{key}}"
   private static String key(String mk) {

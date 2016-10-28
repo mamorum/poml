@@ -10,7 +10,6 @@ public interface Converter {
   String name();
   void convert(Poml poml, Xml xml);
 
-  public static String nl = System.lineSeparator();
   public static String
     sp2="  ",
     sp4=sp2+sp2,
