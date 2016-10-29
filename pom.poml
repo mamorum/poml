@@ -18,7 +18,6 @@ fatjar.conf.archive+={
     <Built-By>Poml Authors</Built-By>
   </manifestEntries>
 }
-info=name:POML, license:MIT,
+info=license:MIT, name:POML,
   description:POM's Minimal Language,
   url:https://github.com/mamorum/poml
-  
