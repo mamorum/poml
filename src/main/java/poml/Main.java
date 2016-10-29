@@ -4,17 +4,7 @@ import poml.cmd.Console;
 import poml.cmd.Init;
 
 public class Main {
-
-  public static void main(String[] args) throws Throwable {
-    preProcess(args);
-    Console.start(args[0], args[1]);
-    try { Processor.start(args[0], args[1]); }
-    catch (Throwable e) {
-      Console.error(e);
-      throw e;
-    }
-    Console.end();
-  }
+  private static void exit(int i) { System.exit(i); }
 
   private static void preProcess(String[] args) {
     if (args.length == 2) return; // -> convert
@@ -27,5 +17,14 @@ public class Main {
     Console.help(); exit(1);
   }
 
-  private static void exit(int i) { System.exit(i); }
+  public static void main(String[] args) throws Throwable {
+    preProcess(args);
+    Console.start(args[0], args[1]);
+    try { Processor.start(args[0], args[1]); }
+    catch (Throwable e) {
+      Console.error(e);
+      throw e;
+    }
+    Console.end();
+  }
 }

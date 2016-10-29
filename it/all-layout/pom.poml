@@ -1,5 +1,5 @@
 pkg=com.example:demo:0.0.1:jar
-depends=
+depend=
   org.slf4j:slf4j-api:1.7.21,
   junit:junit:4.12:test,
   org.assertj:assertj-core:3.2.0:test:true,
@@ -28,8 +28,10 @@ dist=snap:ossrh, repo:ossrh
 ---
 {{#model4}}
   {{ pkg }}
-  {{depends }}
-  {{property }}
+  <dependencies>
+    {{depend}}
+  </dependencies>
+  {{ property }}
   <build>
     <plugins>
       {{gpg}}
