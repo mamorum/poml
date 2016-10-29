@@ -18,10 +18,9 @@ public class Compiler implements Converter {
       new String[]{"source", "target"},
       map, name()
     );
-    Put.defaults("ver", "3.5.1", map);
-    xml.out.print(Tmpl.render(
+    Tmpl.render(
       "/converter/build/plugin/compiler.tmpl",
-      map
-    ));
+      map, xml
+    );
   }
 }

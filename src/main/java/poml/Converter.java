@@ -1,7 +1,5 @@
 package poml;
 
-import java.util.Map;
-
 import poml.in.Poml;
 import poml.out.Xml;
 
@@ -16,14 +14,5 @@ public interface Converter {
     sp6=sp2+sp4,
     sp8=sp2+sp6,
     sp10=sp2+sp8;
-
-  public static class Put {
-    public static void defaults(
-      String k, String v,
-      Map<String, String> to
-    ) {
-      if (to.get(k) == null) to.put(k, v);
-    }
-  }
 }
 

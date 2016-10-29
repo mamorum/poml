@@ -15,10 +15,9 @@ public class Exec implements Converter {
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name());
     Assert.exists("mainClass", map, name());
-    Put.defaults("ver", "1.5.0", map);
-    xml.out.print(Tmpl.render(
+    Tmpl.render(
       "/converter/build/plugin/exec.tmpl",
-      map
-    ));
+      map, xml
+    );
   }
 }

@@ -2,6 +2,7 @@ package poml.in;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -44,7 +45,7 @@ public class Config {
 
   // -> for getting config values.
   // ? key=_none
-  public boolean none(String key) {
+  private boolean none(String key) {
     return "_none".equals(val(key));
   }
   // key=val
@@ -59,6 +60,7 @@ public class Config {
   }
   // key=k:v, k:v, ...
   public Map<String, String> map(String key) {
+    if (none(key)) return Collections.emptyMap();
     Map<String, String> map = new LinkedHashMap<>();
     String[] kvs = vals(key);
     if (kvs == null) return map;
@@ -69,15 +71,20 @@ public class Config {
   }
 
   // -> for getting config tags from "{ <k>v</k>  ... }"
-  private static final String[] zerosa = {};
-  public String[] tags(String key) {
+  public String tag(String key, String space) {
     String val = val(key);
-    if (val == null) return zerosa;
-    String tag = val.substring(
+    if (val == null) return null;
+    String tags = val.substring(
       val.indexOf('{') + 1,
       val.lastIndexOf('}')
     ); 
-    return split(tag, "&&");
+    StringBuilder sb = new StringBuilder();
+    for (String tag: tags.split("&&")) {
+      sb.append(space);
+      sb.append(tag);
+      sb.append(System.lineSeparator());
+    }
+    return sb.toString();
   }
   
   // -> utils

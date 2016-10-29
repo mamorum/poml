@@ -18,7 +18,7 @@ public class Layout {
     // convert
     String key = poml.line.substring(start+2, end);
     String name = key.trim();
-    
+
     preNewLine(key, name, xml);
     Converters.get(name).convert(poml, xml);
     postNewLine(key, name, xml);

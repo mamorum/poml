@@ -1,9 +1,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>{{ver}}</version>
+        <version>{{ver:2.6}}</version>
         <configuration>
-          <finalName>{{jarName}}</finalName>
+          <finalName>{{jarName:${project.artifactId}}}</finalName>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
@@ -13,3 +13,15 @@
             <manifest>
               <mainClass>{{mainClass}}</mainClass>
             </manifest>
+            {{archive+}}
+          </archive>
+          {{conf+}}
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals><goal>single</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
