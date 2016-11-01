@@ -1,11 +1,10 @@
 # POML -  User Guide
 ## Table of Contents
 - Getting Started
-    - Install
-    - Example
 - Poml Overview
 - Poml File
     - Overview
+    - Abbreviation
     - Config Section
     - Layout Section
 - Poml Converters
@@ -14,15 +13,14 @@
 
 
 ## Getting Started
-### Install
-[Installation Guide](./installation-guide.md) describes how to install.
-
-### Example
-"Example Section" of [Readme](../readme.md) describes how Poml works.
+- **Install**: [Installation Guide](./installation-guide.md)
+- **Example**: [Readme](../readme.md)
 
 
 ## Poml Overview
-"Poml Processor" generates a Maven `pom.xml`, reading a "Poml File (`pom.poml`)" and calling  "Poml Converters".
+Poml Processor generates a `pom.xml`, using Poml File (`pom.poml`) and Converters.
+
+This document describes Poml File and Converters.
 
 
 ## Poml File
@@ -43,14 +41,28 @@ depends=
 
 The delimiter `---` separates two sections. And it needs newlines on its front and behind.
 
+
+### Abbreviation
+Poml supports abbreviation of it's file. In this case, Poml File consists of "Config Section" only. 
+
+```
+pkg=com.example:demo:0.0.1:jar
+depends=
+  junit:junit:4.12:test,
+  org.assertj:assertj-core:3.2.0:test
+```
+
+Poml determines XML layout automatically.
+
+
 ### Config Section
-In this section, we can write the configuration as `key=value`. The `key` is a converter name (ex.`pkg`,`depends`). The `value` varies according to a converter. 
+In the config section, we can write the configuration as `key=value`. The `key` is a converter name (ex.`pkg`,`depends`). The `value` varies according to a converter. 
 
 ```
 pkg=com.example:demo:0.0.1:jar
 ```
 
-The `value` sometimes contains comma `,` as a separator. To use comma not as a separator, we can write `\\,` instead of `,`. For example, to express the version `[4.12,)` (4.12 or over in maven), we can write `[4.12\\,)`.
+The `value` sometimes contains comma `,` as a separator. To use comma as a value of XML, we can write escaped `\\,`. For example, to express the version `[4.12,)` (4.12 or over in maven), we can write `[4.12\\,)`.
 
 ```
 depends=
@@ -58,10 +70,11 @@ depends=
   org.assertj:assertj-core:3.2.0:test
 ```
 
-And, if a line ends with `=`, `,`or `{`, Poml Processor considers that the configuration (`key=value`) continues to next line.
+As above configuration (`depends=...test, ...test`), if a line ends with `=`, `,`or `{`, configuration continues to the next line.
+
 
 ### Layout Section
-Poml Processor outputs this section to `pom.xml`, converting placeholders. The placeholder is expressed as `{{key}}`. The `key` is a converter name. Depending on the converter, placeholder contains specific symbols (ex.`#`,`/`).
+Poml outputs this section to `pom.xml`, converting placeholders. A placeholder is expressed as `{{key}}`, and `key` is a converter name. Depending on the converter, placeholder contains specific symbols (ex.`#`,`/`).
 
 ```
 {{#model4}}
@@ -70,14 +83,14 @@ Poml Processor outputs this section to `pom.xml`, converting placeholders. The p
 {{/model4}}
 ```
 
-We can add spaces around the `key` like `{{ pkg }}`. Poml Processor converts the front spaces to newlines before converting placeholders and the behind spaces after converting. One space is converted one newline.
+We can add spaces around the `key` like `{{ pkg }}`. Poml converts the front spaces to newlines before converting placeholders and the behind spaces after converting. One space is converted one newline.
 
 Now, we can write one pleceholder per one line. 
 
 
 ## Poml Converters
 ### Overview
-Poml Converter is called when Poml Processor meets a placeholder in the layout section. Converter gets configuration from config section and generates the elements of `pom.xml`.
+Poml Converter generates XML elements, using it's configuration.
 
 ### Reference
 Poml Converters are listed in [Converter Reference](https://github.com/mamorum/poml/wiki). It describes converter configurations, examples and so on.

@@ -24,18 +24,6 @@ depends=
   junit:junit:4.12:test,
   org.assertj:assertj-core:3.2.0:test
 property=project.build.sourceEncoding:UTF-8
-compiler=source:1.8, target:1.8
----
-{{#model4 }}
-  {{pkg }}
-  {{depends }}
-  {{property }}
-  <build>
-    <plugins>
-      {{compiler}}
-    </plugins>
-  </build>
-{{/model4}}
 ```
 
 
@@ -76,20 +64,6 @@ After execution, following `pom.xml` is generated.
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>
 ```
 
