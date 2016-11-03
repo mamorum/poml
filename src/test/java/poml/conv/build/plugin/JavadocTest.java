@@ -9,9 +9,9 @@ public class JavadocTest extends ConvTestCase {
 
   Javadoc conv = new Javadoc();
 
-  @Test public void none() {
+  @Test public void defaults() {
     // Nothing to configure. 
-    poml.conf.append("source=_none");
+    poml.conf.append("source=_default");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(

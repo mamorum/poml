@@ -9,8 +9,8 @@ public class SourceTest extends ConvTestCase {
 
   Source conv = new Source();
 
-  @Test public void none() {
-    poml.conf.append("source=_none");
+  @Test public void defaults() {
+    poml.conf.append("source=_default");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(

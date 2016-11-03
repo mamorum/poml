@@ -9,8 +9,8 @@ public class GpgTest extends ConvTestCase {
 
   Gpg conv = new Gpg();
 
-  @Test public void none() {
-    poml.conf.append("gpg=_none");
+  @Test public void defaults() {
+    poml.conf.append("gpg=_default");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(

@@ -7,7 +7,7 @@ depends=
 property=
   project.build.sourceEncoding:UTF-8,
   gpg.skip:true
-gpg=_none
+gpg=_default
 compiler=source:1.8, target:1.8
 source=ver:2.2.1
 javadoc=ver:2.9.1

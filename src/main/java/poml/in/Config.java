@@ -45,8 +45,8 @@ public class Config {
 
   // -> for getting config values.
   // ? key=_none
-  private boolean none(String key) {
-    return "_none".equals(val(key));
+  private boolean defaults(String key) {
+    return "_default".equals(val(key));
   }
   // key=val
   public String val(String key) {
@@ -60,7 +60,7 @@ public class Config {
   }
   // key=k:v, k:v, ...
   public Map<String, String> map(String key) {
-    if (none(key)) return Collections.emptyMap();
+    if (defaults(key)) return Collections.emptyMap();
     Map<String, String> map = new LinkedHashMap<>();
     String[] kvs = vals(key);
     if (kvs == null) return map;
