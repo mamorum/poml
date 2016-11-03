@@ -56,13 +56,7 @@ Poml determines XML layout automatically.
 
 
 ### Config Section
-In the config section, we can write the configuration as `key=value`. The `key` is a converter name (ex.`pkg`,`depends`). The `value` varies according to a converter. 
-
-```
-pkg=com.example:demo:0.0.1:jar
-```
-
-The `value` sometimes contains comma `,` as a separator. To use comma as a value of XML, we can write escaped `\\,`. For example, to express the version `[4.12,)` (4.12 or over in maven), we can write `[4.12\\,)`.
+In this section, we can write a configuration as `key=value`. If a configuration line ends with `=`, `,`or `{`, it continues to the next line.
 
 ```
 depends=
@@ -70,7 +64,11 @@ depends=
   org.assertj:assertj-core:3.2.0:test
 ```
 
-As above configuration (`depends=...test, ...test`), if a line ends with `=`, `,`or `{`, configuration continues to the next line.
+The `key` is a converter name (ex.`pkg`,`depends`, etc).
+
+The `value` varies according to a converter. The `value` sometimes contains comma `,` as a separator. To use comma as a value of XML, we can write escaped `\\,`. For example, to express the version `[4.12,)` (4.12 or over in maven), we can write `[4.12\\,)`.
+
+
 
 
 ### Layout Section
