@@ -1,5 +1,5 @@
 # POML -  Installation Guide
-## Requirement
+## Requirements
 - **JDK**: version 8 is installed.
 - **PATH (or Path)**: `$JAVA_HOME/bin` (or `%JAVA_HOME%\bin`) is added.
 
@@ -8,7 +8,7 @@ $ java -version
 java version "1.8.0_...
 ```
 
-## Installing
+## Install
 ### 1. Download
 Get a file from [Release Page](https://github.com/mamorum/poml/releases). (not "Source code" file.)
 
