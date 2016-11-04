@@ -1,43 +1,44 @@
 # POML -  Installation Guide
-### 1. Requirement
-Poml requires a JDK8 or higher.
-
-Poml uses `java` command in the `PATH` (`Path`) evnvironment variable. Please add `$JAVA_HOME/bin` (`%JAVA_HOME%\bin`) to the `PATH`.
-
-
-### 2. Recommendation
-It is recommended to have the [Maven](https://maven.apache.org/index.html) installed.
-
-
-### 3. Download
-Distribution archive is available on the [Release Page](https://github.com/mamorum/poml/releases).
-
-
-### 4. Extract
-Extract the archive in any directory, like following.
+## Requirement
+- **JDK**: version 8 is installed.
+- **PATH (or Path)**: `$JAVA_HOME/bin` (or `%JAVA_HOME%\bin`) is added.
 
 ```
-unzip poml-0.2.1.zip
+$ java -version
+java version "1.8.0_...
 ```
 
+## Installing
+### 1. Download
+Get a file from [Release Page](https://github.com/mamorum/poml/releases). (not "Source code" file.)
+
 ```
-tar zxvf poml-0.2.1.tar.gz
+# wget https://github.com/mamorum/poml/releases/download/v0.2.1/poml-0.2.1.tar.gz
 ```
 
 
-### 5. Update PATH
-Add the extracted directory `poml-0.2.1` to the `PATH`, like following.
+### 2. Extract
+Extract it in any directory.
 
 ```
-export PATH=$PATH:/opt/poml-0.2.1
+# tar zxvf poml-0.2.1.tar.gz
 ```
 
 
-### 6 Check
-Check `poml` command with option `-v`.
+### 3. Update PATH
+Add the extracted directory to the `PATH` (or `Path`).
 
 ```
-poml -v
+$ export PATH=$PATH:/opt/poml-0.2.1
 ```
 
-If version number appears, installation has succeeded.
+
+## Check
+Execute `poml -v` command.
+
+```
+$ poml -v
+0.2.1
+```
+
+
