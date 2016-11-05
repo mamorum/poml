@@ -16,12 +16,12 @@ public class Compiler implements Converter {
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
     Put.defaults("ver", "3.5.1", map);
-    Assert.exists(required, map, name());
+    Assert.exist(keys, map, name());
     Tmpl.render(
       "/converter/build/plugin/compiler.tmpl",
       map, xml
     );
   }
   
-  private static final String[] required = {"source", "target"};
+  private static final String[] keys = {"source", "target"};
 }
