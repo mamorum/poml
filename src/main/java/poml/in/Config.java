@@ -51,27 +51,27 @@ public class Config {
   }
   
   // -> For getting config values.
-  // -> Do not implement validation in this class.
   // key=val
   public String val(String key) {
-    return p.getProperty(key);
+    String val = p.getProperty(key);
+    if (val == null) Throw.noConfig(key);
+    return val;
   }
   // key=val, val, ... (not spilted by escaped "\\,")
   public String[] vals(String key) {
-    String val = val(key);
-    if (val == null) return null;
-    return split(val, "(?<!\\\\),");
+    return split(val(key));
   }
   // key=k:v, k:v, ...
   private static final String _default = "_default";
   public Map<String, String> map(
     String key, boolean defaultOk
   ) {
-    if (_default.equals(val(key))) {
+    String val = val(key);
+    if (_default.equals(val)) {
       if (defaultOk) return new HashMap<>();
       else Throw.ngDefault(key, _default);
     }
-    String[] kvs = vals(key);
+    String[] kvs = split(val);
     if (kvs == null) return new HashMap<>();
     Map<String, String> map = new LinkedHashMap<>();
     for (String kv: kvs) {
@@ -99,16 +99,17 @@ public class Config {
   
   // -> utils
   // split with delim, converting "\\," to ","
-  private static final String escma = "\\,";
-  private String[] split(String val, String delim) {
-    if (!val.contains(escma)) {
+  private static final String escaped = "\\,";
+  private static final String delim = "(?<!\\\\),";
+  private String[] split(String val) {
+    if (!val.contains(escaped)) {
       return val.split(delim);
     }
     String[] tmp = val.split(delim);
     String[] vals = new String[tmp.length];
     for (int i=0; i<tmp.length; i++) {
       vals[i] = tmp[i].replace(
-          escma, ","
+          escaped, ","
       );
     }
     return vals;

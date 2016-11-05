@@ -3,7 +3,7 @@ package poml.conv.basic;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Throw;
+import poml.tool.Assert;
 
 public class Pkg implements Converter {
 
@@ -11,11 +11,8 @@ public class Pkg implements Converter {
 
   @Override public void convert(Poml poml, Xml xml) {
     String val = poml.conf.val(name());
-    if (val == null) Throw.noConfig(name());
     String[] vals = val.trim().split(":");
-    if (vals.length < 3) Throw.badConfig(
-      name(), val, "Required [val=groupId:artifactId:version]."
-    );
+    Assert.pkg(vals, name(), val);
     for (int i = 0; i < vals.length; i++) {
       xml.printKvTag(sp2, tags[i], vals[i]);
     }

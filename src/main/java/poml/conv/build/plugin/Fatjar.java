@@ -18,17 +18,17 @@ public class Fatjar implements Converter {
     Assert.exist("mainClass", map, name());
     Put.defaults("ver", "2.6", map);
     Put.defaults("jarName", "${project.artifactId}", map);
-    map.put(
-      "conf+",
-      poml.conf.tag("fatjar.conf+", sp8)
+    if (poml.conf.has(confPlus)) map.put(
+      "conf+", poml.conf.tag(confPlus, sp8)
     );
-    map.put(
-      "archive+",
-      poml.conf.tag("fatjar.conf.archive+", sp10)
+    if (poml.conf.has(archPlus)) map.put(
+      "archive+", poml.conf.tag(archPlus, sp10)
     );
     Tmpl.render(
       "/converter/build/plugin/fatjar.tmpl",
       map, xml
     );
   }
+  private static final String confPlus = "fatjar.conf+";
+  private static final String archPlus = "fatjar.conf.archive+";
 }

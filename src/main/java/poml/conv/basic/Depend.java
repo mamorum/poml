@@ -3,7 +3,7 @@ package poml.conv.basic;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Throw;
+import poml.tool.Assert;
 
 public class Depend implements Converter {
 
@@ -14,9 +14,7 @@ public class Depend implements Converter {
   }
 
   public void converts(String cname, Poml poml, Xml xml) {
-    String[] deps = poml.conf.vals(cname);
-    if (deps == null) Throw.noConfig(cname);
-    for (String dep: deps) {
+    for (String dep: poml.conf.vals(cname)) {
       xml.out.println("    <dependency>");
       printTags(cname, dep, xml);
       xml.out.println("    </dependency>");
@@ -25,9 +23,7 @@ public class Depend implements Converter {
 
   private void printTags(String cname, String dep, Xml xml) {
     String[] vals = dep.trim().split(":");
-    if (vals.length < 3) Throw.badConfig(
-      cname, dep, "Required [val=groupId:artifactId:version]."
-    );
+    Assert.pkg(vals, cname, dep);
     for (int i = 0; i < vals.length; i++) {
       if ("".equals(vals[i])) continue;
       xml.printKvTag(sp6, tags[i], vals[i]);

@@ -3,6 +3,13 @@ package poml.tool;
 import java.util.Map;
 
 public class Assert {
+  public static void pkg(
+    String[] vals, String key, String val
+  ) {
+    if (vals.length < 3) Throw.badConfig(
+      key, val, "Required [val=groupId:artifactId:version]."
+    );
+  }
   public static void exist(
     String k, Map<String, String> in, String cname
   ) {
