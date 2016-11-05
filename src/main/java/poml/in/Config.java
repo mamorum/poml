@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import poml.tool.Throw;
+
 public class Config {
 
   private Properties p = new Properties();
@@ -50,10 +52,6 @@ public class Config {
   
   // -> For getting config values.
   // -> Do not implement validation in this class.
-  // ? key=_none
-  private boolean defaults(String key) {
-    return "_default".equals(val(key));
-  }
   // key=val
   public String val(String key) {
     return p.getProperty(key);
@@ -65,8 +63,14 @@ public class Config {
     return split(val, "(?<!\\\\),");
   }
   // key=k:v, k:v, ...
-  public Map<String, String> map(String key) {
-    if (defaults(key)) return new HashMap<>();
+  private static final String _default = "_default";
+  public Map<String, String> map(
+    String key, boolean defaultOk
+  ) {
+    if (_default.equals(val(key))) {
+      if (defaultOk) return new HashMap<>();
+      else Throw.ngDefault(key, _default);
+    }
     String[] kvs = vals(key);
     if (kvs == null) return new HashMap<>();
     Map<String, String> map = new LinkedHashMap<>();

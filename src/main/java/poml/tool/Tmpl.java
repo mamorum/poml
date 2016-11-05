@@ -48,17 +48,9 @@ public class Tmpl {
       return;
     }
         
-    String val = val(key, kv);
+    String val = kv.get(key);
     xml.out.print(line.substring(0, start));
     xml.out.print(val);
     xml.out.println(line.substring(end+2));
-  }
-  
-  private static String val(String key, Map<String, String> kv) {
-    int colon = key.indexOf(":");
-    if (colon == -1) return kv.get(key);  // no default val.
-    String val = kv.get(key.substring(0, colon));  // using new key.
-    if (val == null) return key.substring(colon+1);  // default.
-    else return val; // map val. ( user setting val. )
   }
 }

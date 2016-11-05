@@ -13,7 +13,7 @@ public class Gpg implements Converter {
   @Override public String name() { return "gpg"; }
 
   @Override public void convert(Poml poml, Xml xml) {
-    Map<String, String> map = poml.conf.map(name());
+    Map<String, String> map = poml.conf.map(name(), true);
     Put.defaults("ver", "1.6", map);
     Tmpl.render(
       "/converter/build/plugin/gpg.tmpl",

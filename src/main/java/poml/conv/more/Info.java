@@ -14,7 +14,7 @@ public class Info implements Converter {
     {"name", "description", "url", "inceptionYear"};
 
   @Override public void convert(Poml poml, Xml xml) {
-    Map<String, String> map = poml.conf.map(name());
+    Map<String, String> map = poml.conf.map(name(), false);
     if (map.size() == 0) return;
 
     // name - inceptionYear

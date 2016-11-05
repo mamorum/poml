@@ -11,4 +11,7 @@ public class Throw {
       "Bad config [key=" + key +", val=" + val + "]. " + msg
     );
   }
+  public static void ngDefault(String key, String val) {
+    badConfig(key, val, "Not supported [val=" + val + "].");
+  }
 }
