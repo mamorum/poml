@@ -11,6 +11,7 @@ public class Pkg implements Converter {
 
   @Override public void convert(Poml poml, Xml xml) {
     String val = poml.conf.val(name());
+    if (val == null) Throw.noConfig(name());
     String[] vals = val.trim().split(":");
     if (vals.length < 3) Throw.badConfig(
       name(), val, "Required [val=groupId:artifactId:version]."

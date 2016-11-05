@@ -15,6 +15,7 @@ public class Depend implements Converter {
 
   public void converts(String cname, Poml poml, Xml xml) {
     String[] deps = poml.conf.vals(cname);
+    if (deps == null) Throw.noConfig(cname);
     for (String dep: deps) {
       xml.out.println("    <dependency>");
       printTags(cname, dep, xml);

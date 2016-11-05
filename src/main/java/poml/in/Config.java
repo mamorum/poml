@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import poml.tool.Throw;
-
 public class Config {
 
   private Properties p = new Properties();
@@ -45,27 +43,28 @@ public class Config {
     );
   }
 
-  // -> for getting config values.
+  // -> For getting config values.
+  // -> Do not implement validation in this class.
   // ? key=_none
   private boolean defaults(String key) {
     return "_default".equals(val(key));
   }
   // key=val
   public String val(String key) {
-    String val = p.getProperty(key);
-    if (val == null) Throw.noConfig(key);
-    return val;
+    return p.getProperty(key);
   }
-  // key=val, val, ... ( "\\," does not split val. )
+  // key=val, val, ... (not spilted by escaped "\\,")
   public String[] vals(String key) {
-    return split(val(key), "(?<!\\\\),");
+    String val = val(key);
+    if (val == null) return null;
+    return split(val, "(?<!\\\\),");
   }
   // key=k:v, k:v, ...
   public Map<String, String> map(String key) {
     if (defaults(key)) return Collections.emptyMap();
-    Map<String, String> map = new LinkedHashMap<>();
     String[] kvs = vals(key);
-    if (kvs == null) return map;
+    if (kvs == null) return Collections.emptyMap();
+    Map<String, String> map = new LinkedHashMap<>();
     for (String kv: kvs) {
       map.put(k(kv),v(kv));
     }
