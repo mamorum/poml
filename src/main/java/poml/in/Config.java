@@ -2,7 +2,7 @@ package poml.in;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -43,6 +43,11 @@ public class Config {
     );
   }
 
+  // -> For checking key.
+  public boolean has(String key) {
+    return p.containsKey(key);
+  }
+  
   // -> For getting config values.
   // -> Do not implement validation in this class.
   // ? key=_none
@@ -61,9 +66,9 @@ public class Config {
   }
   // key=k:v, k:v, ...
   public Map<String, String> map(String key) {
-    if (defaults(key)) return Collections.emptyMap();
+    if (defaults(key)) return new HashMap<>();
     String[] kvs = vals(key);
-    if (kvs == null) return Collections.emptyMap();
+    if (kvs == null) return new HashMap<>();
     Map<String, String> map = new LinkedHashMap<>();
     for (String kv: kvs) {
       map.put(k(kv),v(kv));

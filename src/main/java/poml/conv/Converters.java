@@ -69,18 +69,18 @@ public class Converters {
     Converter[] cs, Poml poml, Xml xml
   ) {
     for (Converter c: cs) {
-      String config = poml.conf.val(c.name());
-      if (config == null) continue;
-      xml.out.println();
-      c.convert(poml, xml);
+      if (poml.conf.has(c.name())) {
+        xml.out.println();
+        c.convert(poml, xml);
+      }
     }
   }
   private static void convertPlugins(Poml poml, Xml xml) {
     ArrayList<Converter> targets = new ArrayList<>();
     for (Converter c: Grp.plgin) {
-      String config = poml.conf.val(c.name());
-      if (config == null) continue;
-      targets.add(c);
+      if (poml.conf.has(c.name())) {
+        targets.add(c);
+      }
     }
     if (targets.size() == 0) return;
     
