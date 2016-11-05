@@ -14,7 +14,7 @@ public class Fatjar implements Converter {
   
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name());
-    Assert.exists("mainClass", map, name());
+    Assert.exist("mainClass", map, name());
     map.put(
       "conf+",
       poml.conf.tag("fatjar.conf+", sp8)
