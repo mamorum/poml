@@ -11,41 +11,6 @@ public class DependTest extends ConvTestCase {
 
   Depend conv = new Depend();
   
-  @Test public void ng_noConf() {
-    poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "Config not found"
-      );
-    }
-  }
-  
-  @Test public void ng_emptyConf() {
-    poml.conf.append("depend=");
-    poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "Bad config val"
-      );
-    }
-  }
-  
-  @Test public void ng_badConf() {
-    poml.conf.append("depend=group.com:artifact:");
-    poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "Bad config val"
-      );
-    }
-  }
-  
   @Test public void id2ver() {
     poml.conf.append("depend=group.com:artifact:0.0.1");
     poml.conf.load();
@@ -131,5 +96,40 @@ public class DependTest extends ConvTestCase {
       "      <type>jar</type>" + nl +
       "    </dependency>" + nl
     );
+  }
+
+  @Test public void ng_noConf() {
+    poml.conf.load();
+    try { conv.convert(poml, xml); }
+    catch (IllegalStateException e) {
+      System.out.println(e.getMessage());
+      assertThat(e.getMessage()).startsWith(
+        "No config"
+      );
+    }
+  }
+  
+  @Test public void ng_emptyConf() {
+    poml.conf.append("depend=");
+    poml.conf.load();
+    try { conv.convert(poml, xml); }
+    catch (IllegalStateException e) {
+      System.out.println(e.getMessage());
+      assertThat(e.getMessage()).startsWith(
+        "Bad config"
+      );
+    }
+  }
+  
+  @Test public void ng_badConf() {
+    poml.conf.append("depend=group.com:artifact:");
+    poml.conf.load();
+    try { conv.convert(poml, xml); }
+    catch (IllegalStateException e) {
+      System.out.println(e.getMessage());
+      assertThat(e.getMessage()).startsWith(
+        "Bad config"
+      );
+    }
   }
 }

@@ -3,6 +3,7 @@ package poml.conv.basic;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
+import poml.tool.Throw;
 
 public class Depend implements Converter {
 
@@ -14,9 +15,6 @@ public class Depend implements Converter {
 
   public void converts(String cname, Poml poml, Xml xml) {
     String[] deps = poml.conf.vals(cname);
-    if (deps == null) throw new IllegalStateException(
-      "Config not found [key=" + cname + "]"
-    );
     for (String dep: deps) {
       xml.out.println("    <dependency>");
       printTags(cname, dep, xml);
@@ -26,9 +24,8 @@ public class Depend implements Converter {
 
   private void printTags(String cname, String dep, Xml xml) {
     String[] vals = dep.trim().split(":");
-    if (vals.length < 3) throw new IllegalStateException(
-      "Bad config val [key=" + cname +", val=" + dep + "] " +
-      "Please set \"groupId:artifactId:version\" at least"
+    if (vals.length < 3) Throw.badConfig(
+      cname, dep, "Required [val=groupId:artifactId:version]."
     );
     for (int i = 0; i < vals.length; i++) {
       if ("".equals(vals[i])) continue;

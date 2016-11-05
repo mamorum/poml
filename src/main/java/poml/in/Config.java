@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import poml.tool.Throw;
+
 public class Config {
 
   private Properties p = new Properties();
@@ -50,13 +52,13 @@ public class Config {
   }
   // key=val
   public String val(String key) {
-    return p.getProperty(key);
+    String val = p.getProperty(key);
+    if (val == null) Throw.noConfig(key);
+    return val;
   }
   // key=val, val, ... ( "\\," does not split val. )
   public String[] vals(String key) {
-    String val = val(key);
-    if (val == null) return null;
-    return split(val, "(?<!\\\\),");
+    return split(val(key), "(?<!\\\\),");
   }
   // key=k:v, k:v, ...
   public Map<String, String> map(String key) {

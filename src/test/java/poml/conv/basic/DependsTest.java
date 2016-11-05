@@ -11,29 +11,6 @@ public class DependsTest extends ConvTestCase {
 
   Depends conv = new Depends();
 
-  @Test public void ng_noConf() {
-    poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "Config not found"
-      );
-    }
-  }
-  
-  @Test public void ng_badConf() {
-    poml.conf.append("depends=group.com:");
-    poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "Bad config val"
-      );
-    }
-  }
-
   @Test public void id2type() {
     poml.conf.append("depends=group.com:artifact:0.0.1:test:true:jar");
     poml.conf.load();
@@ -82,5 +59,28 @@ public class DependsTest extends ConvTestCase {
       "    </dependency>" + nl +
       "  </dependencies>" + nl
     );
+  }
+
+  @Test public void ng_noConf() {
+    poml.conf.load();
+    try { conv.convert(poml, xml); }
+    catch (IllegalStateException e) {
+      System.out.println(e.getMessage());
+      assertThat(e.getMessage()).startsWith(
+        "No config"
+      );
+    }
+  }
+  
+  @Test public void ng_badConf() {
+    poml.conf.append("depends=group.com:");
+    poml.conf.load();
+    try { conv.convert(poml, xml); }
+    catch (IllegalStateException e) {
+      System.out.println(e.getMessage());
+      assertThat(e.getMessage()).startsWith(
+        "Bad config"
+      );
+    }
   }
 }
