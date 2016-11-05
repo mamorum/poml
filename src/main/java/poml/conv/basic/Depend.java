@@ -9,27 +9,35 @@ public class Depend implements Converter {
   @Override public String name() { return "depend"; }
 
   @Override public void convert(Poml poml, Xml xml) {
-    print(name(), poml, xml);
+    converts(name(), poml, xml);
   }
 
-  public void print(String cname, Poml poml, Xml xml) {
-    for (String lib: poml.conf.vals(cname)) {
+  public void converts(String cname, Poml poml, Xml xml) {
+    String[] deps = poml.conf.vals(cname);
+    if (deps == null) throw new IllegalStateException(
+      "Config not found [key=" + cname + "]"
+    );
+    for (String dep: deps) {
       xml.out.println("    <dependency>");
-      printLib(lib, xml);
+      printTags(cname, dep, xml);
       xml.out.println("    </dependency>");
     }
   }
 
-  private void printLib(String lib, Xml xml) {
-    // TODO check vals (null, length)
-    String[] vals = lib.trim().split(":");
+  private void printTags(String cname, String dep, Xml xml) {
+    String[] vals = dep.trim().split(":");
+    if (vals.length < 3) throw new IllegalStateException(
+      "Bad config val [key=" + cname +", val=" + dep + "] " +
+      "Please set \"groupId:artifactId:version\" at least"
+    );
     for (int i = 0; i < vals.length; i++) {
+      if ("".equals(vals[i])) continue;
       xml.printKvTag(sp6, tags[i], vals[i]);
     }
   }
 
   private static final String[] tags = {
-    "groupId", "artifactId", "version",
-    "scope", "optional", "type"
+    "groupId", "artifactId", "version",  // required
+    "scope", "optional", "type"  // optional
   };
 }

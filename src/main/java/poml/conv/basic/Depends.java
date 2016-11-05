@@ -12,7 +12,7 @@ public class Depends implements Converter {
   
   @Override public void convert(Poml poml, Xml xml) {
     xml.out.println("  <dependencies>");
-    depend.print(name(), poml, xml);
+    depend.converts(name(), poml, xml);
     xml.out.println("  </dependencies>");
   }
 }
