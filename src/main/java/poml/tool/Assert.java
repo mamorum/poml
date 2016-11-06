@@ -10,7 +10,7 @@ public class Assert {
       key, val, "Required [val=groupId:artifactId:version]."
     );
   }
-  public static void exists(
+  public static void notNull(
     String k, Map<String, String> in, String cname
   ) {
     if (in.get(k) == null) throw new RuntimeException(
@@ -18,9 +18,9 @@ public class Assert {
       " in property section"
     );
   }
-  public static void exist(
+  public static void notNull(
     String[] k, Map<String, String> in, String cname
   ) {
-    for (String key: k) exists(key, in, cname);
+    for (String key: k) notNull(key, in, cname);
   }
 }

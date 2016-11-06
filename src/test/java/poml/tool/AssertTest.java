@@ -15,7 +15,7 @@ public class AssertTest {
     Map<String, String> map
       = Collections.singletonMap("target", "1.8");
     try {
-      Assert.exists("source", map, "javac");
+      Assert.notNull("source", map, "javac");
     } catch (RuntimeException e) {
       assertThat(e.getMessage()).isEqualTo(
         "\"javac\" requires \"source\" in property section"
@@ -27,7 +27,7 @@ public class AssertTest {
     Map<String, String> map
       = Collections.singletonMap("target", "1.8");
     try {
-      Assert.exist(
+      Assert.notNull(
         new String[] {"ver", "source"},
         map, "javac");
     } catch (RuntimeException e) {

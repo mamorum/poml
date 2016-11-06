@@ -16,7 +16,7 @@ public class Compiler implements Converter {
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
     Put.defaults("ver", "3.5.1", map);
-    Assert.exist(keys, map, name());
+    Assert.notNull(keys, map, name());
     Tmpl.render(
       "/converter/build/plugin/compiler.tmpl",
       map, xml
