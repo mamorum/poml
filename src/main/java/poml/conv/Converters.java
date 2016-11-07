@@ -20,43 +20,7 @@ import poml.out.Xml;
 
 public class Converters {
 
-  private static final class Grp {
-    private static final Converter[] prj = {
-      new Model4.Start(), new Model4.End()
-    };
-    private static final Converter[] basic = {
-      new Pkg(), new Depends(), Depends.depend,
-      new Property()
-    };
-    private static final Converter[] plgin = {
-      new Gpg(), new Compiler(), new Source(),
-      new Javadoc(), new Exec(), new Fatjar()
-    };
-    private static final Converter[] more = {
-      new Info()
-    };
-    private static final Converter[] env = {
-      new Dist()
-    };  
-  }
-  private static final HashMap<String, Converter>
-    all = new HashMap<>();
-  static {
-    put(Grp.prj); put(Grp.basic); put(Grp.plgin);
-    put(Grp.more); put(Grp.env);
-  }
-  private static void put(Converter[] cs) {
-    for (Converter c: cs) all.put(c.name(), c);
-  }
-  
-  public static Converter get(String name) {
-    Converter c = all.get(name);
-    if (c == null) throw new RuntimeException(
-      "Converter not found for {{" + name + "}}"
-    );
-    return c;
-  }
-
+  // -> for "No Layout Section"
   public static void convert(Poml poml, Xml xml) {
     Grp.prj[0].convert(poml, xml);
     convert(Grp.basic, poml, xml);
@@ -93,5 +57,45 @@ public class Converters {
     }
     xml.out.println("    </plugins>");
     xml.out.println("  </build>");
+  }
+  private static final class Grp {
+    private static final Converter[] prj = {
+      new Model4.Start(), new Model4.End()
+    };
+    private static final Converter[] basic = {
+      new Pkg(), new Depends(), new Property()
+    };
+    private static final Converter[] plgin = {
+      new Gpg(), new Compiler(), new Source(),
+      new Javadoc(), new Exec(), new Fatjar()
+    };
+    private static final Converter[] more = {
+      new Info()
+    };
+    private static final Converter[] env = {
+      new Dist()
+    };  
+  }
+  
+  // -> for "Layout Section"
+  public static Converter get(String name) {
+    Converter c = all.get(name);
+    if (c == null) throw new RuntimeException(
+      "Converter not found for {{" + name + "}}"
+    );
+    return c;
+  }
+  private static final HashMap<String, Converter>
+    all = new HashMap<>();
+  static {
+    put(Grp.prj); put(Grp.basic); put(Grp.plgin);
+    put(Grp.more); put(Grp.env);
+    put(Depends.depend);
+  }
+  private static void put(Converter[] cs) {
+    for (Converter c: cs) put(c);
+  }
+  private static void put(Converter c) {
+    all.put(c.name(), c);
   }
 }
