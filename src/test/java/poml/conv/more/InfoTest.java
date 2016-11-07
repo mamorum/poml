@@ -1,5 +1,7 @@
 package poml.conv.more;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
@@ -53,5 +55,18 @@ public class InfoTest extends ConvTestCase {
       "    </license>" + nl +
       "  </licenses>" + nl
     );
+  }
+
+  @Test public void ng_badConf() {
+    poml.conf.append("info=");
+    poml.conf.append("  name:bad-conf,");
+    poml.conf.append("  license:nothing");
+    poml.conf.load();
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Bad config");
+    }
   }
 }

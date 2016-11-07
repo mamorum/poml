@@ -5,6 +5,7 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
+import poml.tool.Func.Throw;
 
 public class Info implements Converter {
 
@@ -16,17 +17,15 @@ public class Info implements Converter {
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
     // name - inceptionYear
-    for (String tag: tags) {
-      xml.printKvTag(sp2, tag, map.get(tag));
+    for (String t: tags) {
+      xml.printKvTag(sp2, t, map.get(t));
     }
     // license
     String lic = map.get("license");
     if (lic == null) return;
     if ("Apache 2.0".equals(lic)) xml.print(apache2);
     else if ("MIT".equals(lic)) xml.print(mit);
-    else throw new IllegalStateException(
-      "License \"" + lic + "\" not found"
-    );
+    else Throw.badConfig(name(), "license:" + lic);
   }
 
   private static final String[] mit = {
