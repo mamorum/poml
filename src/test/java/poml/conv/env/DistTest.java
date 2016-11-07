@@ -1,5 +1,7 @@
 package poml.conv.env;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
@@ -38,6 +40,17 @@ public class DistTest extends ConvTestCase {
       "      <url>https://oss.sonatype.org/content/repositories/snapshots</url>" + nl +
       "    </snapshotRepository>" + nl +
       "  </distributionManagement>" + nl
-  );
+    );
+  }
+
+  @Test public void ng_badConf() {
+    poml.conf.append("dist=snap:ossrh, repo:oss");
+    poml.conf.load();
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Bad config");
+    }
   }
 }

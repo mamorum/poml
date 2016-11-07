@@ -5,6 +5,7 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
+import poml.tool.Func.Throw;
 
 public class Dist implements Converter {
     
@@ -13,15 +14,19 @@ public class Dist implements Converter {
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);    
     xml.out.println("  <distributionManagement>");
-    printOssrh(map.get("snap"), xml, snap);
-    printOssrh(map.get("repo"), xml, repo);
+    printOssrh("snap", map, snap, xml);
+    printOssrh("repo", map, repo, xml);
     xml.out.println("  </distributionManagement>");
   }
   
-  private static final void printOssrh(
-    String val, Xml xml, String[] lines
+  private final void printOssrh(
+    String key, Map<String, String> map,
+    String[] lines, Xml xml
   ) {
-    if ("ossrh".equals(val)) xml.print(lines);
+    String val = map.get(key);
+    if (val == null) return;
+    else if ("ossrh".equals(val)) xml.print(lines);
+    else Throw.badConfig(name(), key + ":" + val);
   }
   private static final String[] snap = {
     "    <snapshotRepository>",
@@ -34,5 +39,5 @@ public class Dist implements Converter {
     "      <id>ossrh</id>",
     "      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>",
     "    </repository>"
-   };
+  };
 }
