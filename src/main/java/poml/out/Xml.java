@@ -48,6 +48,13 @@ public class Xml {
     for (String l: lines) out.println(l);
   }
   public void printKvTags(
+    String space, String[] k, String[] v
+  ) {
+    for (int i = 0; i < v.length; i++) {
+      printKvTag(space, k[i], v[i]);
+    }
+  }
+  public void printKvTags(
     String space, Map<String, String> kv
   ) {
     for (String k: kv.keySet()) {
@@ -57,7 +64,7 @@ public class Xml {
   public void printKvTag(
     String space, String k, String v
   ) {
-    if (v == null) return;
+    if (v == null || "".equals(v)) return;
     out.print(space);
     out.print("<"); out.print(k); out.print(">");
     out.print(v);

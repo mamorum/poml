@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import poml.tool.Assert;
+import poml.tool.Func.Assert;
 
 public class AssertTest {
 

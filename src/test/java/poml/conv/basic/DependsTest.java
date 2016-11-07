@@ -1,11 +1,10 @@
 package poml.conv.basic;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
-import poml.conv.basic.Depends;
 
 public class DependsTest extends ConvTestCase {
 
@@ -63,24 +62,22 @@ public class DependsTest extends ConvTestCase {
 
   @Test public void ng_noConf() {
     poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "No config"
-      );
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Config not found");
     }
   }
   
   @Test public void ng_badConf() {
     poml.conf.append("depends=group.com:");
     poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "Bad config"
-      );
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Bad config");
     }
   }
 }

@@ -1,7 +1,7 @@
 pkg=com.example:demo:0.0.1:jar
 depends=
   org.slf4j:slf4j-api:1.7.21,
-  junit:junit:4.12:test,
+  junit:junit:[4.12\\,):test,
   org.assertj:assertj-core:3.2.0:test:true,
   ch.qos.logback:logback-classic:1.1.7:test:true:jar
 property=

@@ -1,11 +1,10 @@
 package poml.conv.basic;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
-import poml.conv.basic.Depend;
 
 public class DependTest extends ConvTestCase {
 
@@ -70,7 +69,7 @@ public class DependTest extends ConvTestCase {
 
   @Test public void multi() {
     poml.conf.append("depend=");
-    poml.conf.append("  demo.com:demo:0.0.1,");
+    poml.conf.append("  demo.com:demo:[4.12\\\\,),");
     poml.conf.append("  sample.com:sample:0.0.1:provided,");
     poml.conf.append("  group.com:artifact:0.0.1:test:true:jar");
     poml.conf.load();
@@ -79,7 +78,7 @@ public class DependTest extends ConvTestCase {
       "    <dependency>" + nl +
       "      <groupId>demo.com</groupId>" + nl + 
       "      <artifactId>demo</artifactId>" + nl +
-      "      <version>0.0.1</version>" + nl +
+      "      <version>[4.12,)</version>" + nl +
       "    </dependency>" + nl +
       "    <dependency>" + nl +
       "      <groupId>sample.com</groupId>" + nl + 
@@ -100,36 +99,47 @@ public class DependTest extends ConvTestCase {
 
   @Test public void ng_noConf() {
     poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "No config"
-      );
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Config not found");
     }
   }
   
   @Test public void ng_emptyConf() {
     poml.conf.append("depend=");
     poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "Bad config"
-      );
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Bad config");
     }
   }
   
   @Test public void ng_badConf() {
-    poml.conf.append("depend=group.com:artifact:");
+    poml.conf.append("depend=");
+    poml.conf.append("  group.com:artifact:1.0,");
+    poml.conf.append("  group.com:artifact:");
     poml.conf.load();
-    try { conv.convert(poml, xml); }
-    catch (IllegalStateException e) {
-      System.out.println(e.getMessage());
-      assertThat(e.getMessage()).startsWith(
-        "Bad config"
-      );
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Bad config");
+    }
+  }
+  
+  @Test public void ng_badConf2() {
+    poml.conf.append("depend=, ,");
+    poml.conf.append("  group.com:artifact:1.0");
+    poml.conf.load();
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Bad config");
     }
   }
 }

@@ -1,12 +1,13 @@
 pkg=com.example:demo:0.0.1:jar
 depend=
   org.slf4j:slf4j-api:1.7.21,
-  junit:junit:4.12:test,
+  junit:junit:[4.12\\,):test,
   org.assertj:assertj-core:3.2.0:test:true,
   ch.qos.logback:logback-classic:1.1.7:test:true:jar
 property=
   project.build.sourceEncoding:UTF-8,
   gpg.skip:true
+gpg=_default
 compiler=source:1.8, target:1.8
 source=ver:2.2.1
 javadoc=ver:2.9.1

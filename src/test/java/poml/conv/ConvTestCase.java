@@ -27,6 +27,22 @@ public class ConvTestCase {
     if (poml != null) poml.close();
     if (xml != null) xml.closeBuffer();
   }
+
+  public Msg msg(Exception e) {
+    return new Msg(e.getMessage());
+  }
+  
+  public class Msg {
+    String msg;
+    Msg(String msg) { this.msg=msg; }
+    public void starts(String prefix) {
+      starts(prefix, false);
+    }
+    public void starts(String prefix, boolean debug) {
+      if (debug) System.out.println(this.msg);
+      assertThat(this.msg).startsWith(prefix);
+    }
+  }
   
   public class Output {
     StringWriter sw;

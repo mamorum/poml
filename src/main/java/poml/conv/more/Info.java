@@ -10,16 +10,14 @@ public class Info implements Converter {
 
   @Override public String name() { return "info"; }
 
-  private static final String[] keys =
+  private static final String[] tags =
     {"name", "description", "url", "inceptionYear"};
 
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
-    if (map.size() == 0) return;
-
     // name - inceptionYear
-    for (String k: keys) {
-      xml.printKvTag(sp2, k, map.get(k));
+    for (String tag: tags) {
+      xml.printKvTag(sp2, tag, map.get(tag));
     }
     // license
     String lic = map.get("license");

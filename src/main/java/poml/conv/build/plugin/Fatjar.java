@@ -5,9 +5,9 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Assert;
-import poml.tool.Tmpl;
+import poml.tool.Func.Assert;
 import poml.tool.Func.Put;
+import poml.tool.Tmpl;
 
 public class Fatjar implements Converter {
 
