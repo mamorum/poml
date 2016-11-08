@@ -5,8 +5,8 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Func.Put;
 import poml.tool.Is;
+import poml.tool.Put;
 import poml.tool.Throw;
 import poml.tool.Tmpl;
 
@@ -17,12 +17,13 @@ public class Compiler implements Converter {
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
     Put.defaults("ver", "3.5.1", map);
-    if (!Is.in(keys, map)) Throw.noKv(name(), keys);
+    if (!Is.in(ks, map)) Throw.noKv(name(), ks);
     Tmpl.render(
-      "/converter/build/plugin/compiler.tmpl",
+      "/conv/build/plugin/compiler.tmpl",
       map, xml
     );
   }
-  
-  private static final String[] keys = {"source", "target"};
+  private static final String[] ks = {
+    "source", "target"  // required
+  };
 }

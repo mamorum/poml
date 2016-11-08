@@ -5,8 +5,9 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Func.Assert;
-import poml.tool.Func.Put;
+import poml.tool.Put;
+import poml.tool.Is;
+import poml.tool.Throw;
 import poml.tool.Tmpl;
 
 public class Fatjar implements Converter {
@@ -15,7 +16,7 @@ public class Fatjar implements Converter {
   
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
-    Assert.notNull("mainClass", map, name());
+    if (!Is.in(k, map)) Throw.noKv(name(), k);
     Put.defaults("ver", "2.6", map);
     Put.defaults("jarName", "${project.artifactId}", map);
     if (poml.conf.has(confPlus)) map.put(
@@ -25,10 +26,11 @@ public class Fatjar implements Converter {
       "archive+", poml.conf.tag(archPlus, sp10)
     );
     Tmpl.render(
-      "/converter/build/plugin/fatjar.tmpl",
+      "/conv/build/plugin/fatjar.tmpl",
       map, xml
     );
   }
+  private static final String k = "mainClass"; // required
   private static final String confPlus = "fatjar.conf+";
   private static final String archPlus = "fatjar.conf.archive+";
 }

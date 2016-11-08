@@ -5,7 +5,7 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Func.Put;
+import poml.tool.Put;
 import poml.tool.Tmpl;
 
 public class Gpg implements Converter {
@@ -16,7 +16,7 @@ public class Gpg implements Converter {
     Map<String, String> map = poml.conf.map(name(), true);
     Put.defaults("ver", "1.6", map);
     Tmpl.render(
-      "/converter/build/plugin/gpg.tmpl",
+      "/conv/build/plugin/gpg.tmpl",
       map, xml
     );
   }

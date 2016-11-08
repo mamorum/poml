@@ -5,8 +5,9 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Func.Assert;
-import poml.tool.Func.Put;
+import poml.tool.Is;
+import poml.tool.Put;
+import poml.tool.Throw;
 import poml.tool.Tmpl;
 
 public class Exec implements Converter {
@@ -15,11 +16,12 @@ public class Exec implements Converter {
 
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
-    Assert.notNull("mainClass", map, name());
+    if (!Is.in(k, map)) Throw.noKv(name(), k);
     Put.defaults("ver", "1.5.0", map);
     Tmpl.render(
-      "/converter/build/plugin/exec.tmpl",
+      "/conv/build/plugin/exec.tmpl",
       map, xml
     );
   }
+  private static final String k = "mainClass"; // required
 }

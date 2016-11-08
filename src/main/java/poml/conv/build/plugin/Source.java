@@ -5,8 +5,8 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
+import poml.tool.Put;
 import poml.tool.Tmpl;
-import poml.tool.Func.Put;
 
 public class Source implements Converter {
 
@@ -16,7 +16,7 @@ public class Source implements Converter {
     Map<String, String> map = poml.conf.map(name(), true);
     Put.defaults("ver", "3.0.1", map);
     Tmpl.render(
-      "/converter/build/plugin/source.tmpl",
+      "/conv/build/plugin/source.tmpl",
       map, xml
     );
   }

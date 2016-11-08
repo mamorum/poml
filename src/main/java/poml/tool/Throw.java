@@ -24,4 +24,10 @@ public class Throw {
       " Requires [val=" + vals.toString() + "]"
     );
   }
+  public static void noKv(String conv, String k) {
+    throw new IllegalStateException(
+      "Bad config [key=" + conv +"]" +
+      " Requires [val=" + k + ":v]"
+    );
+  }
 }
