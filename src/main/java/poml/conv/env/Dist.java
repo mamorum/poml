@@ -5,7 +5,7 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Func.Throw;
+import poml.tool.Throw;
 
 public class Dist implements Converter {
     
@@ -26,7 +26,7 @@ public class Dist implements Converter {
     String val = map.get(key);
     if (val == null) return;
     else if ("ossrh".equals(val)) xml.print(lines);
-    else Throw.badConfig(name(), key + ":" + val);
+    else Throw.badConf(name(), key + ":" + val);
   }
   private static final String[] snap = {
     "    <snapshotRepository>",

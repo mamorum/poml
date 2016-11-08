@@ -1,5 +1,7 @@
 package poml.conv.build.plugin;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
@@ -41,5 +43,16 @@ public class CompilerTest extends ConvTestCase {
       "        </configuration>" + nl +
       "      </plugin>" + nl
     );
+  }
+
+  @Test public void ng_badConf() {
+    poml.conf.append("compiler=ver:1.0.0, source:1.8");
+    poml.conf.load();
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Bad config", true);
+    }
   }
 }

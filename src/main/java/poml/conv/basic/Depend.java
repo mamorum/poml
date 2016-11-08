@@ -3,7 +3,8 @@ package poml.conv.basic;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Func.Assert;
+import poml.tool.Is;
+import poml.tool.Throw;
 
 public class Depend implements Converter {
 
@@ -17,7 +18,7 @@ public class Depend implements Converter {
     for (String dep: poml.conf.vals(cname)) {
       xml.out.println("    <dependency>");
       String[] vals = dep.split(":");
-      Assert.pkg(vals, cname, dep);
+      if (!Is.pkg(vals)) Throw.badConf(name(), dep);
       xml.printKvTags(sp6, tags, vals);
       xml.out.println("    </dependency>");
     }

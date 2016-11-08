@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import poml.tool.Func.Throw;
+import poml.tool.Throw;
 
 public class Config {
 
@@ -56,9 +56,9 @@ public class Config {
   //  - return: not null or blank
   public String val(String key) {
     String pv = p.getProperty(key);
-    if (pv == null) Throw.noConfig(key);
+    if (pv == null) Throw.noConf(key);
     String val = pv.trim();
-    if ("".equals(val)) Throw.badConfig(key, pv);
+    if ("".equals(val)) Throw.badConf(key, pv);
     return val;
   }
   // key=val, val, ... 
@@ -76,7 +76,7 @@ public class Config {
     for (int i=0; i<vals.length; i++) {
       vals[i] = vals[i].trim();
       if(hasEsc) vals[i] = vals[i].replace(esc, ",");
-      if (none(vals[i])) Throw.badConfig(key, val);
+      if (none(vals[i])) Throw.badConf(key, val);
     }
     return vals;
   }
@@ -93,7 +93,7 @@ public class Config {
     }
     Map<String, String> map = new LinkedHashMap<>();
     for (String kv: split(key, val)) {
-      if (!put(kv, map)) Throw.badConfig(key, val);
+      if (!put(kv, map)) Throw.badConf(key, val);
     }
     return map;
   }

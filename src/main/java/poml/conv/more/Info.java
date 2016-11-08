@@ -5,7 +5,7 @@ import java.util.Map;
 import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
-import poml.tool.Func.Throw;
+import poml.tool.Throw;
 
 public class Info implements Converter {
 
@@ -25,7 +25,7 @@ public class Info implements Converter {
     if (lic == null) return;
     if ("Apache 2.0".equals(lic)) xml.print(apache2);
     else if ("MIT".equals(lic)) xml.print(mit);
-    else Throw.badConfig(name(), "license:" + lic);
+    else Throw.badConf(name(), "license:" + lic);
   }
 
   private static final String[] mit = {
