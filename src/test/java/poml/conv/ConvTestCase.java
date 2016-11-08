@@ -24,8 +24,8 @@ public class ConvTestCase {
   }
   
   @After public void after() throws IOException {
-    if (poml != null) poml.close();
-    if (xml != null) xml.closeBuffer();
+    try { if (poml != null) poml.close(); }
+    finally { if (xml != null) xml.closeBuffer(); }
   }
 
   public Msg msg(Exception e) {

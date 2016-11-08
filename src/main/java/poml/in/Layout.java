@@ -9,10 +9,9 @@ public class Layout {
     int start = poml.line.indexOf("{{");
     int end = poml.line.indexOf("}}");
     
-    // no conversion.
     if (start == -1 || end == -1) {
       xml.out.println(poml.line);
-      return;
+      return;  // not convert
     }
 
     // convert
@@ -24,6 +23,7 @@ public class Layout {
     postNewLine(key, name, xml);
   }
 
+  // convert a space to a newline. (space around the key ex.{{ key }})
   private void preNewLine(String key, String name, Xml xml) {
     int count = key.indexOf(name);
     for (int i=0; i < count; i++) xml.out.println();

@@ -11,12 +11,12 @@ import poml.out.Xml;
 // pom.poml
 public class Poml {
 
+  public Config conf = new Config();
+  public Layout layout;
+  
   public BufferedReader in;
   public String line;
 
-  public Config conf = new Config();
-  public Layout layout = new Layout();
-  
   public static Poml open(String path) throws IOException {
     Poml p = new Poml();
     p.in = new BufferedReader(new InputStreamReader
@@ -24,22 +24,27 @@ public class Poml {
     );
     return p;
   }
-  
+
   public void loadConfig() throws IOException {
     while ((line = in.readLine()) != null) {
-      if (line.equals("---")) break;
+      if (line.trim().equals("---")) {
+        this.layout = new Layout();
+        break;  // -> has layout.
+      }
       conf.append(line);
     }
     conf.load();
   }
 
+  public boolean hasLayout() {
+    return (this.layout != null);
+  }
   public void layoutTo(Xml xml) throws IOException {
-    if (line == null) { noLayoutTo(xml); return; }
     while ((line = in.readLine()) != null) {
       layout.processLine(this, xml);
     }
   }
-  private void noLayoutTo(Xml xml) {
+  public void noLayoutTo(Xml xml) {
     Converters.convert(this, xml);
   }
 

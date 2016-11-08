@@ -13,10 +13,11 @@ public class Processor {
     throws Throwable
   {
     try {
-      poml = Poml.open(pomlPath);
       xml = Xml.openBuffer();
+      poml = Poml.open(pomlPath);
       poml.loadConfig();
-      poml.layoutTo(xml);
+      if (poml.hasLayout()) poml.layoutTo(xml);
+      else poml.noLayoutTo(xml);
       xml.save(xmlPath);
     }
     finally { close(); }
