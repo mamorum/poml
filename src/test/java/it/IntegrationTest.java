@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 
 import org.junit.Test;
 
@@ -47,12 +46,12 @@ public class IntegrationTest {
     try (
       BufferedReader br1 = reader(path1);
       BufferedReader br2 = reader(path2);
-      StringWriter sw1 = new StringWriter();
-      StringWriter sw2 = new StringWriter();
     ) {
-      read(br1, sw1);
-      read(br2, sw2);
-      assertThat(sw1.toString()).isEqualTo(sw2.toString());
+      StringBuilder sb1 = new StringBuilder();
+      StringBuilder sb2 = new StringBuilder();
+      read(br1, sb1);
+      read(br2, sb2);
+      assertThat(sb1.toString()).isEqualTo(sb2.toString());
     }
   }
   private static BufferedReader 
@@ -63,7 +62,7 @@ public class IntegrationTest {
     ));
   }
   private static void read(
-    BufferedReader from, StringWriter to) throws IOException
+    BufferedReader from, StringBuilder to) throws IOException
   {
     String line = null;
     while ((line = from.readLine()) != null) {
