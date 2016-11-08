@@ -77,6 +77,17 @@ demo$ poml && mvn <goal>
 Operater `&&` seems available also in the Windows (see [Command shell overview - MS TechNet](https://technet.microsoft.com/en-us/library/bb490954.aspx)).
 
 
+## More Examples
+There are examples in the sub directories of [example](example).
+
+- [example/demo](example/demo): Same as above `demo` example.
+- [example/demo-layout](example/demo-layout): Same configs as `demo`, but using "Layout Section".
+- [example/all](example/all): Using all implemented configs ([converters](https://github.com/mamorum/poml/wiki)).
+- [example/all-layout](example/all-layout): Using all configs and "Layout Section".
+
+Each sub directories have two files, `poml.poml` and `pom.xml`. The generated XML from `pom.poml` is same as `pom.xml`. Test case [IntegrationTest.java](src/test/java/it/IntegrationTest.java) checks it continuously.
+
+
 ## Showcase
 POML eats its own poml.
 
