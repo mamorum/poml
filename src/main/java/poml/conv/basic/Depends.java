@@ -11,8 +11,8 @@ public class Depends implements Converter {
   @Override public String name() { return "depends"; }
   
   @Override public void convert(Poml poml, Xml xml) {
-    xml.out.println("  <dependencies>");
+    xml.println("  <dependencies>");
     depend.converts(name(), poml, xml);
-    xml.out.println("  </dependencies>");
+    xml.println("  </dependencies>");
   }
 }

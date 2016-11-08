@@ -13,10 +13,10 @@ public class Dist implements Converter {
     
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);    
-    xml.out.println("  <distributionManagement>");
+    xml.println("  <distributionManagement>");
     printOssrh("snap", map, snap, xml);
     printOssrh("repo", map, repo, xml);
-    xml.out.println("  </distributionManagement>");
+    xml.println("  </distributionManagement>");
   }
   
   private final void printOssrh(

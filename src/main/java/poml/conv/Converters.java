@@ -34,7 +34,7 @@ public class Converters {
   ) {
     for (Converter c: cs) {
       if (poml.conf.has(c.name())) {
-        xml.out.println();
+        xml.println();
         c.convert(poml, xml);
       }
     }
@@ -49,14 +49,14 @@ public class Converters {
     if (targets.size() == 0) return;
     
     // output xml.
-    xml.out.println();
-    xml.out.println("  <build>");
-    xml.out.println("    <plugins>");
+    xml.println();
+    xml.println("  <build>");
+    xml.println("    <plugins>");
     for (Converter c: targets) {
       c.convert(poml, xml);
     }
-    xml.out.println("    </plugins>");
-    xml.out.println("  </build>");
+    xml.println("    </plugins>");
+    xml.println("  </build>");
   }
   private static final class Grp {
     private static final Converter[] prj = {

@@ -12,8 +12,8 @@ public class Property implements Converter {
   
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> kv = poml.conf.map(name(), false);
-    xml.out.println("  <properties>");
+    xml.println("  <properties>");
     xml.printKvTags(sp4, kv);
-    xml.out.println("  </properties>");
+    xml.println("  </properties>");
   }
 }

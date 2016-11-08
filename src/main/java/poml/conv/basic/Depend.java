@@ -16,11 +16,11 @@ public class Depend implements Converter {
 
   public void converts(String cname, Poml poml, Xml xml) {
     for (String dep: poml.conf.vals(cname)) {
-      xml.out.println("    <dependency>");
+      xml.println("    <dependency>");
       String[] vals = dep.split(":");
       if (!Is.pkg(vals)) Throw.badConf(name(), dep);
       xml.printKvTags(sp6, tags, vals);
-      xml.out.println("    </dependency>");
+      xml.println("    </dependency>");
     }
   }
   private static final String[] tags = {

@@ -3,7 +3,6 @@ package poml.conv;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,13 +18,12 @@ public class ConvTestCase {
   
   @Before public void before() {
     poml = new Poml();
-    xml = Xml.openBuffer();
-    output = new Output(xml.sw);
+    xml = new Xml();
+    output = new Output();
   }
   
   @After public void after() throws IOException {
-    try { if (poml != null) poml.close(); }
-    finally { if (xml != null) xml.closeBuffer(); }
+    if (poml != null) poml.close();
   }
 
   public Msg msg(Exception e) {
@@ -45,10 +43,8 @@ public class ConvTestCase {
   }
   
   public class Output {
-    StringWriter sw;
-    Output(StringWriter sw) {this.sw = sw;}
     public void is(String s) {
-      assertThat(sw.toString()).isEqualTo(s);
+      assertThat(xml.out.toString()).isEqualTo(s);
     }
   }
 }

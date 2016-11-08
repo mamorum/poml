@@ -36,16 +36,14 @@ public class Poml {
     conf.load();
   }
 
-  public boolean hasLayout() {
-    return (this.layout != null);
-  }
-  public void layoutTo(Xml xml) throws IOException {
+  public void to(Xml xml) throws IOException {
+    if (layout == null) {
+      Converters.convert(this, xml);
+      return;  // no layout
+    }
     while ((line = in.readLine()) != null) {
       layout.processLine(this, xml);
     }
-  }
-  public void noLayoutTo(Xml xml) {
-    Converters.convert(this, xml);
   }
 
   public void close() {

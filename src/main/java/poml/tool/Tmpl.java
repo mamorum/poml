@@ -36,7 +36,7 @@ public class Tmpl {
     int start = line.indexOf("{{");
     int end = line.lastIndexOf("}}");
     if (start == -1 || end == -1) {
-      xml.out.println(line);
+      xml.println(line);
       return;
     }
 
@@ -44,13 +44,13 @@ public class Tmpl {
     
     if (key.endsWith("+")) {
       String tag = kv.get(key);
-      if (tag != null) xml.out.print(tag);
+      if (tag != null) xml.print(tag);
       return;
     }
         
     String val = kv.get(key);
-    xml.out.print(line.substring(0, start));
-    xml.out.print(val);
-    xml.out.println(line.substring(end+2));
+    xml.print(line.substring(0, start));
+    xml.print(val);
+    xml.println(line.substring(end+2));
   }
 }

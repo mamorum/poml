@@ -5,30 +5,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Map;
 
 // pom.xml
 public class Xml {
   
-  public StringWriter sw;
-  public PrintWriter out;
-
-  public static Xml openBuffer() {
-    Xml x = new Xml();
-    x.sw = new StringWriter();
-    x.out= new PrintWriter(x.sw);
-    return x;
-  }
+  public StringBuilder out = new StringBuilder();
 
   public void save(String path) {
     try (PrintWriter file = file(path)) {
-      file.write(sw.toString());
+      file.write(out.toString());
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-  }
-  
+  }  
   private PrintWriter file(String path)
     throws IOException
   {
@@ -39,14 +29,23 @@ public class Xml {
     );
   }
 
-  public void closeBuffer() {
-    if (out != null) out.close();
+  //  -> output string, newline
+  public void print(String s) {
+    out.append(s);
   }
-
-  // output methods ->
   public void print(String[] lines) {
-    for (String l: lines) out.println(l);
+    for (String l: lines) println(l);
   }
+  public void println(String s) {
+    out.append(s).append(
+      System.lineSeparator()
+    );
+  }
+  public void println() {
+    out.append(System.lineSeparator());
+  }
+  
+  // -> output tags
   public void printKvTags(
     String space, String[] k, String[] v
   ) {
@@ -65,9 +64,10 @@ public class Xml {
     String space, String k, String v
   ) {
     if (v == null || "".equals(v)) return;
-    out.print(space);
-    out.print("<"); out.print(k); out.print(">");
-    out.print(v);
-    out.print("</"); out.print(k); out.println(">");
+    out.append(space);
+    out.append("<").append(k).append(">");
+    out.append(v);
+    out.append("</").append(k).append(">");
+    println();
   }
 }

@@ -4,27 +4,20 @@ import poml.in.Poml;
 import poml.out.Xml;
 
 public class Processor {
-
-  private static Poml poml;
-  private static Xml xml;
   
   public static void start(
     String pomlPath, String xmlPath)
     throws Throwable
   {
+    Poml poml = null;
+    Xml xml = null;
     try {
-      xml = Xml.openBuffer();
       poml = Poml.open(pomlPath);
       poml.loadConfig();
-      if (poml.hasLayout()) poml.layoutTo(xml);
-      else poml.noLayoutTo(xml);
+      xml = new Xml();
+      poml.to(xml);
       xml.save(xmlPath);
     }
-    finally { close(); }
-  }
-
-  private static void close() {
-    try { if (xml != null) xml.closeBuffer(); }
     finally { if (poml != null) poml.close(); }
   }
 }
