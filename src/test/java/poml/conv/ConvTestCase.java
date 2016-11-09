@@ -2,9 +2,6 @@ package poml.conv;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
-
-import org.junit.After;
 import org.junit.Before;
 
 import poml.in.Poml;
@@ -20,10 +17,6 @@ public class ConvTestCase {
     poml = new Poml();
     xml = new Xml();
     output = new Output();
-  }
-  
-  @After public void after() throws IOException {
-    if (poml != null) poml.close();
   }
 
   public Msg msg(Exception e) {

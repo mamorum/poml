@@ -1,23 +1,24 @@
 package poml;
 
+import java.io.IOException;
+
 import poml.in.Poml;
 import poml.out.Xml;
 
 public class Processor {
   
-  public static void start(
-    String pomlPath, String xmlPath)
-    throws Throwable
+  public static void
+    start(String pomlPath, String xmlPath)
+  throws IOException
   {
-    Poml poml = null;
-    Xml xml = null;
+    Poml poml = new Poml();
+    Xml xml = new Xml();
     try {
-      poml = Poml.open(pomlPath);
+      poml.open(pomlPath);
       poml.loadConfig();
-      xml = new Xml();
       poml.to(xml);
       xml.save(xmlPath);
     }
-    finally { if (poml != null) poml.close(); }
+    finally { poml.close(); }
   }
 }

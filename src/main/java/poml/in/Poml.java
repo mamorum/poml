@@ -10,46 +10,41 @@ import poml.out.Xml;
 
 // pom.poml
 public class Poml {
-
-  public Config conf = new Config();
-  public Layout layout;
   
   public BufferedReader in;
   public String line;
 
-  public static Poml open(String path) throws IOException {
-    Poml p = new Poml();
-    p.in = new BufferedReader(new InputStreamReader
+  public Config conf = new Config();
+  public Layout layout;
+
+  public void open(String path) throws IOException {
+    in = new BufferedReader(new InputStreamReader
       (new FileInputStream(path), "UTF-8")
     );
-    return p;
   }
 
+  // -> Using opened file.
   public void loadConfig() throws IOException {
     while ((line = in.readLine()) != null) {
-      if (line.trim().equals("---")) {
+      if (line.equals("---")) {
         this.layout = new Layout();
-        break;  // -> has layout.
+        break;  // layout exists.
       }
       conf.append(line);
     }
     conf.load();
   }
-
   public void to(Xml xml) throws IOException {
-    if (layout == null) {
+    if (layout == null) {  // no layout.
       Converters.convert(this, xml);
-      return;  // no layout
+      return;
     }
+    // layout exists.
     while ((line = in.readLine()) != null) {
       layout.processLine(this, xml);
     }
   }
-
-  public void close() {
-    try { if (in != null) in.close(); }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+  public void close() throws IOException{
+    if (in != null) in.close();
   }
 }

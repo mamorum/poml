@@ -12,14 +12,14 @@ import poml.tool.Throw;
 public class Config {
 
   private Properties p = new Properties();
-  private StringBuilder lines = new StringBuilder();
+  private StringBuilder ps = new StringBuilder();
   
   // -> for loading.
   public void append(String line) {
     if ("".equals(line)) return;
-    lines.append(line);
+    ps.append(line);
     if (isContinue(line)) return;
-    lines.append(System.lineSeparator());
+    ps.append(System.lineSeparator());
   }
   private boolean isContinue(String line) {
     char last = line.charAt(line.length()-1);
@@ -27,22 +27,19 @@ public class Config {
     if (last == ',') return true;
     if (last == '{') return true;
     if (last == '>') {
-      lines.append("&&");
+      ps.append("&&");
       return true;
     }
     return false;
   }
   public void load() {
-    try (StringReader r = strdr()) {
-      p.load(r);
-    } catch (IOException e) {
+    try (
+      StringReader r =
+        new StringReader(ps.toString())
+    ) { p.load(r); }
+    catch (IOException e) {
       throw new RuntimeException(e);
     }
-  }
-  private StringReader strdr() {
-    return new StringReader(
-      lines.toString()
-    );
   }
 
   // -> For checking key.
