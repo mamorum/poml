@@ -17,6 +17,7 @@ import poml.conv.more.Info;
 import poml.conv.project.Model4;
 import poml.in.Poml;
 import poml.out.Xml;
+import poml.tool.Throw;
 
 public class Converters {
 
@@ -80,9 +81,7 @@ public class Converters {
   // -> for "Layout Section"
   public static Converter get(String name) {
     Converter c = all.get(name);
-    if (c == null) throw new RuntimeException(
-      "Converter not found for {{" + name + "}}"
-    );
+    if (c == null) Throw.noConv(name);
     return c;
   }
   private static final HashMap<String, Converter>

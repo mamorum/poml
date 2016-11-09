@@ -2,6 +2,11 @@ package poml.tool;
 
 // TODO Needs message harmony of all methods.
 public class Throw {
+  public static void noConv(String name) {
+    throw new IllegalStateException(
+      "Converter not found [name=" + name + "]"
+    );
+  }
   public static void noConf(String key) {
     throw new IllegalStateException(
       "Config not found [key=" + key + "]"

@@ -12,19 +12,15 @@ public class Xml {
   
   public StringBuilder out = new StringBuilder();
 
-  public void save(String path) {
+  public void save(String path) throws IOException {
     try (PrintWriter file = file(path)) {
       file.write(out.toString());
-    } catch (IOException e) {
-      throw new RuntimeException(e);
     }
   }  
-  private PrintWriter file(String path)
-    throws IOException
-  {
-    return  new PrintWriter(
-      new BufferedWriter(new OutputStreamWriter
-        (new FileOutputStream(path), "UTF-8")
+  private PrintWriter file(String path) throws IOException {
+    return new PrintWriter(
+      new BufferedWriter(new OutputStreamWriter(
+        new FileOutputStream(path), "UTF-8")
       )
     );
   }
