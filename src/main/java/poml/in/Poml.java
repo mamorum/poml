@@ -27,7 +27,7 @@ public class Poml {
   public void loadConfig() throws IOException {
     while ((line = in.readLine()) != null) {
       if (line.equals("---")) {
-        this.layout = new Layout();
+        layout = new Layout();
         break;  // layout exists.
       }
       conf.append(line);
