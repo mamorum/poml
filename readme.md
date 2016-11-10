@@ -28,14 +28,14 @@ compiler=source:1.8, target:1.8
 
 
 ### 2. Execute Poml Command
-Execute `poml` command. ([Installation Guide](doc/installation-guide.md))
+Execute `poml`. ([Installation Guide](doc/installation-guide.md))
 
 ```
 demo$ poml
 ```
 
 ### 3. Check XML
-Poml generates following `pom.xml`.
+Following `pom.xml` is generated.
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -61,9 +61,19 @@ Poml generates following `pom.xml`.
     </dependency>
   </dependencies>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
 ```
 
