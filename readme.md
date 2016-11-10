@@ -16,7 +16,7 @@ Poml is a conversion tool from text to [Maven](https://maven.apache.org/) `pom.x
 
 ## Example
 ### 1. Create Poml File
-In the `demo` directory, create a `pom.poml` and save the following text.
+Create a `pom.poml` and save the following text. (ex. in the `demo` directory.)
 
 ```txt
 pkg=com.example:demo:0.0.1:jar
@@ -28,14 +28,14 @@ property=project.build.sourceEncoding:UTF-8
 
 
 ### 2. Execute Poml Command
-Execute `poml` command in the `demo` directory.
+Execute `poml` command. ([Installation Guide](doc/installation-guide.md))
 
 ```
 demo$ poml
 ```
 
-### 3. Check Pom File
-After execution, following `pom.xml` is generated.
+### 3. Check XML
+Poml generates following `pom.xml`.
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -78,14 +78,14 @@ Operater `&&` seems available also in the Windows (see [Command shell overview -
 
 
 ## More Examples
-There are examples in the sub directories of [example](example).
+There are some examples in the sub directories of [example](example).
 
-- [example/demo](example/demo): Same as above `demo` example.
-- [example/demo-layout](example/demo-layout): Same configs as `demo`, but using "Layout Section".
-- [example/all](example/all): Using all implemented configs ([converters](https://github.com/mamorum/poml/wiki)).
-- [example/all-layout](example/all-layout): Using all configs and "Layout Section".
+- [demo](example/demo): Same as above `demo` example.
+- [demo-layout](example/demo-layout): Same configs as `demo`, but using "Layout Section".
+- [all](example/all): Using all implemented configs ([converters](https://github.com/mamorum/poml/wiki)).
+- [all-layout](example/all-layout): Using all configs and "Layout Section".
 
-Each sub directories have two files, `poml.poml` and `pom.xml`. The generated XML from `pom.poml` is same as `pom.xml`. Test case [IntegrationTest.java](src/test/java/it/IntegrationTest.java) checks it continuously.
+Each sub directories have two files, `poml.poml` and `pom.xml`. XML generated from `pom.poml` is same as `pom.xml`. Test case [IntegrationTest.java](src/test/java/it/IntegrationTest.java) checks it continuously.
 
 
 ## Showcase
