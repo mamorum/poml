@@ -91,8 +91,6 @@ depends=junit:junit:4.12:test, org.assertj:assertj-core:3.2.0:test
 compiler=source:1.8, target:1.8
 ```
 
-If `val` has only one element, Array config is `key=v`. Map is `key=k:v`.
-
 
 #### 3.3.3. Line Endings
 If a line ends with `=`, `,`or `{`, configuration continues to the next line.
