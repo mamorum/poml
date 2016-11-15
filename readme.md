@@ -88,7 +88,7 @@ Operater `&&` seems available also in the Windows (see [Command shell overview -
 
 
 ## More Examples
-There are some examples in the sub directories of [example](example).
+There are some examples in the sub directories of [poml/example](example).
 
 - [demo](example/demo): Same as above `demo` example.
 - [demo-layout](example/demo-layout): Same configs as `demo`, but using "Layout Section".
@@ -99,6 +99,7 @@ Each sub directories have two files, `poml.poml` and `pom.xml`. XML generated fr
 
 
 ## Showcase
-POML eats its own poml.
+Following projects use POML. Poml File `pom.poml` and generated `pom.xml` are commited.
 
-In this project, [pom.poml](pom.poml) is converted to [pom.xml](pom.xml).
+- [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): Web application, packged as fatjar.
+- [poml](https://github.com/mamorum/poml): This project.
