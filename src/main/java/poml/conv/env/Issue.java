@@ -1,4 +1,4 @@
-package poml.conv.build.plugin;
+package poml.conv.env;
 
 import java.util.Map;
 
@@ -6,24 +6,22 @@ import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
 import poml.tool.Is;
-import poml.tool.Put;
 import poml.tool.Throw;
-import poml.tool.Tmpl;
 
-public class Compiler implements Converter {
+public class Issue implements Converter {
 
-  @Override public String name() { return "compiler"; }
+  @Override public String name() { return "issue"; }
 
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
-    Put.defaults("ver", "3.5.1", map);
     if (!Is.in(keys, map)) Throw.noKv(name(), keys);
-    Tmpl.render(
-      "/conv/build/plugin/compiler.tmpl",
-      map, xml
-    );
+    xml.println("  <issueManagement>");
+    for (String k: keys) {
+      xml.printKvTag(sp4, k, map.get(k));
+    }
+    xml.println("  </issueManagement>");
   }
   private static final String[] keys = {
-    "source", "target"  // required
+    "system", "url"  // required
   };
 }

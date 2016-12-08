@@ -24,4 +24,7 @@ fatjar.conf.archive+={
 info=name:Demo, license:Apache 2.0,
   description:Demo App,
   url:http://demo-app.com/
+issue=
+  system:GitHub Issues,
+  url:https://github.com/user/repo/issues
 dist=snap:ossrh, repo:ossrh

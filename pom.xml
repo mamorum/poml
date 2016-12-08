@@ -86,4 +86,9 @@
       <url>http://www.opensource.org/licenses/mit-license.php</url>
     </license>
   </licenses>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/mamorum/poml/issues</url>
+  </issueManagement>
 </project>

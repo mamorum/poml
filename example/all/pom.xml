@@ -135,6 +135,11 @@
     </license>
   </licenses>
 
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/user/repo/issues</url>
+  </issueManagement>
+
   <distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>

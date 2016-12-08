@@ -21,3 +21,6 @@ fatjar.conf.archive+={
 info=license:MIT, name:POML,
   description:POM's Minimal Language,
   url:https://github.com/mamorum/poml
+issue=
+  system:GitHub Issues,
+  url:https://github.com/mamorum/poml/issues

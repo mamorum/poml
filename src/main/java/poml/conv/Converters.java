@@ -13,6 +13,7 @@ import poml.conv.build.plugin.Gpg;
 import poml.conv.build.plugin.Javadoc;
 import poml.conv.build.plugin.Source;
 import poml.conv.env.Dist;
+import poml.conv.env.Issue;
 import poml.conv.more.Info;
 import poml.conv.project.Model4;
 import poml.in.Poml;
@@ -74,8 +75,8 @@ public class Converters {
       new Info()
     };
     private static final Converter[] env = {
-      new Dist()
-    };  
+      new Issue(), new Dist()
+    };
   }
   
   // -> for "Layout Section"
