@@ -14,6 +14,7 @@ import poml.conv.build.plugin.Javadoc;
 import poml.conv.build.plugin.Source;
 import poml.conv.env.Dist;
 import poml.conv.env.Issue;
+import poml.conv.env.Scm;
 import poml.conv.more.Info;
 import poml.conv.project.Model4;
 import poml.in.Poml;
@@ -75,7 +76,7 @@ public class Converters {
       new Info()
     };
     private static final Converter[] env = {
-      new Issue(), new Dist()
+      new Issue(), new Scm(), new Dist()
     };
   }
   
