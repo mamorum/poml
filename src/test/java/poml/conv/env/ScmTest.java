@@ -27,12 +27,12 @@ public class ScmTest extends ConvTestCase {
     poml.conf.append("  connect: scm:git:https://github.com/mamorum/poml.git,");
     poml.conf.append("  devConnect: scm:git:git@github.com:mamorum/poml.git,");
     poml.conf.append("  tag: HEAD,");
-    poml.conf.append("  url: https://github.com/mamorum/poml/");
+    poml.conf.append("  url: https://github.com/mamorum/poml");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(
       "  <scm>" + nl +
-      "    <url>https://github.com/mamorum/poml/</url>" + nl +
+      "    <url>https://github.com/mamorum/poml</url>" + nl +
       "    <connection>scm:git:https://github.com/mamorum/poml.git</connection>" + nl +
       "    <developerConnection>scm:git:git@github.com:mamorum/poml.git</developerConnection>" + nl +
       "    <tag>HEAD</tag>" + nl +
