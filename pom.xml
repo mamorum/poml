@@ -91,4 +91,11 @@
     <system>GitHub Issues</system>
     <url>https://github.com/mamorum/poml/issues</url>
   </issueManagement>
+
+  <scm>
+    <url>https://github.com/mamorum/poml</url>
+    <connection>scm:git:https://github.com/mamorum/poml.git</connection>
+    <developerConnection>scm:git:git@github.com:mamorum/poml.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
 </project>

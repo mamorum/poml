@@ -24,3 +24,8 @@ info=license:MIT, name:POML,
 issue=
   system:GitHub Issues,
   url:https://github.com/mamorum/poml/issues
+scm=
+  url:https://github.com/mamorum/poml,
+  connect:scm:git:https://github.com/mamorum/poml.git,
+  devConnect: scm:git:git@github.com:mamorum/poml.git,
+  tag:HEAD
