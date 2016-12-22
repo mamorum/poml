@@ -27,5 +27,5 @@ issue=
 scm=
   url:https://github.com/mamorum/poml,
   connect:scm:git:https://github.com/mamorum/poml.git,
-  devConnect: scm:git:git@github.com:mamorum/poml.git,
+  devConnect:scm:git:git@github.com:mamorum/poml.git,
   tag:HEAD
