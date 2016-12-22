@@ -27,6 +27,11 @@ info=name:Demo, license:Apache 2.0,
 issue=
   system:GitHub Issues,
   url:https://github.com/user/repo/issues
+scm=
+  url:https://github.com/user/repo,
+  connect:scm:git:https://github.com/user/repo.git,
+  devConnect:scm:git:git@github.com:user/repo.git,
+  tag:HEAD
 dist=snap:ossrh, repo:ossrh
 ---
 {{#model4}}
@@ -47,5 +52,6 @@ dist=snap:ossrh, repo:ossrh
   </build>
   {{ info}}
   {{ issue}}
+  {{ scm}}
   {{ dist}}
 {{/model4}}
