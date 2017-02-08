@@ -30,6 +30,7 @@ public class DependsTest extends ConvTestCase {
 
   @Test public void multi() {
     poml.conf.append("depends=");
+    poml.conf.append("  demo.com:demo2,");
     poml.conf.append("  demo.com:demo:0.0.1,");
     poml.conf.append("  sample.com:sample:0.0.1:provided,");
     poml.conf.append("  group.com:artifact:0.0.1:test:true:jar");
@@ -37,6 +38,10 @@ public class DependsTest extends ConvTestCase {
     conv.convert(poml, xml);
     output.is(
       "  <dependencies>" + nl +
+      "    <dependency>" + nl +
+      "      <groupId>demo.com</groupId>" + nl + 
+      "      <artifactId>demo2</artifactId>" + nl +
+      "    </dependency>" + nl +
       "    <dependency>" + nl +
       "      <groupId>demo.com</groupId>" + nl + 
       "      <artifactId>demo</artifactId>" + nl +
