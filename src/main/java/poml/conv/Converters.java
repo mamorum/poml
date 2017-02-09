@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import poml.conv.basic.Depends;
+import poml.conv.basic.Parent;
 import poml.conv.basic.Pkg;
 import poml.conv.basic.Property;
 import poml.conv.build.plugin.Compiler;
@@ -66,7 +67,8 @@ public class Converters {
       new Model4.Start(), new Model4.End()
     };
     private static final Converter[] basic = {
-      new Pkg(), new Depends(), new Property()
+      new Pkg(), new Parent(),
+      new Depends(), new Property()
     };
     private static final Converter[] plgin = {
       new Gpg(), new Compiler(), new Source(),

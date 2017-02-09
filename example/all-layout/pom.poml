@@ -1,4 +1,5 @@
 pkg=com.example:demo:0.0.1:jar
+parent=org.springframework.boot:spring-boot-starter-parent:1.5.1.RELEASE
 depend=
   org.slf4j:slf4j-api:1.7.21,
   junit:junit:[4.12\\,):test,
@@ -36,7 +37,8 @@ scm=
 dist=snap:ossrh, repo:ossrh
 ---
 {{#model4}}
-  {{ pkg }}
+  {{ pkg}}
+  {{ parent }}
   <dependencies>
     {{depend}}
   </dependencies>
