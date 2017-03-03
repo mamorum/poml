@@ -23,6 +23,7 @@ fatjar.conf.archive+={
     <Built-By>Demo Authors</Built-By>
   </manifestEntries>
 }
+sbp=_default
 info=name:Demo, license:Apache 2.0,
   description:Demo App,
   url:http://demo-app.com/
@@ -51,6 +52,7 @@ dist=snap:ossrh, repo:ossrh
       {{javadoc}}
       {{exec}}
       {{fatjar}}
+      {{sbp}}
     </plugins>
   </build>
   {{ info}}

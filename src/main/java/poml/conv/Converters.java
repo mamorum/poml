@@ -12,6 +12,7 @@ import poml.conv.build.plugin.Exec;
 import poml.conv.build.plugin.Fatjar;
 import poml.conv.build.plugin.Gpg;
 import poml.conv.build.plugin.Javadoc;
+import poml.conv.build.plugin.Sbp;
 import poml.conv.build.plugin.Source;
 import poml.conv.env.Dist;
 import poml.conv.env.Issue;
@@ -72,7 +73,8 @@ public class Converters {
     };
     private static final Converter[] plgin = {
       new Gpg(), new Compiler(), new Source(),
-      new Javadoc(), new Exec(), new Fatjar()
+      new Javadoc(), new Exec(), new Fatjar(),
+      new Sbp()
     };
     private static final Converter[] more = {
       new Info()
