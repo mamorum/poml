@@ -13,7 +13,7 @@ java version "1.8.0_...
 Get a file from [Release Page](https://github.com/mamorum/poml/releases). (not "Source code" file.)
 
 ```
-# wget https://github.com/mamorum/poml/releases/download/v0.2.2/poml-0.2.2.tar.gz
+# wget https://github.com/mamorum/poml/releases/download/v0.3.0/poml-0.3.0.tar.gz
 ```
 
 
@@ -21,7 +21,7 @@ Get a file from [Release Page](https://github.com/mamorum/poml/releases). (not "
 Extract it in any directory.
 
 ```
-# tar zxvf poml-0.2.2.tar.gz
+# tar zxvf poml-0.3.0.tar.gz
 ```
 
 
@@ -29,7 +29,7 @@ Extract it in any directory.
 Add the extracted directory to the `PATH` (or `Path`).
 
 ```
-$ export PATH=$PATH:/opt/poml-0.2.2
+$ export PATH=$PATH:/opt/poml-0.3.0
 ```
 
 
@@ -38,7 +38,7 @@ Execute `poml -v` command.
 
 ```
 $ poml -v
-0.2.2
+0.3.0
 ```
 
 
