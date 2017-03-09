@@ -1,0 +1,16 @@
+## Task List for Release
+- Dev (coding, test)
+- Archive (tar, zip)
+  - exec archive.sh
+  - check archives
+- Update document
+  - installation-guide.md (version)
+  - readme.md, user-guide.md
+  - poml.wiki
+- Release (GitHub)
+  - write changelog
+  - upload tar, zip
+- Notification
+  - twitter
+  - blogger (POML Blog)
+  - hatena
