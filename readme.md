@@ -1,9 +1,9 @@
 # POML: POM's Minimal Language
 [![Build Status](https://travis-ci.org/mamorum/poml.svg?branch=master)](https://travis-ci.org/mamorum/poml)
 
-Poml is a conversion tool from text to [Maven](https://maven.apache.org/) `pom.xml`. There are two things in poml.
+Poml is a conversion tool from text to [Maven](https://maven.apache.org/) `pom.xml`. There are two things in Poml.
 
-1. Text syntax for writing poml file named `pom.poml`.
+1. Text syntax for writing `pom.poml` called "Poml File".
 2. Processor converting `pom.poml` to `pom.xml`.
 
 
