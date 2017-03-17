@@ -36,6 +36,8 @@ Execute `poml`. ([Installation Guide](doc/installation-guide.md))
 
 ```
 demo$ poml
+[POML:INFO] Processing "pom.poml"
+[POML:INFO] Genarated "pom.xml" @183ms
 ```
 
 ### 3. Check XML
