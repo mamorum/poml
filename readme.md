@@ -21,9 +21,13 @@ Create a `pom.poml` and save the following text. (ex. in the `demo` directory.)
 ```txt
 pkg=com.example:demo:0.0.1:jar
 depends=
-  junit:junit:4.12:test,
-  org.assertj:assertj-core:3.2.0:test
-compiler=source:1.8, target:1.8
+  com.google.guava:guava:21.0,
+  junit:junit:4.12:test
+property=
+  project.build.sourceEncoding: UTF-8,
+  project.reporting.outputEncoding: UTF-8,
+  maven.compiler.source: 1.8,
+  maven.compiler.target: 1.8
 ```
 
 
@@ -48,32 +52,24 @@ Following `pom.xml` is generated.
 
   <dependencies>
     <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>21.0</version>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>3.2.0</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
 </project>
 ```
 

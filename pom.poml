@@ -5,8 +5,11 @@ pkg=com.github.mamorum:poml:0.3.1:jar
 depends=
   junit:junit:4.12:test,
   org.assertj:assertj-core:3.2.0:test
-property=project.build.sourceEncoding:UTF-8
-compiler=source: 1.8, target: 1.8
+property=
+  project.build.sourceEncoding: UTF-8,
+  project.reporting.outputEncoding: UTF-8,
+  maven.compiler.source: 1.8,
+  maven.compiler.target: 1.8
 exec=mainClass: poml.Main
 fatjar=mainClass: poml.Main
 fatjar.conf+={

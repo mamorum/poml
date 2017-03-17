@@ -1,5 +1,9 @@
 pkg=com.example:demo:0.0.1:jar
 depends=
-  junit:junit:4.12:test,
-  org.assertj:assertj-core:3.2.0:test
-compiler=source:1.8, target:1.8
+  com.google.guava:guava:21.0,
+  junit:junit:4.12:test
+property=
+  project.build.sourceEncoding: UTF-8,
+  project.reporting.outputEncoding: UTF-8,
+  maven.compiler.source: 1.8,
+  maven.compiler.target: 1.8
