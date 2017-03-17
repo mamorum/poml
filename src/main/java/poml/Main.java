@@ -1,32 +1,37 @@
 package poml;
 
-import poml.cmd.Console;
-import poml.cmd.Init;
+import poml.cmd.Msg;
+import poml.cmd.Opt;
 
 public class Main {
-
   private static void exit(int i) { System.exit(i); }
+  private static void ng() { Opt.help(); exit(1); }
 
-  private static void preProcess(String[] args) {
-    if (args.length == 2) return; // -> convert
-    if (args.length == 1) { // -> option
-      if ("-h".equals(args[0])) { Console.help(); exit(0);}
-      if ("-v".equals(args[0])) { Console.version(); exit(0); }
-      if ("-i".equals(args[0])) { Init.project(); exit(0); }
-    }
-    // -> mistake args.
-    Console.help(); exit(1);
+  // for cmd "poml option"
+  private static void option(String opt) {
+    if ("help".equals(opt)) Opt.help();
+    else if ("version".equals(opt)) Opt.version();
+    else if ("mkdirs".equals(opt)) Opt.mkdirs();
+    else if ("init".equals(opt)) Opt.init();
+    else ng(); // option not found
   }
 
   public static void main(String[] args) throws Throwable {
-    preProcess(args);  // -> cmd "poml -option" exits.
-    // -> cmd "poml pom.poml pom.xml" starts.
-    Console.start(args[0], args[1]);
-    try { Processor.start(args[0], args[1]); }
+    if (args.length == 2) process(args[0], args[1]);
+    else if (args.length == 1) option(args[0]);
+    else ng(); // invalid args
+  }
+
+  // for cmd "poml pom.poml pom.xml"
+  private static void process(
+    String poml, String xml) throws Throwable
+  {
+    Msg.start(poml);
+    try { Processor.start(poml, xml); }
     catch (Throwable e) {
-      Console.error(e);
+      Msg.error(e, xml);
       throw e;
     }
-    Console.end();
+    Msg.end(xml);
   }
 }
