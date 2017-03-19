@@ -2,6 +2,8 @@ package poml;
 
 import poml.cmd.Msg;
 import poml.cmd.Opt;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Main {
   private static void exit(int i) { System.exit(i); }
@@ -17,21 +19,30 @@ public class Main {
   }
 
   public static void main(String[] args) throws Throwable {
-    if (args.length == 2) process(args[0], args[1]);
+    if (args.length == 2) convert(args[0], args[1]);
     else if (args.length == 1) option(args[0]);
     else ng(); // invalid args
   }
 
   // for cmd "poml pom.poml pom.xml"
-  private static void process(
-    String poml, String xml) throws Throwable
+  private static void
+    convert(String pomlPath, String xmlPath)
+  throws Throwable
   {
-    Msg.start(poml);
-    try { Processor.start(poml, xml); }
+    Poml poml = new Poml();
+    Xml xml = new Xml();
+    try {
+      Msg.start(pomlPath);
+      poml.open(pomlPath);
+      poml.loadConfig();
+      poml.to(xml);
+      xml.save(xmlPath);     
+      Msg.end(xmlPath); 
+    }
     catch (Throwable e) {
-      Msg.error(e, xml);
+      Msg.error(e, xmlPath);
       throw e;
     }
-    Msg.end(xml);
+    finally { poml.close(); }
   }
 }
