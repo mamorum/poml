@@ -11,7 +11,7 @@ public class Opt {
       ).add("Usage: poml [option]").nl().nl(
       ).add("Option:").nl(
       ).add("  help   \t   print this help").nl(
-      ).add("  init   \t   create pom.poml, pom.xml and src dirs").nl(
+      // ).add("  init   \t   create pom.poml, pom.xml and src dirs").nl(
       ).add("  mkdirs \t   create src dirs for maven project").nl(
       ).add("  version\t   print poml version").nl(
     ).out();

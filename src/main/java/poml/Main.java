@@ -14,7 +14,7 @@ public class Main {
     if ("help".equals(opt)) Opt.help();
     else if ("version".equals(opt)) Opt.version();
     else if ("mkdirs".equals(opt)) Opt.mkdirs();
-    else if ("init".equals(opt)) Opt.init();
+    // else if ("init".equals(opt)) Opt.init(); TODO
     else ng(); // option not found
   }
 
