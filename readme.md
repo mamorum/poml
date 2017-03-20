@@ -1,10 +1,10 @@
 # POML: POM's Minimal Language
 [![Build Status](https://travis-ci.org/mamorum/poml.svg?branch=master)](https://travis-ci.org/mamorum/poml)
 
-Poml is a conversion tool from text to [Maven](https://maven.apache.org/) `pom.xml`. There are two things in Poml.
+There are two things in Poml.
 
-1. Text syntax for writing `pom.poml` called "Poml File".
-2. Processor converting `pom.poml` to `pom.xml`.
+1. Syntax for writing Poml file named `pom.poml`.
+2. Conversion tool from `pom.poml` to [Maven](https://maven.apache.org/) `pom.xml`.
 
 
 ## Documents
@@ -23,11 +23,7 @@ pkg=com.example:demo:0.0.1:jar
 depends=
   com.google.guava:guava:21.0,
   junit:junit:4.12:test
-property=
-  project.build.sourceEncoding: UTF-8,
-  project.reporting.outputEncoding: UTF-8,
-  maven.compiler.source: 1.8,
-  maven.compiler.target: 1.8
+property=$encoding:UTF-8, $compiler:1.8
 ```
 
 
@@ -36,12 +32,12 @@ Execute `poml`. ([Installation Guide](doc/installation-guide.md))
 
 ```
 demo$ poml
-[POML:INFO] Processing "pom.poml"
-[POML:INFO] Genarated "pom.xml" @183ms
+[POML:INFO] Converting pom.poml
+[POML:INFO] Created pom.xml @183ms
 ```
 
 ### 3. Check XML
-Following `pom.xml` is generated.
+ `pom.poml` is converted to the following `pom.xml`.
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
