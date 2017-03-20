@@ -19,7 +19,7 @@ public class Layout {
     String name = key.trim();
 
     preNewline(key, name, xml);
-    Converters.get(name).convert(poml, xml);
+    Converters.convert(name, poml, xml);
     postNewline(key, name, xml);
   }
 

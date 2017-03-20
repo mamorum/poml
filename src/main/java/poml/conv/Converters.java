@@ -26,26 +26,24 @@ public class Converters {
 
   // -> for "No Layout Section"
   public static void convert(Poml poml, Xml xml) {
-    Grp.prj[0].convert(poml, xml);
-    convert(Grp.basic, poml, xml);
+    start.convert(poml, xml);
+    for (Converter c: basic) convert(c, poml, xml);
     convertPlugins(poml, xml);
-    convert(Grp.more, poml, xml);
-    convert(Grp.env, poml, xml);
-    Grp.prj[1].convert(poml, xml);
+    convert(info, poml, xml);
+    for (Converter c: env) convert(c, poml, xml);
+    end.convert(poml, xml);
   }
   private static void convert(
-    Converter[] cs, Poml poml, Xml xml
+    Converter c, Poml poml, Xml xml
   ) {
-    for (Converter c: cs) {
-      if (poml.conf.has(c.name())) {
-        xml.println();
-        c.convert(poml, xml);
-      }
+    if (poml.conf.has(c.name())) {
+      xml.println();
+      c.convert(poml, xml);
     }
   }
   private static void convertPlugins(Poml poml, Xml xml) {
     ArrayList<Converter> targets = new ArrayList<>();
-    for (Converter c: Grp.plgin) {
+    for (Converter c: plgin) {
       if (poml.conf.has(c.name())) {
         targets.add(c);
       }
@@ -62,41 +60,37 @@ public class Converters {
     xml.println("    </plugins>");
     xml.println("  </build>");
   }
-  private static final class Grp {
-    private static final Converter[] prj = {
-      new Model4.Start(), new Model4.End()
-    };
-    private static final Converter[] basic = {
-      new Pkg(), new Parent(),
-      new Depends(), new Property()
-    };
-    private static final Converter[] plgin = {
-      new Gpg(), new Source(), new Javadoc(),
-      new Exec(), new Fatjar(), new Sbp()
-    };
-    private static final Converter[] more = {
-      new Info()
-    };
-    private static final Converter[] env = {
-      new Issue(), new Scm(), new Dist()
-    };
-  }
-  
+
   // -> for "Layout Section"
-  public static Converter get(String name) {
+  public static void convert(
+    String name, Poml poml, Xml xml
+  ) {
     Converter c = all.get(name);
     if (c == null) Throw.noConv(name);
-    return c;
+    c.convert(poml, xml);
   }
+
+  // -> all converters
   private static final HashMap<String, Converter>
     all = new HashMap<>();
+  private static final Converter[]
+    basic = {
+      new Pkg(), new Parent(), new Depends(),
+      new Property()},
+    plgin = {
+      new Gpg(), new Source(), new Javadoc(),
+      new Exec(), new Fatjar(), new Sbp()},
+    env = {
+      new Issue(), new Scm(), new Dist()};
+  private static final Converter
+    start=new Model4.Start(), end=new Model4.End(),
+    info = new Info();
   static {
-    put(Grp.prj); put(Grp.basic); put(Grp.plgin);
-    put(Grp.more); put(Grp.env);
+    for (Converter c: basic) put(c);
+    for (Converter c: env) put(c);
+    for (Converter c: plgin) put(c);
+    put(start); put(end); put(info);
     put(Depends.depend);
-  }
-  private static void put(Converter[] cs) {
-    for (Converter c: cs) put(c);
   }
   private static void put(Converter c) {
     all.put(c.name(), c);

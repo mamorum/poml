@@ -35,6 +35,24 @@ public class PropertyTest extends ConvTestCase {
     );
   }
   
+  @Test public void replace() {
+    poml.conf.append("property=");
+    poml.conf.append("  property:value,");
+    poml.conf.append("  $encoding:UTF-8,");
+    poml.conf.append("  $compiler:1.8");
+    poml.conf.load();
+    conv.convert(poml, xml);
+    output.is(
+      "  <properties>" + nl + 
+      "    <property>value</property>" + nl +
+      "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
+      "    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>" + nl +
+      "    <maven.compiler.source>1.8</maven.compiler.source>" + nl +
+      "    <maven.compiler.target>1.8</maven.compiler.target>" + nl +
+      "  </properties>" + nl
+    );
+  }
+  
   @Test public void ng_noConf() {
     poml.conf.load();
     try { 

@@ -22,8 +22,10 @@ public class Poml {
       (new FileInputStream(path), "UTF-8")
     );
   }
+  public void close() throws IOException{
+    if (in != null) in.close();
+  }
 
-  // -> Using opened file.
   public void loadConfig() throws IOException {
     while ((line = in.readLine()) != null) {
       if (line.equals("---")) {
@@ -43,8 +45,5 @@ public class Poml {
     while ((line = in.readLine()) != null) {
       layout.processLine(this, xml);
     }
-  }
-  public void close() throws IOException{
-    if (in != null) in.close();
   }
 }
