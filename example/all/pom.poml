@@ -7,10 +7,8 @@ depends=
   ch.qos.logback:logback-classic:1.1.7:test:true:jar,
   org.springframework.boot:spring-boot-starter-web
 property=
-  project.build.sourceEncoding: UTF-8,
-  project.reporting.outputEncoding: UTF-8,
-  maven.compiler.source: 1.8,
-  maven.compiler.target: 1.8,
+  $encoding:UTF-8,
+  $compiler:1.8,
   gpg.skip:true
 gpg=_default
 source=ver:2.2.1
