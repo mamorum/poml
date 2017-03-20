@@ -13,21 +13,19 @@ public class Msg {
 
   public static void start(String pomlPath) {
     Msg.init(
-      ).add("[POML:INFO] Processing \""
-      ).add(pomlPath).add("\"").nl(
+      ).add("[POML:INFO] Converting ").add(pomlPath).nl(
     ).out();
   }
   public static void error(Throwable e, String xmlPath) {
     Msg.init(
       ).add("[POML:ERROR] ").add(e.getMessage()).nl(
-      ).add("[POML:ERROR] Could not generate \""
-      ).add(xmlPath).add("\"").nl(
+      ).add("[POML:ERROR] Could not create ").add(xmlPath).nl(
     ).err();
   }
   public static void end(String xmlPath) {
     Msg.init(
-      ).add("[POML:INFO] Genarated \""
-      ).add(xmlPath).add("\" @").add(
+      ).add("[POML:INFO] Created "
+      ).add(xmlPath).add(" @").add(
         ManagementFactory
           .getRuntimeMXBean().getUptime()
       ).add("ms").nl(
