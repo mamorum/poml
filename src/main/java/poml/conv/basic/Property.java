@@ -12,24 +12,22 @@ public class Property implements Converter {
   
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> kv = poml.conf.map(name(), false);
-    replaceKey(kv, encoding, encodings);
-    replaceKey(kv, compiler, compilers);
     xml.println("  <properties>");
-    xml.printKvTags(sp4, kv);
+    for (String k: kv.keySet()) {
+      if (k.startsWith("$")) replace(k, kv.get(k), xml);
+      else xml.printKvTag(sp4, k, kv.get(k));
+    }
     xml.println("  </properties>");
   }
   
-  private static final String encoding = "$encoding";
-  private static final String[] encodings = {
-    "project.build.sourceEncoding", "project.reporting.outputEncoding"
-  };
-  private static final String compiler = "$compiler";
-  private static final String[] compilers = {
-    "maven.compiler.source", "maven.compiler.target"
-  };  
-  private void replaceKey(Map<String, String> kv, String from, String[] to) {
-    if (!kv.containsKey(from)) return;
-    String v = kv.remove(from);
-    for (String k: to) kv.put(k, v);
+  private void replace(String k, String v, Xml xml) {
+    if ("$encoding".equals(k)) {
+      xml.printKvTag(sp4, "project.build.sourceEncoding", v);
+      xml.printKvTag(sp4, "project.reporting.outputEncoding", v);
+    }
+    else if ("$compiler".equals(k)) {
+      xml.printKvTag(sp4, "maven.compiler.source", v);
+      xml.printKvTag(sp4, "maven.compiler.target", v);
+    }
   }
 }
