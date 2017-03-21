@@ -10,10 +10,10 @@ public class Opt {
       ).add("Convert pom.poml to pom.xml").nl().nl(
       ).add("Usage: poml [option]").nl().nl(
       ).add("Option:").nl(
-      ).add("  help   \t   print this help").nl(
-      // ).add("  init   \t   create pom.poml, pom.xml and src dirs").nl(
-      ).add("  mkdirs \t   create src dirs for maven project").nl(
-      ).add("  version\t   print poml version").nl(
+      ).add("  -h, help   \t   print this help").nl(
+      ).add("  -v, version\t   print poml version").nl(
+      // ).add("  init       \t   create pom.poml, pom.xml and src dirs").nl(
+      ).add("  mkdirs     \t   create src dirs for maven project").nl(
     ).out();
   }
   public static void version() {

@@ -11,7 +11,9 @@ public class Main {
 
   // for cmd "poml option"
   private static void option(String opt) {
-    if ("help".equals(opt)) Opt.help();
+    if ("-h".equals(opt)) Opt.help();
+    else if ("help".equals(opt)) Opt.help();
+    else if ("-v".equals(opt)) Opt.version();
     else if ("version".equals(opt)) Opt.version();
     else if ("mkdirs".equals(opt)) Opt.mkdirs();
     // else if ("init".equals(opt)) Opt.init(); TODO
