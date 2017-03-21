@@ -4,8 +4,8 @@ depends=
   junit:junit:4.12:test
 property=$encoding:UTF-8, $compiler:1.8
 ---
-{{#model4}}
-  {{ pkg }}
+{{#model4 }}
+  {{pkg }}
   {{depends }}
   {{property}}
 {{/model4}}
