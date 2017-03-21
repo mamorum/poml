@@ -8,9 +8,9 @@ depends=
   org.springframework.boot:spring-boot-starter-web
 property=
   $encoding:UTF-8,
-  $compiler:1.8,
   gpg.skip:true
 gpg=_default
+compiler=source:1.8, target:1.8
 source=ver:2.2.1
 javadoc=ver:2.9.1
 exec=mainClass:demo.Main
