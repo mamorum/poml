@@ -33,7 +33,7 @@ Execute `poml`. ([Installation Guide](doc/installation-guide.md))
 ```
 demo$ poml
 [POML:INFO] Converting pom.poml
-[POML:INFO] Created pom.xml @183ms
+[POML:INFO] Created pom.xml @30ms
 ```
 
 ### 3. Check XML

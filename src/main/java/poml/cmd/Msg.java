@@ -1,7 +1,5 @@
 package poml.cmd;
 
-import java.lang.management.ManagementFactory;
-
 public class Msg {
   StringBuilder b;
   public Msg(StringBuilder b) { this.b = b; }
@@ -11,7 +9,7 @@ public class Msg {
   public void err() { System.err.print(b.toString()); }
   public static Msg init() { return new Msg(new StringBuilder()); }
 
-  public static void start(String pomlPath) {
+  public static void begin(String pomlPath) {
     Msg.init(
       ).add("[POML:INFO] Converting ").add(pomlPath).nl(
     ).out();
@@ -22,13 +20,10 @@ public class Msg {
       ).add("[POML:ERROR] Could not create ").add(xmlPath).nl(
     ).err();
   }
-  public static void end(String xmlPath) {
+  public static void success(String xmlPath, long time) {
     Msg.init(
       ).add("[POML:INFO] Created "
-      ).add(xmlPath).add(" @").add(
-        ManagementFactory
-          .getRuntimeMXBean().getUptime()
-      ).add("ms").nl(
+      ).add(xmlPath).add(" @").add(time).add("ms").nl(
     ).out();
   }
 }

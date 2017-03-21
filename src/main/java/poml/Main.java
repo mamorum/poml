@@ -29,15 +29,17 @@ public class Main {
     convert(String pomlPath, String xmlPath)
   throws Throwable
   {
+    long start = System.currentTimeMillis();
+    Msg.begin(pomlPath);
     Poml poml = new Poml();
     Xml xml = new Xml();
     try {
-      Msg.start(pomlPath);
       poml.open(pomlPath);
       poml.loadConfig();
       poml.to(xml);
-      xml.save(xmlPath);     
-      Msg.end(xmlPath); 
+      xml.save(xmlPath);
+      long end = System.currentTimeMillis();
+      Msg.success(xmlPath, (end - start)); 
     }
     catch (Throwable e) {
       Msg.error(e, xmlPath);
