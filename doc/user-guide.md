@@ -1,139 +1,128 @@
 # POML -  User Guide
 ## Table of Contents
-1. Getting Started
-2. How Poml Works
-3. Poml File
-    - Overview
-    - Abbreviation
-    - Config Section
-    - Layout Section
-4. Poml Converter
-    - Overview
-    - Reference
+1. Poml File
+2. Limitation
+3. Config Section
+4. Layout Section (Optional)
 
 
-## 1. Getting Started
-- **Install**: [Installation Guide](./installation-guide.md)
-- **Example**: [Readme](../readme.md)
+## 1. Poml File
+Poml file named `pom.poml` is converted to `pom.xml`.  
+We can write two sections in `pom.poml`.
 
+1. Config Section
+2. Layout Section (Optional)
 
-## 2. How Poml Works
-Poml works in the following order, after `poml` command is executed.
-
-1. Poml Processor reads Poml File.
-2. Processor invokes Poml Converters.
-3. Converters generate POM (XML) elements.
-
-To generate a `pom.xml`, Poml File and Converters are needed.  
-So, this document describes Poml File and Converter.
-
-
-## 3. Poml File
-### 3.1. Overview
-Poml File consists of two parts. First part is "Config Section". Second part is "Layout Section". 
+Delimiter `---` separates two sections.  
+The delimiter needs newlines on its front and behind.
 
 ```
 pkg=com.example:demo:0.0.1:jar
 depends=
-  junit:junit:4.12:test,
-  org.assertj:assertj-core:3.2.0:test
+  com.google.guava:guava:21.0,
+  junit:junit:[4.12\\,):test
+property=$encoding:UTF-8
 compiler=source:1.8, target:1.8
 ---
 {{#model4}}
   {{ pkg }}
   {{depends }}
+  {{property }}
   <build>
     <plugins>
+      <!-- maven compiler plugin -->
       {{compiler}}
     </plugins>
   </build>
 {{/model4}}
 ```
 
-The delimiter `---` separates two sections. And it needs newlines on its front and behind.
+Above file is "[poml/example/demo-layout/pom.poml](https://github.com/mamorum/poml/blob/master/example/demo-layout/pom.poml)",  
+and is converted to "[poml/example/demo-layout/pom.pom.xml](https://github.com/mamorum/poml/blob/master/example/demo-layout/pom.xml)".
 
 
-### 3.2. Abbreviation
-Poml supports abbreviation of it's file. In this case, Poml File consists of "Config Section" only. 
+## 2. Limitation
+Poml does not support all XML tags of `pom.xml`.  
+To use unsupported XML tags, we can write "Layout Section".
+
+
+## 3. Config Section
+In this section, we can write the `key=val` as a configuration.
 
 ```
 pkg=com.example:demo:0.0.1:jar
 depends=
-  junit:junit:4.12:test,
-  org.assertj:assertj-core:3.2.0:test
+  com.google.guava:guava:21.0,
+  junit:junit:[4.12\\,):test
+property=$encoding:UTF-8
 compiler=source:1.8, target:1.8
 ```
 
-Poml determines XML layout automatically.
+Available keys (`pkg`, `depends`, etc) are listed in the [Config Reference](https://github.com/mamorum/poml/wiki).  
+The val varies according to a key.
 
 
-### 3.3. Config Section
-In this section, we can write a configuration as `key=val`.
-
-#### 3.3.1. Key
-The `key` is a converter name (ex.`pkg`). In the [Converter Reference](https://github.com/mamorum/poml/wiki), the names are listed.
-
-#### 3.3.2. Val
-The `val` varies according to a converter. There are `String`, `Array` and `Map` as its pattern.
-
-**String: `v`**
-```
-pkg=com.example:demo:0.0.1:jar
-```
-
-**Array: `v, v, ... v`**
-```
-depends=junit:junit:4.12:test, org.assertj:assertj-core:3.2.0:test
-```
-
-**Map: `k:v, k:v, ... k:v`**
-```
-compiler=source:1.8, target:1.8
-```
-
-
-#### 3.3.3. Line Endings
-If a line ends with `=`, `,`or `{`, configuration continues to the next line.
+### 3.1. Line Endings
+If a line ends with `=`, `,`or `{`, configuration continues to the next line.  
 
 ```
 depends=
-  junit:junit:4.12:test,
-  org.assertj:assertj-core:3.2.0:test
+  com.google.guava:guava:21.0,
+  junit:junit:[4.12\\,):test
 ```
+
+In the above case,
+
+- key: `depends`
+- val: `com.google.guava:guava:21.0, junit:junit:4.12:test`
 
 Please do **NOT** ends line with a space ` `.
 
-#### 3.3.4. Comma
-To use comma as a value of XML (not separator in `val`), we can write escaped `\\,`.  
-For example, to express the version `[4.12,)` (4.12 or over), we can write `[4.12\\,)`.
+### 3.2. Comma in a Val
+To use comma in a val (not separator), we can write escaped comma `\\,`.  
+For example, to use `[4.12,)` (version 4.12 or over), we can write `[4.12\\,)`.
 
 ```
-depends=junit:junit:[4.12\\,):test
+  junit:junit:[4.12\\,):test
 ```
 
 
-### 3.4. Layout Section
-Poml outputs this section to `pom.xml`, converting placeholders. A placeholder is expressed as `{{key}}`, and `key` is a converter name. Depending on the converter, placeholder contains specific symbols (ex.`#`,`/`).
+## 4. Layout Section (Optional)
+In this section, we can write XML elements and placeholders.
 
 ```
 {{#model4}}
   {{ pkg }}
+  {{depends }}
+  {{property }}
   <build>
     <plugins>
+      <!-- maven compiler plugin -->
       {{compiler}}
     </plugins>
   </build>
 {{/model4}}
 ```
 
-We can add spaces around the `key` like `{{ pkg }}`. Poml converts the front spaces to newlines before converting placeholders and the behind spaces after converting. One space is converted one newline.
+### 4.1. XML Elements
+Poml outputs XML elements (and comments) to `poml.xml` as it is.
 
-Now, we can write one pleceholder per one line. 
+### 4.2. Placeholders
+Poml converts placeholders to XML tags.
 
+We can write one placeholder as `{{key}}` per one line.  
+A `key` is same as the one used in "Config Section".
+ 
+#### 4.2.1. Special symbols
+Only `model4` starts with `#` or `/`, like `{{#model4}}`.  
+Details is in [model4 page](https://github.com/mamorum/poml/wiki/model4).
 
-## 4. Poml Converter
-### 4.1. Overview
-Converter generates POM (XML) elements, using it's configuration.
+#### 4.2.2. Spaces
+We can add spaces around a `key` like `{{  key  }}`.  
+Poml converts one space to one newline.
 
-### 4.2. Reference
-Converters are listed in [Converter Reference](https://github.com/mamorum/poml/wiki). It describes converter configurations, examples and so on.
+For example, Poml proceesses `{{ pkg  }}` as following order.
+
+1. converts a space before `pkg` (to a newline) 
+2. converts `pkg` (to XML tags)
+3. converts 2 spaces after `pkg` (to 2 newlines)

@@ -1,7 +1,7 @@
 pkg=com.example:demo:0.0.1:jar
 depends=
   com.google.guava:guava:21.0,
-  junit:junit:4.12:test
+  junit:junit:[4.12\\,):test
 property=$encoding:UTF-8
 compiler=source:1.8, target:1.8
 ---
@@ -11,6 +11,7 @@ compiler=source:1.8, target:1.8
   {{property }}
   <build>
     <plugins>
+      <!-- maven compiler plugin -->
       {{compiler}}
     </plugins>
   </build>

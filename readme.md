@@ -10,11 +10,11 @@ There are two things in Poml.
 ## Documents
 - [Installation Guide](doc/installation-guide.md)
 - [User Guide](doc/user-guide.md)
-- [Converter Reference](https://github.com/mamorum/poml/wiki)
+- [Reference](https://github.com/mamorum/poml/wiki)
 - [Blog](http://java-poml.blogspot.com/)
 
 
-## Example
+## Getting Started
 ### 1. Create Poml File
 Create a `pom.poml` and save the following text. (ex. in the `demo` directory.)
 
@@ -28,7 +28,7 @@ property=$encoding:UTF-8, $compiler:1.8
 
 
 ### 2. Execute Poml Command
-Execute `poml`. ([Installation Guide](doc/installation-guide.md))
+Execute `poml`. ( After [Installing Poml](doc/installation-guide.md). )
 
 ```
 demo$ poml
@@ -36,8 +36,8 @@ demo$ poml
 [POML:INFO] Created pom.xml @30ms
 ```
 
-### 3. Check XML
- `pom.poml` is converted to the following `pom.xml`.
+### 3. Check Pom XML
+Following `pom.xml` is created.
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -81,19 +81,19 @@ demo$ poml && mvn <goal>
 Operater `&&` seems available also in the Windows (see [Command shell overview - MS TechNet](https://technet.microsoft.com/en-us/library/bb490954.aspx)).
 
 
-## More Examples
+## Examples
 There are some examples in the sub directories of [poml/example](example).
 
-- [demo](example/demo): Same as above `demo` example.
-- [demo-layout](example/demo-layout): Same configs as `demo`, but using "Layout Section".
-- [all](example/all): Using all implemented configs ([converters](https://github.com/mamorum/poml/wiki)).
-- [all-layout](example/all-layout): Using all configs and "Layout Section".
+- [all](example/all): Using all [configs](https://github.com/mamorum/poml/wiki)
+- [all-layout](example/all-layout): Using all configs and "Layout Section"
 
-Each sub directories have two files, `poml.poml` and `pom.xml`. XML generated from `pom.poml` is same as `pom.xml`. Test case [IntegrationTest.java](src/test/java/it/IntegrationTest.java) checks it continuously.
+Each sub directories have `poml.poml` and converted `pom.xml`.
 
 
 ## Showcase
-Following projects use POML. Poml File `pom.poml` and generated `pom.xml` are commited.
+Following projects use Poml.
 
 - [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): Web application, packged as fatjar.
 - [poml](https://github.com/mamorum/poml): This project.
+
+ `pom.poml` and `pom.xml` are commited.
