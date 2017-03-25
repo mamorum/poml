@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
-import poml.out.Xml;
+import poml.io.Xml;
 
 public class Tmpl {
 
@@ -36,7 +36,7 @@ public class Tmpl {
     int start = line.indexOf("{{");
     int end = line.lastIndexOf("}}");
     if (start == -1 || end == -1) {
-      xml.println(line);
+      xml.out.add(line).nl();
       return;
     }
 
@@ -44,13 +44,13 @@ public class Tmpl {
     
     if (key.endsWith("+")) {
       String tag = kv.get(key);
-      if (tag != null) xml.print(tag);
+      if (tag != null) xml.out.add(tag);
       return;
     }
         
     String val = kv.get(key);
-    xml.print(line.substring(0, start));
-    xml.print(val);
-    xml.println(line.substring(end+2));
+    xml.out.add(line.substring(0, start));
+    xml.out.add(val);
+    xml.out.add(line.substring(end+2)).nl();
   }
 }

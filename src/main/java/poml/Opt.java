@@ -1,12 +1,12 @@
-package poml.cmd;
+package poml;
 
 import java.io.File;
 
-import poml.Main;
+import poml.io.Txt;
 
 public class Opt {
-  public static void help() {
-    Msg.init(
+  public void help() {
+    System.out.print(Txt.init(
       ).add("Convert pom.poml to pom.xml").nl().nl(
       ).add("Usage: poml [option]").nl().nl(
       ).add("Option:").nl(
@@ -14,15 +14,15 @@ public class Opt {
       ).add("  -v, version\t   print poml version").nl(
       // ).add("  init       \t   create pom.poml, pom.xml and src dirs").nl(
       ).add("  mkdirs     \t   create src dirs for maven project").nl(
-    ).out();
+    ).toString());
   }
-  public static void version() {
+  public void version() {
     System.out.println(
       Main.class.getPackage()
         .getImplementationVersion()
     );
   }
-  public static void mkdirs() {
+  public void mkdirs() {
     String mj = "src/main/java";
     String mr = "src/main/resources";
     String tj = "src/test/java";
@@ -32,15 +32,15 @@ public class Opt {
     (new File(tj)).mkdirs();
     (new File(tr)).mkdirs();
     String cdir = " ./";
-    Msg.init(
+    System.out.print(Txt.init(
       ).add("[POML:INFO] Created dirs").nl(
       ).add(cdir).add(mj).nl(
       ).add(cdir).add(mr).nl(
       ).add(cdir).add(tj).nl(
       ).add(cdir).add(tr).nl(
-    ).out();
+    ).toString());
   }
-  public static void init() {
+  public void init() {
     // prompt
     // create pom.poml
     // convert pom.poml to pom.xml

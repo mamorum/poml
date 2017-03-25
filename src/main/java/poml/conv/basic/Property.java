@@ -3,8 +3,8 @@ package poml.conv.basic;
 import java.util.Map;
 
 import poml.conv.Converter;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public class Property implements Converter {
 
@@ -12,22 +12,22 @@ public class Property implements Converter {
   
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> kv = poml.conf.map(name(), false);
-    xml.println("  <properties>");
+    xml.out.add("  <properties>").nl();
     for (String k: kv.keySet()) {
       if (k.startsWith("$")) replace(k, kv.get(k), xml);
-      else xml.printKvTag(sp4, k, kv.get(k));
+      else xml.outTag(sp4, k, kv.get(k));
     }
-    xml.println("  </properties>");
+    xml.out.add("  </properties>").nl();
   }
   
   private void replace(String k, String v, Xml xml) {
     if ("$encoding".equals(k)) {
-      xml.printKvTag(sp4, "project.build.sourceEncoding", v);
-      xml.printKvTag(sp4, "project.reporting.outputEncoding", v);
+      xml.outTag(sp4, "project.build.sourceEncoding", v);
+      xml.outTag(sp4, "project.reporting.outputEncoding", v);
     }
     else if ("$compiler".equals(k)) {
-      xml.printKvTag(sp4, "maven.compiler.source", v);
-      xml.printKvTag(sp4, "maven.compiler.target", v);
+      xml.outTag(sp4, "maven.compiler.source", v);
+      xml.outTag(sp4, "maven.compiler.target", v);
     }
   }
 }

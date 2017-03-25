@@ -1,7 +1,6 @@
-package poml.in;
+package poml.io;
 
 import poml.conv.Converters;
-import poml.out.Xml;
 
 public class Layout {
 
@@ -10,7 +9,7 @@ public class Layout {
     int end = poml.line.indexOf("}}");
 
     if (start == -1 || end == -1) {
-      xml.println(poml.line);
+      xml.out.add(poml.line).nl();
       return;  // not convert
     }
 
@@ -26,11 +25,11 @@ public class Layout {
   // ex. " pkg  " -> print newline * 1
   private void preNewline(String key, String name, Xml xml) {
     int count = key.indexOf(name);
-    for (int i=0; i < count; i++) xml.println();
+    for (int i=0; i < count; i++) xml.out.nl();
   }
   // ex. " pkg  " -> print newline * 2 
   private void postNewline(String key, String name, Xml xml) {
     int count = key.length() - key.indexOf(name) - name.length();
-    for (int i=0; i < count; i++) xml.println();
+    for (int i=0; i < count; i++) xml.out.nl();
   }
 }

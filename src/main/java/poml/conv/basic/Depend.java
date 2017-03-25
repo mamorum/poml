@@ -1,8 +1,8 @@
 package poml.conv.basic;
 
 import poml.conv.Converter;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 import poml.tool.Is;
 import poml.tool.Throw;
 
@@ -16,11 +16,11 @@ public class Depend implements Converter {
 
   public void converts(String cname, Poml poml, Xml xml) {
     for (String dep: poml.conf.vals(cname)) {
-      xml.println("    <dependency>");
+      xml.out.add("    <dependency>").nl();
       String[] vals = dep.split(":");
       if (!Is.lib(vals)) Throw.badConf(name(), dep);
-      xml.printKvTags(sp6, tags, vals);
-      xml.println("    </dependency>");
+      xml.outTags(sp6, tags, vals);
+      xml.out.add("    </dependency>").nl();
     }
   }
   private static final String[] tags = {

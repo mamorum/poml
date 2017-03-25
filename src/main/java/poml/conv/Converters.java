@@ -19,8 +19,8 @@ import poml.conv.env.Issue;
 import poml.conv.env.Scm;
 import poml.conv.more.Info;
 import poml.conv.project.Model4;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 import poml.tool.Throw;
 
 public class Converters {
@@ -38,7 +38,7 @@ public class Converters {
     Converter c, Poml poml, Xml xml
   ) {
     if (poml.conf.has(c.name())) {
-      xml.println();
+      xml.out.nl();
       c.convert(poml, xml);
     }
   }
@@ -52,14 +52,14 @@ public class Converters {
     if (targets.size() == 0) return;
     
     // output xml.
-    xml.println();
-    xml.println("  <build>");
-    xml.println("    <plugins>");
+    xml.out.nl();
+    xml.out.add("  <build>").nl();
+    xml.out.add("    <plugins>").nl();
     for (Converter c: targets) {
       c.convert(poml, xml);
     }
-    xml.println("    </plugins>");
-    xml.println("  </build>");
+    xml.out.add("    </plugins>").nl();
+    xml.out.add("  </build>").nl();
   }
 
   // -> for "Layout Section"

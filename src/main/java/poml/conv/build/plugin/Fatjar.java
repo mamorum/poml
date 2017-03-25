@@ -3,8 +3,8 @@ package poml.conv.build.plugin;
 import java.util.Map;
 
 import poml.conv.Converter;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 import poml.tool.Put;
 import poml.tool.Is;
 import poml.tool.Throw;

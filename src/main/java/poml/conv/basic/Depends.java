@@ -1,8 +1,8 @@
 package poml.conv.basic;
 
 import poml.conv.Converter;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public class Depends implements Converter {
 
@@ -11,8 +11,8 @@ public class Depends implements Converter {
   @Override public String name() { return "depends"; }
   
   @Override public void convert(Poml poml, Xml xml) {
-    xml.println("  <dependencies>");
+    xml.out.add("  <dependencies>").nl();
     depend.converts(name(), poml, xml);
-    xml.println("  </dependencies>");
+    xml.out.add("  </dependencies>").nl();
   }
 }

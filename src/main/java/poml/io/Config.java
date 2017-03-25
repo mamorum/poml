@@ -1,4 +1,4 @@
-package poml.in;
+package poml.io;
 
 import java.io.IOException;
 import java.io.StringReader;

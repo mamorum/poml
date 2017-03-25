@@ -1,7 +1,7 @@
 package poml.conv;
 
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public interface Converter {
 

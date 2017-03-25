@@ -3,8 +3,8 @@ package poml.conv.more;
 import java.util.Map;
 
 import poml.conv.Converter;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 import poml.tool.Throw;
 
 public class Info implements Converter {
@@ -18,13 +18,13 @@ public class Info implements Converter {
     Map<String, String> map = poml.conf.map(name(), false);
     // name - inceptionYear
     for (String k: keys) {
-      xml.printKvTag(sp2, k, map.get(k));
+      xml.outTag(sp2, k, map.get(k));
     }
     // license
     String lic = map.get("license");
     if (lic == null) return;
-    if ("Apache 2.0".equals(lic)) xml.print(apache2);
-    else if ("MIT".equals(lic)) xml.print(mit);
+    if ("Apache 2.0".equals(lic)) xml.out.add(apache2);
+    else if ("MIT".equals(lic)) xml.out.add(mit);
     else Throw.badConf(name(), "license:" + lic);
   }
 

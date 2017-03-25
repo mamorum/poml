@@ -3,8 +3,8 @@ package poml.conv.env;
 import java.util.Map;
 
 import poml.conv.Converter;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public class Scm implements Converter {
 
@@ -12,11 +12,11 @@ public class Scm implements Converter {
   
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
-    xml.println("  <scm>");  // -> elements are not required 
-    xml.printKvTag(sp4, "url", map.get("url"));
-    xml.printKvTag(sp4, "connection", map.get("connect"));
-    xml.printKvTag(sp4, "developerConnection", map.get("devConnect"));
-    xml.printKvTag(sp4, "tag", map.get("tag"));
-    xml.println("  </scm>");
+    xml.out.add("  <scm>").nl();  // -> elements are not required 
+    xml.outTag(sp4, "url", map.get("url"));
+    xml.outTag(sp4, "connection", map.get("connect"));
+    xml.outTag(sp4, "developerConnection", map.get("devConnect"));
+    xml.outTag(sp4, "tag", map.get("tag"));
+    xml.out.add("  </scm>").nl();
   }
 }

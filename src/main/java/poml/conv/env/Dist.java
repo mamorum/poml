@@ -3,8 +3,8 @@ package poml.conv.env;
 import java.util.Map;
 
 import poml.conv.Converter;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 import poml.tool.Throw;
 
 public class Dist implements Converter {
@@ -13,10 +13,10 @@ public class Dist implements Converter {
     
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);    
-    xml.println("  <distributionManagement>");
+    xml.out.add("  <distributionManagement>").nl();
     printOssrh("snap", map, snap, xml);
     printOssrh("repo", map, repo, xml);
-    xml.println("  </distributionManagement>");
+    xml.out.add("  </distributionManagement>").nl();
   }
   
   private final void printOssrh(
@@ -25,7 +25,7 @@ public class Dist implements Converter {
   ) {
     String val = map.get(key);
     if (val == null) return;
-    else if ("ossrh".equals(val)) xml.print(lines);
+    else if ("ossrh".equals(val)) xml.out.add(lines);
     else Throw.badConf(name(), key + ":" + val);
   }
   private static final String[] snap = {

@@ -1,38 +1,36 @@
 package poml;
 
-import poml.cmd.Msg;
-import poml.cmd.Opt;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.io.Poml;
+import poml.io.Txt;
+import poml.io.Xml;
 
 public class Main {
   private static void exit(int i) { System.exit(i); }
-  private static void ng() { Opt.help(); exit(1); }
+  private static void ng(Opt opt) { opt.help(); exit(1); }
 
-  // for cmd "poml option"
-  private static void option(String opt) {
-    if ("-h".equals(opt)) Opt.help();
-    else if ("help".equals(opt)) Opt.help();
-    else if ("-v".equals(opt)) Opt.version();
-    else if ("version".equals(opt)) Opt.version();
-    else if ("mkdirs".equals(opt)) Opt.mkdirs();
-    // else if ("init".equals(opt)) Opt.init(); TODO
-    else ng(); // option not found
+  // cmd "poml option"
+  private static void option(Opt opt, String arg) {
+    if ("-h".equals(arg)) opt.help();
+    else if ("help".equals(arg)) opt.help();
+    else if ("-v".equals(arg)) opt.version();
+    else if ("version".equals(arg)) opt.version();
+    else if ("mkdirs".equals(arg)) opt.mkdirs();
+    // TODO else if ("init".equals(opt)) Opt.init();
+    else ng(opt); // option not found
   }
 
   public static void main(String[] args) throws Throwable {
     if (args.length == 2) convert(args[0], args[1]);
-    else if (args.length == 1) option(args[0]);
-    else ng(); // invalid args
+    else if (args.length == 1) option(new Opt(), args[0]);
+    else ng(new Opt()); // invalid args
   }
 
-  // for cmd "poml pom.poml pom.xml"
+  // cmd "poml pom.poml pom.xml"
   private static void
     convert(String pomlPath, String xmlPath)
   throws Throwable
   {
-    long start = System.currentTimeMillis();
-    Msg.begin(pomlPath);
+    long time = begin(pomlPath);
     Poml poml = new Poml();
     Xml xml = new Xml();
     try {
@@ -40,13 +38,38 @@ public class Main {
       poml.loadConfig();
       poml.to(xml);
       xml.save(xmlPath);
-      long end = System.currentTimeMillis();
-      Msg.success(xmlPath, (end - start)); 
+      success(xmlPath, time); 
     }
     catch (Throwable e) {
-      Msg.error(e, xmlPath);
+      error(e, xmlPath);
       throw e;
     }
     finally { poml.close(); }
+  }
+
+  // cmd messages
+  static String info = "[POML:INFO] ";
+  public static long begin(String pomlPath) {
+    long time = System.currentTimeMillis();
+    System.out.print(Txt.init(
+      ).add(info).add("Converting ").add(pomlPath).nl(
+    ).toString());
+    return time;
+  }
+  public static void success(String xmlPath, long time) {
+    String uptime = String.valueOf(
+      (System.currentTimeMillis() - time)
+    );
+    System.out.print(Txt.init(
+      ).add(info).add("Created ").add(xmlPath
+      ).add(" @").add(uptime).add("ms").nl(
+    ).toString());
+  }
+  public static void error(Throwable e, String xmlPath) {
+    String err = "[POML:ERROR] ";
+    System.out.print(Txt.init(
+      ).add(err).add(e.getMessage()).nl(
+      ).add(err).add("Could not create ").add(xmlPath).nl(
+    ).toString());
   }
 }
