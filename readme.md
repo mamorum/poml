@@ -71,29 +71,14 @@ Following `pom.xml` is created.
 </project>
 ```
 
-### Note: With Maven Command
-Combined command like `poml && mvn test` is convenient to execute Maven with successfully generated `pom.xml`. 
-
-```
-demo$ poml && mvn <goal>
-```
-
-Operater `&&` seems available also in the Windows (see [Command shell overview - MS TechNet](https://technet.microsoft.com/en-us/library/bb490954.aspx)).
-
 
 ## Examples
-There are some examples in the sub directories of [poml/example](example).
+In the following directories, `pom.poml` and converted `pom.xml` exist.
 
-- [all](example/all): Using all [configs](https://github.com/mamorum/poml/wiki)
-- [all-layout](example/all-layout): Using all configs and "Layout Section"
-
-Each sub directories have `poml.poml` and converted `pom.xml`.
+- [example/all](example/all): Using all [configs](https://github.com/mamorum/poml/wiki)
+- [example/all-layout](example/all-layout): Using all configs and "Layout Section"
 
 
 ## Showcase
-Following projects use Poml.
-
-- [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): Web application, packged as fatjar.
-- [poml](https://github.com/mamorum/poml): This project.
-
- `pom.poml` and `pom.xml` are commited.
+- [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): Web application, packaged as fatjar.
+- [poml](https://github.com/mamorum/poml): Eating own poml.
