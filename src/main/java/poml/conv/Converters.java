@@ -7,8 +7,6 @@ import poml.conv.basic.Depends;
 import poml.conv.basic.Parent;
 import poml.conv.basic.Pkg;
 import poml.conv.basic.Property;
-import poml.conv.build.plugin.Compiler;
-import poml.conv.build.plugin.Exec;
 import poml.conv.build.plugin.Fatjar;
 import poml.conv.build.plugin.Gpg;
 import poml.conv.build.plugin.Javadoc;
@@ -79,9 +77,8 @@ public class Converters {
       new Pkg(), new Parent(), new Depends(),
       new Property()},
     plgin = {
-      new Gpg(), new Compiler(),
-      new Source(), new Javadoc(),
-      new Exec(), new Fatjar(), new Sbp()},
+      new Gpg(), new Source(), new Javadoc(),
+      new Fatjar(), new Sbp()},
     env = {
       new Issue(), new Scm(), new Dist()};
   private static final Converter

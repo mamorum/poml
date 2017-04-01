@@ -21,8 +21,8 @@ pkg=com.example:demo:0.0.1:jar
 depends=
   com.google.guava:guava:21.0,
   junit:junit:[4.12\\,):test
-property=$encoding:UTF-8
-compiler=source:1.8, target:1.8
+property=$encoding: UTF-8, $compiler: 1.8
+fatjar=mainClass: demo.Main
 ---
 {{#model4}}
   {{ pkg }}
@@ -30,8 +30,8 @@ compiler=source:1.8, target:1.8
   {{property }}
   <build>
     <plugins>
-      <!-- maven compiler plugin -->
-      {{compiler}}
+      <!-- assembly plugin -->
+      {{fatjar}}
     </plugins>
   </build>
 {{/model4}}
@@ -54,8 +54,8 @@ pkg=com.example:demo:0.0.1:jar
 depends=
   com.google.guava:guava:21.0,
   junit:junit:[4.12\\,):test
-property=$encoding:UTF-8
-compiler=source:1.8, target:1.8
+property=$encoding: UTF-8, $compiler: 1.8
+fatjar=mainClass: demo.Main
 ```
 
 Available keys (`pkg`, `depends`, etc) are listed in the [Config Reference](https://github.com/mamorum/poml/wiki).  
@@ -97,8 +97,8 @@ In this section, we can write XML elements and placeholders.
   {{property }}
   <build>
     <plugins>
-      <!-- maven compiler plugin -->
-      {{compiler}}
+      <!-- assembly plugin -->
+      {{fatjar}}
     </plugins>
   </build>
 {{/model4}}

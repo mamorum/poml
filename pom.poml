@@ -1,12 +1,22 @@
 # exec -> mvn exec:java -Dexec.args="pom.poml pom.xml"
-# fatjar -> dist/poml.jar
-
 pkg=com.github.mamorum:poml:0.3.2:jar
 depends=
   junit:junit:4.12:test,
   org.assertj:assertj-core:3.2.0:test
 property=$encoding:UTF-8, $compiler:1.8
-exec=mainClass: poml.Main
+info=
+  name: POML, license: MIT,
+  description: POM's Minimal Language,
+  url: https://github.com/mamorum/poml
+issue=
+  system: GitHub Issues,
+  url: https://github.com/mamorum/poml/issues
+scm=
+  url: https://github.com/mamorum/poml,
+  connect: scm:git:https://github.com/mamorum/poml.git,
+  devConnect: scm:git:git@github.com:mamorum/poml.git
+
+# fatjar -> dist/poml.jar
 fatjar=mainClass: poml.Main
 fatjar.conf+={
   <outputDirectory>dist</outputDirectory>
@@ -17,14 +27,3 @@ fatjar.conf.archive+={
     <Built-By>Poml Authors</Built-By>
   </manifestEntries>
 }
-info=license: MIT, name: POML,
-  description: POM's Minimal Language,
-  url: https://github.com/mamorum/poml
-issue=
-  system: GitHub Issues,
-  url: https://github.com/mamorum/poml/issues
-scm=
-  url: https://github.com/mamorum/poml,
-  connect: scm:git:https://github.com/mamorum/poml.git,
-  devConnect: scm:git:git@github.com:mamorum/poml.git,
-  tag: HEAD
