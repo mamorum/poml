@@ -1,4 +1,4 @@
-# exec -> mvn exec:java -Dexec.args="pom.poml pom.xml"
+# exec -> mvn exec:java -Dexec.mainClass=poml.Main -Dexec.args="pom.poml pom.xml"
 pkg=com.github.mamorum:poml:0.3.2:jar
 depends=
   junit:junit:4.12:test,
