@@ -10,14 +10,6 @@ public class Is {
     return (vals.length >= 2);
   }
   public static boolean in(
-    String[] ks, Map<String, String> in
-  ) {
-    for (String k: ks) {
-      if (!in.containsKey(k)) return false;
-    }
-    return true;
-  }
-  public static boolean in(
     String k, Map<String, String> in
   ) {
     return in.containsKey(k);

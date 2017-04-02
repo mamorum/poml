@@ -10,7 +10,18 @@ public class IssueTest extends ConvTestCase {
 
   Issue conv = new Issue();
 
-  @Test public void system_url() {
+  @Test public void url() {
+    poml.conf.append("issue=url: https://github.com/mamorum/poml/issues");
+    poml.conf.load();
+    conv.convert(poml, xml);
+    output.is(
+      "  <issueManagement>" + nl +
+      "    <url>https://github.com/mamorum/poml/issues</url>" + nl +
+      "  </issueManagement>" + nl
+    );
+  }
+
+  @Test public void all() {
     poml.conf.append("issue=");
     poml.conf.append("  system:GitHub Issues,");
     poml.conf.append("  url:https://github.com/mamorum/poml/issues");
@@ -25,7 +36,7 @@ public class IssueTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("issue=system:GitHub Issues");
+    poml.conf.append("issue=bad");
     poml.conf.load();
     try { 
       conv.convert(poml, xml);
