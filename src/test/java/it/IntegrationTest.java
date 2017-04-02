@@ -1,13 +1,12 @@
 package it;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import poml.Main;
@@ -51,7 +50,7 @@ public class IntegrationTest {
       StringBuilder sb2 = new StringBuilder();
       read(br1, sb1);
       read(br2, sb2);
-      assertThat(sb1.toString()).isEqualTo(sb2.toString());
+      Assert.assertEquals(sb1.toString(), sb2.toString());
     }
   }
   private static BufferedReader 

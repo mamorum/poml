@@ -1,7 +1,6 @@
 package poml.conv;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import org.junit.Assert;
 import org.junit.Before;
 
 import poml.io.Poml;
@@ -31,13 +30,13 @@ public class ConvTestCase {
     }
     public void starts(String prefix, boolean debug) {
       if (debug) System.out.println(this.msg);
-      assertThat(this.msg).startsWith(prefix);
+      Assert.assertTrue(this.msg.startsWith(prefix));
     }
   }
   
   public class Output {
     public void is(String s) {
-      assertThat(xml.out.toString()).isEqualTo(s);
+      Assert.assertEquals(s, xml.out.toString());
     }
   }
 }
