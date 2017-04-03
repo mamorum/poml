@@ -24,9 +24,15 @@ fatjar.conf.archive+={
 }
 sbp=_default
 info=
-  name:Demo, license:Apache 2.0,
-  description:Demo App,
-  url:http://demo-app.com/
+  name: Demo, description: Demo App,
+  url: http://demo-app.com/,
+  inceptionYear: 2016
+licenses=&apache2, &mit, $bsd2
+$bsd2=
+  name: The New BSD License,
+  url: http://www.opensource.org/licenses/bsd-license.php,
+  distribution: repo,
+  comments: The 2-Clause BSD License
 issue=
   system:GitHub Issues,
   url:https://github.com/user/repo/issues
@@ -54,6 +60,7 @@ dist=snap:ossrh, repo:ossrh
     </plugins>
   </build>
   {{ info}}
+  {{ licenses}}
   {{ issue}}
   {{ scm}}
   {{ dist}}

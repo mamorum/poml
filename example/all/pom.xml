@@ -128,10 +128,22 @@
   <name>Demo</name>
   <description>Demo App</description>
   <url>http://demo-app.com/</url>
+  <inceptionYear>2016</inceptionYear>
+
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+    </license>
+    <license>
+      <name>The New BSD License</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+      <distribution>repo</distribution>
+      <comments>The 2-Clause BSD License</comments>
     </license>
   </licenses>
 

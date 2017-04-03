@@ -16,6 +16,7 @@ import poml.conv.env.Dist;
 import poml.conv.env.Issue;
 import poml.conv.env.Scm;
 import poml.conv.more.Info;
+import poml.conv.more.Licenses;
 import poml.conv.project.Model4;
 import poml.io.Poml;
 import poml.io.Xml;
@@ -28,7 +29,7 @@ public class Converters {
     start.convert(poml, xml);
     for (Converter c: basic) convert(c, poml, xml);
     convertPlugins(poml, xml);
-    convert(info, poml, xml);
+    for (Converter c: more) convert(c, poml, xml);
     for (Converter c: env) convert(c, poml, xml);
     end.convert(poml, xml);
   }
@@ -79,16 +80,18 @@ public class Converters {
     plgin = {
       new Gpg(), new Source(), new Javadoc(),
       new Fatjar(), new Sbp()},
+    more = {
+      new Info(), new Licenses()},
     env = {
       new Issue(), new Scm(), new Dist()};
   private static final Converter
-    start=new Model4.Start(), end=new Model4.End(),
-    info = new Info();
+    start=new Model4.Start(), end=new Model4.End();
   static {
     for (Converter c: basic) put(c);
-    for (Converter c: env) put(c);
     for (Converter c: plgin) put(c);
-    put(start); put(end); put(info);
+    for (Converter c: more) put(c);
+    for (Converter c: env) put(c);
+    put(start); put(end);
     put(Depends.depend);
   }
   private static void put(Converter c) {
