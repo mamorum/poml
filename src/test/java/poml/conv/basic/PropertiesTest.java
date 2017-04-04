@@ -6,12 +6,12 @@ import org.junit.Test;
 
 import poml.conv.ConvTestCase;
 
-public class PropertyTest extends ConvTestCase {
+public class PropertiesTest extends ConvTestCase {
 
-  Property conv = new Property();
+  Properties conv = new Properties();
   
   @Test public void single() {
-    poml.conf.append("property=project.build.sourceEncoding:UTF-8");
+    poml.conf.append("properties=project.build.sourceEncoding:UTF-8");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(
@@ -22,7 +22,7 @@ public class PropertyTest extends ConvTestCase {
   }
   
   @Test public void multi() {
-    poml.conf.append("property=");
+    poml.conf.append("properties=");
     poml.conf.append("  property:value,");
     poml.conf.append("  project.build.sourceEncoding:UTF-8");
     poml.conf.load();
@@ -36,7 +36,7 @@ public class PropertyTest extends ConvTestCase {
   }
   
   @Test public void replaceEncoding() {
-    poml.conf.append("property=$encoding:UTF-8");
+    poml.conf.append("properties=&encoding:UTF-8");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(
@@ -47,7 +47,7 @@ public class PropertyTest extends ConvTestCase {
     );
   }
   @Test public void replaceCompiler() {
-    poml.conf.append("property=$compiler:1.8");
+    poml.conf.append("properties=&compiler:1.8");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(
@@ -59,11 +59,11 @@ public class PropertyTest extends ConvTestCase {
   }
   
   @Test public void replaceMulti() {
-    poml.conf.append("property=");
+    poml.conf.append("properties=");
     poml.conf.append("  property1:value1,");
-    poml.conf.append("  $encoding:UTF-8,");
+    poml.conf.append("  &encoding:UTF-8,");
     poml.conf.append("  property2:value2,");
-    poml.conf.append("  $compiler:1.8,");
+    poml.conf.append("  &compiler:1.8,");
     poml.conf.append("  property3:value3");
     poml.conf.load();
     conv.convert(poml, xml);
@@ -91,7 +91,7 @@ public class PropertyTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.append("property=");
+    poml.conf.append("properties=");
     poml.conf.load();
     try { 
       conv.convert(poml, xml);
@@ -102,7 +102,7 @@ public class PropertyTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("property=:");
+    poml.conf.append("properties=:");
     poml.conf.load();
     try { 
       conv.convert(poml, xml);
@@ -113,7 +113,7 @@ public class PropertyTest extends ConvTestCase {
   }
   
   @Test public void ng_badConf2() {
-    poml.conf.append("property=");
+    poml.conf.append("properties=");
     poml.conf.append("  key:val,");
     poml.conf.append("  keyval");
     poml.conf.load();

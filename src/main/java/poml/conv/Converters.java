@@ -6,7 +6,7 @@ import java.util.HashMap;
 import poml.conv.basic.Depends;
 import poml.conv.basic.Parent;
 import poml.conv.basic.Pkg;
-import poml.conv.basic.Property;
+import poml.conv.basic.Properties;
 import poml.conv.build.plugin.Fatjar;
 import poml.conv.build.plugin.Gpg;
 import poml.conv.build.plugin.Javadoc;
@@ -77,7 +77,7 @@ public class Converters {
   private static final Converter[]
     basic = {
       new Pkg(), new Parent(), new Depends(),
-      new Property()},
+      new Properties()},
     plgin = {
       new Gpg(), new Source(), new Javadoc(),
       new Fatjar(), new Sbp()},

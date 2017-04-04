@@ -2,13 +2,13 @@ pkg=com.example:demo:0.0.1:jar
 depends=
   com.google.guava:guava:21.0,
   junit:junit:[4.12\\,):test
-property=$encoding: UTF-8, $compiler: 1.8
+properties=&encoding: UTF-8, &compiler: 1.8
 fatjar=mainClass: demo.Main
 ---
 {{#model4}}
   {{ pkg }}
   {{depends }}
-  {{property }}
+  {{properties }}
   <build>
     <plugins>
       <!-- assembly plugin -->

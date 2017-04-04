@@ -6,9 +6,9 @@ depend=
   org.assertj:assertj-core:3.2.0:test:true,
   ch.qos.logback:logback-classic:1.1.7:test:true:jar,
   org.springframework.boot:spring-boot-starter-web
-property=
-  $encoding: UTF-8,
-  $compiler: 1.8,
+properties=
+  &encoding: UTF-8,
+  &compiler: 1.8,
   gpg.skip: true
 gpg=_default
 source=ver:2.2.1
@@ -55,7 +55,7 @@ dist=snap:ossrh, repo:ossrh
   <dependencies>
     {{depend}}
   </dependencies>
-  {{ property }}
+  {{ properties }}
   <build>
     <plugins>
       {{gpg}}
