@@ -33,6 +33,12 @@ $bsd2=
   url: http://www.opensource.org/licenses/bsd-license.php,
   distribution: repo,
   comments: The 2-Clause BSD License
+developers=$jdoe, $ken
+$jdoe=
+  id: jdoe, name: John Doe,
+  email: jdoe@example.com,
+  url: http://www.example.com/jdoe
+$ken=id: ken
 issue=
   system:GitHub Issues,
   url:https://github.com/user/repo/issues

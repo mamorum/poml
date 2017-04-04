@@ -15,6 +15,7 @@ import poml.conv.build.plugin.Source;
 import poml.conv.env.Dist;
 import poml.conv.env.Issue;
 import poml.conv.env.Scm;
+import poml.conv.more.Developers;
 import poml.conv.more.Info;
 import poml.conv.more.Licenses;
 import poml.conv.project.Model4;
@@ -81,7 +82,7 @@ public class Converters {
       new Gpg(), new Source(), new Javadoc(),
       new Fatjar(), new Sbp()},
     more = {
-      new Info(), new Licenses()},
+      new Info(), new Licenses(), new Developers()},
     env = {
       new Issue(), new Scm(), new Dist()};
   private static final Converter

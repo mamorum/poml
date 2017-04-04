@@ -1,5 +1,5 @@
 # exec -> mvn exec:java -Dexec.mainClass=poml.Main -Dexec.args="pom.poml pom.xml"
-pkg=com.github.mamorum:poml:0.3.3-alpha.2:jar
+pkg=com.github.mamorum:poml:0.3.3-alpha.3:jar
 depends=junit:junit:4.12:test
 property=$encoding:UTF-8, $compiler:1.8
 info=
@@ -7,6 +7,8 @@ info=
   description: POM's Minimal Language,
   url: https://github.com/mamorum/poml
 licenses=&mit
+developers=$m
+$m=id: mamorum
 issue=
   system: GitHub Issues,
   url: https://github.com/mamorum/poml/issues

@@ -3,7 +3,7 @@
 
   <groupId>com.github.mamorum</groupId>
   <artifactId>poml</artifactId>
-  <version>0.3.3-alpha.2</version>
+  <version>0.3.3-alpha.3</version>
   <packaging>jar</packaging>
 
   <dependencies>
@@ -67,6 +67,12 @@
       <url>https://opensource.org/licenses/MIT</url>
     </license>
   </licenses>
+
+  <developers>
+    <developer>
+      <id>mamorum</id>
+    </developer>
+  </developers>
 
   <issueManagement>
     <system>GitHub Issues</system>
