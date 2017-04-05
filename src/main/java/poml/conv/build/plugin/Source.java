@@ -10,7 +10,7 @@ import poml.tool.Tmpl;
 
 public class Source implements Converter {
 
-  @Override public String name() { return "source"; }
+  @Override public String name() { return "&source"; }
 
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), true);

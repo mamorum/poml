@@ -34,6 +34,7 @@ public class Poml {
       conf.append(line);
     }
     conf.load();
+    Converters.load(this);
   }
   public void to(Xml xml) throws IOException {
     if (layout == null) {  // no layout.

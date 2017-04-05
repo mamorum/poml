@@ -12,7 +12,8 @@ import poml.tool.Tmpl;
 
 public class Fatjar implements Converter {
 
-  @Override public String name() { return "fatjar"; }
+  private static final String name = "&fatjar";
+  @Override public String name() { return name; }
   
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), false);
@@ -31,6 +32,6 @@ public class Fatjar implements Converter {
     );
   }
   private static final String k = "mainClass"; // required
-  private static final String confPlus = "fatjar.conf+";
-  private static final String archPlus = "fatjar.conf.archive+";
+  private static final String confPlus = name + ".conf+";
+  private static final String archPlus = name + ".conf.archive+";
 }

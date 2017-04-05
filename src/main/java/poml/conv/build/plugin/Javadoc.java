@@ -10,7 +10,7 @@ import poml.tool.Tmpl;
 
 public class Javadoc implements Converter {
   
-  @Override public String name() { return "javadoc"; }
+  @Override public String name() { return "&javadoc"; }
 
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name(), true);

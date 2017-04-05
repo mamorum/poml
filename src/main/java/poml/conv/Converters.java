@@ -1,17 +1,12 @@
 package poml.conv;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import poml.conv.basic.Depends;
 import poml.conv.basic.Parent;
 import poml.conv.basic.Pkg;
 import poml.conv.basic.Properties;
-import poml.conv.build.plugin.Fatjar;
-import poml.conv.build.plugin.Gpg;
-import poml.conv.build.plugin.Javadoc;
-import poml.conv.build.plugin.Sbp;
-import poml.conv.build.plugin.Source;
+import poml.conv.build.Plugins;
 import poml.conv.env.Dist;
 import poml.conv.env.Issue;
 import poml.conv.env.Scm;
@@ -43,23 +38,12 @@ public class Converters {
     }
   }
   private static void convertPlugins(Poml poml, Xml xml) {
-    ArrayList<Converter> targets = new ArrayList<>();
-    for (Converter c: plgin) {
-      if (poml.conf.has(c.name())) {
-        targets.add(c);
-      }
+    if (poml.conf.has(plgins.name())) {
+      xml.out.nl();
+      xml.out.add("  <build>").nl();
+      plgins.convert(poml, xml);
+      xml.out.add("  </build>").nl();
     }
-    if (targets.size() == 0) return;
-    
-    // output xml.
-    xml.out.nl();
-    xml.out.add("  <build>").nl();
-    xml.out.add("    <plugins>").nl();
-    for (Converter c: targets) {
-      c.convert(poml, xml);
-    }
-    xml.out.add("    </plugins>").nl();
-    xml.out.add("  </build>").nl();
   }
 
   // -> for "Layout Section"
@@ -78,18 +62,16 @@ public class Converters {
     basic = {
       new Pkg(), new Parent(), new Depends(),
       new Properties()},
-    plgin = {
-      new Gpg(), new Source(), new Javadoc(),
-      new Fatjar(), new Sbp()},
     more = {
       new Info(), new Licenses(), new Developers()},
     env = {
       new Issue(), new Scm(), new Dist()};
   private static final Converter
     start=new Model4.Start(), end=new Model4.End();
+  private static Plugins plgins;
   static {
     for (Converter c: basic) put(c);
-    for (Converter c: plgin) put(c);
+//    for (Converter c: plgin) put(c);
     for (Converter c: more) put(c);
     for (Converter c: env) put(c);
     put(start); put(end);
@@ -97,5 +79,12 @@ public class Converters {
   }
   private static void put(Converter c) {
     all.put(c.name(), c);
+  }
+  public static void load(Poml poml) {
+    plgins = new Plugins();
+    if (poml.conf.has(plgins.name())) {
+      all.putAll(plgins.load(poml));
+    }
+    put(plgins);
   }
 }

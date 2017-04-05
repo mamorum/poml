@@ -10,19 +10,20 @@ properties=
   &encoding: UTF-8,
   &compiler: 1.8,
   gpg.skip: true
-gpg=_default
-source=ver:2.2.1
-javadoc=ver:2.9.1
-fatjar=mainClass:demo.Main
-fatjar.conf+={
+build.plugins=$sbp, &gpg, &source, &javadoc, &fatjar
+$sbp=org.springframework.boot:spring-boot-maven-plugin
+&gpg=_default
+&source=ver:2.2.1
+&javadoc=ver:2.9.1
+&fatjar=mainClass:demo.Main
+&fatjar.conf+={
   <outputDirectory>dist</outputDirectory>
 }
-fatjar.conf.archive+={
+&fatjar.conf.archive+={
   <manifestEntries>
     <Built-By>Demo Authors</Built-By>
   </manifestEntries>
 }
-sbp=_default
 info=
   name: Demo, description: Demo App,
   url: http://demo-app.com/,
@@ -58,11 +59,11 @@ dist=snap:ossrh, repo:ossrh
   {{ properties }}
   <build>
     <plugins>
-      {{gpg}}
-      {{source}}
-      {{javadoc}}
-      {{fatjar}}
-      {{sbp}}
+      {{$sbp}}
+      {{&gpg}}
+      {{&source}}
+      {{&javadoc}}
+      {{&fatjar}}
     </plugins>
   </build>
   {{ info}}
