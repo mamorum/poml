@@ -10,7 +10,7 @@ public class SourceTest extends ConvTestCase {
   Source conv = new Source();
 
   @Test public void defaults() {
-    poml.conf.append("source=_default");
+    poml.conf.append("&source=_default");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(
@@ -29,7 +29,7 @@ public class SourceTest extends ConvTestCase {
   }
 
   @Test public void ver() {
-    poml.conf.append("source=ver:1.0.0");
+    poml.conf.append("&source=ver:1.0.0");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(

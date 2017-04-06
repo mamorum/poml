@@ -10,7 +10,7 @@ public class FatjarTest extends ConvTestCase {
   Fatjar conv = new Fatjar();
 
   @Test public void defaultVer() {
-    poml.conf.append("fatjar=");
+    poml.conf.append("&fatjar=");
     poml.conf.append("  mainClass:org.sample.Main");
     poml.conf.load();
     conv.convert(poml, xml);
@@ -44,7 +44,7 @@ public class FatjarTest extends ConvTestCase {
   }
   
   @Test public void ver_jar() {
-    poml.conf.append("fatjar=");
+    poml.conf.append("&fatjar=");
     poml.conf.append("  ver:1.0.0,");
     poml.conf.append("  jarName:sample.jar,");
     poml.conf.append("  mainClass:org.sample.Main");
@@ -80,15 +80,15 @@ public class FatjarTest extends ConvTestCase {
   }
   
   @Test public void addConfArch() {
-    poml.conf.append("fatjar=mainClass:org.sample.Main");
-    poml.conf.append("fatjar.conf+={");
+    poml.conf.append("&fatjar=mainClass:org.sample.Main");
+    poml.conf.append("&fatjar.conf+={");
     poml.conf.append("  <outputDirectory>dist</outputDirectory>");
     poml.conf.append("  <delimiters>");
     poml.conf.append("    <delimiter>${*}</delimiter>");
     poml.conf.append("    <delimiter>@</delimiter>");
     poml.conf.append("  </delimiters>");
     poml.conf.append("}");
-    poml.conf.append("fatjar.conf.archive+={");
+    poml.conf.append("&fatjar.conf.archive+={");
     poml.conf.append("  <manifestEntries>");
     poml.conf.append("    <Built-By>Poml Authors</Built-By>");
     poml.conf.append("  </manifestEntries>");

@@ -11,7 +11,7 @@ public class JavadocTest extends ConvTestCase {
 
   @Test public void defaults() {
     // Nothing to configure. 
-    poml.conf.append("javadoc=_default");
+    poml.conf.append("&javadoc=_default");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(
@@ -30,7 +30,7 @@ public class JavadocTest extends ConvTestCase {
   }
 
   @Test public void ver() {
-    poml.conf.append("javadoc=ver:1.0.0");
+    poml.conf.append("&javadoc=ver:1.0.0");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(

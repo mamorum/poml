@@ -45,7 +45,7 @@ public class Plugins  implements Converter {
     xml.out.add("    </plugins>").nl();
   }
   
-  private static class Plugin implements Converter {
+  static class Plugin implements Converter {
     String name;
     public Plugin(String name) { this.name = name; }
     @Override public String name() { return name; }

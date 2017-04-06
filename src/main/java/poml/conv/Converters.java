@@ -71,7 +71,6 @@ public class Converters {
   private static Plugins plgins;
   static {
     for (Converter c: basic) put(c);
-//    for (Converter c: plgin) put(c);
     for (Converter c: more) put(c);
     for (Converter c: env) put(c);
     put(start); put(end);

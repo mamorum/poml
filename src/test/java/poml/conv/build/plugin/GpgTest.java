@@ -10,7 +10,7 @@ public class GpgTest extends ConvTestCase {
   Gpg conv = new Gpg();
 
   @Test public void defaults() {
-    poml.conf.append("gpg=_default");
+    poml.conf.append("&gpg=_default");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(
@@ -30,7 +30,7 @@ public class GpgTest extends ConvTestCase {
   }
 
   @Test public void ver() {
-    poml.conf.append("gpg=ver:1.0.0");
+    poml.conf.append("&gpg=ver:1.0.0");
     poml.conf.load();
     conv.convert(poml, xml);
     output.is(
@@ -58,7 +58,7 @@ public class GpgTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.append("gpg=");
+    poml.conf.append("&gpg=");
     poml.conf.load();
     try {conv.convert(poml, xml);}
     catch (IllegalStateException e) {
@@ -67,7 +67,7 @@ public class GpgTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("gpg=ver:1.0, ngValue");
+    poml.conf.append("&gpg=ver:1.0, ngValue");
     poml.conf.load();
     try {conv.convert(poml, xml);}
     catch (IllegalStateException e) {
