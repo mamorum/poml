@@ -34,7 +34,6 @@ public class Poml {
       conf.append(line);
     }
     conf.load();
-    Converters.load(this);
   }
   public void to(Xml xml) throws IOException {
     if (layout == null) {  // no layout.
@@ -42,6 +41,7 @@ public class Poml {
       return;
     }
     // layout exists.
+    Converters.load(this);
     while ((line = in.readLine()) != null) {
       layout.processLine(this, xml);
     }

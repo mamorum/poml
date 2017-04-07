@@ -38,15 +38,22 @@ public class Converters {
     }
   }
   private static void convertPlugins(Poml poml, Xml xml) {
-    if (poml.conf.has(plgins.name())) {
+    if (poml.conf.has(Plugins.name)) {
       xml.out.nl();
       xml.out.add("  <build>").nl();
-      plgins.convert(poml, xml);
+      (new Plugins(poml)).convert(poml, xml);
       xml.out.add("  </build>").nl();
     }
   }
 
   // -> for "Layout Section"
+  public static void load(Poml poml) {
+    if (poml.conf.has(Plugins.name)) {
+      Plugins plgs = new Plugins(poml);
+      all.putAll(plgs.export());
+      put(plgs);
+    }
+  }
   public static void convert(
     String name, Poml poml, Xml xml
   ) {
@@ -68,7 +75,6 @@ public class Converters {
       new Issue(), new Scm(), new Dist()};
   private static final Converter
     start=new Model4.Start(), end=new Model4.End();
-  private static Plugins plgins;
   static {
     for (Converter c: basic) put(c);
     for (Converter c: more) put(c);
@@ -78,12 +84,5 @@ public class Converters {
   }
   private static void put(Converter c) {
     all.put(c.name(), c);
-  }
-  public static void load(Poml poml) {
-    plgins = new Plugins();
-    if (poml.conf.has(plgins.name())) {
-      all.putAll(plgins.load(poml));
-    }
-    put(plgins);
   }
 }

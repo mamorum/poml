@@ -1,6 +1,5 @@
 package poml.conv.build;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -14,33 +13,27 @@ import poml.io.Xml;
 
 public class Plugins  implements Converter {
 
-  private static String name = "build.plugins";
+  public static String name = "build.plugins";
   @Override public String name() { return name; }
-
-  public static Map<String, Converter> sysPlugins = new HashMap<>();
-  public static Converter[] convs = {
-    new Fatjar(), new Gpg(), new Javadoc(), new Source()
-  };
-  static {
-    for (Converter c: convs) sysPlugins.put(c.name(), c);
-  }
   
-  private Map<String, Converter> target = new LinkedHashMap<>(); 
-  
-  public Map<String, Converter> load(Poml poml) {
-    String[] plgNames = poml.conf.vals(name);
-    for (String plgName: plgNames) {
-      Converter c = sysPlugins.get(plgName);
-      if (c == null) target.put(plgName, new Plugin(plgName));
-      else target.put(c.name(), c);
+  private Map<String, Converter> convs = new LinkedHashMap<>();
+  private void put(String key, Converter c) { convs.put(key, c); }
+  public Plugins(Poml poml) {
+    String[] plgs = poml.conf.vals(name);
+    for (String p: plgs) {
+      if ("&fatjar".equals(p)) put("&fatjar", new Fatjar());
+      else if ("&gpg".equals(p)) put("&gpg", new Gpg());
+      else if ("&source".equals(p)) put("&source", new Source());
+      else if ("&javadoc".equals(p)) put("&javadoc", new Javadoc());
+      else convs.put(p, new Plugin(p));  // user plugin
     }
-    return target;
   }
+  public Map<String, Converter> export() { return convs; }
   
   @Override public void convert(Poml poml, Xml xml) {
     xml.out.add("    <plugins>").nl();
-    for (String plgName: target.keySet()) {
-      target.get(plgName).convert(poml, xml);
+    for (String plgName: convs.keySet()) {
+      convs.get(plgName).convert(poml, xml);
     }
     xml.out.add("    </plugins>").nl();
   }
@@ -74,6 +67,5 @@ public class Plugins  implements Converter {
         xml.out.add(sp8).add("</").add(tag).add(">").nl();
       }
     }
-
   }
 }

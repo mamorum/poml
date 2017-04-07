@@ -11,7 +11,7 @@ import poml.tool.Throw;
 
 public class Config {
 
-  private Properties p = new Properties();
+  Properties p = new Properties();
   private StringBuilder ps = new StringBuilder();
   
   // -> for loading.
