@@ -3,7 +3,6 @@ package poml.conv.build;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
-import poml.conv.build.Plugins.Plugin;
 
 public class PluginsTest extends ConvTestCase {
 
