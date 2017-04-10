@@ -20,10 +20,10 @@ public class Fatjar implements Converter {
     if (!Is.in(k, map)) Throw.noKv(name(), k);
     Put.defaults("ver", "2.6", map);
     Put.defaults("jarName", "${project.artifactId}", map);
-    if (poml.conf.has(confPlus)) map.put(
+    if (poml.conf.hasTag(confPlus)) map.put(
       "conf+", poml.conf.tag(confPlus, sp8)
     );
-    if (poml.conf.has(archPlus)) map.put(
+    if (poml.conf.hasTag(archPlus)) map.put(
       "archive+", poml.conf.tag(archPlus, sp10)
     );
     Tmpl.render(

@@ -11,39 +11,22 @@ import poml.conv.Converters;
 public class Poml {
   
   public BufferedReader in;
-  public String line;
-
-  public Config conf = new Config();
-  public Layout layout;
+  public Config conf;
 
   public void open(String path) throws IOException {
     in = new BufferedReader(new InputStreamReader
       (new FileInputStream(path), "UTF-8")
     );
   }
-  public void close() throws IOException{
+  public void close() throws IOException {
     if (in != null) in.close();
   }
-
-  public void loadConfig() throws IOException {
-    while ((line = in.readLine()) != null) {
-      if (line.equals("---")) {
-        layout = new Layout();
-        break;  // layout exists.
-      }
-      conf.append(line);
-    }
-    conf.load();
+  
+  public void configure() throws IOException {
+    conf = Config.Parser.init().parse(this);
   }
   public void to(Xml xml) throws IOException {
-    if (layout == null) {  // no layout.
-      Converters.convert(this, xml);
-      return;
-    }
-    // layout exists.
-    Converters.load(this);
-    while ((line = in.readLine()) != null) {
-      layout.processLine(this, xml);
-    }
+    if (conf.hasLayout) (new Layout()).render(this, xml);
+    else Converters.convert(this, xml); // no layout.
   }
 }

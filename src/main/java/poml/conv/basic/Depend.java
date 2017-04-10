@@ -18,7 +18,7 @@ public class Depend implements Converter {
     for (String dep: poml.conf.vals(cname)) {
       xml.out.add("    <dependency>").nl();
       String[] vals = dep.split(":");
-      if (!Is.lib(vals)) Throw.badConf(name(), dep);
+      if (!Is.lib(vals)) Throw.badConf(cname, dep);
       xml.outTags(sp6, tags, vals);
       xml.out.add("    </dependency>").nl();
     }

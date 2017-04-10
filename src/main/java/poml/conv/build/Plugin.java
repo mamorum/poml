@@ -27,7 +27,7 @@ public class Plugin implements Converter {
   ) {
     StringBuilder sb = new StringBuilder();
     String key = sb.append(keyPrefix).append(keySuffix).toString();
-    if (poml.conf.has(key)) {
+    if (poml.conf.hasTag(key)) {
       xml.out.add(sp8).add("<").add(tag).add(">").nl();
       xml.out.add(poml.conf.tag(key, sp8));
       xml.out.add(sp8).add("</").add(tag).add(">").nl();

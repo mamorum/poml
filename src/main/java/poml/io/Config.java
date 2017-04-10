@@ -1,50 +1,31 @@
 package poml.io;
 
 import java.io.IOException;
-import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import poml.tool.Throw;
 
 public class Config {
-
-  Properties p = new Properties();
-  private StringBuilder ps = new StringBuilder();
   
-  // -> for loading.
-  public void append(String line) {
-    if ("".equals(line)) return;
-    ps.append(line);
-    if (isContinue(line)) return;
-    ps.append(System.lineSeparator());
-  }
-  private boolean isContinue(String line) {
-    char last = line.charAt(line.length()-1);
-    if (last == '=') return true;
-    if (last == ',') return true;
-    if (last == '{') return true;
-    if (last == '>') {
-      ps.append("&&");
-      return true;
-    }
-    return false;
-  }
-  public void load() {
-    try (
-      StringReader r =
-        new StringReader(ps.toString())
-    ) { p.load(r); }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
+  // TODO delete -> for test compile error
+  public void append(String line) {}
+  public void load() {}
+  // <-
 
+  Map<String, String> p = new HashMap<>();
+  Map<String, List<String>> tags = new HashMap<>();
+  boolean hasLayout = false;
+  
   // -> For checking key.
   public boolean has(String key) {
     return p.containsKey(key);
+  }
+  public boolean hasTag(String key) {
+    return tags.containsKey(key);
   }
 
   // -> For getting config values.
@@ -52,7 +33,8 @@ public class Config {
   //  - throw: if val is null or blank
   //  - return: not null or blank
   public String val(String key) {
-    String pv = p.getProperty(key);
+    //String pv = p.getProperty(key);
+    String pv = p.get(key);
     if (pv == null) Throw.noConf(key);
     String val = pv.trim();
     if ("".equals(val)) Throw.badConf(key, pv);
@@ -114,18 +96,97 @@ public class Config {
 
   // -> for getting config tags from "{ <k>v</k>  ... }"
   public String tag(String key, String space) {
-    String val = val(key);
-    if (val == null) return null;
-    String tags = val.substring(
-      val.indexOf('{') + 1,
-      val.lastIndexOf('}')
-    ); 
+    List<String> lines = tags.get(key);
+    if (lines == null) Throw.noConf(key);
+    // TODO check if lines exist ?
     StringBuilder sb = new StringBuilder();
-    for (String tag: tags.split("&&")) {
-      sb.append(space);
-      sb.append(tag);
-      sb.append(System.lineSeparator());
+    for (String line: lines) {
+      sb.append(space).append(line)
+        .append(System.lineSeparator());
     }
     return sb.toString();
+  }
+  
+  static class Parser {
+    static Parser init() { return new Parser(); }
+    private String line;
+    private Config conf = new Config();
+
+    Config parse(Poml poml) throws IOException {
+      while ((line = poml.in.readLine()) != null) {
+        length();
+        if (length == 0) continue;
+        start();
+        if (isComment()) continue;
+        last();
+        if (isLayout()) break;
+        else if (isContinuing()) addLines(poml);
+        else if (isStartBracket()) addTags(poml);
+        else addLine();
+      }
+      return conf;
+    }
+
+    private int length;
+    private char start, last;
+    private void length() { length = line.length(); }
+    private void start() { start = line.charAt(0); }
+    private void last() { last = line.charAt(length - 1); }
+
+    private boolean isComment() {
+      return start == '#';
+    }
+    private boolean isStartBracket() {
+      if (last == '{') return true;
+      return false;
+    }
+    private boolean isContinuing() {
+      if (last == '=') return true;
+      if (last == ',') return true;
+      return false;
+    }
+    private boolean isLayout() {
+      if (length == 3 && start == '-' && last == '-') {
+        if (line.charAt(1) == '-') conf.hasLayout = true;
+      }
+      return conf.hasLayout;
+    }
+
+    private void addTags(Poml poml) throws IOException {
+      // first line
+      int pos = line.indexOf('=');
+      if (pos == -1) return;
+      String key = line.substring(0, pos).trim();
+      // second+ lines
+      ArrayList<String> val = new ArrayList<>();
+      while ((line = poml.in.readLine()) != null) {
+        length(); start(); last();
+        if (!isTagEnd()) break;
+        val.add(line);
+      }
+      conf.tags.put(key, val);
+    }
+    private boolean isTagEnd() {
+      if (last == '>') return true;
+      return false;
+    }
+
+    private void addLines(Poml poml) throws IOException {
+      StringBuilder sb = new StringBuilder(line);
+      while ((line = poml.in.readLine()) != null) {
+        sb.append(line);
+        length(); start(); last();
+        if (!isContinuing()) break;
+      }
+      line = sb.toString();
+      addLine();
+    }
+    private void addLine() {
+      int pos = line.indexOf('=');
+      if (pos == -1) return;
+      String k = line.substring(0, pos).trim();
+      String v = line.substring(pos + 1).trim();
+      conf.p.put(k, v);
+    }
   }
 }

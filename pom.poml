@@ -17,11 +17,12 @@ scm=
   devConnect: scm:git:git@github.com:mamorum/poml.git
 
 # fatjar -> dist/poml.jar
-fatjar=mainClass: poml.Main
-fatjar.conf+={
+build.plugins=&fatjar
+&fatjar=mainClass: poml.Main
+&fatjar.conf+={
   <outputDirectory>dist</outputDirectory>
 }
-fatjar.conf.archive+={
+&fatjar.conf.archive+={
   <manifestEntries>
     <Implementation-Version>${project.version}</Implementation-Version>
     <Built-By>Poml Authors</Built-By>

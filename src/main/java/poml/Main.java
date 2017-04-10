@@ -20,14 +20,14 @@ public class Main {
   }
 
   public static void main(String[] args) throws Throwable {
-    if (args.length == 2) convert(args[0], args[1]);
+    if (args.length == 2) main(args[0], args[1]);
     else if (args.length == 1) option(new Opt(), args[0]);
     else ng(new Opt()); // invalid args
   }
 
   // cmd "poml pom.poml pom.xml"
   private static void
-    convert(String pomlPath, String xmlPath)
+    main(String pomlPath, String xmlPath)
   throws Throwable
   {
     long time = begin(pomlPath);
@@ -35,7 +35,7 @@ public class Main {
     Xml xml = new Xml();
     try {
       poml.open(pomlPath);
-      poml.loadConfig();
+      poml.configure();
       poml.to(xml);
       xml.save(xmlPath);
       success(xmlPath, time); 
