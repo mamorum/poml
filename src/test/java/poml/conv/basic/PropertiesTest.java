@@ -11,8 +11,9 @@ public class PropertiesTest extends ConvTestCase {
   Properties conv = new Properties();
   
   @Test public void single() {
-    poml.conf.append("properties=project.build.sourceEncoding:UTF-8");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "properties=project.build.sourceEncoding:UTF-8"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <properties>" + nl + 
@@ -22,10 +23,11 @@ public class PropertiesTest extends ConvTestCase {
   }
   
   @Test public void multi() {
-    poml.conf.append("properties=");
-    poml.conf.append("  property:value,");
-    poml.conf.append("  project.build.sourceEncoding:UTF-8");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "properties=" + nl +
+      "  property:value," + nl +
+      "  project.build.sourceEncoding:UTF-8"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <properties>" + nl + 
@@ -36,8 +38,9 @@ public class PropertiesTest extends ConvTestCase {
   }
   
   @Test public void replaceEncoding() {
-    poml.conf.append("properties=&encoding:UTF-8");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "properties=&encoding:UTF-8"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <properties>" + nl + 
@@ -47,8 +50,9 @@ public class PropertiesTest extends ConvTestCase {
     );
   }
   @Test public void replaceCompiler() {
-    poml.conf.append("properties=&compiler:1.8");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "properties=&compiler:1.8"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <properties>" + nl + 
@@ -59,13 +63,14 @@ public class PropertiesTest extends ConvTestCase {
   }
   
   @Test public void replaceMulti() {
-    poml.conf.append("properties=");
-    poml.conf.append("  property1:value1,");
-    poml.conf.append("  &encoding:UTF-8,");
-    poml.conf.append("  property2:value2,");
-    poml.conf.append("  &compiler:1.8,");
-    poml.conf.append("  property3:value3");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "properties=" + nl +
+      "  property1:value1," + nl +
+      "  &encoding:UTF-8," + nl +
+      "  property2:value2," + nl +
+      "  &compiler:1.8," + nl +
+      "  property3:value3"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <properties>" + nl + 
@@ -81,7 +86,7 @@ public class PropertiesTest extends ConvTestCase {
   }
   
   @Test public void ng_noConf() {
-    poml.conf.load();
+    poml.conf.parse(in(""));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -91,8 +96,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.append("properties=");
-    poml.conf.load();
+    poml.conf.parse(in("properties="));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -102,8 +106,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("properties=:");
-    poml.conf.load();
+    poml.conf.parse(in("properties=:"));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -113,10 +116,11 @@ public class PropertiesTest extends ConvTestCase {
   }
   
   @Test public void ng_badConf2() {
-    poml.conf.append("properties=");
-    poml.conf.append("  key:val,");
-    poml.conf.append("  keyval");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "properties=" + nl +
+      "  key:val," + nl +
+      "  keyval"
+    ));
     try { 
       conv.convert(poml, xml);
       fail();

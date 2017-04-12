@@ -10,8 +10,9 @@ public class ParentTest extends ConvTestCase {
   Parent conv = new Parent();
   
   @Test public void id_ver() {
-    poml.conf.append("parent=parent.com:parent:1.0.0");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "parent=parent.com:parent:1.0.0"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <parent>" + nl +
@@ -23,7 +24,7 @@ public class ParentTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml.conf.load();
+    poml.conf.parse(in(""));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -33,8 +34,7 @@ public class ParentTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.append("parent=");
-    poml.conf.load();
+    poml.conf.parse(in("parent="));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -44,8 +44,7 @@ public class ParentTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("parent=parent.com::");
-    poml.conf.load();
+    poml.conf.parse(in("parent=parent.com::"));
     try { 
       conv.convert(poml, xml);
       fail();

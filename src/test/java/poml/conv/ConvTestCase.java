@@ -22,13 +22,9 @@ public class ConvTestCase {
   }
 
   // Create test input.
-  protected BufferedReader in(String... lines) {
-    StringBuilder sb = new StringBuilder();
-    for (String l: lines) {
-      sb.append(l).append(System.lineSeparator());
-    }
+  protected BufferedReader in(String lines) {
     return new BufferedReader(
-      new StringReader(sb.toString())
+      new StringReader(lines)
     );
   }
   
