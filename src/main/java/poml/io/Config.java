@@ -1,5 +1,6 @@
 package poml.io;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,15 +11,16 @@ import java.util.Map;
 import poml.tool.Throw;
 
 public class Config {
-  
-  // TODO delete -> for test compile error
-  public void append(String line) {}
-  public void load() {}
-  // <-
-
-  Map<String, String> p = new HashMap<>();
-  Map<String, List<String>> tags = new HashMap<>();
   boolean hasLayout = false;
+  private Map<String, String> p = new HashMap<>();
+  private Map<String, List<String>> tags = new HashMap<>();
+  
+  public void parse(BufferedReader in) {
+    try { (new Parser(in, this)).parse(); }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
   
   // -> For checking key.
   public boolean has(String key) {
@@ -107,31 +109,35 @@ public class Config {
     return sb.toString();
   }
   
+  // NOT thread safe
   static class Parser {
-    static Parser init() { return new Parser(); }
+    Parser(BufferedReader in, Config conf) {
+      this.in = in;
+      this.conf = conf;
+    }
+    private BufferedReader in;
+    private Config conf;
+    
     private String line;
-    private Config conf = new Config();
-
-    Config parse(Poml poml) throws IOException {
-      while ((line = poml.in.readLine()) != null) {
+    private int length;
+    private char start, last;
+    private void length() { length = line.length(); }
+    private void start() { start = line.charAt(0); }
+    private void last() { last = line.charAt(length - 1); }
+    
+    void parse() throws IOException {
+      while ((line = in.readLine()) != null) {
         length();
         if (length == 0) continue;
         start();
         if (isComment()) continue;
         last();
         if (isLayout()) break;
-        else if (isContinuing()) addLines(poml);
-        else if (isStartBracket()) addTags(poml);
+        else if (isContinuing()) addLines();
+        else if (isStartBracket()) addTags();
         else addLine();
       }
-      return conf;
     }
-
-    private int length;
-    private char start, last;
-    private void length() { length = line.length(); }
-    private void start() { start = line.charAt(0); }
-    private void last() { last = line.charAt(length - 1); }
 
     private boolean isComment() {
       return start == '#';
@@ -152,14 +158,14 @@ public class Config {
       return conf.hasLayout;
     }
 
-    private void addTags(Poml poml) throws IOException {
+    private void addTags() throws IOException {
       // first line
       int pos = line.indexOf('=');
       if (pos == -1) return;
       String key = line.substring(0, pos).trim();
       // second+ lines
       ArrayList<String> val = new ArrayList<>();
-      while ((line = poml.in.readLine()) != null) {
+      while ((line = in.readLine()) != null) {
         length(); start(); last();
         if (!isTagEnd()) break;
         val.add(line);
@@ -171,9 +177,9 @@ public class Config {
       return false;
     }
 
-    private void addLines(Poml poml) throws IOException {
+    private void addLines() throws IOException {
       StringBuilder sb = new StringBuilder(line);
-      while ((line = poml.in.readLine()) != null) {
+      while ((line = in.readLine()) != null) {
         sb.append(line);
         length(); start(); last();
         if (!isContinuing()) break;

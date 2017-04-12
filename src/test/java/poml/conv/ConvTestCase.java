@@ -1,5 +1,8 @@
 package poml.conv;
 
+import java.io.BufferedReader;
+import java.io.StringReader;
+
 import org.junit.Assert;
 import org.junit.Before;
 
@@ -18,6 +21,17 @@ public class ConvTestCase {
     output = new Output();
   }
 
+  // Create test input.
+  protected BufferedReader in(String... lines) {
+    StringBuilder sb = new StringBuilder();
+    for (String l: lines) {
+      sb.append(l).append(System.lineSeparator());
+    }
+    return new BufferedReader(
+      new StringReader(sb.toString())
+    );
+  }
+  
   public Msg msg(Exception e) {
     return new Msg(e.getMessage());
   }

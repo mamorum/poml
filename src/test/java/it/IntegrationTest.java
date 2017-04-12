@@ -35,7 +35,7 @@ public class IntegrationTest {
     try { Main.main(new String[] {poml, converted}); }
     catch (Throwable e) { throw new RuntimeException(e); }
     // check.
-    try { eq(converted, expected); }
+    try { eq(expected, converted); }
     catch (IOException e) { throw new RuntimeException(e);}
     finally { (new File(converted)).delete(); }
   }

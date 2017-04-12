@@ -11,7 +11,7 @@ import poml.conv.Converters;
 public class Poml {
   
   public BufferedReader in;
-  public Config conf;
+  public Config conf = new Config();
 
   public void open(String path) throws IOException {
     in = new BufferedReader(new InputStreamReader
@@ -21,12 +21,10 @@ public class Poml {
   public void close() throws IOException {
     if (in != null) in.close();
   }
-  
-  public void configure() throws IOException {
-    conf = Config.Parser.init().parse(this);
-  }
+
   public void to(Xml xml) throws IOException {
+    conf.parse(in);
     if (conf.hasLayout) (new Layout()).render(this, xml);
-    else Converters.convert(this, xml); // no layout.
+    else Converters.convert(this, xml);
   }
 }

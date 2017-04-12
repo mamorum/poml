@@ -35,7 +35,6 @@ public class Main {
     Xml xml = new Xml();
     try {
       poml.open(pomlPath);
-      poml.configure();
       poml.to(xml);
       xml.save(xmlPath);
       success(xmlPath, time); 
