@@ -11,12 +11,13 @@ public class DevelopersTest extends ConvTestCase {
   Developers conv = new Developers();
   
   @Test public void single() {
-    poml.conf.append("developers=$jdoe");
-    poml.conf.append("$jdoe=");
-    poml.conf.append("  id: jdoe, name: John Doe,");
-    poml.conf.append("  email: jdoe@example.com,");
-    poml.conf.append("  url: http://www.example.com/jdoe");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "developers=$jdoe" + nl +
+      "$jdoe=" + nl +
+      "  id: jdoe, name: John Doe," + nl +
+      "  email: jdoe@example.com," + nl +
+      "  url: http://www.example.com/jdoe" + nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <developers>" + nl +
@@ -31,13 +32,14 @@ public class DevelopersTest extends ConvTestCase {
   }
   
   @Test public void multi() {
-    poml.conf.append("developers=$jdoe, $ken");
-    poml.conf.append("$jdoe=");
-    poml.conf.append("  id: jdoe, name: John Doe,");
-    poml.conf.append("  email: jdoe@example.com,");
-    poml.conf.append("  url: http://www.example.com/jdoe");
-    poml.conf.append("$ken=id: ken");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "developers=$jdoe, $ken" + nl +
+      "$jdoe=" + nl +
+      "  id: jdoe, name: John Doe," + nl +
+      "  email: jdoe@example.com," + nl +
+      "  url: http://www.example.com/jdoe" + nl +
+      "$ken=id: ken" + nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <developers>" + nl +
@@ -55,9 +57,10 @@ public class DevelopersTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("developers=$ng");
-    poml.conf.append("$ng=bad");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "developers=$ng" + nl +
+      "$ng=bad" + nl
+    ));
     try { 
       conv.convert(poml, xml);
       fail();

@@ -11,8 +11,9 @@ public class DependsTest extends ConvTestCase {
   Depends conv = new Depends();
 
   @Test public void id2type() {
-    poml.conf.append("depends=group.com:artifact:0.0.1:test:true:jar");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "depends=group.com:artifact:0.0.1:test:true:jar"
+    ));
     conv.convert(poml, xml);
     output.is(
         "  <dependencies>" + nl +
@@ -29,12 +30,13 @@ public class DependsTest extends ConvTestCase {
   }
 
   @Test public void multi() {
-    poml.conf.append("depends=");
-    poml.conf.append("  demo.com:demo2,");
-    poml.conf.append("  demo.com:demo:0.0.1,");
-    poml.conf.append("  sample.com:sample:0.0.1:provided,");
-    poml.conf.append("  group.com:artifact:0.0.1:test:true:jar");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "depends=" + nl +
+      "  demo.com:demo2," + nl +
+      "  demo.com:demo:0.0.1," + nl +
+      "  sample.com:sample:0.0.1:provided," + nl +
+      "  group.com:artifact:0.0.1:test:true:jar" + nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <dependencies>" + nl +
@@ -66,7 +68,7 @@ public class DependsTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml.conf.load();
+    poml.conf.parse(in(""));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -76,8 +78,9 @@ public class DependsTest extends ConvTestCase {
   }
   
   @Test public void ng_badConf() {
-    poml.conf.append("depends=group.com:");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "depends=group.com:"
+    ));
     try { 
       conv.convert(poml, xml);
       fail();

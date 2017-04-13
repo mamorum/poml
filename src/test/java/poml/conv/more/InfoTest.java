@@ -12,8 +12,9 @@ public class InfoTest extends ConvTestCase {
   Info conv = new Info();
   
   @Test public void name() {
-    poml.conf.append("info=name:INFO");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "info=name:INFO"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <name>INFO</name>" + nl
@@ -21,12 +22,13 @@ public class InfoTest extends ConvTestCase {
   }
   
   @Test public void all() {
-    poml.conf.append("info=");
-    poml.conf.append("  name: INFO,");
-    poml.conf.append("  description: More Project Infomation,");
-    poml.conf.append("  url: https://github.com/mamorum/poml,");
-    poml.conf.append("  inceptionYear: 2016");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "info=" + nl +
+      "  name: INFO," + nl +
+      "  description: More Project Infomation," + nl +
+      "  url: https://github.com/mamorum/poml," + nl +
+      "  inceptionYear: 2016" + nl
+    ));
     conv.convert(poml, xml);
     output.is(
         "  <name>INFO</name>" + nl + 
@@ -37,8 +39,9 @@ public class InfoTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("info=bad-conf");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "info=bad-conf"
+    ));
     try { 
       conv.convert(poml, xml);
       fail();

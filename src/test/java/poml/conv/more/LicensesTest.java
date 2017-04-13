@@ -11,8 +11,9 @@ public class LicensesTest extends ConvTestCase {
   Licenses conv = new Licenses();
   
   @Test public void apache2() {
-    poml.conf.append("licenses=&apache2");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "licenses=&apache2"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <licenses>" + nl +
@@ -25,13 +26,14 @@ public class LicensesTest extends ConvTestCase {
   }
   
   @Test public void usr() {
-    poml.conf.append("licenses=$bsd2");
-    poml.conf.append("$bsd2=");
-    poml.conf.append("  name: The New BSD License,");
-    poml.conf.append("  url: http://www.opensource.org/licenses/bsd-license.php,");
-    poml.conf.append("  distribution: repo,");
-    poml.conf.append("  comments: The 2-Clause BSD License");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "licenses=$bsd2" + nl +
+      "$bsd2=" + nl +
+      "  name: The New BSD License," + nl +
+      "  url: http://www.opensource.org/licenses/bsd-license.php," + nl +
+      "  distribution: repo," + nl +
+      "  comments: The 2-Clause BSD License" + nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <licenses>" + nl +
@@ -46,11 +48,12 @@ public class LicensesTest extends ConvTestCase {
   }
   
   @Test public void multi() {
-    poml.conf.append("licenses=$wtfpl, &mit");
-    poml.conf.append("$wtfpl=");
-    poml.conf.append("  name: WTFPL,");
-    poml.conf.append("  url: http://www.wtfpl.net/");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "licenses=$wtfpl, &mit" + nl +
+      "$wtfpl=" + nl +
+      "  name: WTFPL," + nl +
+      "  url: http://www.wtfpl.net/" + nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <licenses>" + nl +
@@ -67,9 +70,10 @@ public class LicensesTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("licenses=$ng");
-    poml.conf.append("$ng=bad");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "licenses=$ng" + nl +
+      "$ng=bad" + nl
+    ));
     try { 
       conv.convert(poml, xml);
       fail();
