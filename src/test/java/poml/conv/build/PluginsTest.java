@@ -11,8 +11,9 @@ public class PluginsTest extends ConvTestCase {
   // -> Test for Plugins.Plugin
   @Test public void grp_art() {
     Plugin conv = new Plugin("$sbp");
-    poml.conf.append("$sbp=org.springframework.boot:spring-boot-maven-plugin");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "$sbp=org.springframework.boot:spring-boot-maven-plugin"
+    ));
     conv.convert(poml, xml);
     output.is(
       "      <plugin>" + nl +

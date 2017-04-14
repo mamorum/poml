@@ -10,9 +10,10 @@ public class FatjarTest extends ConvTestCase {
   Fatjar conv = new Fatjar();
 
   @Test public void defaultVer() {
-    poml.conf.append("&fatjar=");
-    poml.conf.append("  mainClass:org.sample.Main");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "&fatjar="+ nl +
+      "  mainClass:org.sample.Main"+ nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "      <plugin>" + nl + 
@@ -44,11 +45,12 @@ public class FatjarTest extends ConvTestCase {
   }
   
   @Test public void ver_jar() {
-    poml.conf.append("&fatjar=");
-    poml.conf.append("  ver:1.0.0,");
-    poml.conf.append("  jarName:sample.jar,");
-    poml.conf.append("  mainClass:org.sample.Main");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "&fatjar="+ nl +
+      "  ver:1.0.0,"+ nl +
+      "  jarName:sample.jar,"+ nl +
+      "  mainClass:org.sample.Main"+ nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "      <plugin>" + nl + 
@@ -80,21 +82,22 @@ public class FatjarTest extends ConvTestCase {
   }
   
   @Test public void addConfArch() {
-    poml.conf.append("&fatjar=mainClass:org.sample.Main");
-    poml.conf.append("&fatjar.conf+={");
-    poml.conf.append("  <outputDirectory>dist</outputDirectory>");
-    poml.conf.append("  <delimiters>");
-    poml.conf.append("    <delimiter>${*}</delimiter>");
-    poml.conf.append("    <delimiter>@</delimiter>");
-    poml.conf.append("  </delimiters>");
-    poml.conf.append("}");
-    poml.conf.append("&fatjar.conf.archive+={");
-    poml.conf.append("  <manifestEntries>");
-    poml.conf.append("    <Built-By>Poml Authors</Built-By>");
-    poml.conf.append("  </manifestEntries>");
-    poml.conf.append("  <index>true</index>");
-    poml.conf.append("}");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "&fatjar=mainClass:org.sample.Main"+ nl +
+      "&fatjar.conf+={"+ nl +
+      "  <outputDirectory>dist</outputDirectory>"+ nl +
+      "  <delimiters>"+ nl +
+      "    <delimiter>${*}</delimiter>"+ nl +
+      "    <delimiter>@</delimiter>"+ nl +
+      "  </delimiters>"+ nl +
+      "}"+ nl +
+      "&fatjar.conf.archive+={"+ nl +
+      "  <manifestEntries>"+ nl +
+      "    <Built-By>Poml Authors</Built-By>"+ nl +
+      "  </manifestEntries>"+ nl +
+      "  <index>true</index>"+ nl +
+      "}"+ nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "      <plugin>" + nl + 

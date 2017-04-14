@@ -1,17 +1,19 @@
 package poml.conv.build.plugin;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
 import poml.conv.build.plugin.Gpg;
 
+@Ignore
 public class GpgTest extends ConvTestCase {
 
   Gpg conv = new Gpg();
 
   @Test public void defaults() {
-    poml.conf.append("&gpg=_default");
-    poml.conf.load();
+//    poml.conf.append("&gpg=_default");
+//    poml.conf.load();
     conv.convert(poml, xml);
     output.is(
       "      <plugin>" + nl +
@@ -30,8 +32,8 @@ public class GpgTest extends ConvTestCase {
   }
 
   @Test public void ver() {
-    poml.conf.append("&gpg=ver:1.0.0");
-    poml.conf.load();
+//    poml.conf.append("&gpg=ver:1.0.0");
+//    poml.conf.load();
     conv.convert(poml, xml);
     output.is(
       "      <plugin>" + nl +
@@ -50,7 +52,7 @@ public class GpgTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml.conf.load();
+//    poml.conf.load();
     try {conv.convert(poml, xml);}
     catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -58,8 +60,8 @@ public class GpgTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.append("&gpg=");
-    poml.conf.load();
+//    poml.conf.append("&gpg=");
+//    poml.conf.load();
     try {conv.convert(poml, xml);}
     catch (IllegalStateException e) {
       msg(e).starts("Bad config");
@@ -67,8 +69,8 @@ public class GpgTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("&gpg=ver:1.0, ngValue");
-    poml.conf.load();
+//    poml.conf.append("&gpg=ver:1.0, ngValue");
+//    poml.conf.load();
     try {conv.convert(poml, xml);}
     catch (IllegalStateException e) {
       msg(e).starts("Bad config");

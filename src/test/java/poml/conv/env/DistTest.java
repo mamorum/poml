@@ -12,8 +12,9 @@ public class DistTest extends ConvTestCase {
   Dist conv = new Dist();
 
   @Test public void ossrh_snap_repo() {
-    poml.conf.append("dist=snap:ossrh, repo:ossrh");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "dist=snap:ossrh, repo:ossrh"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <distributionManagement>" + nl + 
@@ -30,8 +31,9 @@ public class DistTest extends ConvTestCase {
   }
   
   @Test public void ossrh_snap() {
-    poml.conf.append("dist=snap:ossrh");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "dist=snap:ossrh"
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <distributionManagement>" + nl + 
@@ -44,8 +46,9 @@ public class DistTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("dist=snap:ossrh, repo:oss");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "dist=snap:ossrh, repo:oss"
+    ));
     try { 
       conv.convert(poml, xml);
       fail();

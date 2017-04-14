@@ -11,9 +11,10 @@ public class ScmTest extends ConvTestCase {
   Scm conv = new Scm();
 
   @Test public void url() {
-    poml.conf.append("scm=");
-    poml.conf.append("  url:https://github.com/mamorum/poml/");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "scm=" + nl +
+      "  url:https://github.com/mamorum/poml/" + nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <scm>" + nl +
@@ -23,12 +24,13 @@ public class ScmTest extends ConvTestCase {
   }
   
   @Test public void all() {
-    poml.conf.append("scm=");
-    poml.conf.append("  connect: scm:git:https://github.com/mamorum/poml.git,");
-    poml.conf.append("  devConnect: scm:git:git@github.com:mamorum/poml.git,");
-    poml.conf.append("  tag: HEAD,");
-    poml.conf.append("  url: https://github.com/mamorum/poml");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "scm=" + nl +
+      "  connect: scm:git:https://github.com/mamorum/poml.git," + nl +
+      "  devConnect: scm:git:git@github.com:mamorum/poml.git," + nl +
+      "  tag: HEAD," + nl +
+      "  url: https://github.com/mamorum/poml" + nl
+    ));
     conv.convert(poml, xml);
     output.is(
       "  <scm>" + nl +
@@ -41,8 +43,9 @@ public class ScmTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.append("scm=badconf");
-    poml.conf.load();
+    poml.conf.parse(in(
+      "scm=badconf"
+    ));
     try { 
       conv.convert(poml, xml);
       fail();
