@@ -3,7 +3,6 @@ package poml.conv.build.plugin;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
-import poml.conv.build.plugin.Fatjar;
 
 public class FatjarTest extends ConvTestCase {
 

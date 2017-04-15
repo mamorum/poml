@@ -1,9 +1,9 @@
 package poml.conv.basic;
 
 import poml.conv.Converter;
+import poml.conv.Is;
 import poml.io.Poml;
 import poml.io.Xml;
-import poml.tool.Is;
 import poml.tool.Throw;
 
 public class Depend implements Converter {

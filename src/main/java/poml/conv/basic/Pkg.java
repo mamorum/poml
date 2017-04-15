@@ -1,10 +1,10 @@
 package poml.conv.basic;
 
 import poml.conv.Converter;
+import poml.conv.Is;
 import poml.io.Poml;
 import poml.io.Xml;
 import poml.tool.Throw;
-import poml.tool.Is;
 
 public class Pkg implements Converter {
 

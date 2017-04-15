@@ -26,8 +26,8 @@
   </properties>
 
   <build>
-    <!-- $compiler, &fatjar -->
     <plugins>
+      <!-- $compiler, &fatjar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

@@ -9,7 +9,6 @@ public class Layout {
   private String line;
 
   public void render(Poml poml, Xml xml)  throws IOException {
-    Converters.load(poml);
     while ((line = poml.in.readLine()) != null) {
       convert(poml, xml);
     }

@@ -17,7 +17,9 @@ $compiler.conf={
   {{depends }}
   {{properties }}
   <build>
-    <!-- $compiler, &fatjar -->
-    {{build.plugins}}
+    <plugins>
+      <!-- $compiler, &fatjar -->
+      {{build.plugins}}
+    </plugins>
   </build>
 {{/model4}}

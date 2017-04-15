@@ -7,14 +7,9 @@ depend=
   ch.qos.logback:logback-classic:1.1.7:test:true:jar,
   org.springframework.boot:spring-boot-starter-web
 properties=
-  &encoding: UTF-8,
-  &compiler: 1.8,
-  gpg.skip: true
-build.plugins=$sbp, &gpg, &source, &javadoc, &fatjar
+  &encoding: UTF-8, &compiler: 1.8, gpg.skip: true
+build.plugins=$sbp, &dsg, &fatjar
 $sbp=org.springframework.boot:spring-boot-maven-plugin
-&gpg=_default
-&source=ver:2.2.1
-&javadoc=ver:2.9.1
 &fatjar=mainClass:demo.Main
 &fatjar.conf+={
   <outputDirectory>dist</outputDirectory>
@@ -59,11 +54,7 @@ dist=snap:ossrh, repo:ossrh
   {{ properties }}
   <build>
     <plugins>
-      {{$sbp}}
-      {{&gpg}}
-      {{&source}}
-      {{&javadoc}}
-      {{&fatjar}}
+      {{build.plugins}}
     </plugins>
   </build>
   {{ info}}

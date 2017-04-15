@@ -13,7 +13,7 @@ public class Txt {
     for (String l: lines) add(l).nl();
     return this;
   }
-  private static final String nl = System.lineSeparator();
+  public static final String nl = System.lineSeparator();
   public Txt nl() {
     b.append(nl);
     return this;
