@@ -16,7 +16,7 @@ public class JavadocTest extends ConvTestCase {
 //    poml.conf.append("&javadoc=_default");
 //    poml.conf.load();
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-javadoc-plugin</artifactId>" + nl +
@@ -35,7 +35,7 @@ public class JavadocTest extends ConvTestCase {
 //    poml.conf.append("&javadoc=ver:1.0.0");
 //    poml.conf.load();
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-javadoc-plugin</artifactId>" + nl +

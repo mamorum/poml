@@ -11,7 +11,7 @@ public class DevelopersTest extends ConvTestCase {
   Developers conv = new Developers();
   
   @Test public void single() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "developers=$jdoe" + nl +
       "$jdoe=" + nl +
       "  id: jdoe, name: John Doe," + nl +
@@ -19,7 +19,7 @@ public class DevelopersTest extends ConvTestCase {
       "  url: http://www.example.com/jdoe" + nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <developers>" + nl +
       "    <developer>" + nl +
       "      <id>jdoe</id>" + nl +
@@ -32,7 +32,7 @@ public class DevelopersTest extends ConvTestCase {
   }
   
   @Test public void multi() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "developers=$jdoe, $ken" + nl +
       "$jdoe=" + nl +
       "  id: jdoe, name: John Doe," + nl +
@@ -41,7 +41,7 @@ public class DevelopersTest extends ConvTestCase {
       "$ken=id: ken" + nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <developers>" + nl +
       "    <developer>" + nl +
       "      <id>jdoe</id>" + nl +
@@ -57,7 +57,7 @@ public class DevelopersTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "developers=$ng" + nl +
       "$ng=bad" + nl
     ));

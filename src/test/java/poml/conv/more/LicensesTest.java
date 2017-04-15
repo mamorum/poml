@@ -11,11 +11,11 @@ public class LicensesTest extends ConvTestCase {
   Licenses conv = new Licenses();
   
   @Test public void apache2() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "licenses=&apache2"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <licenses>" + nl +
       "    <license>" + nl +
       "      <name>The Apache License, Version 2.0</name>" + nl +
@@ -26,7 +26,7 @@ public class LicensesTest extends ConvTestCase {
   }
   
   @Test public void usr() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "licenses=$bsd2" + nl +
       "$bsd2=" + nl +
       "  name: The New BSD License," + nl +
@@ -35,7 +35,7 @@ public class LicensesTest extends ConvTestCase {
       "  comments: The 2-Clause BSD License" + nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <licenses>" + nl +
       "    <license>" + nl +
       "      <name>The New BSD License</name>" + nl +
@@ -48,14 +48,14 @@ public class LicensesTest extends ConvTestCase {
   }
   
   @Test public void multi() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "licenses=$wtfpl, &mit" + nl +
       "$wtfpl=" + nl +
       "  name: WTFPL," + nl +
       "  url: http://www.wtfpl.net/" + nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <licenses>" + nl +
       "    <license>" + nl +
       "      <name>WTFPL</name>" + nl +
@@ -70,7 +70,7 @@ public class LicensesTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "licenses=$ng" + nl +
       "$ng=bad" + nl
     ));

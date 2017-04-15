@@ -11,12 +11,12 @@ public class ScmTest extends ConvTestCase {
   Scm conv = new Scm();
 
   @Test public void url() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "scm=" + nl +
       "  url:https://github.com/mamorum/poml/" + nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <scm>" + nl +
       "    <url>https://github.com/mamorum/poml/</url>" + nl +
       "  </scm>" + nl
@@ -24,7 +24,7 @@ public class ScmTest extends ConvTestCase {
   }
   
   @Test public void all() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "scm=" + nl +
       "  connect: scm:git:https://github.com/mamorum/poml.git," + nl +
       "  devConnect: scm:git:git@github.com:mamorum/poml.git," + nl +
@@ -32,7 +32,7 @@ public class ScmTest extends ConvTestCase {
       "  url: https://github.com/mamorum/poml" + nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <scm>" + nl +
       "    <url>https://github.com/mamorum/poml</url>" + nl +
       "    <connection>scm:git:https://github.com/mamorum/poml.git</connection>" + nl +
@@ -43,7 +43,7 @@ public class ScmTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "scm=badconf"
     ));
     try { 

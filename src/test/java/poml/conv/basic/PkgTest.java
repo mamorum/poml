@@ -11,11 +11,11 @@ public class PkgTest extends ConvTestCase {
   Pkg conv = new Pkg();
   
   @Test public void id_ver() { 
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "pkg=group.com:artifact:0.0.1"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <groupId>group.com</groupId>" + nl + 
       "  <artifactId>artifact</artifactId>" + nl +
       "  <version>0.0.1</version>" + nl
@@ -23,11 +23,11 @@ public class PkgTest extends ConvTestCase {
   }
   
   @Test public void id_ver_pkg() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "pkg=group.com:artifact:0.0.1:jar"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "  <groupId>group.com</groupId>" + nl + 
       "  <artifactId>artifact</artifactId>" + nl +
       "  <version>0.0.1</version>" + nl +
@@ -36,7 +36,7 @@ public class PkgTest extends ConvTestCase {
   }
   
   @Test public void ng_noConf() {
-    poml.conf.parse(in(""));
+    poml.conf.parse(data(""));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -46,7 +46,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.parse(in("pkg="));
+    poml.conf.parse(data("pkg="));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -56,7 +56,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(in("pkg=group.com:::"));
+    poml.conf.parse(data("pkg=group.com:::"));
     try { 
       conv.convert(poml, xml);
       fail();

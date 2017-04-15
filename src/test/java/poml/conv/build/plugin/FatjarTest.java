@@ -10,12 +10,12 @@ public class FatjarTest extends ConvTestCase {
   Fatjar conv = new Fatjar();
 
   @Test public void defaultVer() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "&fatjar="+ nl +
       "  mainClass:org.sample.Main"+ nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl + 
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
@@ -45,14 +45,14 @@ public class FatjarTest extends ConvTestCase {
   }
   
   @Test public void ver_jar() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "&fatjar="+ nl +
       "  ver:1.0.0,"+ nl +
       "  jarName:sample.jar,"+ nl +
       "  mainClass:org.sample.Main"+ nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl + 
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
@@ -82,7 +82,7 @@ public class FatjarTest extends ConvTestCase {
   }
   
   @Test public void addConfArch() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "&fatjar=mainClass:org.sample.Main"+ nl +
       "&fatjar.conf+={"+ nl +
       "  <outputDirectory>dist</outputDirectory>"+ nl +
@@ -99,7 +99,7 @@ public class FatjarTest extends ConvTestCase {
       "}"+ nl
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl + 
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-assembly-plugin</artifactId>" + nl +

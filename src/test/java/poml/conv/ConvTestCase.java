@@ -12,22 +12,21 @@ import poml.io.Xml;
 public class ConvTestCase {
   public Poml poml;
   public Xml xml;
-  public Output output;
   public static String nl = System.lineSeparator();
   
   @Before public void before() {
     poml = new Poml();
     xml = new Xml();
-    output = new Output();
   }
 
-  // Create test input.
-  protected BufferedReader in(String lines) {
+  public BufferedReader data(String lines) {
     return new BufferedReader(
       new StringReader(lines)
     );
   }
-  
+  public void result(String expected) {
+    Assert.assertEquals(expected, xml.out.toString());
+  }  
   public Msg msg(Exception e) {
     return new Msg(e.getMessage());
   }
@@ -41,12 +40,6 @@ public class ConvTestCase {
     public void starts(String prefix, boolean debug) {
       if (debug) System.out.println(this.msg);
       Assert.assertTrue(this.msg.startsWith(prefix));
-    }
-  }
-  
-  public class Output {
-    public void is(String s) {
-      Assert.assertEquals(s, xml.out.toString());
     }
   }
 }

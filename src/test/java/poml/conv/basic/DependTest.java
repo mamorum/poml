@@ -11,11 +11,11 @@ public class DependTest extends ConvTestCase {
   Depend conv = new Depend();
   
   @Test public void id2art() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "depend=group.com:artifact"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl + 
       "      <artifactId>artifact</artifactId>" + nl +
@@ -24,11 +24,11 @@ public class DependTest extends ConvTestCase {
   }
   
   @Test public void id2ver() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "depend=group.com:artifact:0.0.1"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl + 
       "      <artifactId>artifact</artifactId>" + nl +
@@ -38,11 +38,11 @@ public class DependTest extends ConvTestCase {
   }
 
   @Test public void id2ver_type() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "depend=group.com:artifact:0.0.1:::jar"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl + 
       "      <artifactId>artifact</artifactId>" + nl +
@@ -53,11 +53,11 @@ public class DependTest extends ConvTestCase {
   }
 
   @Test public void id2ver_opt() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "depend=group.com:artifact:0.0.1::false"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl + 
       "      <artifactId>artifact</artifactId>" + nl +
@@ -68,11 +68,11 @@ public class DependTest extends ConvTestCase {
   }
   
   @Test public void id2type() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "depend=group.com:artifact:0.0.1:test:true:jar"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl + 
       "      <artifactId>artifact</artifactId>" + nl +
@@ -85,7 +85,7 @@ public class DependTest extends ConvTestCase {
   }
 
   @Test public void multi() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "depend=" + nl +
       "  demo.com:demo2," + nl +
       "  demo.com:demo:[4.12\\,)," + nl +
@@ -93,7 +93,7 @@ public class DependTest extends ConvTestCase {
       "  group.com:artifact:0.0.1:test:true:jar"
     ));
     conv.convert(poml, xml);
-    output.is(
+    result(
       "    <dependency>" + nl +
       "      <groupId>demo.com</groupId>" + nl + 
       "      <artifactId>demo2</artifactId>" + nl +
@@ -121,7 +121,7 @@ public class DependTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml.conf.parse(in(""));
+    poml.conf.parse(data(""));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -131,7 +131,7 @@ public class DependTest extends ConvTestCase {
   }
   
   @Test public void ng_emptyConf() {
-    poml.conf.parse(in("depend="));
+    poml.conf.parse(data("depend="));
     try { 
       conv.convert(poml, xml);
       fail();
@@ -141,7 +141,7 @@ public class DependTest extends ConvTestCase {
   }
   
   @Test public void ng_badConf() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "depend=" + nl +
       "  group.com:artifact:1.0," + nl +
       "  group.com:"
@@ -155,7 +155,7 @@ public class DependTest extends ConvTestCase {
   }
   
   @Test public void ng_badConf2() {
-    poml.conf.parse(in(
+    poml.conf.parse(data(
       "depend=, ," + nl +
       "  group.com:artifact:1.0"
     ));

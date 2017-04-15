@@ -15,7 +15,7 @@ public class GpgTest extends ConvTestCase {
 //    poml.conf.append("&gpg=_default");
 //    poml.conf.load();
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-gpg-plugin</artifactId>" + nl +
@@ -35,7 +35,7 @@ public class GpgTest extends ConvTestCase {
 //    poml.conf.append("&gpg=ver:1.0.0");
 //    poml.conf.load();
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-gpg-plugin</artifactId>" + nl +

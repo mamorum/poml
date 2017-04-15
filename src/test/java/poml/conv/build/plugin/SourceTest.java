@@ -16,7 +16,7 @@ public class SourceTest extends ConvTestCase {
 //    poml.conf.append("&source=_default");
 //    poml.conf.load();
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-source-plugin</artifactId>" + nl +
@@ -36,7 +36,7 @@ public class SourceTest extends ConvTestCase {
 //    poml.conf.append("&source=ver:1.0.0");
 //    poml.conf.load();
     conv.convert(poml, xml);
-    output.is(
+    result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-source-plugin</artifactId>" + nl +
