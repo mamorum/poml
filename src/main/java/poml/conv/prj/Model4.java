@@ -1,4 +1,4 @@
-package poml.conv.project;
+package poml.conv.prj;
 
 import poml.conv.Converter;
 import poml.io.Poml;

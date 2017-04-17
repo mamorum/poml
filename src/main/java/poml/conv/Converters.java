@@ -13,7 +13,7 @@ import poml.conv.env.Scm;
 import poml.conv.more.Developers;
 import poml.conv.more.Info;
 import poml.conv.more.Licenses;
-import poml.conv.project.Model4;
+import poml.conv.prj.Model4;
 import poml.io.Poml;
 import poml.io.Xml;
 import poml.tool.Throw;
