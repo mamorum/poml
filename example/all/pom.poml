@@ -8,7 +8,7 @@ depends=
   org.springframework.boot:spring-boot-starter-web
 properties=
   &encoding: UTF-8, &compiler: 1.8, gpg.skip: true
-build.plugins=$sbp, &dsg, &fatjar
+build.plugins=$sbp, &ossrh, &fatjar
 $sbp=org.springframework.boot:spring-boot-maven-plugin
 &fatjar=mainClass:demo.Main
 &fatjar.conf+={

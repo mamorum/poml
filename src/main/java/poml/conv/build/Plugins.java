@@ -1,7 +1,7 @@
 package poml.conv.build;
 
 import poml.conv.Converter;
-import poml.conv.build.plugin.Dsg;
+import poml.conv.build.plugin.Ossrh;
 import poml.conv.build.plugin.Fatjar;
 import poml.io.Poml;
 import poml.io.Xml;
@@ -13,7 +13,7 @@ public class Plugins  implements Converter {
     String[] plgs = poml.conf.vals(name());
     for (String plg: plgs) {
       if ("&fatjar".equals(plg)) (new Fatjar()).convert(poml, xml);
-      else if ("&dsg".equals(plg)) (new Dsg()).add(xml);
+      else if ("&ossrh".equals(plg)) (new Ossrh()).add(xml);
       else convert(plg, poml, xml);
     }    
   }

@@ -4,9 +4,9 @@ import org.junit.Test;
 
 import poml.conv.ConvTestCase;
 
-public class DsgTest extends ConvTestCase {
+public class OssrhTest extends ConvTestCase {
 
-  Dsg conv = new Dsg();
+  Ossrh conv = new Ossrh();
 
   @Test public void test() {
     conv.add(xml);

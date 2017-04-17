@@ -4,7 +4,7 @@ import poml.io.Xml;
 
 // plugins: javadoc, source, gpg 
 // http://central.sonatype.org/pages/apache-maven.html
-public class Dsg {
+public class Ossrh {
   public void add(Xml xml) {
     xml.out
       .add("      <plugin>").nl()
