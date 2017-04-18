@@ -2,7 +2,7 @@ package poml.conv;
 
 import java.util.HashMap;
 
-import poml.conv.basic.Depends;
+import poml.conv.basic.Depend;
 import poml.conv.basic.Parent;
 import poml.conv.basic.Pkg;
 import poml.conv.basic.Properties;
@@ -23,8 +23,8 @@ public class Converters {
   // -> for "No Layout Section"
   public static void convert(Poml poml, Xml xml) {
     start.convert(poml, xml);
-    for (Converter c: basic) convert(c, poml, xml);
-    convertPlugins(poml, xml);
+    convertBasic(poml, xml);
+    convertBuild(poml, xml);
     for (Converter c: more) convert(c, poml, xml);
     for (Converter c: env) convert(c, poml, xml);
     end.convert(poml, xml);
@@ -37,7 +37,27 @@ public class Converters {
       c.convert(poml, xml);
     }
   }
-  private static void convertPlugins(Poml poml, Xml xml) {
+  private static void convert(
+      Converter c, Poml poml, Xml xml,
+      String pre, String post
+    ) {
+      if (poml.conf.has(c.name())) {
+        xml.out.nl();
+        xml.out.add(pre).nl();
+        c.convert(poml, xml);
+        xml.out.add(post).nl();
+      }
+    }
+  private static void convertBasic(Poml poml, Xml xml) {
+    convert(pkg, poml, xml);
+    convert(parent, poml, xml);
+    convert(
+      depend, poml, xml,
+      "  <dependencies>", "  </dependencies>"
+    );
+    convert(props, poml, xml);
+  }
+  private static void convertBuild(Poml poml, Xml xml) {
     if (poml.conf.has(plg.name())) {
       xml.out.nl();
       xml.out.add("  <build>").nl();
@@ -58,25 +78,24 @@ public class Converters {
   }
 
   // -> all converters
-  private static final HashMap<String, Converter>
-    all = new HashMap<>();
+  private static final Converter
+    start=new Model4.Start(), end=new Model4.End(),
+    pkg = new Pkg(), parent = new Parent(),
+    depend = new Depend(), props = new Properties(),
+    plg = new Plugin();
   private static final Converter[]
-    basic = {
-      new Pkg(), new Parent(), new Depends(),
-      new Properties()},
+    basic = { pkg, parent, depend, props},
     more = {
       new Info(), new Licenses(), new Developers()},
     env = {
       new Issue(), new Scm(), new Dist()};
-  private static final Converter
-    start=new Model4.Start(), end=new Model4.End(),
-    plg = new Plugin();
+  private static final HashMap<String, Converter>
+    all = new HashMap<>();
   static {
     for (Converter c: basic) put(c);
     for (Converter c: more) put(c);
     for (Converter c: env) put(c);
     put(start); put(end); put(plg);
-    put(Depends.depend);
   }
   private static void put(Converter c) {
     all.put(c.name(), c);

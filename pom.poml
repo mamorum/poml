@@ -1,6 +1,6 @@
 # exec -> mvn exec:java -Dexec.mainClass=poml.Main -Dexec.args="pom.poml pom.xml"
-pkg=com.github.mamorum:poml:0.3.5:jar
-depends=junit:junit:4.12:test
+pkg=com.github.mamorum:poml:0.3.6:jar
+depend=junit:junit:4.12:test
 properties=&encoding:UTF-8, &compiler:1.8
 info=
   name: POML, description: POM's Minimal Language,

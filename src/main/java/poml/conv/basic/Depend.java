@@ -11,14 +11,10 @@ public class Depend implements Converter {
   @Override public String name() { return "depend"; }
 
   @Override public void convert(Poml poml, Xml xml) {
-    converts(name(), poml, xml);
-  }
-
-  public void converts(String cname, Poml poml, Xml xml) {
-    for (String dep: poml.conf.vals(cname)) {
+    for (String dep: poml.conf.vals(name())) {
       xml.out.add("    <dependency>").nl();
       String[] vals = dep.split(":");
-      if (!Is.lib(vals)) Throw.badConf(cname, dep);
+      if (!Is.lib(vals)) Throw.badConf(name(), dep);
       xml.outTags(sp6, tags, vals);
       xml.out.add("    </dependency>").nl();
     }

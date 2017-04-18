@@ -139,8 +139,20 @@ public class DependTest extends ConvTestCase {
       msg(e).starts("Bad config");
     }
   }
-  
+
   @Test public void ng_badConf() {
+    poml.conf.parse(data(
+      "depend=group.com:"
+    ));
+    try { 
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Bad config");
+    }
+  }
+
+  @Test public void ng_badConf2() {
     poml.conf.parse(data(
       "depend=" + nl +
       "  group.com:artifact:1.0," + nl +
@@ -153,8 +165,8 @@ public class DependTest extends ConvTestCase {
       msg(e).starts("Bad config");
     }
   }
-  
-  @Test public void ng_badConf2() {
+
+  @Test public void ng_badConf3() {
     poml.conf.parse(data(
       "depend=, ," + nl +
       "  group.com:artifact:1.0"
