@@ -10,7 +10,7 @@ import poml.conv.build.Plugin;
 import poml.conv.env.Dist;
 import poml.conv.env.Issue;
 import poml.conv.env.Scm;
-import poml.conv.more.Developers;
+import poml.conv.more.Developer;
 import poml.conv.more.Info;
 import poml.conv.more.Licenses;
 import poml.conv.prj.Model4;
@@ -25,8 +25,8 @@ public class Converters {
     start.convert(poml, xml);
     convertBasic(poml, xml);
     convertBuild(poml, xml);
-    for (Converter c: more) convert(c, poml, xml);
-    for (Converter c: env) convert(c, poml, xml);
+    convertMore(poml, xml);
+    convertEnv(poml, xml);
     end.convert(poml, xml);
   }
   private static void convert(
@@ -47,7 +47,7 @@ public class Converters {
         c.convert(poml, xml);
         xml.out.add(post).nl();
       }
-    }
+  }
   private static void convertBasic(Poml poml, Xml xml) {
     convert(pkg, poml, xml);
     convert(parent, poml, xml);
@@ -67,6 +67,19 @@ public class Converters {
       xml.out.add("  </build>").nl();
     }
   }
+  private static void convertMore(Poml poml, Xml xml) {
+    convert(info, poml, xml);
+    convert(license, poml, xml);
+    convert(
+      dev, poml, xml,
+      "  <developers>", "  </developers>"
+    );
+  }
+  private static void convertEnv(Poml poml, Xml xml) {
+    convert(issue, poml, xml);
+    convert(scm, poml, xml);
+    convert(dist, poml, xml);
+  }
 
   // -> for "Layout Section"
   public static void convert(
@@ -79,25 +92,22 @@ public class Converters {
 
   // -> all converters
   private static final Converter
-    start=new Model4.Start(), end=new Model4.End(),
+    start = new Model4.Start(), end = new Model4.End(),
     pkg = new Pkg(), parent = new Parent(),
     depend = new Depend(), props = new Properties(),
-    plg = new Plugin();
-  private static final Converter[]
-    basic = { pkg, parent, depend, props},
-    more = {
-      new Info(), new Licenses(), new Developers()},
-    env = {
-      new Issue(), new Scm(), new Dist()};
+    plg = new Plugin(),
+    info = new Info(), license = new Licenses(),
+    dev = new Developer(),
+    issue = new Issue(), scm = new Scm(),
+    dist = new Dist();
+  private static final Converter[] convs = {
+    start, end, // prj
+    pkg, parent, depend, props, // basic
+    plg, // build
+    info, license, dev, // more
+    issue, scm, dist // env
+  };
   private static final HashMap<String, Converter>
     all = new HashMap<>();
-  static {
-    for (Converter c: basic) put(c);
-    for (Converter c: more) put(c);
-    for (Converter c: env) put(c);
-    put(start); put(end); put(plg);
-  }
-  private static void put(Converter c) {
-    all.put(c.name(), c);
-  }
+  static { for (Converter c: convs)  all.put(c.name(), c); }
 }

@@ -6,7 +6,7 @@ info=
   name: POML, description: POM's Minimal Language,
   url: https://github.com/mamorum/poml
 licenses=&mit
-developers=$m
+developer=$m
 $m=id: mamorum
 issue=
   system: GitHub Issues,
