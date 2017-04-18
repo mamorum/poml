@@ -17,7 +17,7 @@ scm=
   devConnect: scm:git:git@github.com:mamorum/poml.git
 
 # fatjar -> dist/poml.jar
-build.plugins=&fatjar
+plugin=&fatjar
 &fatjar=mainClass: poml.Main
 &fatjar.conf+={
   <outputDirectory>dist</outputDirectory>

@@ -6,8 +6,8 @@ import poml.conv.build.plugin.Fatjar;
 import poml.io.Poml;
 import poml.io.Xml;
 
-public class Plugins  implements Converter {
-  @Override public String name() { return "build.plugins"; }
+public class Plugin  implements Converter {
+  @Override public String name() { return "plugin"; }
   
   @Override public void convert(Poml poml, Xml xml) {
     String[] plgs = poml.conf.vals(name());

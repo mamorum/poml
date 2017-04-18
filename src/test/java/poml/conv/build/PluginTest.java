@@ -4,14 +4,14 @@ import org.junit.Test;
 
 import poml.conv.ConvTestCase;
 
-public class PluginsTest extends ConvTestCase {
+public class PluginTest extends ConvTestCase {
 
-  Plugins conv = new Plugins();
+  Plugin conv = new Plugin();
 
   // $
   @Test public void grp_art() {
     poml.conf.parse(data(
-      "build.plugins=$sbp" + nl +
+      "plugin=$sbp" + nl +
       "$sbp=org.springframework.boot:spring-boot-maven-plugin"
     ));
     conv.convert(poml, xml);
@@ -26,7 +26,7 @@ public class PluginsTest extends ConvTestCase {
   // &
   @Test public void fatjar_ossrh() {
     poml.conf.parse(data(
-      "build.plugins=&fatjar, &ossrh" + nl +
+      "plugin=&fatjar, &ossrh" + nl +
       "&fatjar=mainClass: poml.Main"
     ));
     conv.convert(poml, xml);

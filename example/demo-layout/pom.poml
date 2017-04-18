@@ -3,7 +3,7 @@ depends=
   com.google.guava:guava:21.0,
   junit:junit:[4.12\,):test
 properties=&encoding: UTF-8
-build.plugins=$compiler, &fatjar
+plugin=$compiler, &fatjar
 $compiler=
   org.apache.maven.plugins:maven-compiler-plugin:3.6.1
 $compiler.conf={
@@ -19,7 +19,7 @@ $compiler.conf={
   <build>
     <plugins>
       <!-- $compiler, &fatjar -->
-      {{build.plugins}}
+      {{plugin}}
     </plugins>
   </build>
 {{/model4}}

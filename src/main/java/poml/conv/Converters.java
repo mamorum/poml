@@ -6,7 +6,7 @@ import poml.conv.basic.Depends;
 import poml.conv.basic.Parent;
 import poml.conv.basic.Pkg;
 import poml.conv.basic.Properties;
-import poml.conv.build.Plugins;
+import poml.conv.build.Plugin;
 import poml.conv.env.Dist;
 import poml.conv.env.Issue;
 import poml.conv.env.Scm;
@@ -38,11 +38,11 @@ public class Converters {
     }
   }
   private static void convertPlugins(Poml poml, Xml xml) {
-    if (poml.conf.has(plgs.name())) {
+    if (poml.conf.has(plg.name())) {
       xml.out.nl();
       xml.out.add("  <build>").nl();
       xml.out.add("    <plugins>").nl();
-      plgs.convert(poml, xml);
+      plg.convert(poml, xml);
       xml.out.add("    </plugins>").nl();
       xml.out.add("  </build>").nl();
     }
@@ -70,12 +70,12 @@ public class Converters {
       new Issue(), new Scm(), new Dist()};
   private static final Converter
     start=new Model4.Start(), end=new Model4.End(),
-    plgs = new Plugins();
+    plg = new Plugin();
   static {
     for (Converter c: basic) put(c);
     for (Converter c: more) put(c);
     for (Converter c: env) put(c);
-    put(start); put(end); put(plgs);
+    put(start); put(end); put(plg);
     put(Depends.depend);
   }
   private static void put(Converter c) {
