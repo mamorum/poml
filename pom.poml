@@ -1,11 +1,10 @@
-# exec -> mvn exec:java -Dexec.mainClass=poml.Main -Dexec.args="pom.poml pom.xml"
-pkg=com.github.mamorum:poml:0.3.6:jar
+pkg=com.github.mamorum:poml:0.3.9:jar
 depend=junit:junit:4.12:test
 properties=&encoding:UTF-8, &compiler:1.8
 info=
   name: POML, description: POM's Minimal Language,
   url: https://github.com/mamorum/poml
-licenses=&mit
+license=&mit
 developer=$m
 $m=id: mamorum
 issue=
@@ -16,7 +15,6 @@ scm=
   connect: scm:git:https://github.com/mamorum/poml.git,
   devConnect: scm:git:git@github.com:mamorum/poml.git
 
-# fatjar -> dist/poml.jar
 plugin=&fatjar
 &fatjar=mainClass: poml.Main
 &fatjar.conf+={

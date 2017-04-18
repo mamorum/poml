@@ -12,7 +12,7 @@ import poml.conv.env.Issue;
 import poml.conv.env.Scm;
 import poml.conv.more.Developer;
 import poml.conv.more.Info;
-import poml.conv.more.Licenses;
+import poml.conv.more.License;
 import poml.conv.prj.Model4;
 import poml.io.Poml;
 import poml.io.Xml;
@@ -69,10 +69,11 @@ public class Converters {
   }
   private static void convertMore(Poml poml, Xml xml) {
     convert(info, poml, xml);
-    convert(license, poml, xml);
     convert(
-      dev, poml, xml,
-      "  <developers>", "  </developers>"
+      license, poml, xml, "  <licenses>", "  </licenses>"
+    );
+    convert(
+      dev, poml, xml, "  <developers>", "  </developers>"
     );
   }
   private static void convertEnv(Poml poml, Xml xml) {
@@ -96,7 +97,7 @@ public class Converters {
     pkg = new Pkg(), parent = new Parent(),
     depend = new Depend(), props = new Properties(),
     plg = new Plugin(),
-    info = new Info(), license = new Licenses(),
+    info = new Info(), license = new License(),
     dev = new Developer(),
     issue = new Issue(), scm = new Scm(),
     dist = new Dist();
