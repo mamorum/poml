@@ -10,7 +10,7 @@ public class Fatjar {
   private static final String name = "&fatjar";
 
   public void convert(Poml poml, Xml xml) {
-    Map<String, String> map = poml.conf.map(name, false);
+    Map<String, String> map = poml.conf.map(name);
     String main = map.get("mainClass");  // required
     if (main == null) Throw.noKv(name, "mainClass");
     String ver = map.get("ver");

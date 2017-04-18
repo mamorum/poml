@@ -63,15 +63,9 @@ public class Config {
   }
   // key=k:v, k:v, ...
   //  - throw: if map element is null or blank
-  //  - return: map (size 0), if default
-  //  - return: map (size 1+), if not default
-  public Map<String, String> map(
-    String key, boolean defaultOk
-  ) {
+  //  - return: map (size 1+)
+  public Map<String, String> map(String key) {
     String val = val(key);
-    if (defaultOk &&  "_default".equals(val)) {
-      return new HashMap<>();
-    }
     Map<String, String> map = new LinkedHashMap<>();
     for (String kv: split(key, val)) {
       if (!put(kv, map)) Throw.badConf(key, val);

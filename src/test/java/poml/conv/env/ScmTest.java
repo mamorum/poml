@@ -26,8 +26,8 @@ public class ScmTest extends ConvTestCase {
   @Test public void all() {
     poml.conf.parse(data(
       "scm=" + nl +
-      "  connect: scm:git:https://github.com/mamorum/poml.git," + nl +
-      "  devConnect: scm:git:git@github.com:mamorum/poml.git," + nl +
+      "  connection: scm:git:https://github.com/mamorum/poml.git," + nl +
+      "  developerConnection: scm:git:git@github.com:mamorum/poml.git," + nl +
       "  tag: HEAD," + nl +
       "  url: https://github.com/mamorum/poml" + nl
     ));
@@ -50,7 +50,7 @@ public class ScmTest extends ConvTestCase {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).starts("Bad config", false);
     }
   }
 }

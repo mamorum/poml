@@ -12,7 +12,7 @@ public class Dist implements Converter {
   @Override public String name() { return "dist"; }
     
   @Override public void convert(Poml poml, Xml xml) {
-    Map<String, String> map = poml.conf.map(name(), false);    
+    Map<String, String> map = poml.conf.map(name());    
     xml.out.add("  <distributionManagement>").nl();
     printOssrh("snap", map, snap, xml);
     printOssrh("repo", map, repo, xml);

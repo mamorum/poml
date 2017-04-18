@@ -13,7 +13,7 @@ public class Developer implements Converter{
   @Override public void convert(Poml poml, Xml xml) {
     for (String dev: poml.conf.vals(name())) {
       xml.out.add("    <developer>").nl();
-      Map<String, String> val = poml.conf.map(dev, false);
+      Map<String, String> val = poml.conf.map(dev);
       for (String k: keys) xml.outTag(sp6, k, val.get(k));
       xml.out.add("    </developer>").nl();
     }

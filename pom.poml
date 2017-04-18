@@ -1,4 +1,4 @@
-pkg=com.github.mamorum:poml:0.3.9:jar
+pkg=com.github.mamorum:poml:0.3.11:jar
 depend=junit:junit:4.12:test
 properties=&encoding:UTF-8, &compiler:1.8
 info=
@@ -12,8 +12,8 @@ issue=
   url: https://github.com/mamorum/poml/issues
 scm=
   url: https://github.com/mamorum/poml,
-  connect: scm:git:https://github.com/mamorum/poml.git,
-  devConnect: scm:git:git@github.com:mamorum/poml.git
+  connection: scm:git:https://github.com/mamorum/poml.git,
+  developerConnection: scm:git:git@github.com:mamorum/poml.git
 
 plugin=&fatjar
 &fatjar=mainClass: poml.Main

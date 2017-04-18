@@ -11,7 +11,7 @@ public class Properties implements Converter {
   @Override public String name() { return "properties"; }
   
   @Override public void convert(Poml poml, Xml xml) {
-    Map<String, String> kv = poml.conf.map(name(), false);
+    Map<String, String> kv = poml.conf.map(name());
     xml.out.add("  <properties>").nl();
     for (String k: kv.keySet()) {
       if (k.startsWith("&")) replace(k, kv.get(k), xml);

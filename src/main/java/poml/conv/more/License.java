@@ -15,7 +15,7 @@ public class License implements Converter{
       xml.out.add("    <license>").nl();
       if ("&apache2".equals(lic)) xml.out.add(apache2);
       else if ("&mit".equals(lic)) xml.out.add(mit);
-      else addLicense(poml.conf.map(lic, false), xml);
+      else addLicense(poml.conf.map(lic), xml);
       xml.out.add("    </license>").nl();
     }
   }

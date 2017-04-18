@@ -7,17 +7,18 @@ import poml.io.Poml;
 import poml.io.Xml;
 
 public class Scm implements Converter {
-
   @Override public String name() { return "scm"; }
   
   @Override public void convert(Poml poml, Xml xml) {
-    Map<String, String> map = poml.conf.map(name(), false);
-    xml.out.add("  <scm>").nl();  // -> elements are not required 
+    Map<String, String> map = poml.conf.map(name());
+    xml.out.add("  <scm>").nl(); 
     xml.outTag(sp4, url, map.get(url));
-    xml.outTag(sp4, "connection", map.get("connect"));
-    xml.outTag(sp4, "developerConnection", map.get("devConnect"));
+    xml.outTag(sp4, con, map.get(con));
+    xml.outTag(sp4, dev, map.get(dev));
     xml.outTag(sp4, tag, map.get(tag));
     xml.out.add("  </scm>").nl();
   }
-  private static final String url = "url", tag = "tag";
+  private static final String
+    url = "url", con = "connection",
+    dev = "developerConnection", tag = "tag";
 }
