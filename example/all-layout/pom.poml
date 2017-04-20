@@ -42,7 +42,7 @@ scm=
   tag: HEAD, url: https://github.com/user/repo,
   connection: scm:git:https://github.com/user/repo.git,
   developerConnection: scm:git:git@github.com:user/repo.git
-dist=snap:ossrh, repo:ossrh
+dist=&ossrh
 ---
 {{#model4}}
   {{ pkg}}

@@ -11,9 +11,9 @@ public class DistTest extends ConvTestCase {
 
   Dist conv = new Dist();
 
-  @Test public void ossrh_snap_repo() {
+  @Test public void ossrh() {
     poml.conf.parse(data(
-      "dist=snap:ossrh, repo:ossrh"
+      "dist=&ossrh"
     ));
     conv.convert(poml, xml);
     result(
@@ -29,25 +29,10 @@ public class DistTest extends ConvTestCase {
       "  </distributionManagement>" + nl
     );
   }
-  
-  @Test public void ossrh_snap() {
-    poml.conf.parse(data(
-      "dist=snap:ossrh"
-    ));
-    conv.convert(poml, xml);
-    result(
-      "  <distributionManagement>" + nl + 
-      "    <snapshotRepository>" + nl +
-      "      <id>ossrh</id>" + nl +
-      "      <url>https://oss.sonatype.org/content/repositories/snapshots</url>" + nl +
-      "    </snapshotRepository>" + nl +
-      "  </distributionManagement>" + nl
-    );
-  }
 
   @Test public void ng_badConf() {
     poml.conf.parse(data(
-      "dist=snap:ossrh, repo:oss"
+      "dist=oss"
     ));
     try { 
       conv.convert(poml, xml);
