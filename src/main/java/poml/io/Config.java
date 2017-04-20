@@ -76,7 +76,7 @@ public class Config {
   private static boolean put(
     String kv, Map<String, String> map
   ) {
-    int pos = kv.indexOf(':');
+    int pos = kv.indexOf('>');
     if (pos == -1) return false;
     String k = kv.substring(0, pos).trim();
     String v = kv.substring(pos + 1).trim();

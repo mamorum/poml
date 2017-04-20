@@ -1,22 +1,22 @@
-pkg=com.github.mamorum:poml:0.3.12:jar
+pkg=com.github.mamorum:poml:0.3.13:jar
 depend=junit:junit:4.12:test
-properties=&encoding:UTF-8, &compiler:1.8
+properties=&encoding>UTF-8, &compiler>1.8
 info=
-  name: POML, description: POM's Minimal Language,
-  url: https://github.com/mamorum/poml
+  name>POML, description>POM's Minimal Language,
+  url>https://github.com/mamorum/poml
 license=&mit
 developer=$m
-$m=id: mamorum
+$m=id>mamorum
 issue=
-  system: GitHub Issues,
-  url: https://github.com/mamorum/poml/issues
+  system>GitHub Issues,
+  url>https://github.com/mamorum/poml/issues
 scm=
-  url: https://github.com/mamorum/poml,
-  connection: scm:git:https://github.com/mamorum/poml.git,
-  developerConnection: scm:git:git@github.com:mamorum/poml.git
+  url>https://github.com/mamorum/poml,
+  connection>scm:git:https://github.com/mamorum/poml.git,
+  developerConnection>scm:git:git@github.com:mamorum/poml.git
 
 plugin=&fatjar
-&fatjar=mainClass: poml.Main
+&fatjar=mainClass>poml.Main
 &fatjar.conf+={
   <outputDirectory>dist</outputDirectory>
 }

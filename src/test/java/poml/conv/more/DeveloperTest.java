@@ -14,9 +14,9 @@ public class DeveloperTest extends ConvTestCase {
     poml.conf.parse(data(
       "developer=$jdoe" + nl +
       "$jdoe=" + nl +
-      "  id: jdoe, name: John Doe," + nl +
-      "  email: jdoe@example.com," + nl +
-      "  url: http://www.example.com/jdoe" + nl
+      "  id>jdoe, name>John Doe," + nl +
+      "  email>jdoe@example.com," + nl +
+      "  url>http://www.example.com/jdoe" + nl
     ));
     conv.convert(poml, xml);
     result(
@@ -33,10 +33,10 @@ public class DeveloperTest extends ConvTestCase {
     poml.conf.parse(data(
       "developer=$jdoe, $ken" + nl +
       "$jdoe=" + nl +
-      "  id: jdoe, name: John Doe," + nl +
-      "  email: jdoe@example.com," + nl +
-      "  url: http://www.example.com/jdoe" + nl +
-      "$ken=id: ken" + nl
+      "  id>jdoe, name>John Doe," + nl +
+      "  email>jdoe@example.com," + nl +
+      "  url>http://www.example.com/jdoe" + nl +
+      "$ken=id>ken" + nl
     ));
     conv.convert(poml, xml);
     result(

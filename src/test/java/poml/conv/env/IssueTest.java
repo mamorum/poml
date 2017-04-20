@@ -12,7 +12,7 @@ public class IssueTest extends ConvTestCase {
 
   @Test public void url() {
     poml.conf.parse(data(
-      "issue=url: https://github.com/mamorum/poml/issues"
+      "issue=url>https://github.com/mamorum/poml/issues"
     ));
     conv.convert(poml, xml);
     result(
@@ -25,8 +25,8 @@ public class IssueTest extends ConvTestCase {
   @Test public void all() {
     poml.conf.parse(data(
       "issue=" + nl +
-      "  system:GitHub Issues," + nl +
-      "  url:https://github.com/mamorum/poml/issues" + nl
+      "  system>GitHub Issues," + nl +
+      "  url>https://github.com/mamorum/poml/issues" + nl
     ));
     conv.convert(poml, xml);
     result(

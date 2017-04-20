@@ -27,7 +27,7 @@ public class PluginTest extends ConvTestCase {
   @Test public void fatjar_ossrh() {
     poml.conf.parse(data(
       "plugin=&fatjar, &ossrh" + nl +
-      "&fatjar=mainClass: poml.Main"
+      "&fatjar=mainClass>poml.Main"
     ));
     conv.convert(poml, xml);
     result(

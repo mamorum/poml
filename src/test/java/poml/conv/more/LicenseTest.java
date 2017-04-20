@@ -27,10 +27,10 @@ public class LicenseTest extends ConvTestCase {
     poml.conf.parse(data(
       "license=$bsd2" + nl +
       "$bsd2=" + nl +
-      "  name: The New BSD License," + nl +
-      "  url: http://www.opensource.org/licenses/bsd-license.php," + nl +
-      "  distribution: repo," + nl +
-      "  comments: The 2-Clause BSD License" + nl
+      "  name>The New BSD License," + nl +
+      "  url>http://www.opensource.org/licenses/bsd-license.php," + nl +
+      "  distribution>repo," + nl +
+      "  comments>The 2-Clause BSD License" + nl
     ));
     conv.convert(poml, xml);
     result(
@@ -47,8 +47,8 @@ public class LicenseTest extends ConvTestCase {
     poml.conf.parse(data(
       "license=$wtfpl, &mit" + nl +
       "$wtfpl=" + nl +
-      "  name: WTFPL," + nl +
-      "  url: http://www.wtfpl.net/" + nl
+      "  name>WTFPL," + nl +
+      "  url>http://www.wtfpl.net/" + nl
     ));
     conv.convert(poml, xml);
     result(

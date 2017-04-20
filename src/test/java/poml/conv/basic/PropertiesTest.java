@@ -12,7 +12,7 @@ public class PropertiesTest extends ConvTestCase {
   
   @Test public void single() {
     poml.conf.parse(data(
-      "properties=project.build.sourceEncoding:UTF-8"
+      "properties=project.build.sourceEncoding>UTF-8"
     ));
     conv.convert(poml, xml);
     result(
@@ -25,8 +25,8 @@ public class PropertiesTest extends ConvTestCase {
   @Test public void multi() {
     poml.conf.parse(data(
       "properties=" + nl +
-      "  property:value," + nl +
-      "  project.build.sourceEncoding:UTF-8"
+      "  property>value," + nl +
+      "  project.build.sourceEncoding>UTF-8"
     ));
     conv.convert(poml, xml);
     result(
@@ -39,7 +39,7 @@ public class PropertiesTest extends ConvTestCase {
   
   @Test public void replaceEncoding() {
     poml.conf.parse(data(
-      "properties=&encoding:UTF-8"
+      "properties=&encoding>UTF-8"
     ));
     conv.convert(poml, xml);
     result(
@@ -51,7 +51,7 @@ public class PropertiesTest extends ConvTestCase {
   }
   @Test public void replaceCompiler() {
     poml.conf.parse(data(
-      "properties=&compiler:1.8"
+      "properties=&compiler>1.8"
     ));
     conv.convert(poml, xml);
     result(
@@ -65,11 +65,11 @@ public class PropertiesTest extends ConvTestCase {
   @Test public void replaceMulti() {
     poml.conf.parse(data(
       "properties=" + nl +
-      "  property1:value1," + nl +
-      "  &encoding:UTF-8," + nl +
-      "  property2:value2," + nl +
-      "  &compiler:1.8," + nl +
-      "  property3:value3"
+      "  property1>value1," + nl +
+      "  &encoding>UTF-8," + nl +
+      "  property2>value2," + nl +
+      "  &compiler>1.8," + nl +
+      "  property3>value3"
     ));
     conv.convert(poml, xml);
     result(

@@ -11,7 +11,7 @@ public class FatjarTest extends ConvTestCase {
   @Test public void defaultVer() {
     poml.conf.parse(data(
       "&fatjar="+ nl +
-      "  mainClass:org.sample.Main"+ nl
+      "  mainClass>org.sample.Main"+ nl
     ));
     conv.convert(poml, xml);
     result(
@@ -46,9 +46,9 @@ public class FatjarTest extends ConvTestCase {
   @Test public void ver_jar() {
     poml.conf.parse(data(
       "&fatjar="+ nl +
-      "  ver:1.0.0,"+ nl +
-      "  jarName:sample.jar,"+ nl +
-      "  mainClass:org.sample.Main"+ nl
+      "  ver>1.0.0,"+ nl +
+      "  jarName>sample.jar,"+ nl +
+      "  mainClass>org.sample.Main"+ nl
     ));
     conv.convert(poml, xml);
     result(
@@ -82,7 +82,7 @@ public class FatjarTest extends ConvTestCase {
   
   @Test public void addConfArch() {
     poml.conf.parse(data(
-      "&fatjar=mainClass:org.sample.Main"+ nl +
+      "&fatjar=mainClass>org.sample.Main"+ nl +
       "&fatjar.conf+={"+ nl +
       "  <outputDirectory>dist</outputDirectory>"+ nl +
       "  <delimiters>"+ nl +

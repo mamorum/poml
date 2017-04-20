@@ -13,7 +13,7 @@ public class InfoTest extends ConvTestCase {
   
   @Test public void name() {
     poml.conf.parse(data(
-      "info=name:INFO"
+      "info=name>INFO"
     ));
     conv.convert(poml, xml);
     result(
@@ -24,10 +24,10 @@ public class InfoTest extends ConvTestCase {
   @Test public void all() {
     poml.conf.parse(data(
       "info=" + nl +
-      "  name: INFO," + nl +
-      "  description: More Project Infomation," + nl +
-      "  url: https://github.com/mamorum/poml," + nl +
-      "  inceptionYear: 2016" + nl
+      "  name>INFO," + nl +
+      "  description>More Project Infomation," + nl +
+      "  url>https://github.com/mamorum/poml," + nl +
+      "  inceptionYear>2016" + nl
     ));
     conv.convert(poml, xml);
     result(

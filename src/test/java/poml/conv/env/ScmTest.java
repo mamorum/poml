@@ -13,7 +13,7 @@ public class ScmTest extends ConvTestCase {
   @Test public void url() {
     poml.conf.parse(data(
       "scm=" + nl +
-      "  url:https://github.com/mamorum/poml/" + nl
+      "  url>https://github.com/mamorum/poml/" + nl
     ));
     conv.convert(poml, xml);
     result(
@@ -26,10 +26,10 @@ public class ScmTest extends ConvTestCase {
   @Test public void all() {
     poml.conf.parse(data(
       "scm=" + nl +
-      "  connection: scm:git:https://github.com/mamorum/poml.git," + nl +
-      "  developerConnection: scm:git:git@github.com:mamorum/poml.git," + nl +
-      "  tag: HEAD," + nl +
-      "  url: https://github.com/mamorum/poml" + nl
+      "  connection>scm:git:https://github.com/mamorum/poml.git," + nl +
+      "  developerConnection>scm:git:git@github.com:mamorum/poml.git," + nl +
+      "  tag>HEAD," + nl +
+      "  url>https://github.com/mamorum/poml" + nl
     ));
     conv.convert(poml, xml);
     result(
