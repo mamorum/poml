@@ -16,7 +16,7 @@ import poml.conv.more.License;
 import poml.conv.prj.Model4;
 import poml.io.Poml;
 import poml.io.Xml;
-import poml.tool.Throw;
+import poml.util.Throw;
 
 public class Converters {
 

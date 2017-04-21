@@ -4,7 +4,7 @@ import java.util.Map;
 
 import poml.io.Poml;
 import poml.io.Xml;
-import poml.tool.Throw;
+import poml.util.Throw;
 
 public class Fatjar {
   private static final String name = "&fatjar";

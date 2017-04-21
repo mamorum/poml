@@ -1,8 +1,8 @@
 package poml;
 
 import poml.io.Poml;
-import poml.io.Txt;
 import poml.io.Xml;
+import poml.util.Txt;
 
 public class Main {
   private static void exit(int i) { System.exit(i); }

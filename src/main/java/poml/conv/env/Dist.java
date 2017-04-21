@@ -3,7 +3,7 @@ package poml.conv.env;
 import poml.conv.Converter;
 import poml.io.Poml;
 import poml.io.Xml;
-import poml.tool.Throw;
+import poml.util.Throw;
 
 public class Dist implements Converter {
   @Override public String name() { return "dist"; }

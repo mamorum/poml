@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import poml.tool.Throw;
+import poml.util.Throw;
 
 public class Config {
   boolean hasLayout = false;

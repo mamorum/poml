@@ -2,7 +2,7 @@ package poml;
 
 import java.io.File;
 
-import poml.io.Txt;
+import poml.util.Txt;
 
 public class Opt {
   public void help() {

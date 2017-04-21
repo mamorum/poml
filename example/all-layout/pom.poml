@@ -43,27 +43,26 @@ scm=
   developerConnection>scm:git:git@github.com:user/repo.git
 dist=&ossrh
 ---
-{{#model4}}
-  {{ pkg}}
-  {{ parent }}
+{{#model4}}&
+  {{pkg}}&
+  {{parent}}&
   <dependencies>
     {{depend}}
-  </dependencies>
-  {{ properties }}
+  </dependencies>&
+  {{properties}}&
   <build>
     <plugins>
       {{plugin}}
     </plugins>
-  </build>
-  {{ info }}
+  </build>&
+  {{info}}&
   <licenses>
     {{license}}
-  </licenses>
-
+  </licenses>&
   <developers>
     {{developer}}
-  </developers>
-  {{ issue}}
-  {{ scm}}
-  {{ dist}}
+  </developers>&
+  {{issue}}&
+  {{scm}}&
+  {{dist}}
 {{/model4}}

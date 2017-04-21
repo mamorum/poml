@@ -4,7 +4,7 @@ import poml.conv.Converter;
 import poml.conv.Is;
 import poml.io.Poml;
 import poml.io.Xml;
-import poml.tool.Throw;
+import poml.util.Throw;
 
 public class Parent implements Converter{
 

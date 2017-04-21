@@ -12,12 +12,12 @@ $compiler.conf={
 }
 &fatjar=mainClass>demo.Main
 ---
-{{#model4}}
-  {{ pkg }}
+{{#model4}}&
+  {{pkg}}&
   <dependencies>
     {{depend}}
-  </dependencies>
-  {{ properties }}
+  </dependencies>&
+  {{properties}}&
   <build>
     <plugins>
       <!-- $compiler, &fatjar -->

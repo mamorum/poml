@@ -1,4 +1,4 @@
-package poml.io;
+package poml.util;
 
 public class Txt {
   private StringBuilder b;

@@ -1,4 +1,4 @@
-package poml.tool;
+package poml.util;
 
 // TODO Needs message harmony of all methods.
 public class Throw {
