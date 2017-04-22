@@ -1,4 +1,4 @@
-# POML -  Installation Guide
+# POML - Installation Guide
 ## Requirements
 - **JDK**: version 8 is installed.
 - **PATH (or Path)**: `$JAVA_HOME/bin` (or `%JAVA_HOME%\bin`) is added.
