@@ -9,9 +9,12 @@ There are two things in Poml.
 
 ## Documents
 - [Installation Guide](doc/installation-guide.md)
+- [Blog](http://java-poml.blogspot.com/)
+
+<!--
 - [User Guide](doc/user-guide.md)
 - [Reference](https://github.com/mamorum/poml/wiki)
-- [Blog](http://java-poml.blogspot.com/)
+-->
 
 
 ## Getting Started
@@ -20,10 +23,10 @@ Create a `pom.poml` and save the following text. (ex. in the `demo` directory.)
 
 ```txt
 pkg=com.example:demo:0.0.1:jar
-depends=
+depend=
   com.google.guava:guava:21.0,
   junit:junit:4.12:test
-property=$encoding:UTF-8, $compiler:1.8
+properties=&encoding>UTF-8, &compiler>1.8
 ```
 
 
@@ -75,10 +78,11 @@ Following `pom.xml` is created.
 ## Examples
 In the following directories, `pom.poml` and converted `pom.xml` exist.
 
-- [example/all](example/all): Using all [configs](https://github.com/mamorum/poml/wiki)
+- [example/all](example/all): Using all configs of Poml
 - [example/all-layout](example/all-layout): Using all configs and "Layout Section"
 
-
+<!--
 ## Showcase
 - [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): Web application, packaged as fatjar.
 - [poml](https://github.com/mamorum/poml): Eating own poml.
+-->
