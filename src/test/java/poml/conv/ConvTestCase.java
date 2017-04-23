@@ -13,7 +13,7 @@ public class ConvTestCase {
   public Poml poml;
   public Xml xml;
   public static String nl = System.lineSeparator();
-  
+
   @Before public void before() {
     poml = new Poml();
     xml = new Xml();
@@ -26,11 +26,11 @@ public class ConvTestCase {
   }
   public void result(String expected) {
     Assert.assertEquals(expected, xml.out.toString());
-  }  
+  }
   public Msg msg(Exception e) {
     return new Msg(e.getMessage());
   }
-  
+
   public class Msg {
     String msg;
     Msg(String msg) { this.msg=msg; }
