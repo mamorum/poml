@@ -8,8 +8,18 @@ depend=
   org.springframework.boot:spring-boot-starter-web
 properties=
   &encoding>UTF-8, &compiler>1.8, gpg.skip>true
-plugin=$sbp, &ossrh, &fatjar
-$sbp=org.springframework.boot:spring-boot-maven-plugin
+plugin=$clean, &ossrh, &fatjar
+$clean=org.apache.maven.plugins:maven-clean-plugin:3.0.0
+$clean.conf={
+  <verbose>true</verbose>
+}
+$clean.execs={
+  <execution>
+    <id>auto-clean</id>
+    <phase>initialize</phase>
+    <goals><goal>clean</goal></goals>
+  </execution>
+}
 &fatjar=mainClass>demo.Main
 &fatjar.conf+={
   <outputDirectory>dist</outputDirectory>
