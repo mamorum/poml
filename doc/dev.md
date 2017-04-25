@@ -4,9 +4,8 @@
   - exec archive.sh
   - check archives
 - Update document
-  - installation-guide.md (version)
-  - readme.md, user-guide.md
-  - poml.wiki
+  - readme.md
+  - poml/doc/*
 - Release (GitHub)
   - write changelog
   - upload tar, zip
