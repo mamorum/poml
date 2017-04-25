@@ -24,6 +24,7 @@
 
 #### git pull (2nd+)
 ```
+~$ cd poml
 ~$ git pull
 ```
 
