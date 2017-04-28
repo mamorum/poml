@@ -1,19 +1,19 @@
 package poml.conv.basic;
 
 import poml.conv.Converter;
-import poml.conv.Is;
 import poml.io.Poml;
 import poml.io.Xml;
 import poml.util.Throw;
 
 public class Parent implements Converter{
-
   @Override public String name() { return "parent"; }
 
   @Override public void convert(Poml poml, Xml xml) {
     String val = poml.conf.val(name());
     String[] vals = val.split(":");
-    if (!Is.pkg(vals)) Throw.badConf(name(), val);
+    if (vals.length < 3) {
+      Throw.badConf(name(), val);
+    }
     xml.out.add("  <parent>").nl();
     xml.outTags(sp4, tags, vals);
     xml.out.add("  </parent>").nl();
@@ -22,4 +22,4 @@ public class Parent implements Converter{
     "groupId", "artifactId", "version",  // required
   };
 }
-  
+
