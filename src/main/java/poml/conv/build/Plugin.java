@@ -23,7 +23,7 @@ public class Plugin  implements Converter {
     String val = poml.conf.val(plg);
     String[] vals = val.split(":");
     xml.out.add("      <plugin>").nl();
-    xml.outTags(sp8, tags, vals);  // groupId - inherited
+    xml.tags(sp8, tags, vals);  // groupId - inherited
     convert(plg, ".conf", "configuration", poml, xml);
     convert(plg, ".depends", "dependencies", poml, xml);
     convert(plg, ".execs", "executions", poml, xml);

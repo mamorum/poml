@@ -11,10 +11,10 @@ public class Info implements Converter {
 
   @Override public void convert(Poml poml, Xml xml) {
     Map<String, String> map = poml.conf.map(name());
-    xml.outTag(sp2, name, map.get(name));
-    xml.outTag(sp2, desc, map.get(desc));
-    xml.outTag(sp2, url, map.get(url));
-    xml.outTag(sp2, year, map.get(year));
+    xml.tag(sp2, name, map.get(name));
+    xml.tag(sp2, desc, map.get(desc));
+    xml.tag(sp2, url, map.get(url));
+    xml.tag(sp2, year, map.get(year));
   }
   private static final String
     name = "name", desc = "description",

@@ -8,18 +8,18 @@ import poml.util.Throw;
 public class Depend implements Converter {
   @Override public String name() { return "depend"; }
 
-  @Override public void convert(Poml poml, Xml xml) {
-    for (String dep: poml.conf.vals(name())) {
-      String[] vals = dep.split(":");
+  @Override public void convert(Poml in, Xml out) {
+    for (String lib: in.conf.vals(name())) {
+      String[] vals = lib.split(":");
       if (vals.length < 2) {
-        Throw.badConf(name(), dep);
+        Throw.badConf(name(), lib);
       }
-      xml.out.add("    <dependency>").nl();
-      xml.outTags(sp6, tags, vals);
-      xml.out.add("    </dependency>").nl();
+      out.line("    <dependency>");
+      out.tags(sp6, keys, vals);
+      out.line("    </dependency>");
     }
   }
-  private static final String[] tags = {
+  private static final String[] keys = {
     "groupId", "artifactId", // required
     "version", "scope", "optional", "type"  // optional
   };

@@ -8,17 +8,17 @@ import poml.util.Throw;
 public class Parent implements Converter{
   @Override public String name() { return "parent"; }
 
-  @Override public void convert(Poml poml, Xml xml) {
-    String val = poml.conf.val(name());
+  @Override public void convert(Poml in, Xml out) {
+    String val = in.conf.val(name());
     String[] vals = val.split(":");
     if (vals.length < 3) {
       Throw.badConf(name(), val);
     }
-    xml.out.add("  <parent>").nl();
-    xml.outTags(sp4, tags, vals);
-    xml.out.add("  </parent>").nl();
+    out.line("  <parent>");
+    out.tags(sp4, keys, vals);
+    out.line("  </parent>");
   }
-  private static final String[] tags = {
+  private static final String[] keys = {
     "groupId", "artifactId", "version",  // required
   };
 }

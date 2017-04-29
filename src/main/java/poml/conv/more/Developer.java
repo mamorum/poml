@@ -14,7 +14,7 @@ public class Developer implements Converter{
     for (String dev: poml.conf.vals(name())) {
       xml.out.add("    <developer>").nl();
       Map<String, String> val = poml.conf.map(dev);
-      for (String k: keys) xml.outTag(sp6, k, val.get(k));
+      for (String k: keys) xml.tag(sp6, k, val.get(k));
       xml.out.add("    </developer>").nl();
     }
   }

@@ -20,7 +20,7 @@ public class License implements Converter{
     }
   }
   private void addLicense(Map<String, String> conf, Xml xml) {
-    for (String k: keys) xml.outTag(sp6, k, conf.get(k));
+    for (String k: keys) xml.tag(sp6, k, conf.get(k));
   }
   private static String[] keys = {
     "name", "url", "distribution", "comments"
