@@ -5,7 +5,7 @@ import poml.io.Xml;
 
 public interface Converter {
   String name();
-  void convert(Poml poml, Xml xml);
+  void convert(Poml in, Xml out);
 
   static final String
     sp2="  ", sp4="    ", sp6="      ",

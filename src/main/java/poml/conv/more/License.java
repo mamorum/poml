@@ -7,30 +7,33 @@ import poml.io.Poml;
 import poml.io.Xml;
 
 public class License implements Converter{
-
   @Override public String name() { return "license"; }
-  
-  @Override public void convert(Poml poml, Xml xml) {
-    for (String lic: poml.conf.vals(name())) {
-      xml.out.add("    <license>").nl();
-      if ("&apache2".equals(lic)) xml.out.add(apache2);
-      else if ("&mit".equals(lic)) xml.out.add(mit);
-      else addLicense(poml.conf.map(lic), xml);
-      xml.out.add("    </license>").nl();
+
+  @Override public void convert(Poml in, Xml out) {
+    String[] lics = in.conf.vals(name());
+    for (String lic: lics) {
+      out.line("    <license>");
+      if ("&apache2".equals(lic)) apache2(out);
+      else if ("&mit".equals(lic)) mit(out);
+      else $license(lic, in, out);
+      out.line("    </license>");
     }
   }
-  private void addLicense(Map<String, String> conf, Xml xml) {
-    for (String k: keys) xml.tag(sp6, k, conf.get(k));
+  private void apache2(Xml out) {
+    out.line("      <name>The Apache License, Version 2.0</name>");
+    out.line("      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>");
   }
-  private static String[] keys = {
-    "name", "url", "distribution", "comments"
-  };
-  private static final String[]
-    apache2 = {
-      "      <name>The Apache License, Version 2.0</name>",
-      "      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>"
-  }, mit = {
-      "      <name>MIT License</name>",
-      "      <url>https://opensource.org/licenses/MIT</url>"
-  };
+  private void mit(Xml out) {
+    out.line("      <name>MIT License</name>");
+    out.line("      <url>https://opensource.org/licenses/MIT</url>");
+  }
+  private void $license(String lic, Poml in, Xml out) {
+    Map<String, String> kv = in.conf.map(lic);
+    out.tag(sp6, name, kv.get(name));
+    out.tag(sp6, url, kv.get(url));
+    out.tag(sp6, dist, kv.get(dist));
+    out.tag(sp6, come, kv.get(come));
+  }
+  private static final String
+    name="name", url="url", dist="distribution", come="comments";
 }

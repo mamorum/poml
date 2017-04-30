@@ -7,16 +7,20 @@ import poml.io.Poml;
 import poml.io.Xml;
 
 public class Developer implements Converter{
-
   @Override public String name() { return "developer"; }
 
-  @Override public void convert(Poml poml, Xml xml) {
-    for (String dev: poml.conf.vals(name())) {
-      xml.out.add("    <developer>").nl();
-      Map<String, String> val = poml.conf.map(dev);
-      for (String k: keys) xml.tag(sp6, k, val.get(k));
-      xml.out.add("    </developer>").nl();
+  @Override public void convert(Poml in, Xml out) {
+    String[] devs = in.conf.vals(name());
+    for (String $dev: devs) {
+      Map<String, String> kv = in.conf.map($dev);
+      out.line("    <developer>");
+      out.tag(sp6, id, kv.get(id));
+      out.tag(sp6, name, kv.get(name));
+      out.tag(sp6, mail, kv.get(mail));
+      out.tag(sp6, url, kv.get(url));
+      out.line("    </developer>");
     }
   }
-  private static String[] keys =  {"id", "name", "email", "url"};
+  private static final String
+    id="id", name="name", mail="email", url="url";
 }
