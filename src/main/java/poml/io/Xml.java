@@ -27,9 +27,9 @@ public class Xml {
   }
 
   // -> output api
-  public void line(String l) {
-    out.add(l).nl();
-  }
+  public Xml nl() { out.nl(); return this; }
+  public Xml txt(String s) { out.add(s); return this; }
+  public void line(String l) { out.add(l).nl(); }
   public void tags(
     String space, String[] key, String[] val
   ) {
