@@ -6,8 +6,8 @@ import java.io.StringReader;
 import org.junit.Assert;
 import org.junit.Before;
 
-import poml.io.Poml;
-import poml.io.Xml;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class ConvTestCase {
   public Poml poml;
@@ -25,7 +25,7 @@ public class ConvTestCase {
     );
   }
   public void result(String expected) {
-    Assert.assertEquals(expected, xml.out.toString());
+    Assert.assertEquals(expected, xml.toString());
   }
   public Msg msg(Exception e) {
     return new Msg(e.getMessage());

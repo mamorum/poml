@@ -1,8 +1,8 @@
 package poml.conv.prj;
 
 import poml.conv.Converter;
-import poml.io.Poml;
-import poml.io.Xml;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Model4 {
   public static class Start implements Converter {
@@ -19,7 +19,7 @@ public class Model4 {
   public static class End implements Converter {
     @Override public String name() { return "/model4"; }
     @Override public void convert(Poml in, Xml out) {
-      out.line("</project>");
+      out.txt("</project>");
     }
   }
 }

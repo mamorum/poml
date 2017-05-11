@@ -1,4 +1,4 @@
-package poml.io;
+package poml.out;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -6,12 +6,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
-import poml.util.Txt;
-
 // pom.xml
 public class Xml {
-
-  public Txt out = Txt.init();
+  private StringBuilder out = new StringBuilder();
 
   public void save(String path) throws IOException {
     try (PrintWriter file = file(path)) {
@@ -27,9 +24,18 @@ public class Xml {
   }
 
   // -> output api
-  public Xml nl() { out.nl(); return this; }
-  public Xml txt(String s) { out.add(s); return this; }
-  public void line(String l) { out.add(l).nl(); }
+  public Xml nl() {
+    out.append(System.lineSeparator());
+    return this;
+  }
+  public Xml txt(String s) {
+    out.append(s);
+    return this;
+  }
+  public void line(String l) {
+    out.append(l);
+    nl();
+  }
   public void tags(
     String space, String[] key, String[] val
   ) {
@@ -41,10 +47,15 @@ public class Xml {
     String space, String key, String val
   ) {
     if (val == null || "".equals(val)) return;
-    out.add(space);
-    out.add("<").add(key).add(">");
-    out.add(val);
-    out.add("</").add(key).add(">");
-    out.nl();
+    out.append(space);
+    out.append("<").append(key).append(">");
+    out.append(val);
+    out.append("</").append(key).append(">");
+    nl();
+  }
+
+  // -> show xml
+  @Override public String toString() {
+    return out.toString();
   }
 }

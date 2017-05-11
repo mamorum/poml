@@ -3,8 +3,8 @@ package poml.conv.env;
 import java.util.Map;
 
 import poml.conv.Converter;
-import poml.io.Poml;
-import poml.io.Xml;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Issue implements Converter {
   @Override public String name() { return "issue"; }

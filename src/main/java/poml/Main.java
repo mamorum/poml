@@ -1,8 +1,7 @@
 package poml;
 
-import poml.io.Poml;
-import poml.io.Xml;
-import poml.util.Txt;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Main {
   private static void exit(int i) { System.exit(i); }
@@ -37,7 +36,7 @@ public class Main {
       poml.open(pomlPath);
       poml.to(xml);
       xml.save(xmlPath);
-      success(xmlPath, time); 
+      success(xmlPath, time);
     }
     catch (Throwable e) {
       error(e, xmlPath);
@@ -47,28 +46,34 @@ public class Main {
   }
 
   // cmd messages
-  static String info = "[POML:INFO] ";
   public static long begin(String pomlPath) {
     long time = System.currentTimeMillis();
-    System.out.print(Txt.init(
-      ).add(info).add("Converting ").add(pomlPath).nl(
-    ).toString());
+    String msg = (new StringBuilder()
+      ).append("[POML:INFO] Converting "
+      ).append(pomlPath
+    ).toString();
+    System.out.println(msg);
     return time;
   }
   public static void success(String xmlPath, long time) {
     String uptime = String.valueOf(
       (System.currentTimeMillis() - time)
     );
-    System.out.print(Txt.init(
-      ).add(info).add("Created ").add(xmlPath
-      ).add(" @").add(uptime).add("ms").nl(
-    ).toString());
+    String msg = (new StringBuilder()
+      ).append("[POML:INFO] Created "
+      ).append(xmlPath).append(" @"
+      ).append(uptime).append("ms"
+    ).toString();
+    System.out.println(msg);
   }
   public static void error(Throwable e, String xmlPath) {
-    String err = "[POML:ERROR] ";
-    System.out.print(Txt.init(
-      ).add(err).add(e.getMessage()).nl(
-      ).add(err).add("Could not create ").add(xmlPath).nl(
-    ).toString());
+    String msg = (new StringBuilder()
+      ).append("[POML:ERROR] "
+      ).append(e.getMessage()
+      ).append(System.lineSeparator()
+      ).append("[POML:ERROR] Could not create "
+      ).append(xmlPath
+    ).toString();
+    System.out.println(msg);
   }
 }

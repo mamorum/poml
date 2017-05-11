@@ -3,8 +3,8 @@ package poml.conv.more;
 import java.util.Map;
 
 import poml.conv.Converter;
-import poml.io.Poml;
-import poml.io.Xml;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class License implements Converter{
   @Override public String name() { return "license"; }

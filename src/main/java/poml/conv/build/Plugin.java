@@ -2,10 +2,10 @@ package poml.conv.build;
 
 import java.util.Map;
 
+import poml.Throw;
 import poml.conv.Converter;
-import poml.io.Poml;
-import poml.io.Xml;
-import poml.util.Throw;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Plugin  implements Converter {
   private static final String fatjar="&fatjar", ossrh="&ossrh";
