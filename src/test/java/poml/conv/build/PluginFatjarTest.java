@@ -1,21 +1,22 @@
-package poml.conv.build.plugin;
+package poml.conv.build;
 
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
 
-public class FatjarTest extends ConvTestCase {
+public class PluginFatjarTest extends ConvTestCase {
 
-  Fatjar conv = new Fatjar();
+  Plugin conv = new Plugin();
 
   @Test public void defaultVer() {
     poml.conf.parse(data(
+      "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
       "  mainClass>org.sample.Main"+ nl
     ));
     conv.convert(poml, xml);
     result(
-      "      <plugin>" + nl + 
+      "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
       "        <version>2.6</version>" + nl +
@@ -42,9 +43,10 @@ public class FatjarTest extends ConvTestCase {
       "      </plugin>" + nl
     );
   }
-  
+
   @Test public void ver_jar() {
     poml.conf.parse(data(
+      "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
       "  ver>1.0.0,"+ nl +
       "  jarName>sample.jar,"+ nl +
@@ -52,7 +54,7 @@ public class FatjarTest extends ConvTestCase {
     ));
     conv.convert(poml, xml);
     result(
-      "      <plugin>" + nl + 
+      "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
       "        <version>1.0.0</version>" + nl +
@@ -79,9 +81,10 @@ public class FatjarTest extends ConvTestCase {
       "      </plugin>" + nl
     );
   }
-  
+
   @Test public void addConfArch() {
     poml.conf.parse(data(
+      "plugin=&fatjar" + nl +
       "&fatjar=mainClass>org.sample.Main"+ nl +
       "&fatjar.conf+={"+ nl +
       "  <outputDirectory>dist</outputDirectory>"+ nl +
@@ -99,7 +102,7 @@ public class FatjarTest extends ConvTestCase {
     ));
     conv.convert(poml, xml);
     result(
-      "      <plugin>" + nl + 
+      "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
       "        <version>2.6</version>" + nl +

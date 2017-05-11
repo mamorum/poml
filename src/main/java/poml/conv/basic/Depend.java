@@ -1,26 +1,26 @@
 package poml.conv.basic;
 
+import poml.Throw;
 import poml.conv.Converter;
-import poml.conv.Is;
-import poml.io.Poml;
-import poml.io.Xml;
-import poml.util.Throw;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Depend implements Converter {
-
   @Override public String name() { return "depend"; }
 
-  @Override public void convert(Poml poml, Xml xml) {
-    for (String dep: poml.conf.vals(name())) {
-      xml.out.add("    <dependency>").nl();
-      String[] vals = dep.split(":");
-      if (!Is.lib(vals)) Throw.badConf(name(), dep);
-      xml.outTags(sp6, tags, vals);
-      xml.out.add("    </dependency>").nl();
+  @Override public void convert(Poml in, Xml out) {
+    for (String lib: in.conf.vals(name())) {
+      String[] vals = lib.split(":");
+      if (vals.length < 2) {
+        Throw.badConf(name(), lib);
+      }
+      out.line("    <dependency>");
+      out.tags(sp6, keys, vals);
+      out.line("    </dependency>");
     }
   }
-  private static final String[] tags = {
-    "groupId", "artifactId", "version",  // required
-    "scope", "optional", "type"  // optional
+  private static final String[] keys = {
+    "groupId", "artifactId", // required
+    "version", "scope", "optional", "type"  // optional
   };
 }

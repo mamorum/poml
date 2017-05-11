@@ -1,15 +1,18 @@
-package poml.conv.build.plugin;
+package poml.conv.build;
 
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
 
-public class OssrhTest extends ConvTestCase {
+public class PluginOssrhTest extends ConvTestCase {
 
-  Ossrh conv = new Ossrh();
+  Plugin conv = new Plugin();
 
   @Test public void test() {
-    conv.add(xml);
+    poml.conf.parse(data(
+        "plugin=&ossrh" + nl
+      ));
+    conv.convert(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +

@@ -3,7 +3,7 @@
 
   <groupId>com.github.mamorum</groupId>
   <artifactId>poml</artifactId>
-  <version>0.3.113</version>
+  <version>0.3.201</version>
   <packaging>jar</packaging>
 
   <dependencies>

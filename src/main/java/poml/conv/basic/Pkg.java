@@ -1,22 +1,22 @@
 package poml.conv.basic;
 
+import poml.Throw;
 import poml.conv.Converter;
-import poml.conv.Is;
-import poml.io.Poml;
-import poml.io.Xml;
-import poml.util.Throw;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Pkg implements Converter {
-
   @Override public String name() { return "pkg"; }
 
-  @Override public void convert(Poml poml, Xml xml) {
-    String val = poml.conf.val(name());
+  @Override public void convert(Poml in, Xml out) {
+    String val = in.conf.val(name());
     String[] vals = val.split(":");
-    if (!Is.pkg(vals)) Throw.badConf(name(), val);
-    xml.outTags(sp2, tags, vals);
+    if (vals.length < 3) {
+      Throw.badConf(name(), val);
+    }
+    out.tags(sp2, keys, vals);
   }
-  private static final String[] tags = {
+  private static final String[] keys = {
     "groupId", "artifactId", "version",  // required
     "packaging"  // optional
   };

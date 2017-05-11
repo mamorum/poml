@@ -2,6 +2,7 @@ package poml.conv;
 
 import java.util.HashMap;
 
+import poml.Throw;
 import poml.conv.basic.Depend;
 import poml.conv.basic.Parent;
 import poml.conv.basic.Pkg;
@@ -14,9 +15,8 @@ import poml.conv.more.Developer;
 import poml.conv.more.Info;
 import poml.conv.more.License;
 import poml.conv.prj.Model4;
-import poml.io.Poml;
-import poml.io.Xml;
-import poml.util.Throw;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Converters {
 
@@ -33,7 +33,7 @@ public class Converters {
     Converter c, Poml poml, Xml xml
   ) {
     if (poml.conf.has(c.name())) {
-      xml.out.nl();
+      xml.nl();
       c.convert(poml, xml);
     }
   }
@@ -42,10 +42,10 @@ public class Converters {
       String pre, String post
     ) {
       if (poml.conf.has(c.name())) {
-        xml.out.nl();
-        xml.out.add(pre).nl();
+        xml.nl();
+        xml.line(pre);
         c.convert(poml, xml);
-        xml.out.add(post).nl();
+        xml.line(post);
       }
   }
   private static void convertBasic(Poml poml, Xml xml) {
@@ -59,12 +59,12 @@ public class Converters {
   }
   private static void convertBuild(Poml poml, Xml xml) {
     if (poml.conf.has(plg.name())) {
-      xml.out.nl();
-      xml.out.add("  <build>").nl();
-      xml.out.add("    <plugins>").nl();
+      xml.nl();
+      xml.line("  <build>");
+      xml.line("    <plugins>");
       plg.convert(poml, xml);
-      xml.out.add("    </plugins>").nl();
-      xml.out.add("  </build>").nl();
+      xml.line("    </plugins>");
+      xml.line("  </build>");
     }
   }
   private static void convertMore(Poml poml, Xml xml) {

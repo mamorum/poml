@@ -3,31 +3,29 @@ package poml.conv.basic;
 import java.util.Map;
 
 import poml.conv.Converter;
-import poml.io.Poml;
-import poml.io.Xml;
+import poml.in.Poml;
+import poml.out.Xml;
 
 public class Properties implements Converter {
-
   @Override public String name() { return "properties"; }
-  
-  @Override public void convert(Poml poml, Xml xml) {
-    Map<String, String> kv = poml.conf.map(name());
-    xml.out.add("  <properties>").nl();
+
+  @Override public void convert(Poml in, Xml out) {
+    Map<String, String> kv = in.conf.map(name());
+    out.line("  <properties>");
     for (String k: kv.keySet()) {
-      if (k.startsWith("&")) replace(k, kv.get(k), xml);
-      else xml.outTag(sp4, k, kv.get(k));
+      render(out, k, kv.get(k));
     }
-    xml.out.add("  </properties>").nl();
+    out.line("  </properties>");
   }
-  
-  private void replace(String k, String v, Xml xml) {
+  private void render(Xml out, String k, String v) {
     if ("&encoding".equals(k)) {
-      xml.outTag(sp4, "project.build.sourceEncoding", v);
-      xml.outTag(sp4, "project.reporting.outputEncoding", v);
+      out.tag(sp4, "project.build.sourceEncoding", v);
+      out.tag(sp4, "project.reporting.outputEncoding", v);
     }
     else if ("&compiler".equals(k)) {
-      xml.outTag(sp4, "maven.compiler.source", v);
-      xml.outTag(sp4, "maven.compiler.target", v);
+      out.tag(sp4, "maven.compiler.source", v);
+      out.tag(sp4, "maven.compiler.target", v);
     }
+    else out.tag(sp4, k, v);
   }
 }
