@@ -93,10 +93,10 @@ public class Config {
     return false;
   }
   private static String ltrim(String s) {
-    int len=s.length(), st=0;
+    int len=s.length(), i=0;
     char[] c = s.toCharArray();
-    while ((st < len) && (c[st] <= ' ')) st++;
-    return (st > 0 ? s.substring(st) : s);
+    while ((i < len) && (c[i] <= ' ')) i++;
+    return (i > 0 ? s.substring(i) : s);
   }
 
   // -> for parsing config section of pom.poml.
