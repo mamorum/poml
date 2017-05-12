@@ -10,7 +10,6 @@ import poml.out.Xml;
 
 // pom.poml
 public class Poml {
-
   public BufferedReader in;
   public Config conf = new Config();
 

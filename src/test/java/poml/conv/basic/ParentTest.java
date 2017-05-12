@@ -8,7 +8,7 @@ import poml.conv.ConvTestCase;
 public class ParentTest extends ConvTestCase {
 
   Parent conv = new Parent();
-  
+
   @Test public void id_ver() {
     poml.conf.parse(data(
       "parent=parent.com:parent:1.0.0"
@@ -16,7 +16,7 @@ public class ParentTest extends ConvTestCase {
     conv.convert(poml, xml);
     result(
       "  <parent>" + nl +
-      "    <groupId>parent.com</groupId>" + nl + 
+      "    <groupId>parent.com</groupId>" + nl +
       "    <artifactId>parent</artifactId>" + nl +
       "    <version>1.0.0</version>" + nl +
       "  </parent>" + nl
@@ -25,7 +25,7 @@ public class ParentTest extends ConvTestCase {
 
   @Test public void ng_noConf() {
     poml.conf.parse(data(""));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {
@@ -35,17 +35,17 @@ public class ParentTest extends ConvTestCase {
 
   @Test public void ng_emptyConf() {
     poml.conf.parse(data("parent="));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).starts("Config not found");
     }
   }
 
   @Test public void ng_badConf() {
     poml.conf.parse(data("parent=parent.com::"));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {

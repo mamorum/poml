@@ -9,19 +9,19 @@ import poml.conv.ConvTestCase;
 public class PropertiesTest extends ConvTestCase {
 
   Properties conv = new Properties();
-  
+
   @Test public void single() {
     poml.conf.parse(data(
       "properties=project.build.sourceEncoding>UTF-8"
     ));
     conv.convert(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "  </properties>" + nl
     );
   }
-  
+
   @Test public void multi() {
     poml.conf.parse(data(
       "properties=" + nl +
@@ -30,20 +30,20 @@ public class PropertiesTest extends ConvTestCase {
     ));
     conv.convert(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <property>value</property>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "  </properties>" + nl
     );
   }
-  
+
   @Test public void replaceEncoding() {
     poml.conf.parse(data(
       "properties=&encoding>UTF-8"
     ));
     conv.convert(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>" + nl +
       "  </properties>" + nl
@@ -55,13 +55,13 @@ public class PropertiesTest extends ConvTestCase {
     ));
     conv.convert(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <maven.compiler.source>1.8</maven.compiler.source>" + nl +
       "    <maven.compiler.target>1.8</maven.compiler.target>" + nl +
       "  </properties>" + nl
     );
   }
-  
+
   @Test public void replaceMulti() {
     poml.conf.parse(data(
       "properties=" + nl +
@@ -73,7 +73,7 @@ public class PropertiesTest extends ConvTestCase {
     ));
     conv.convert(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <property1>value1</property1>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>" + nl +
@@ -84,10 +84,10 @@ public class PropertiesTest extends ConvTestCase {
       "  </properties>" + nl
     );
   }
-  
+
   @Test public void ng_noConf() {
     poml.conf.parse(data(""));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {
@@ -97,7 +97,17 @@ public class PropertiesTest extends ConvTestCase {
 
   @Test public void ng_emptyConf() {
     poml.conf.parse(data("properties="));
-    try { 
+    try {
+      conv.convert(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Config not found");
+    }
+  }
+
+  @Test public void ng_badConf() {
+    poml.conf.parse(data("properties=:"));
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {
@@ -105,23 +115,13 @@ public class PropertiesTest extends ConvTestCase {
     }
   }
 
-  @Test public void ng_badConf() {
-    poml.conf.parse(data("properties=:"));
-    try { 
-      conv.convert(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
-    }
-  }
-  
   @Test public void ng_badConf2() {
     poml.conf.parse(data(
       "properties=" + nl +
       "  key:val," + nl +
       "  keyval"
     ));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {
