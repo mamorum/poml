@@ -28,21 +28,9 @@ public class Config {
   //  - throw: if val is null or blank
   //  - return: not null or blank
   public String val(String key) {
-    String pv = p.get(key);
-    if (pv == null ||  "".equals(pv)) {
-      Throw.noConf(key);
-    }
-    return ltrim(pv);
-  }
-  private static String ltrim(String line) {
-    if (line.length() == 0) return "";
-    int i=0;
-    for (char c; i<line.length(); i++) {
-      c = line.charAt(i);
-      if (c == ' ') continue;
-      else break;
-    }
-    return line.substring(i);
+    String val = p.get(key);
+    if (none(val)) Throw.noConf(key);
+    return ltrim(val);
   }
   // key=val, val, ...
   //  - throw: if array element is null or blank
@@ -57,13 +45,13 @@ public class Config {
     String delim = hasEsc ? "(?<!\\\\)," : ",";
     String[] vals = val.split(delim);
     for (int i=0; i<vals.length; i++) {
-      vals[i] = vals[i].trim();
-      if(hasEsc) vals[i] = vals[i].replace(esc, ",");
       if (none(vals[i])) Throw.badConf(key, val);
+      if(hasEsc) vals[i] = vals[i].replace(esc, ",");
+      vals[i] = ltrim(vals[i]);
     }
     return vals;
   }
-  // key=k:v, k:v, ...
+  // key=k>v, k>v, ...
   //  - throw: if map element is null or blank
   //  - return: map (size 1+)
   public Map<String, String> map(String key) {
@@ -74,24 +62,20 @@ public class Config {
     }
     return map;
   }
-  //// "k:v" -> put("k", "v")
+  //// "k>v" -> put("k", "v")
+  ////" k > v " -> put("k", "v ")
   private static boolean put(
     String kv, Map<String, String> map
   ) {
     int pos = kv.indexOf('>');
     if (pos == -1) return false;
-    String k = kv.substring(0, pos).trim();
-    String v = kv.substring(pos + 1).trim();
+    String k = kv.substring(0, pos);
+    String v = kv.substring(pos + 1);
     if (none(k)) return false;
     if (none(v)) return false;
-    map.put(k, v);
+    map.put(k.trim(), ltrim(v));
     return true;
   }
-  private static boolean none(String s) {
-    if (s == null || "".equals(s)) return true;
-    return false;
-  }
-
   // -> for getting config tags from "{ <k>v</k>  ... }"
   public String tag(String key, String space) {
     List<String> lines = tags.get(key);
@@ -104,7 +88,16 @@ public class Config {
     }
     return sb.toString();
   }
-
+  private static boolean none(String s) {
+    if (s == null || "".equals(s)) return true;
+    return false;
+  }
+  private static String ltrim(String s) {
+    int len=s.length(), st=0;
+    char[] c = s.toCharArray();
+    while ((st < len) && (c[st] <= ' ')) st++;
+    return (st > 0 ? s.substring(st) : s);
+  }
 
   // -> for parsing config section of pom.poml.
   public void parse(BufferedReader lines) {
