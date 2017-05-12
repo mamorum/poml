@@ -23,14 +23,13 @@ public class Xml {
     );
   }
 
-  // -> output api
-  public Xml nl() {
-    out.append(System.lineSeparator());
-    return this;
-  }
+  // -> api for adding element to xml.
   public Xml txt(String s) {
     out.append(s);
     return this;
+  }
+  public void nl() {
+    out.append(System.lineSeparator());
   }
   public void line(String l) {
     out.append(l);

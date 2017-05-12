@@ -86,10 +86,14 @@ public class Plugin  implements Converter {
     out.txt("              <mainClass>").txt(main).txt("</mainClass>").nl();
     out.line("            </manifest>");
     String confArc = "&fatjar.conf.archive+";
-    if (in.conf.hasTag(confArc)) out.txt(in.conf.tag(confArc, sp10));
+    if (in.conf.hasTag(confArc)) {
+      out.txt(in.conf.tag(confArc, sp10));
+    }
     out.line("          </archive>");
     String conf = "&fatjar.conf+";
-    if (in.conf.hasTag(conf)) out.txt(in.conf.tag(conf, sp8));
+    if (in.conf.hasTag(conf)) {
+      out.txt(in.conf.tag(conf, sp8));
+    }
     out.line("        </configuration>");
     out.line("        <executions>");
     out.line("          <execution>");
