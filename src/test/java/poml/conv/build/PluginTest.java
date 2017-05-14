@@ -3,6 +3,7 @@ package poml.conv.build;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
+import poml.in.Poml;
 
 public class PluginTest extends ConvTestCase {
 
@@ -10,7 +11,7 @@ public class PluginTest extends ConvTestCase {
 
   // $
   @Test public void grp_art() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=$sbp" + nl +
       "$sbp=org.springframework.boot:spring-boot-maven-plugin"
     ));
@@ -24,7 +25,7 @@ public class PluginTest extends ConvTestCase {
   }
 
   @Test public void grp_exec() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=$jar" + nl +
       "$jar=org.apache.maven.plugins:maven-jar-plugin:2.6:false:true" + nl +
       "$jar.conf={" + nl +
@@ -74,7 +75,7 @@ public class PluginTest extends ConvTestCase {
 
   // &
   @Test public void fatjar_ossrh() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=&fatjar, &ossrh" + nl +
       "&fatjar=mainClass>poml.Main"
     ));
@@ -145,7 +146,7 @@ public class PluginTest extends ConvTestCase {
 
   // $, &
   @Test public void combi() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=$ant, &ossrh" + nl +
       "$ant=:maven-antrun-plugin:1.1" + nl +
       "$ant.execs={" + nl +

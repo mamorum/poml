@@ -3,13 +3,14 @@ package poml.conv.build;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
+import poml.in.Poml;
 
 public class PluginFatjarTest extends ConvTestCase {
 
   Plugin conv = new Plugin();
 
   @Test public void defaultVer() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
       "  mainClass>org.sample.Main"+ nl
@@ -45,7 +46,7 @@ public class PluginFatjarTest extends ConvTestCase {
   }
 
   @Test public void ver_jar() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
       "  ver>1.0.0,"+ nl +
@@ -83,7 +84,7 @@ public class PluginFatjarTest extends ConvTestCase {
   }
 
   @Test public void addConfArch() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=&fatjar" + nl +
       "&fatjar=mainClass>org.sample.Main"+ nl +
       "&fatjar.conf+={"+ nl +

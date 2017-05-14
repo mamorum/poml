@@ -5,19 +5,19 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
-import poml.conv.env.Dist;
+import poml.in.Poml;
 
 public class DistTest extends ConvTestCase {
 
   Dist conv = new Dist();
 
   @Test public void ossrh() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "dist=&ossrh"
     ));
     conv.convert(poml, xml);
     result(
-      "  <distributionManagement>" + nl + 
+      "  <distributionManagement>" + nl +
       "    <snapshotRepository>" + nl +
       "      <id>ossrh</id>" + nl +
       "      <url>https://oss.sonatype.org/content/repositories/snapshots</url>" + nl +
@@ -31,10 +31,10 @@ public class DistTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "dist=oss"
     ));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {

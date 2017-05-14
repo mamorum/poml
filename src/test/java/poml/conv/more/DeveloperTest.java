@@ -5,13 +5,14 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
+import poml.in.Poml;
 
 public class DeveloperTest extends ConvTestCase {
 
   Developer conv = new Developer();
-  
+
   @Test public void single() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "developer=$jdoe" + nl +
       "$jdoe=" + nl +
       "  id>jdoe, name>John Doe," + nl +
@@ -28,9 +29,9 @@ public class DeveloperTest extends ConvTestCase {
       "    </developer>" + nl
     );
   }
-  
+
   @Test public void multi() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "developer=$jdoe, $ken" + nl +
       "$jdoe=" + nl +
       "  id>jdoe, name>John Doe," + nl +
@@ -53,11 +54,11 @@ public class DeveloperTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "developer=$ng" + nl +
       "$ng=bad" + nl
     ));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {

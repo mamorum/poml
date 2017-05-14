@@ -24,7 +24,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void id_ver_pkg() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "pkg=group.com:artifact:0.0.1:jar"
     ));
     conv.convert(poml, xml);
@@ -37,7 +37,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml.conf.parse(data(""));
+    poml = Poml.parse(data(""));
     try {
       conv.convert(poml, xml);
       fail();
@@ -47,7 +47,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.parse(data("pkg="));
+    poml = Poml.parse(data("pkg="));
     try {
       conv.convert(poml, xml);
       fail();
@@ -57,7 +57,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data("pkg=group.com:::"));
+    poml = Poml.parse(data("pkg=group.com:::"));
     try {
       conv.convert(poml, xml);
       fail();

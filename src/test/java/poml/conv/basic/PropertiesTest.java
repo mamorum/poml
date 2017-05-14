@@ -5,13 +5,14 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
+import poml.in.Poml;
 
 public class PropertiesTest extends ConvTestCase {
 
   Properties conv = new Properties();
 
   @Test public void single() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=project.build.sourceEncoding>UTF-8"
     ));
     conv.convert(poml, xml);
@@ -23,7 +24,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void multi() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=" + nl +
       "  property>value," + nl +
       "  project.build.sourceEncoding>UTF-8"
@@ -38,7 +39,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void replaceEncoding() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=&encoding>UTF-8"
     ));
     conv.convert(poml, xml);
@@ -50,7 +51,7 @@ public class PropertiesTest extends ConvTestCase {
     );
   }
   @Test public void replaceCompiler() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=&compiler>1.8"
     ));
     conv.convert(poml, xml);
@@ -63,7 +64,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void replaceMulti() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=" + nl +
       "  property1>value1," + nl +
       "  &encoding>UTF-8," + nl +
@@ -86,7 +87,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml.conf.parse(data(""));
+    poml = Poml.parse(data(""));
     try {
       conv.convert(poml, xml);
       fail();
@@ -96,7 +97,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.parse(data("properties="));
+    poml = Poml.parse(data("properties="));
     try {
       conv.convert(poml, xml);
       fail();
@@ -106,7 +107,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data("properties=:"));
+    poml = Poml.parse(data("properties=:"));
     try {
       conv.convert(poml, xml);
       fail();
@@ -116,7 +117,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf2() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=" + nl +
       "  key:val," + nl +
       "  keyval"

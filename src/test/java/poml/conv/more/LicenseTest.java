@@ -5,13 +5,14 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
+import poml.in.Poml;
 
 public class LicenseTest extends ConvTestCase {
 
   License conv = new License();
-  
+
   @Test public void apache2() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "license=&apache2"
     ));
     conv.convert(poml, xml);
@@ -22,9 +23,9 @@ public class LicenseTest extends ConvTestCase {
       "    </license>" + nl
     );
   }
-  
+
   @Test public void usr() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "license=$bsd2" + nl +
       "$bsd2=" + nl +
       "  name>The New BSD License," + nl +
@@ -42,9 +43,9 @@ public class LicenseTest extends ConvTestCase {
       "    </license>" + nl
     );
   }
-  
+
   @Test public void multi() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "license=$wtfpl, &mit" + nl +
       "$wtfpl=" + nl +
       "  name>WTFPL," + nl +
@@ -64,11 +65,11 @@ public class LicenseTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "license=$ng" + nl +
       "$ng=bad" + nl
     ));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Opt {
-  private static final String cdir = " ./";
   private static final String nl = System.lineSeparator();
   public void help() {
     System.out.print((new StringBuilder(
@@ -34,12 +33,13 @@ public class Opt {
     (new File(mr)).mkdirs();
     (new File(tj)).mkdirs();
     (new File(tr)).mkdirs();
+    String sp = " ";
     System.out.print((new StringBuilder(
       "[POML:INFO] Created dirs")).append(nl
-      ).append(cdir).append(mj).append(nl
-      ).append(cdir).append(mr).append(nl
-      ).append(cdir).append(tj).append(nl
-      ).append(cdir).append(tr).append(nl
+      ).append(sp).append(mj).append(nl
+      ).append(sp).append(mr).append(nl
+      ).append(sp).append(tj).append(nl
+      ).append(sp).append(tr).append(nl
     ).toString());
   }
   private BufferedReader in;

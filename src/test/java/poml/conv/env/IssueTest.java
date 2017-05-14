@@ -5,13 +5,14 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
+import poml.in.Poml;
 
 public class IssueTest extends ConvTestCase {
 
   Issue conv = new Issue();
 
   @Test public void url() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "issue=url>https://github.com/mamorum/poml/issues"
     ));
     conv.convert(poml, xml);
@@ -23,7 +24,7 @@ public class IssueTest extends ConvTestCase {
   }
 
   @Test public void all() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "issue=" + nl +
       "  system>GitHub Issues," + nl +
       "  url>https://github.com/mamorum/poml/issues" + nl
@@ -38,10 +39,10 @@ public class IssueTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "issue=bad"
     ));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {

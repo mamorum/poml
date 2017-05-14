@@ -5,14 +5,14 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
-import poml.conv.more.Info;
+import poml.in.Poml;
 
 public class InfoTest extends ConvTestCase {
 
   Info conv = new Info();
-  
+
   @Test public void name() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "info=name>INFO"
     ));
     conv.convert(poml, xml);
@@ -20,9 +20,9 @@ public class InfoTest extends ConvTestCase {
       "  <name>INFO</name>" + nl
     );
   }
-  
+
   @Test public void all() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "info=" + nl +
       "  name>INFO," + nl +
       "  description>More Project Infomation," + nl +
@@ -31,7 +31,7 @@ public class InfoTest extends ConvTestCase {
     ));
     conv.convert(poml, xml);
     result(
-        "  <name>INFO</name>" + nl + 
+        "  <name>INFO</name>" + nl +
         "  <description>More Project Infomation</description>" + nl +
         "  <url>https://github.com/mamorum/poml</url>" + nl +
         "  <inceptionYear>2016</inceptionYear>" + nl
@@ -39,10 +39,10 @@ public class InfoTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "info=bad-conf"
     ));
-    try { 
+    try {
       conv.convert(poml, xml);
       fail();
     } catch (IllegalStateException e) {
