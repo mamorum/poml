@@ -1,42 +1,35 @@
 package poml.in;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-import poml.conv.Converters;
+import poml.conv.Convert;
 import poml.out.Xml;
 
-// pom.poml
+// pom.poml & its conversion tool
 public class Poml {
-  public BufferedReader in;
+  private BufferedReader in;
+  private Poml(BufferedReader in) { this.in = in; }
   public Config conf = new Config();
 
-  public void open(String path) throws IOException {
-    in = new BufferedReader(new InputStreamReader
-      (new FileInputStream(path), "UTF-8")
-    );
-  }
-  public void close() throws IOException {
-    if (in != null) in.close();
+  public static Poml parse(BufferedReader in) {
+    Poml p = new Poml(in);
+    p.conf.parse(in);
+    return p;
   }
 
-  public void to(Xml xml) throws IOException {
-    conf.parse(in);
-    if (conf.hasLayout) (new Layout()).render(this, xml);
-    else Converters.convert(this, xml);
+  public String toXml() throws IOException {
+    Xml xml = new Xml();
+    if (conf.hasLayout) layoutTo(xml);
+    else noLayoutTo(xml);
+    return xml.toString();
   }
-
-  private class Layout {
+  private void layoutTo(Xml xml)  throws IOException {
     String line;
-    public void render(Poml poml, Xml xml)  throws IOException {
-      while ((line = poml.in.readLine()) != null) {
-        if (line.length() == 0) xml.nl();
-        else convert(poml, xml);
+    while ((line = in.readLine()) != null) {
+      if (line.length() == 0) {
+        xml.nl(); continue;
       }
-    }
-    private void convert(Poml poml, Xml xml) {
       boolean endsAmp = line.endsWith("&");
       int start = line.indexOf("{{");
       int end = line.indexOf("}}");
@@ -45,9 +38,17 @@ public class Poml {
         xml.line(line);
       } else {  // convert
         String name = line.substring(start+2, end);
-        Converters.convert(name, poml, xml);
+        Convert.exec(name, this, xml);
       }
       if (endsAmp) xml.nl();
     }
+  }
+  private void noLayoutTo(Xml xml) {
+    Convert.start(this, xml);
+    Convert.basic(this, xml);
+    Convert.build(this, xml);
+    Convert.more(this, xml);
+    Convert.env(this, xml);
+    Convert.end(this, xml);
   }
 }

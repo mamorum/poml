@@ -15,7 +15,6 @@ public class ConvTestCase {
   public static String nl = System.lineSeparator();
 
   @Before public void before() {
-    poml = new Poml();
     xml = new Xml();
   }
 

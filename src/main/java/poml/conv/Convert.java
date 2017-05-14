@@ -18,18 +18,10 @@ import poml.conv.prj.Model4;
 import poml.in.Poml;
 import poml.out.Xml;
 
-public class Converters {
+public class Convert {
 
   // -> for "No Layout Section"
-  public static void convert(Poml poml, Xml xml) {
-    start.convert(poml, xml);
-    convertBasic(poml, xml);
-    convertBuild(poml, xml);
-    convertMore(poml, xml);
-    convertEnv(poml, xml);
-    end.convert(poml, xml);
-  }
-  private static void convert(
+  private static void exec(
     Converter c, Poml poml, Xml xml
   ) {
     if (poml.conf.has(c.name())) {
@@ -37,27 +29,33 @@ public class Converters {
       c.convert(poml, xml);
     }
   }
-  private static void convert(
-      Converter c, Poml poml, Xml xml,
-      String pre, String post
-    ) {
-      if (poml.conf.has(c.name())) {
-        xml.nl();
-        xml.line(pre);
-        c.convert(poml, xml);
-        xml.line(post);
-      }
+  private static void exec(
+    Converter c, Poml poml, Xml xml,
+    String pre, String post
+  ) {
+    if (poml.conf.has(c.name())) {
+      xml.nl();
+      xml.line(pre);
+      c.convert(poml, xml);
+      xml.line(post);
+    }
   }
-  private static void convertBasic(Poml poml, Xml xml) {
-    convert(pkg, poml, xml);
-    convert(parent, poml, xml);
-    convert(
+  public static void start(Poml poml, Xml xml) {
+    start.convert(poml, xml);
+  }
+  public static void end(Poml poml, Xml xml) {
+    end.convert(poml, xml);
+  }
+  public static void basic(Poml poml, Xml xml) {
+    exec(pkg, poml, xml);
+    exec(parent, poml, xml);
+    exec(
       depend, poml, xml,
       "  <dependencies>", "  </dependencies>"
     );
-    convert(props, poml, xml);
+    exec(props, poml, xml);
   }
-  private static void convertBuild(Poml poml, Xml xml) {
+  public static void build(Poml poml, Xml xml) {
     if (poml.conf.has(plg.name())) {
       xml.nl();
       xml.line("  <build>");
@@ -67,23 +65,23 @@ public class Converters {
       xml.line("  </build>");
     }
   }
-  private static void convertMore(Poml poml, Xml xml) {
-    convert(info, poml, xml);
-    convert(
+  public static void more(Poml poml, Xml xml) {
+    exec(info, poml, xml);
+    exec(
       license, poml, xml, "  <licenses>", "  </licenses>"
     );
-    convert(
+    exec(
       dev, poml, xml, "  <developers>", "  </developers>"
     );
   }
-  private static void convertEnv(Poml poml, Xml xml) {
-    convert(issue, poml, xml);
-    convert(scm, poml, xml);
-    convert(dist, poml, xml);
+  public static void env(Poml poml, Xml xml) {
+    exec(issue, poml, xml);
+    exec(scm, poml, xml);
+    exec(dist, poml, xml);
   }
 
   // -> for "Layout Section"
-  public static void convert(
+  public static void exec(
     String name, Poml poml, Xml xml
   ) {
     Converter c = all.get(name);

@@ -5,13 +5,14 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import poml.conv.ConvTestCase;
+import poml.in.Poml;
 
 public class PkgTest extends ConvTestCase {
 
   Pkg conv = new Pkg();
 
   @Test public void id_ver() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "pkg=group.com:artifact:0.0.1"
     ));
     conv.convert(poml, xml);
