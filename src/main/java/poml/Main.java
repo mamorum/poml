@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 
 import poml.in.Poml;
 
@@ -49,35 +50,28 @@ public class Main {
   }
 
   // cmd messages
+  private static final PrintStream out = System.out;
   private static long begin(String pomlPath) {
     long time = System.currentTimeMillis();
-    String msg = (new StringBuilder()
-      ).append("[POML:INFO] Converting "
-      ).append(pomlPath
-    ).toString();
-    System.out.println(msg);
+    out.print("[POML:INFO] Converting ");
+    out.println(pomlPath);
     return time;
   }
   private static void success(String xmlPath, long time) {
     String uptime = String.valueOf(
       (System.currentTimeMillis() - time)
     );
-    String msg = (new StringBuilder()
-      ).append("[POML:INFO] Created "
-      ).append(xmlPath).append(" @"
-      ).append(uptime).append("ms"
-    ).toString();
-    System.out.println(msg);
+    out.print("[POML:INFO] Created ");
+    out.print(xmlPath);
+    out.print(" @");
+    out.print(uptime);
+    out.println("ms");
   }
   private static void error(Throwable e, String xmlPath) {
-    String msg = (new StringBuilder()
-      ).append("[POML:ERROR] "
-      ).append(e.getMessage()
-      ).append(System.lineSeparator()
-      ).append("[POML:ERROR] Could not create "
-      ).append(xmlPath
-    ).toString();
-    System.out.println(msg);
+    out.print("[POML:ERROR] ");
+    out.println(e.getMessage());
+    out.print("[POML:ERROR] Could not create ");
+    out.println(xmlPath);
   }
 
   // file operations
@@ -87,10 +81,9 @@ public class Main {
     );
   }
   static void save(String txt, String path) throws IOException {
-    try (
-      BufferedWriter file =
-        new BufferedWriter(new OutputStreamWriter(
-          new FileOutputStream(path), "UTF-8"))
+    try (BufferedWriter file =
+      new BufferedWriter(new OutputStreamWriter(
+        new FileOutputStream(path), "UTF-8"))
     ) {
       file.write(txt);
     }

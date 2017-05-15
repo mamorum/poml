@@ -4,91 +4,95 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
+
+import poml.conv.basic.Pkg;
+import poml.conv.basic.Properties;
 
 public class Opt {
+  private static final PrintStream out = System.out;
   private static final String nl = System.lineSeparator();
   public void help() {
-    System.out.print((new StringBuilder(
-      "Convert pom.poml to pom.xml")).append(nl).append(nl
-      ).append("Usage: poml [option]").append(nl).append(nl
-      ).append("Option:").append(nl
-      ).append("  -h, help   \t   print this help").append(nl
-      ).append("  -v, version\t   print poml version").append(nl
-      ).append("  init       \t   create pom.poml, pom.xml and src dirs").append(nl
-      ).append("  mkdirs     \t   create src dirs for maven project").append(nl
-    ).toString());
+    out.println("Convert pom.poml to pom.xml");
+    out.println();
+    out.println("Usage: poml [option]");
+    out.println();
+    out.println("Option:");
+    out.println("  -h, help   \t   print this help");
+    out.println("  -v, version\t   print poml version");
+    out.println("  mkdirs     \t   create src dirs for maven project");
+    out.println("  init       \t   create pom.poml, pom.xml and src dirs");
   }
   public void version() {
-    System.out.println(
+    out.println(
       Main.class.getPackage()
         .getImplementationVersion()
     );
   }
+  // mkdirs ->
+  private static final String
+    mj="src/main/java", smj=" "+mj,
+    mr="src/main/resources", smr=" "+mr,
+    tj="src/test/java", stj=" "+tj,
+    tr="src/test/resources", str=" "+tr;
   public void mkdirs() {
-    String mj = "src/main/java";
-    String mr = "src/main/resources";
-    String tj = "src/test/java";
-    String tr = "src/test/resources";
     (new File(mj)).mkdirs();
     (new File(mr)).mkdirs();
     (new File(tj)).mkdirs();
     (new File(tr)).mkdirs();
-    String sp = " ";
-    System.out.print((new StringBuilder(
-      "[POML:INFO] Created dirs")).append(nl
-      ).append(sp).append(mj).append(nl
-      ).append(sp).append(mr).append(nl
-      ).append(sp).append(tj).append(nl
-      ).append(sp).append(tr).append(nl
-    ).toString());
+    out.println("[POML:INFO] Created dirs");
+    out.println(smj);
+    out.println(smr);
+    out.println(stj);
+    out.println(str);
   }
+  // init ->
   private BufferedReader in;
-  private String in(String item, String defVal) throws IOException {
-    System.out.print(item);
-    System.out.print(": (");
-    System.out.print(defVal);
-    System.out.print(") ");
+  public void init() throws Throwable {
+    in = new BufferedReader(new InputStreamReader(System.in));
+    out.println("This option creates pom.poml and maven project.");
+    out.println("Please answer some questions. (Press ^C to quit.)");
+    out.println();
+    String poml = askPoml();
+    out.println();
+    out.println("content of pom.poml: ");
+    out.println();
+    out.println(poml);
+    out.println();
+    String ok = ask("ok?", "yes");
+    if ("yes".equals(ok)) createPrj(poml);
+    else out.println("Quit.");
+  }
+  private String askPoml() throws IOException {
+    File dir = (new File(".")).getAbsoluteFile().getParentFile();
+    String grp = ask("groupId", "com.mydomain");
+    String art = ask("artifactId", dir.getName());
+    String ver = ask("version", "1.0.0");
+    String pkg = ask("packaging", "jar");
+    String enc = ask("encoding", "UTF-8");
+    String jdk = ask("jdk version", "1.8");
+    return (new StringBuilder(
+      ).append(Pkg.name).append("="
+      ).append(grp).append(":").append(art).append(":"
+      ).append(ver).append(":").append(pkg).append(nl
+      ).append(Properties.name).append("="
+      ).append(Properties.enc).append(">").append(enc).append(", "
+      ).append(Properties.comp).append(">").append(jdk)
+    ).toString();
+  }
+  private String ask(String item, String defVal) throws IOException {
+    String prompt = (new StringBuilder(
+      ).append(item).append(": (").append(defVal).append(") ")
+    ).toString();
+    out.print(prompt);
     String usrVal = in.readLine();
     return "".equals(usrVal) ? defVal : usrVal;
   }
-  public void init() throws Throwable {
-    // prompt
-    System.out.println("This option creates pom.poml and maven project.");
-    System.out.println("Please answer some questions. (Press ^C to quit.)");
-    System.out.println();
-    in = new BufferedReader(new InputStreamReader(System.in));
-    File cdir = new File(".").getAbsoluteFile().getParentFile();
-    String grp = in("groupId", "org.sample");
-    String art = in("artifactId", cdir.getName());
-    String ver = in("version", "1.0.0");
-    String pkg = in("packaging", "jar");
-    String enc = in("encoding", "UTF-8");
-    String jdk = in("jdk version", "1.8");
-    // no junit.
-
-    System.out.println();
-    System.out.println("content of pom.poml: ");
-    System.out.println();
-    String poml = (new StringBuilder(
-      ).append("pkg="
-      ).append(grp).append(":").append(art).append(":"
-      ).append(ver).append(":").append(pkg).append(nl
-      ).append("properties="
-      ).append("&encoding>").append(enc).append(", "
-      ).append("&compiler>").append(jdk)).toString();
-    System.out.println(poml);
-    System.out.println();
-    String ok = in("ok?", "yes");
-    if (!"yes".equals(ok)) {
-      System.out.println("Quit.");
-      return;
-    }
-    // create pom.poml
+  private void createPrj(String poml) throws Throwable {
     Main.save(poml, "pom.poml");
-    System.out.println();
-    System.out.println("[POML:INFO] Created pom.poml");
-    // convert pom.poml to pom.xml
-    Main.main("pom.poml", "pom.xml");
+    out.println();
+    out.println("[POML:INFO] Created pom.poml");
+    Main.main("pom.poml", "pom.xml"); // convert poml to xml
     mkdirs();
   }
 }
