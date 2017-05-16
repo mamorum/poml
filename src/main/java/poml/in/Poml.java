@@ -34,7 +34,9 @@ public class Poml {
       int start = line.indexOf("{{");
       int end = line.indexOf("}}");
       if (start == -1 || end == -1) { // not convert
-        if (endsAmp) line = line.substring(0, line.length()-1);
+        if (endsAmp) {
+          line = line.substring(0, line.length()-1);
+        }
         xml.line(line);
       } else {  // convert
         String name = line.substring(start+2, end);
