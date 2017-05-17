@@ -33,8 +33,8 @@ properties=&encoding>UTF-8, &compiler>1.8
 {{/model4}}
 ```
 
-Above file is "[poml/example/demo-layout/pom.poml](https://github.com/mamorum/poml/blob/master/example/demo-layout/pom.poml)".  
-It is converted to "[poml/example/demo-layout/pom.pom.xml](https://github.com/mamorum/poml/blob/master/example/demo-layout/pom.xml)".
+Above file is "[poml/example/demo-layout/pom.poml](../example/demo-layout/pom.poml)".  
+It is converted to "[poml/example/demo-layout/pom.pom.xml](../example/demo-layout/pom.xml)".
 
 
 ## 2. Limitation
