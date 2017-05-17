@@ -2,26 +2,13 @@ pkg=com.example:demo:0.0.1:jar
 depend=
   com.google.guava:guava:21.0,
   junit:junit:[4.12\,):test
-properties=&encoding>UTF-8
-plugin=$compiler, &fatjar
-$compiler=
-  org.apache.maven.plugins:maven-compiler-plugin:3.6.1
-$compiler.conf={
-  <source>1.8</source>
-  <target>1.8</target>
-}
-&fatjar=mainClass>demo.Main
+properties=&encoding>UTF-8, &compiler>1.8
 ---
 {{#model4}}&
   {{pkg}}&
   <dependencies>
+    <!-- guava, junit -->
     {{depend}}
   </dependencies>&
-  {{properties}}&
-  <build>
-    <plugins>
-      <!-- $compiler, &fatjar -->
-      {{plugin}}
-    </plugins>
-  </build>
+  {{properties}}
 {{/model4}}
