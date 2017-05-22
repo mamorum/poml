@@ -1,17 +1,18 @@
-This converter covers following tags of `pom.xml`.
+# pkg
+```
+pkg=groupId:artifactId:version:packaging
+---
+{{pkg}}
+```
 
-- /project/groupId
-- /project/artifactId
-- /project/version
-- /project/packaging
+- **Required**: groupId, artifactId, version
+- **Optional**: packaging
 
 
-## Example
+## Example 1
 **poml**
 ```
 pkg=com.example:demo:0.0.1:jar
----
-{{pkg}}
 ```
 
 **converted**
@@ -23,16 +24,15 @@ pkg=com.example:demo:0.0.1:jar
 ```
 
 
-## Config
+## Example 2
+**poml**
 ```
-pkg=groupId:artifactId:version:packaging
-```
-
-- **Val**: String(`v`)
-- **Required**: groupId, artifactId, version
-
-```
-# Without packaging
-pkg=groupId:artifactId:version
+pkg=com.example:demo:0.0.1
 ```
 
+**converted**
+```
+  <groupId>com.example</groupId>
+  <artifactId>demo</artifactId>
+  <version>0.0.1</version>
+```

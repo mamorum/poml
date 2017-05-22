@@ -1,28 +1,20 @@
 # POML - Reference
-## 1. Cmd Reference
-- [poml]
-
-
-## 2. Config Reference
-Poml file consists of `key=val` configurations.
-
-This reference consists of `key` pages. Each `key` page describes its `val`, converted XML tags, and samples. To understand XML tags, [Maven POM Reference](https://maven.apache.org/pom.html) is helpful.
-
-### 2.1. key pages (Ordered by POM Category)
+## Config
 - Project Model
-    - [model4]
+    - [model4](config/model4.md)
+    - [end](config/end.md)
 - Basics
-    - [pkg]
-    - [parent]
-    - [properties]
-    - [depend]
+    - [pkg](config/pkg.md)
+    - [parent](config/parent.md)
+    - [properties](config/properties.md)
+    - [depend](config/depend.md)
 - Build Plugins
-    - [plugin]
+    - [plugin](config/plugin.md)
 - More Project Info
-    - [info]
-    - [license]
-    - [developer]
+    - [info](config/info.md)
+    - [license](config/license.md)
+    - [developer](config/developer.md)
 - Environment
-    - [issue]
-    - [scm]
-    - [dist]
+    - [issue](config/issue.md)
+    - [scm](config/scm.md)
+    - [dist](config/dist.md)
