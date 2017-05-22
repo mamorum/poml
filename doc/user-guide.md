@@ -23,14 +23,14 @@ depend=
   junit:junit:[4.12\,):test
 properties=&encoding>UTF-8, &compiler>1.8
 ---
-{{#model4}}&
+{{model4}}&
   {{pkg}}&
   <dependencies>
     <!-- guava, junit -->
     {{depend}}
   </dependencies>&
   {{properties}}
-{{/model4}}
+{{end}}
 ```
 
 Above file is "[poml/example/demo-layout/pom.poml](../example/demo-layout/pom.poml)".  
@@ -72,12 +72,12 @@ In the above case,
 - val: `com.google.guava:guava:21.0,  junit:junit:[4.12\,):test`
 
 Please do **NOT** ends line with a space,  if it continues.  
-Spaces at end of line are not trimed.
+Spaces at the end of line are not trimed.
 
 
-### 3.2. Comma in a Val
-To use comma in a val (not separator), we can write escaped comma `\,`.  
-For example, to use `[4.12,)` (version 4.12 or over), we can write `[4.12\,)`.
+### 3.2. Comma
+To use comma as a part of val (not as a separator), we can write escaped comma `\,`.  
+For example, to express `[4.12,)` (version 4.12 or over), we can write `[4.12\,)`.
 
 ```
   junit:junit:[4.12\,):test
@@ -88,14 +88,14 @@ For example, to use `[4.12,)` (version 4.12 or over), we can write `[4.12\,)`.
 In this section, we can write XML elements, placeholders and ampersand.
 
 ```
-{{#model4}}&
+{{model4}}&
   {{pkg}}&
   <dependencies>
     <!-- guava, junit -->
     {{depend}}
   </dependencies>&
   {{properties}}
-{{/model4}}
+{{end}}
 ```
 
 ### 4.1. XML Elements
@@ -106,5 +106,5 @@ We can write one placeholder `{{key}}` per one line.
 Poml converts placeholders to XML tags, using `key=val` configurations.
 
 ### 4.3. Ampersand
-We can add one `&` to the end of XML elements and placeholders.  
-Poml converts one `&` to newline.
+We can add one `&` to the end of line.  
+Poml converts `&` to newline.

@@ -14,6 +14,7 @@ import poml.conv.env.Scm;
 import poml.conv.more.Developer;
 import poml.conv.more.Info;
 import poml.conv.more.License;
+import poml.conv.prj.End;
 import poml.conv.prj.Model4;
 import poml.in.Poml;
 import poml.out.Xml;
@@ -91,7 +92,7 @@ public class Convert {
 
   // -> all converters
   private static final Converter
-    start = new Model4.Start(), end = new Model4.End(),
+    start = new Model4(), end = new End(),
     pkg = new Pkg(), parent = new Parent(),
     depend = new Depend(), props = new Properties(),
     plg = new Plugin(),

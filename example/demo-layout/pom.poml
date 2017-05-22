@@ -4,11 +4,11 @@ depend=
   junit:junit:[4.12\,):test
 properties=&encoding>UTF-8, &compiler>1.8
 ---
-{{#model4}}&
+{{model4}}&
   {{pkg}}&
   <dependencies>
     <!-- guava, junit -->
     {{depend}}
   </dependencies>&
   {{properties}}
-{{/model4}}
+{{end}}
