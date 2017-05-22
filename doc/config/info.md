@@ -1,8 +1,6 @@
 # info
 ```
-info=
-  name>val1, description>val2,
-  url>val3, inceptionYear>val4
+info=name>v, description>v, url>v, inceptionYear>v
 ---
 {{info}}
 ```
