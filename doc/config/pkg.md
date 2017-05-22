@@ -22,17 +22,3 @@ pkg=com.example:demo:0.0.1:jar
   <version>0.0.1</version>
   <packaging>jar</packaging>
 ```
-
-
-## Example 2
-**poml**
-```
-pkg=com.example:demo:0.0.1
-```
-
-**converted**
-```
-  <groupId>com.example</groupId>
-  <artifactId>demo</artifactId>
-  <version>0.0.1</version>
-```
