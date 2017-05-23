@@ -23,6 +23,7 @@ pkg=com.example:demo:0.0.1:jar
 ```
 
 ### Config + Layout
+**poml**
 ```
 pkg=com.example:demo:0.0.1
 ---
