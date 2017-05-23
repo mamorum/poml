@@ -1,15 +1,14 @@
-# pkg
+# pkg {{pkg}}
 ```
 pkg=groupId:artifactId:version:packaging
----
-{{pkg}}
 ```
 
 - **Required**: groupId, artifactId, version
 - **Optional**: packaging
 
 
-## Example 1
+## Examples
+### Config
 **poml**
 ```
 pkg=com.example:demo:0.0.1:jar
@@ -21,4 +20,18 @@ pkg=com.example:demo:0.0.1:jar
   <artifactId>demo</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
+```
+
+### Config + Layout
+```
+pkg=com.example:demo:0.0.1
+---
+{{pkg}}
+```
+
+**converted**
+```
+  <groupId>com.example</groupId>
+  <artifactId>demo</artifactId>
+  <version>0.0.1</version>
 ```

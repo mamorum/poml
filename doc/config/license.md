@@ -1,24 +1,81 @@
-### license
-Now, license supports a single value, Apache 2.0 or MIT. Converted tags are following.
-
-**license:Apache 2.0**
+# license {{license}}
 ```
-  <licenses>
+license=$1, $2, ...
+$1=name>v, url>v, distribution>v, comments>v
+$2=name>v, url>v, distribution>v, comments>v
+...
+```
+
+- **Optional**: name, url, distribution, comments
+
+
+## Embedded License
+- `&apache2`
+- `&mit`
+
+```
+license=&apache2, &mit
+```
+
+
+## Examples
+### Config
+**poml**
+```
+license=&apache2, &mit, $bsd2
+$bsd2=
+  name>The New BSD License,
+  url>http://www.opensource.org/licenses/bsd-license.php,
+  distribution>repo, comments>The 2-Clause BSD License
+```
+
+**converted**
+```
     <license>
       <name>The Apache License, Version 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+    </license>
+    <license>
+      <name>The New BSD License</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+      <distribution>repo</distribution>
+      <comments>The 2-Clause BSD License</comments>
+    </license>
+```
+
+### Config + Layout
+**poml**
+```
+license=$wtfpl
+$wtfpl=name>WTFPL, url>http://www.wtfpl.net
+---
+  <licenses>
+    {{license}}
+    <license>
+      <name>The New BSD License</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+    </license>    
   </licenses>
 ```
 
-**license:MIT**
+**converted**
 ```
   <licenses>
     <license>
-      <name>MIT License</name>
-      <url>http://www.opensource.org/licenses/mit-license.php</url>
+      <name>WTFPL</name>
+      <url>http://www.wtfpl.net</url>
+    </license>
+    <license>
+      <name>The New BSD License</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
     </license>
   </licenses>
 ```
 
-This refers to "[License Information - The Central Repository](http://central.sonatype.org/pages/requirements.html#license-information)".
+
+## References
+[License Information - The Central Repository](http://central.sonatype.org/pages/requirements.html#license-information)
