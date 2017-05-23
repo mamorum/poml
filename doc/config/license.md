@@ -31,6 +31,7 @@ $bsd2=
 
 **converted**
 ```
+  <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
@@ -45,6 +46,7 @@ $bsd2=
       <distribution>repo</distribution>
       <comments>The 2-Clause BSD License</comments>
     </license>
+  </licenses>
 ```
 
 ### Config + Layout
