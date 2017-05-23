@@ -88,14 +88,14 @@ For example, to express `[4.12,)` (version 4.12 or over), we can write `[4.12\,)
 In this section, we can write XML elements, placeholders and ampersand.
 
 ```
-{{model4}}&
+{{prj}}&
   {{pkg}}&
   <dependencies>
     <!-- guava, junit -->
     {{depend}}
   </dependencies>&
   {{properties}}
-{{end}}
+</project>
 ```
 
 ### 4.1. XML Elements
