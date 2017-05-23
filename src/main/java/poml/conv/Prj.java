@@ -1,11 +1,10 @@
-package poml.conv.prj;
+package poml.conv;
 
-import poml.conv.Converter;
 import poml.in.Poml;
 import poml.out.Xml;
 
-public class Model4 implements Converter {
-  @Override public String name() { return "model4"; }
+public class Prj implements Converter {
+  @Override public String name() { return "prj"; }
   @Override public void convert(Poml in, Xml out) {
     out.line(
       "<project xmlns=\"http://maven.apache.org/POM/4.0.0\" " +

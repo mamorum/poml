@@ -14,8 +14,6 @@ import poml.conv.env.Scm;
 import poml.conv.more.Developer;
 import poml.conv.more.Info;
 import poml.conv.more.License;
-import poml.conv.prj.End;
-import poml.conv.prj.Model4;
 import poml.in.Poml;
 import poml.out.Xml;
 
@@ -45,7 +43,7 @@ public class Convert {
     start.convert(poml, xml);
   }
   public static void end(Poml poml, Xml xml) {
-    end.convert(poml, xml);
+    xml.txt("</project>");
   }
   public static void basic(Poml poml, Xml xml) {
     exec(pkg, poml, xml);
@@ -92,7 +90,7 @@ public class Convert {
 
   // -> all converters
   private static final Converter
-    start = new Model4(), end = new End(),
+    start = new Prj(),
     pkg = new Pkg(), parent = new Parent(),
     depend = new Depend(), props = new Properties(),
     plg = new Plugin(),
@@ -101,7 +99,7 @@ public class Convert {
     issue = new Issue(), scm = new Scm(),
     dist = new Dist();
   private static final Converter[] convs = {
-    start, end, // prj
+    start, // prj
     pkg, parent, depend, props, // basic
     plg, // build
     info, license, dev, // more

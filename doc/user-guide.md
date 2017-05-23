@@ -23,14 +23,14 @@ depend=
   junit:junit:[4.12\,):test
 properties=&encoding>UTF-8, &compiler>1.8
 ---
-{{model4}}&
+{{prj}}&
   {{pkg}}&
   <dependencies>
     <!-- guava, junit -->
     {{depend}}
   </dependencies>&
   {{properties}}
-{{end}}
+</project>
 ```
 
 Above file is "[poml/example/demo-layout/pom.poml](../example/demo-layout/pom.poml)".  

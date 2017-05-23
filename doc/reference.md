@@ -1,8 +1,6 @@
 # POML - Reference
 ## Config
-- Project Model
-    - [model4](config/model4.md)
-    - [end](config/end.md)
+- [prj](config/prj.md)
 - Basics
     - [pkg](config/pkg.md)
     - [parent](config/parent.md)
