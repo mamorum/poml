@@ -1,20 +1,18 @@
-_Since POML v0.2.2_
+# issue {{issue}}
+```
+issue=system>v, url>v
+```
 
-This converter covers following tags of `pom.xml`.
-
-- /project/issueManagement
-- /project/issueManagement/system
-- /project/issueManagement/url
+- **Optional**: system, url
 
 
-## Example
+## Examples
+## Config
 **poml**
 ```
 issue=
-  system:GitHub Issues,
-  url:https://github.com/mamorum/poml/issues
----
-{{issue}}
+  system>GitHub Issues,
+  url>https://github.com/mamorum/poml/issues
 ```
 
 **converted**
@@ -25,12 +23,17 @@ issue=
   </issueManagement>
 ```
 
-
-## Config
+## Config + Layout
+**poml**
 ```
-issue=
-  system:v,
-  url:v
+issue=url>https://github.com/mamorum/poml/issues
+---
+{{issue}}
 ```
 
-- **Val**: Map(`k:v, k:v, ... k:v`)
+**converted**
+```
+  <issueManagement>
+    <url>https://github.com/mamorum/poml/issues</url>
+  </issueManagement>
+```
