@@ -35,10 +35,10 @@ public class ScmTest extends ConvTestCase {
     conv.convert(poml, xml);
     result(
       "  <scm>" + nl +
-      "    <url>https://github.com/mamorum/poml</url>" + nl +
       "    <connection>scm:git:https://github.com/mamorum/poml.git</connection>" + nl +
       "    <developerConnection>scm:git:git@github.com:mamorum/poml.git</developerConnection>" + nl +
       "    <tag>HEAD</tag>" + nl +
+      "    <url>https://github.com/mamorum/poml</url>" + nl +
       "  </scm>" + nl
     );
   }
