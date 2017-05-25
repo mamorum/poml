@@ -13,12 +13,13 @@ properties=k>v, k>v, ...
 ### Config
 **poml**
 ```
-properties=&encoding>UTF-8
+properties=gpg.skip>true, &encoding>UTF-8
 ```
 
 **converted**
 ```
   <properties>
+    <gpg.skip>true</gpg.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -27,7 +28,7 @@ properties=&encoding>UTF-8
 ### Config + Layout
 **poml**
 ```
-properties=&compiler>1.8, gpg.skip>true
+properties=&compiler>1.8
 ---
 {{properties}}
 ```
@@ -37,6 +38,5 @@ properties=&compiler>1.8, gpg.skip>true
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <gpg.skip>true</gpg.skip>
   </properties>
 ```
