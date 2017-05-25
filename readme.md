@@ -10,11 +10,8 @@ There are two things in Poml.
 ## Documents
 - [Installation Guide](doc/installation-guide.md)
 - [User Guide](doc/user-guide.md)
-- [Blog](http://java-poml.blogspot.com/)
-
-<!--
 - [Reference](doc/reference.md)
--->
+- [Blog](http://java-poml.blogspot.com/)
 
 
 ## Getting Started
