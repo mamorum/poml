@@ -13,10 +13,6 @@ $2=name>v, url>v, distribution>v, comments>v
 - `&apache2`
 - `&mit`
 
-```
-license=&apache2, &mit
-```
-
 
 ## Examples
 ### Config
