@@ -4,8 +4,8 @@
 - Basics
     - [pkg](config/pkg.md)
     - [parent](config/parent.md)
-    - [properties](config/properties.md)
     - [depend](config/depend.md)
+    - [properties](config/properties.md)
 - Build Plugins
     - [plugin](config/plugin.md)
 - More Project Info
