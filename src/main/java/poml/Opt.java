@@ -64,20 +64,20 @@ public class Opt {
     else out.println("Quit.");
   }
   private String askPoml() throws IOException {
-    File dir = (new File(".")).getAbsoluteFile().getParentFile();
-    String grp = ask("groupId", "com.mydomain");
-    String art = ask("artifactId", dir.getName());
-    String ver = ask("version", "1.0.0");
-    String pkg = ask("packaging", "jar");
-    String enc = ask("encoding", "UTF-8");
-    String jdk = ask("jdk version", "1.8");
+    String dir = (
+      new File(".")
+    ).getAbsoluteFile().getParentFile().getName();
     return (new StringBuilder(
       ).append(Pkg.name).append("="
-      ).append(grp).append(":").append(art).append(":"
-      ).append(ver).append(":").append(pkg).append(nl
+      ).append(ask("groupId", "com.domain")).append(":"
+      ).append(ask("artifactId", dir)).append(":"
+      ).append(ask("version", "1.0.0")).append(":"
+      ).append(ask("packaging", "jar")).append(nl
       ).append(Properties.name).append("="
-      ).append(Properties.enc).append(">").append(enc).append(", "
-      ).append(Properties.comp).append(">").append(jdk)
+      ).append(Properties.enc).append(">"
+      ).append(ask("encoding", "UTF-8")).append(", "
+      ).append(Properties.comp).append(">"
+      ).append(ask("jdk version", "1.8"))
     ).toString();
   }
   private String ask(String item, String defVal) throws IOException {
