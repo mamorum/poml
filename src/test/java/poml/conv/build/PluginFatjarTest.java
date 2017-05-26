@@ -2,12 +2,11 @@ package poml.conv.build;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.Build;
 
 public class PluginFatjarTest extends ConvTestCase {
-
-  Plugin conv = new Plugin();
 
   @Test public void defaultVer() {
     poml = Poml.parse(data(
@@ -15,7 +14,7 @@ public class PluginFatjarTest extends ConvTestCase {
       "&fatjar="+ nl +
       "  mainClass>org.sample.Main"+ nl
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
@@ -53,7 +52,7 @@ public class PluginFatjarTest extends ConvTestCase {
       "  jarName>sample.jar,"+ nl +
       "  mainClass>org.sample.Main"+ nl
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
@@ -101,7 +100,7 @@ public class PluginFatjarTest extends ConvTestCase {
       "  <index>true</index>"+ nl +
       "}"+ nl
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +

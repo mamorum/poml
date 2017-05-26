@@ -4,19 +4,18 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.Env;
 
 public class ScmTest extends ConvTestCase {
-
-  Scm conv = new Scm();
 
   @Test public void url() {
     poml = Poml.parse(data(
       "scm=" + nl +
       "  url>https://github.com/mamorum/poml/" + nl
     ));
-    conv.convert(poml, xml);
+    Env.scm(poml, xml);
     result(
       "  <scm>" + nl +
       "    <url>https://github.com/mamorum/poml/</url>" + nl +
@@ -32,7 +31,7 @@ public class ScmTest extends ConvTestCase {
       "  tag>HEAD," + nl +
       "  url>https://github.com/mamorum/poml" + nl
     ));
-    conv.convert(poml, xml);
+    Env.scm(poml, xml);
     result(
       "  <scm>" + nl +
       "    <connection>scm:git:https://github.com/mamorum/poml.git</connection>" + nl +
@@ -48,7 +47,7 @@ public class ScmTest extends ConvTestCase {
       "scm=badconf"
     ));
     try {
-      conv.convert(poml, xml);
+      Env.scm(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config", false);

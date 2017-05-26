@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
-import poml.conv.basic.Pkg;
-import poml.conv.basic.Properties;
+import poml.convert.Basic;
 
 public class Opt {
   private static final PrintStream out = System.out;
@@ -68,15 +67,15 @@ public class Opt {
       new File(".")
     ).getAbsoluteFile().getParentFile().getName();
     return (new StringBuilder(
-      ).append(Pkg.name).append("="
+      ).append(Basic.pkg).append("="
       ).append(ask("groupId", "com.domain")).append(":"
       ).append(ask("artifactId", dir)).append(":"
       ).append(ask("version", "1.0.0")).append(":"
       ).append(ask("packaging", "jar")).append(nl
-      ).append(Properties.name).append("="
-      ).append(Properties.enc).append(">"
+      ).append(Basic.props).append("="
+      ).append(Basic.enc).append(">"
       ).append(ask("encoding", "UTF-8")).append(", "
-      ).append(Properties.comp).append(">"
+      ).append(Basic.jdk).append(">"
       ).append(ask("jdk version", "1.8"))
     ).toString();
   }

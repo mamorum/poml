@@ -4,18 +4,17 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.Env;
 
 public class DistTest extends ConvTestCase {
-
-  Dist conv = new Dist();
 
   @Test public void ossrh() {
     poml = Poml.parse(data(
       "dist=&ossrh"
     ));
-    conv.convert(poml, xml);
+    Env.dist(poml, xml);
     result(
       "  <distributionManagement>" + nl +
       "    <snapshotRepository>" + nl +
@@ -35,7 +34,7 @@ public class DistTest extends ConvTestCase {
       "dist=oss"
     ));
     try {
-      conv.convert(poml, xml);
+      Env.dist(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

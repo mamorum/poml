@@ -4,18 +4,17 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.More;
 
 public class InfoTest extends ConvTestCase {
-
-  Info conv = new Info();
 
   @Test public void name() {
     poml = Poml.parse(data(
       "info=name>INFO"
     ));
-    conv.convert(poml, xml);
+    More.info(poml, xml);
     result(
       "  <name>INFO</name>" + nl
     );
@@ -29,7 +28,7 @@ public class InfoTest extends ConvTestCase {
       "  url>https://github.com/mamorum/poml," + nl +
       "  inceptionYear>2016" + nl
     ));
-    conv.convert(poml, xml);
+    More.info(poml, xml);
     result(
         "  <name>INFO</name>" + nl +
         "  <description>More Project Infomation</description>" + nl +
@@ -43,7 +42,7 @@ public class InfoTest extends ConvTestCase {
       "info=bad-conf"
     ));
     try {
-      conv.convert(poml, xml);
+      More.info(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

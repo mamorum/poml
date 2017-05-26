@@ -4,18 +4,17 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.Basic;
 
 public class PkgTest extends ConvTestCase {
-
-  Pkg conv = new Pkg();
 
   @Test public void id_ver() {
     poml = Poml.parse(data(
       "pkg=group.com:artifact:0.0.1"
     ));
-    conv.convert(poml, xml);
+    Basic.pkg(poml, xml);
     result(
       "  <groupId>group.com</groupId>" + nl +
       "  <artifactId>artifact</artifactId>" + nl +
@@ -27,7 +26,7 @@ public class PkgTest extends ConvTestCase {
     poml = Poml.parse(data(
       "pkg=group.com:artifact:0.0.1:jar"
     ));
-    conv.convert(poml, xml);
+    Basic.pkg(poml, xml);
     result(
       "  <groupId>group.com</groupId>" + nl +
       "  <artifactId>artifact</artifactId>" + nl +
@@ -39,7 +38,7 @@ public class PkgTest extends ConvTestCase {
   @Test public void ng_noConf() {
     poml = Poml.parse(data(""));
     try {
-      conv.convert(poml, xml);
+      Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -49,7 +48,7 @@ public class PkgTest extends ConvTestCase {
   @Test public void ng_emptyConf() {
     poml = Poml.parse(data("pkg="));
     try {
-      conv.convert(poml, xml);
+      Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -59,7 +58,7 @@ public class PkgTest extends ConvTestCase {
   @Test public void ng_badConf() {
     poml = Poml.parse(data("pkg=group.com:::"));
     try {
-      conv.convert(poml, xml);
+      Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

@@ -4,18 +4,17 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.Basic;
 
 public class PropertiesTest extends ConvTestCase {
-
-  Properties conv = new Properties();
 
   @Test public void single() {
     poml = Poml.parse(data(
       "properties=project.build.sourceEncoding>UTF-8"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
@@ -29,7 +28,7 @@ public class PropertiesTest extends ConvTestCase {
       "  property>value," + nl +
       "  project.build.sourceEncoding>UTF-8"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
       "    <property>value</property>" + nl +
@@ -42,7 +41,7 @@ public class PropertiesTest extends ConvTestCase {
     poml = Poml.parse(data(
       "properties=&encoding>UTF-8"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
@@ -54,7 +53,7 @@ public class PropertiesTest extends ConvTestCase {
     poml = Poml.parse(data(
       "properties=&compiler>1.8"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
       "    <maven.compiler.source>1.8</maven.compiler.source>" + nl +
@@ -72,7 +71,7 @@ public class PropertiesTest extends ConvTestCase {
       "  &compiler>1.8," + nl +
       "  property3>value3"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
       "    <property1>value1</property1>" + nl +
@@ -89,7 +88,7 @@ public class PropertiesTest extends ConvTestCase {
   @Test public void ng_noConf() {
     poml = Poml.parse(data(""));
     try {
-      conv.convert(poml, xml);
+      Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -99,7 +98,7 @@ public class PropertiesTest extends ConvTestCase {
   @Test public void ng_emptyConf() {
     poml = Poml.parse(data("properties="));
     try {
-      conv.convert(poml, xml);
+      Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -109,7 +108,7 @@ public class PropertiesTest extends ConvTestCase {
   @Test public void ng_badConf() {
     poml = Poml.parse(data("properties=:"));
     try {
-      conv.convert(poml, xml);
+      Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");
@@ -123,7 +122,7 @@ public class PropertiesTest extends ConvTestCase {
       "  keyval"
     ));
     try {
-      conv.convert(poml, xml);
+      Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

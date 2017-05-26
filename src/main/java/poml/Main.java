@@ -9,8 +9,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 
-import poml.in.Poml;
-
 public class Main {
   private static void exit(int i) { System.exit(i); }
   private static void ng(Opt opt) { opt.help(); exit(1); }

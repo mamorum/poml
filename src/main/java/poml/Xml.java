@@ -1,4 +1,6 @@
-package poml.out;
+package poml;
+
+import java.util.Map;
 
 // pom.xml
 public class Xml {
@@ -16,6 +18,11 @@ public class Xml {
     out.append(l); nl();
   }
 
+  public void tags(
+    String space, String[] key, Map<String, String> val
+  ) {
+    for (String k: key) tag(space, k, val.get(k));
+  }
   public void tags(
     String space, String[] key, String[] val
   ) {

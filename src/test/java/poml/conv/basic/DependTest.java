@@ -4,18 +4,17 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.Basic;
 
 public class DependTest extends ConvTestCase {
-
-  Depend conv = new Depend();
 
   @Test public void id2art() {
     poml = Poml.parse(data(
       "depend=group.com:artifact"
     ));
-    conv.convert(poml, xml);
+    Basic.depend(poml, xml);
     result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
@@ -28,7 +27,7 @@ public class DependTest extends ConvTestCase {
     poml = Poml.parse(data(
       "depend=group.com:artifact:0.0.1"
     ));
-    conv.convert(poml, xml);
+    Basic.depend(poml, xml);
     result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
@@ -42,7 +41,7 @@ public class DependTest extends ConvTestCase {
     poml = Poml.parse(data(
       "depend=group.com:artifact:0.0.1:::jar"
     ));
-    conv.convert(poml, xml);
+    Basic.depend(poml, xml);
     result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
@@ -57,7 +56,7 @@ public class DependTest extends ConvTestCase {
     poml = Poml.parse(data(
       "depend=group.com:artifact:0.0.1::false"
     ));
-    conv.convert(poml, xml);
+    Basic.depend(poml, xml);
     result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
@@ -72,7 +71,7 @@ public class DependTest extends ConvTestCase {
     poml = Poml.parse(data(
       "depend=group.com:artifact:0.0.1:test:true:jar"
     ));
-    conv.convert(poml, xml);
+    Basic.depend(poml, xml);
     result(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
@@ -93,7 +92,7 @@ public class DependTest extends ConvTestCase {
       "  sample.com:sample:0.0.1:provided," + nl +
       "  group.com:artifact:0.0.1:test:true:jar"
     ));
-    conv.convert(poml, xml);
+    Basic.depend(poml, xml);
     result(
       "    <dependency>" + nl +
       "      <groupId>demo.com</groupId>" + nl +
@@ -124,7 +123,7 @@ public class DependTest extends ConvTestCase {
   @Test public void ng_noConf() {
     poml = Poml.parse(data(""));
     try {
-      conv.convert(poml, xml);
+      Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -134,7 +133,7 @@ public class DependTest extends ConvTestCase {
   @Test public void ng_emptyConf() {
     poml = Poml.parse(data("depend="));
     try {
-      conv.convert(poml, xml);
+      Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -146,7 +145,7 @@ public class DependTest extends ConvTestCase {
       "depend=group.com:"
     ));
     try {
-      conv.convert(poml, xml);
+      Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");
@@ -160,7 +159,7 @@ public class DependTest extends ConvTestCase {
       "  group.com:"
     ));
     try {
-      conv.convert(poml, xml);
+      Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");
@@ -173,7 +172,7 @@ public class DependTest extends ConvTestCase {
       "  group.com:artifact:1.0"
     ));
     try {
-      conv.convert(poml, xml);
+      Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

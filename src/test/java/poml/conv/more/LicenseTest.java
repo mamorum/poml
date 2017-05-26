@@ -4,18 +4,17 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.More;
 
 public class LicenseTest extends ConvTestCase {
-
-  License conv = new License();
 
   @Test public void apache2() {
     poml = Poml.parse(data(
       "license=&apache2"
     ));
-    conv.convert(poml, xml);
+    More.license(poml, xml);
     result(
       "    <license>" + nl +
       "      <name>The Apache License, Version 2.0</name>" + nl +
@@ -33,7 +32,7 @@ public class LicenseTest extends ConvTestCase {
       "  distribution>repo," + nl +
       "  comments>The 2-Clause BSD License" + nl
     ));
-    conv.convert(poml, xml);
+    More.license(poml, xml);
     result(
       "    <license>" + nl +
       "      <name>The New BSD License</name>" + nl +
@@ -51,7 +50,7 @@ public class LicenseTest extends ConvTestCase {
       "  name>WTFPL," + nl +
       "  url>http://www.wtfpl.net/" + nl
     ));
-    conv.convert(poml, xml);
+    More.license(poml, xml);
     result(
       "    <license>" + nl +
       "      <name>WTFPL</name>" + nl +
@@ -70,7 +69,7 @@ public class LicenseTest extends ConvTestCase {
       "$ng=bad" + nl
     ));
     try {
-      conv.convert(poml, xml);
+      More.license(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

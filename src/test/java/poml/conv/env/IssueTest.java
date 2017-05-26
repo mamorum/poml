@@ -4,18 +4,17 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.Env;
 
 public class IssueTest extends ConvTestCase {
-
-  Issue conv = new Issue();
 
   @Test public void url() {
     poml = Poml.parse(data(
       "issue=url>https://github.com/mamorum/poml/issues"
     ));
-    conv.convert(poml, xml);
+    Env.issue(poml, xml);
     result(
       "  <issueManagement>" + nl +
       "    <url>https://github.com/mamorum/poml/issues</url>" + nl +
@@ -29,7 +28,7 @@ public class IssueTest extends ConvTestCase {
       "  system>GitHub Issues," + nl +
       "  url>https://github.com/mamorum/poml/issues" + nl
     ));
-    conv.convert(poml, xml);
+    Env.issue(poml, xml);
     result(
       "  <issueManagement>" + nl +
       "    <system>GitHub Issues</system>" + nl +
@@ -43,7 +42,7 @@ public class IssueTest extends ConvTestCase {
       "issue=bad"
     ));
     try {
-      conv.convert(poml, xml);
+      Env.issue(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config", true);

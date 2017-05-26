@@ -1,4 +1,4 @@
-package poml.in;
+package poml;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import poml.Throw;
 
 public class Config {
   boolean hasLayout = false;

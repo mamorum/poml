@@ -4,12 +4,11 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
-import poml.in.Poml;
+import poml.convert.More;
 
 public class DeveloperTest extends ConvTestCase {
-
-  Developer conv = new Developer();
 
   @Test public void single() {
     poml = Poml.parse(data(
@@ -19,7 +18,7 @@ public class DeveloperTest extends ConvTestCase {
       "  email>jdoe@example.com," + nl +
       "  url>http://www.example.com/jdoe" + nl
     ));
-    conv.convert(poml, xml);
+    More.developer(poml, xml);
     result(
       "    <developer>" + nl +
       "      <id>jdoe</id>" + nl +
@@ -39,7 +38,7 @@ public class DeveloperTest extends ConvTestCase {
       "  url>http://www.example.com/jdoe" + nl +
       "$ken=id>ken" + nl
     ));
-    conv.convert(poml, xml);
+    More.developer(poml, xml);
     result(
       "    <developer>" + nl +
       "      <id>jdoe</id>" + nl +
@@ -59,7 +58,7 @@ public class DeveloperTest extends ConvTestCase {
       "$ng=bad" + nl
     ));
     try {
-      conv.convert(poml, xml);
+      More.developer(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

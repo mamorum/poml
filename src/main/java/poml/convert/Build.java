@@ -1,19 +1,31 @@
-package poml.conv.build;
+package poml.convert;
 
 import java.util.Map;
 
+import poml.Poml;
 import poml.Throw;
-import poml.conv.Converter;
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.Xml;
 
-public class Plugin  implements Converter {
+public class Build {
+  public static final String
+    plugin="plugin",
+    sp6="      ", sp8=sp6+"  ", sp10=sp8+"  ";
+
+  public static void all(Poml in, Xml out) {
+    if (in.conf.has("plugin")) {
+      out.nl();
+      out.line("  <build>");
+      out.line("    <plugins>");
+      Build.plugin(in, out);
+      out.line("    </plugins>");
+      out.line("  </build>");
+    }
+  }
+
+  // -> plugin
   private static final String fatjar="&fatjar", ossrh="&ossrh";
-
-  @Override public String name() { return "plugin"; }
-
-  @Override public void convert(Poml in, Xml out) {
-    String[] plgs = in.conf.vals(name());
+  public static void plugin(Poml in, Xml out) {
+    String[] plgs = in.conf.vals(plugin);
     for (String plg: plgs) {
       if (fatjar.equals(plg)) fatjar(in, out);
       else if (ossrh.equals(plg)) ossrh(out);
@@ -25,7 +37,7 @@ public class Plugin  implements Converter {
   private static final String[] keys = {
     "groupId", "artifactId", "version", "extensions", "inherited"
   };
-  private void $plugin(String $plg, Poml in, Xml out) {
+  private static void $plugin(String $plg, Poml in, Xml out) {
     String val = in.conf.val($plg);
     String[] vals = val.split(":");
     out.line("      <plugin>");
@@ -35,7 +47,7 @@ public class Plugin  implements Converter {
     $execs($plg, in, out);
     out.line("      </plugin>");
   }
-  private void $conf(String $plg, Poml in, Xml out) {
+  private static void $conf(String $plg, Poml in, Xml out) {
     String key = (new StringBuilder($plg)).append(".conf").toString();
     if (in.conf.hasTag(key)) {
       out.line("        <configuration>");
@@ -43,7 +55,7 @@ public class Plugin  implements Converter {
       out.line("        </configuration>");
     }
   }
-  private void $depends(String $plg, Poml in, Xml out) {
+  private static void $depends(String $plg, Poml in, Xml out) {
     String key = (new StringBuilder($plg)).append(".depends").toString();
     if (in.conf.hasTag(key)) {
       out.line("        <dependencies>");
@@ -51,7 +63,7 @@ public class Plugin  implements Converter {
       out.line("        </dependencies>");
     }
   }
-  private void $execs(String $plg, Poml in, Xml out) {
+  private static void $execs(String $plg, Poml in, Xml out) {
     String key = (new StringBuilder($plg)).append(".execs").toString();
     if (in.conf.hasTag(key)) {
       out.line("        <executions>");
@@ -61,7 +73,7 @@ public class Plugin  implements Converter {
   }
 
   // -> &fatjar : render assembly-plugin
-  private void fatjar(Poml in, Xml out) {
+  private static void fatjar(Poml in, Xml out) {
     Map<String, String> map = in.conf.map(fatjar);
     String main = map.get("mainClass");  // required
     if (main == null) Throw.noKv(fatjar, "mainClass");
@@ -107,7 +119,7 @@ public class Plugin  implements Converter {
 
   // -> &ossrh : render javadoc, source, and gpg
   // http://central.sonatype.org/pages/apache-maven.html
-  private void ossrh(Xml out) {
+  private static void ossrh(Xml out) {
     out.line("      <plugin>");
     out.line("        <groupId>org.apache.maven.plugins</groupId>");
     out.line("        <artifactId>maven-source-plugin</artifactId>");
