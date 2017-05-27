@@ -9,28 +9,36 @@ import poml.convert.More;
 import poml.convert.Prj;
 
 public class Layout {
-  public static void convert(Poml poml, Xml xml) throws IOException {
-    String line;
+  public static void none(Poml i, Xml o) {
+    Prj.start(o);
+    Basic.all(i, o);
+    Build.all(i, o);
+    More.all(i, o);
+    Env.all(i, o);
+    Prj.end(o);
+  }
+
+  public static void render(Poml poml, Xml xml) throws IOException {
+    String line; int len; boolean nl;
     while ((line = poml.in.readLine()) != null) {
-      if (line.length() == 0) {
-        xml.nl(); continue;
+      len = line.length();
+      if (len == 0) xml.nl();
+      else {
+        nl = line.endsWith("&");
+        if (nl) line = line.substring(0, len-1);
+        out(line, poml, xml);
+        if (nl) xml.nl();
       }
-      boolean endsAmp = line.endsWith("&");
-      int start = line.indexOf("{{");
-      int end = line.indexOf("}}");
-      if (start == -1 || end == -1) { // no placeholder
-        if (endsAmp) {
-          line = line.substring(0, line.length()-1);
-        }
-        xml.line(line);
-      } else {  // convert placeholder
-        String key = line.substring(start+2, end);
-        convert(key, poml, xml);
-      }
-      if (endsAmp) xml.nl();
     }
   }
-  private static void convert(String k, Poml i, Xml o) {
+  private static void out(String line, Poml i, Xml o) {
+    int str = line.indexOf("{{");
+    int end = line.indexOf("}}");
+    if (str == -1 || end == -1) {
+      o.line(line); return;  // no placeholder
+    }
+    // convert placeholder {{k}}
+    String k = line.substring(str+2, end);
     if (Prj.start.equals(k)) Prj.start(o);
     else if (Prj.end.equals(k)) Prj.end(o);
     else if (Basic.pkg.equals(k)) Basic.pkg(i, o);

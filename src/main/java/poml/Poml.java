@@ -3,12 +3,6 @@ package poml;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import poml.convert.Basic;
-import poml.convert.Build;
-import poml.convert.Env;
-import poml.convert.More;
-import poml.convert.Prj;
-
 // pom.poml & its conversion tool
 public class Poml {
   public BufferedReader in;
@@ -23,16 +17,8 @@ public class Poml {
 
   public String toXml() throws IOException {
     Xml xml = new Xml();
-    if (conf.hasLayout) {
-      Layout.convert(this, xml);
-    } else {  // no layout
-      Prj.start(xml);
-      Basic.all(this, xml);
-      Build.all(this, xml);
-      More.all(this, xml);
-      Env.all(this, xml);
-      Prj.end(xml);
-    }
+    if (conf.hasLayout) Layout.render(this, xml);
+    else Layout.none(this, xml);
     return xml.toString();
   }
 }
