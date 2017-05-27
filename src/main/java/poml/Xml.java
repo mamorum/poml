@@ -1,40 +1,27 @@
-package poml.out;
+package poml;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.util.Map;
 
 // pom.xml
 public class Xml {
   private StringBuilder out = new StringBuilder();
 
-  public void save(String path) throws IOException {
-    try (PrintWriter file = file(path)) {
-      file.write(out.toString());
-    }
-  }
-  private PrintWriter file(String path) throws IOException {
-    return new PrintWriter(
-      new BufferedWriter(new OutputStreamWriter(
-        new FileOutputStream(path), "UTF-8")
-      )
-    );
-  }
-
-  // -> output api
-  public Xml nl() {
-    out.append(System.lineSeparator());
-    return this;
-  }
+  // -> api for adding element to xml.
   public Xml txt(String s) {
     out.append(s);
     return this;
   }
+  public void nl() {
+    out.append(System.lineSeparator());
+  }
   public void line(String l) {
-    out.append(l);
-    nl();
+    out.append(l); nl();
+  }
+
+  public void tags(
+    String space, String[] key, Map<String, String> val
+  ) {
+    for (String k: key) tag(space, k, val.get(k));
   }
   public void tags(
     String space, String[] key, String[] val
@@ -54,7 +41,7 @@ public class Xml {
     nl();
   }
 
-  // -> show xml
+  // -> return xml content
   @Override public String toString() {
     return out.toString();
   }

@@ -9,12 +9,9 @@ There are two things in Poml.
 
 ## Documents
 - [Installation Guide](doc/installation-guide.md)
-- [Blog](http://java-poml.blogspot.com/)
-
-<!--
 - [User Guide](doc/user-guide.md)
-- [Reference](https://github.com/mamorum/poml/wiki)
--->
+- [Reference](doc/reference.md)
+- [Blog](http://java-poml.blogspot.com/)
 
 
 ## Getting Started

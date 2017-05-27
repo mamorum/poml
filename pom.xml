@@ -3,7 +3,7 @@
 
   <groupId>com.github.mamorum</groupId>
   <artifactId>poml</artifactId>
-  <version>0.3.201</version>
+  <version>0.3.3</version>
   <packaging>jar</packaging>
 
   <dependencies>
@@ -80,8 +80,8 @@
   </issueManagement>
 
   <scm>
-    <url>https://github.com/mamorum/poml</url>
     <connection>scm:git:https://github.com/mamorum/poml.git</connection>
     <developerConnection>scm:git:git@github.com:mamorum/poml.git</developerConnection>
+    <url>https://github.com/mamorum/poml</url>
   </scm>
 </project>

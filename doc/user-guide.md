@@ -18,27 +18,23 @@ The delimiter needs newlines on its front and behind.
 
 ```
 pkg=com.example:demo:0.0.1:jar
-depends=
+depend=
   com.google.guava:guava:21.0,
-  junit:junit:[4.12\\,):test
-property=$encoding: UTF-8, $compiler: 1.8
-fatjar=mainClass: demo.Main
+  junit:junit:[4.12\,):test
+properties=&encoding>UTF-8, &compiler>1.8
 ---
-{{#model4}}
-  {{ pkg }}
-  {{depends }}
-  {{property }}
-  <build>
-    <plugins>
-      <!-- assembly plugin -->
-      {{fatjar}}
-    </plugins>
-  </build>
-{{/model4}}
+{{prj}}&
+  {{pkg}}&
+  <dependencies>
+    <!-- guava, junit -->
+    {{depend}}
+  </dependencies>&
+  {{properties}}
+{{/prj}}
 ```
 
-Above file is "[poml/example/demo-layout/pom.poml](https://github.com/mamorum/poml/blob/master/example/demo-layout/pom.poml)",  
-and is converted to "[poml/example/demo-layout/pom.pom.xml](https://github.com/mamorum/poml/blob/master/example/demo-layout/pom.xml)".
+Above file is "[poml/example/demo-layout/pom.poml](../example/demo-layout/pom.poml)".  
+It is converted to "[poml/example/demo-layout/pom.pom.xml](../example/demo-layout/pom.xml)".
 
 
 ## 2. Limitation
@@ -51,78 +47,64 @@ In this section, we can write the `key=val` as a configuration.
 
 ```
 pkg=com.example:demo:0.0.1:jar
-depends=
+depend=
   com.google.guava:guava:21.0,
-  junit:junit:[4.12\\,):test
-property=$encoding: UTF-8, $compiler: 1.8
-fatjar=mainClass: demo.Main
+  junit:junit:[4.12\,):test
+properties=&encoding>UTF-8, &compiler>1.8
 ```
 
-Available keys (`pkg`, `depends`, etc) are listed in the [Config Reference](https://github.com/mamorum/poml/wiki).  
+Available keys (`pkg`, `depend`, etc) are listed in the [Config Reference](../doc/reference.md).  
 The val varies according to a key.
 
 
 ### 3.1. Line Endings
-If a line ends with `=`, `,`or `{`, configuration continues to the next line.  
+If a line ends with `=` or `,`, configuration continues to the next line.  
 
 ```
-depends=
+depend=
   com.google.guava:guava:21.0,
-  junit:junit:[4.12\\,):test
+  junit:junit:[4.12\,):test
 ```
 
 In the above case,
 
-- key: `depends`
-- val: `com.google.guava:guava:21.0, junit:junit:4.12:test`
+- key: `depend`
+- val: `com.google.guava:guava:21.0,  junit:junit:[4.12\,):test`
 
-Please do **NOT** ends line with a space ` `.
+Please do **NOT** ends line with a space,  if it continues.  
+Spaces at the end of line are not trimed.
 
-### 3.2. Comma in a Val
-To use comma in a val (not separator), we can write escaped comma `\\,`.  
-For example, to use `[4.12,)` (version 4.12 or over), we can write `[4.12\\,)`.
+
+### 3.2. Comma
+To use comma as a part of val (not as a separator), we can write escaped comma `\,`.  
+For example, to express `[4.12,)` (version 4.12 or over), we can write `[4.12\,)`.
 
 ```
-  junit:junit:[4.12\\,):test
+  junit:junit:[4.12\,):test
 ```
 
 
 ## 4. Layout Section (Optional)
-In this section, we can write XML elements and placeholders.
+In this section, we can write XML elements, placeholders and ampersand.
 
 ```
-{{#model4}}
-  {{ pkg }}
-  {{depends }}
-  {{property }}
-  <build>
-    <plugins>
-      <!-- assembly plugin -->
-      {{fatjar}}
-    </plugins>
-  </build>
-{{/model4}}
+{{prj}}&
+  {{pkg}}&
+  <dependencies>
+    <!-- guava, junit -->
+    {{depend}}
+  </dependencies>&
+  {{properties}}
+{{/prj}}
 ```
 
 ### 4.1. XML Elements
 Poml outputs XML elements (and comments) to `poml.xml` as it is.
 
 ### 4.2. Placeholders
-Poml converts placeholders to XML tags.
+We can write one placeholder `{{key}}` per one line.  
+Poml converts placeholders to XML tags, using `key=val` configurations.
 
-We can write one placeholder as `{{key}}` per one line.  
-A `key` is same as the one used in "Config Section".
- 
-#### 4.2.1. Special symbols
-Only `model4` starts with `#` or `/`, like `{{#model4}}`.  
-Details is in [model4 page](https://github.com/mamorum/poml/wiki/model4).
-
-#### 4.2.2. Spaces
-We can add spaces around a `key` like `{{  key  }}`.  
-Poml converts one space to one newline.
-
-For example, Poml proceesses `{{ pkg  }}` as following order.
-
-1. converts a space before `pkg` (to a newline) 
-2. converts `pkg` (to XML tags)
-3. converts 2 spaces after `pkg` (to 2 newlines)
+### 4.3. Ampersand
+We can add one `&` to the end of line.  
+Poml converts `&` to newline.

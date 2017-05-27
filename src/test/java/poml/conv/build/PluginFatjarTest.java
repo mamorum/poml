@@ -2,19 +2,19 @@ package poml.conv.build;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
+import poml.convert.Build;
 
 public class PluginFatjarTest extends ConvTestCase {
 
-  Plugin conv = new Plugin();
-
   @Test public void defaultVer() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
       "  mainClass>org.sample.Main"+ nl
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
@@ -45,14 +45,14 @@ public class PluginFatjarTest extends ConvTestCase {
   }
 
   @Test public void ver_jar() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
       "  ver>1.0.0,"+ nl +
       "  jarName>sample.jar,"+ nl +
       "  mainClass>org.sample.Main"+ nl
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
@@ -83,7 +83,7 @@ public class PluginFatjarTest extends ConvTestCase {
   }
 
   @Test public void addConfArch() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=&fatjar" + nl +
       "&fatjar=mainClass>org.sample.Main"+ nl +
       "&fatjar.conf+={"+ nl +
@@ -100,7 +100,7 @@ public class PluginFatjarTest extends ConvTestCase {
       "  <index>true</index>"+ nl +
       "}"+ nl
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +

@@ -176,10 +176,10 @@
   </issueManagement>
 
   <scm>
-    <url>https://github.com/user/repo</url>
     <connection>scm:git:https://github.com/user/repo.git</connection>
     <developerConnection>scm:git:git@github.com:user/repo.git</developerConnection>
     <tag>HEAD</tag>
+    <url>https://github.com/user/repo</url>
   </scm>
 
   <distributionManagement>

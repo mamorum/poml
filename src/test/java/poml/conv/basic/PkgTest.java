@@ -4,41 +4,41 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
+import poml.convert.Basic;
 
 public class PkgTest extends ConvTestCase {
 
-  Pkg conv = new Pkg();
-  
-  @Test public void id_ver() { 
-    poml.conf.parse(data(
+  @Test public void id_ver() {
+    poml = Poml.parse(data(
       "pkg=group.com:artifact:0.0.1"
     ));
-    conv.convert(poml, xml);
+    Basic.pkg(poml, xml);
     result(
-      "  <groupId>group.com</groupId>" + nl + 
+      "  <groupId>group.com</groupId>" + nl +
       "  <artifactId>artifact</artifactId>" + nl +
       "  <version>0.0.1</version>" + nl
     );
   }
-  
+
   @Test public void id_ver_pkg() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "pkg=group.com:artifact:0.0.1:jar"
     ));
-    conv.convert(poml, xml);
+    Basic.pkg(poml, xml);
     result(
-      "  <groupId>group.com</groupId>" + nl + 
+      "  <groupId>group.com</groupId>" + nl +
       "  <artifactId>artifact</artifactId>" + nl +
       "  <version>0.0.1</version>" + nl +
       "  <packaging>jar</packaging>" + nl
     );
   }
-  
+
   @Test public void ng_noConf() {
-    poml.conf.parse(data(""));
-    try { 
-      conv.convert(poml, xml);
+    poml = Poml.parse(data(""));
+    try {
+      Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -46,19 +46,19 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.parse(data("pkg="));
-    try { 
-      conv.convert(poml, xml);
+    poml = Poml.parse(data("pkg="));
+    try {
+      Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).starts("Config not found");
     }
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data("pkg=group.com:::"));
-    try { 
-      conv.convert(poml, xml);
+    poml = Poml.parse(data("pkg=group.com:::"));
+    try {
+      Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

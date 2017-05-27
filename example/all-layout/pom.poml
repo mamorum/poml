@@ -53,7 +53,7 @@ scm=
   developerConnection>scm:git:git@github.com:user/repo.git
 dist=&ossrh
 ---
-{{#model4}}&
+{{prj}}&
   {{pkg}}&
   {{parent}}&
   <dependencies>
@@ -75,4 +75,4 @@ dist=&ossrh
   {{issue}}&
   {{scm}}&
   {{dist}}
-{{/model4}}
+{{/prj}}

@@ -1,18 +1,59 @@
-This converter covers following tag of `pom.xml`.
+# depend {{depend}}
+```
+depend=
+  groupId:artifactId:version:scope:optional:type,
+  groupId:artifactId::::type,
+  groupId:artifactId
+```
 
-- /project/dependencies/dependency
+- **Required**: groupId, artifactId
+- **Optional**: version, scope, optional, type
 
 
-
-## Example
+## Examples
+### Config
 **poml**
 
 ```
 depend=
-  com.github.mamorum:kaze:0.0.1,
-  junit:junit:4.12:test
+  group.com:artifact1:0.0.1:test:true:jar,
+  group.com:artifact2::::jar,
+  group.com:artifact3,
+```
+
+**converted**
+
+```
+  <dependencies>
+    <dependency>
+      <groupId>group.com</groupId>
+      <artifactId>artifact1</artifactId>
+      <version>0.0.1</version>
+      <scope>test</scope>
+      <optional>true</optional>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>group.com</groupId>
+      <artifactId>artifact2</artifactId>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>group.com</groupId>
+      <artifactId>artifact3</artifactId>
+    </dependency>
+  </dependencies>
+```
+
+
+### Config + Layout
+**poml**
+
+```
+depend=junit:junit:[4.12\,):test
 ---
   <dependencies>
+    {{depend}}
     <dependency>
       <groupId>com.google.http-client</groupId>
       <artifactId>google-http-client</artifactId>
@@ -20,7 +61,6 @@ depend=
       <scope>system</scope>
       <systemPath>${basedir}/lib/google-http-client-1.22.0.jar</systemPath>
     </dependency>
-    {{depend}}
   </dependencies>
 ```
 
@@ -29,28 +69,17 @@ depend=
 ```
   <dependencies>
     <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>[4.12,)</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>com.google.http-client</groupId>
       <artifactId>google-http-client</artifactId>
       <version>1.22.0</version>
       <scope>system</scope>
       <systemPath>${basedir}/lib/google-http-client-1.22.0.jar</systemPath>
     </dependency>
-    <dependency>
-      <groupId>com.github.mamorum</groupId>
-      <artifactId>kaze</artifactId>
-      <version>0.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 ```
-
-
-## Config
-Same val as [[depends|depends]].
-
-This converter doesn't output `dependencies` tag.  So, it is possible to add `dependency` tag in layout section, like above example. 

@@ -4,66 +4,66 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
+import poml.convert.Basic;
 
 public class PropertiesTest extends ConvTestCase {
 
-  Properties conv = new Properties();
-  
   @Test public void single() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=project.build.sourceEncoding>UTF-8"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "  </properties>" + nl
     );
   }
-  
+
   @Test public void multi() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=" + nl +
       "  property>value," + nl +
       "  project.build.sourceEncoding>UTF-8"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <property>value</property>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "  </properties>" + nl
     );
   }
-  
+
   @Test public void replaceEncoding() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=&encoding>UTF-8"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>" + nl +
       "  </properties>" + nl
     );
   }
   @Test public void replaceCompiler() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=&compiler>1.8"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <maven.compiler.source>1.8</maven.compiler.source>" + nl +
       "    <maven.compiler.target>1.8</maven.compiler.target>" + nl +
       "  </properties>" + nl
     );
   }
-  
+
   @Test public void replaceMulti() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=" + nl +
       "  property1>value1," + nl +
       "  &encoding>UTF-8," + nl +
@@ -71,9 +71,9 @@ public class PropertiesTest extends ConvTestCase {
       "  &compiler>1.8," + nl +
       "  property3>value3"
     ));
-    conv.convert(poml, xml);
+    Basic.properties(poml, xml);
     result(
-      "  <properties>" + nl + 
+      "  <properties>" + nl +
       "    <property1>value1</property1>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>" + nl +
@@ -84,11 +84,11 @@ public class PropertiesTest extends ConvTestCase {
       "  </properties>" + nl
     );
   }
-  
+
   @Test public void ng_noConf() {
-    poml.conf.parse(data(""));
-    try { 
-      conv.convert(poml, xml);
+    poml = Poml.parse(data(""));
+    try {
+      Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Config not found");
@@ -96,33 +96,33 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml.conf.parse(data("properties="));
-    try { 
-      conv.convert(poml, xml);
+    poml = Poml.parse(data("properties="));
+    try {
+      Basic.properties(poml, xml);
+      fail();
+    } catch (IllegalStateException e) {
+      msg(e).starts("Config not found");
+    }
+  }
+
+  @Test public void ng_badConf() {
+    poml = Poml.parse(data("properties=:"));
+    try {
+      Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");
     }
   }
 
-  @Test public void ng_badConf() {
-    poml.conf.parse(data("properties=:"));
-    try { 
-      conv.convert(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
-    }
-  }
-  
   @Test public void ng_badConf2() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "properties=" + nl +
       "  key:val," + nl +
       "  keyval"
     ));
-    try { 
-      conv.convert(poml, xml);
+    try {
+      Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

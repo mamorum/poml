@@ -6,8 +6,8 @@ import java.io.StringReader;
 import org.junit.Assert;
 import org.junit.Before;
 
-import poml.in.Poml;
-import poml.out.Xml;
+import poml.Poml;
+import poml.Xml;
 
 public class ConvTestCase {
   public Poml poml;
@@ -15,7 +15,6 @@ public class ConvTestCase {
   public static String nl = System.lineSeparator();
 
   @Before public void before() {
-    poml = new Poml();
     xml = new Xml();
   }
 

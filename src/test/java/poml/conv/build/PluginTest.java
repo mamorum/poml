@@ -2,19 +2,18 @@ package poml.conv.build;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
+import poml.convert.Build;
 
 public class PluginTest extends ConvTestCase {
-
-  Plugin conv = new Plugin();
-
   // $
   @Test public void grp_art() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=$sbp" + nl +
       "$sbp=org.springframework.boot:spring-boot-maven-plugin"
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.springframework.boot</groupId>" + nl +
@@ -24,7 +23,7 @@ public class PluginTest extends ConvTestCase {
   }
 
   @Test public void grp_exec() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=$jar" + nl +
       "$jar=org.apache.maven.plugins:maven-jar-plugin:2.6:false:true" + nl +
       "$jar.conf={" + nl +
@@ -44,7 +43,7 @@ public class PluginTest extends ConvTestCase {
       "  </execution>" + nl +
       "}" + nl
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
         "      <plugin>" + nl +
         "        <groupId>org.apache.maven.plugins</groupId>" + nl +
@@ -74,11 +73,11 @@ public class PluginTest extends ConvTestCase {
 
   // &
   @Test public void fatjar_ossrh() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=&fatjar, &ossrh" + nl +
       "&fatjar=mainClass>poml.Main"
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
@@ -145,7 +144,7 @@ public class PluginTest extends ConvTestCase {
 
   // $, &
   @Test public void combi() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "plugin=$ant, &ossrh" + nl +
       "$ant=:maven-antrun-plugin:1.1" + nl +
       "$ant.execs={" + nl +
@@ -155,7 +154,7 @@ public class PluginTest extends ConvTestCase {
       "  </execution>" + nl +
       "}" + nl
     ));
-    conv.convert(poml, xml);
+    Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
       "        <artifactId>maven-antrun-plugin</artifactId>" + nl +

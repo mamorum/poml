@@ -4,17 +4,17 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import poml.Poml;
 import poml.conv.ConvTestCase;
+import poml.convert.More;
 
 public class LicenseTest extends ConvTestCase {
 
-  License conv = new License();
-  
   @Test public void apache2() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "license=&apache2"
     ));
-    conv.convert(poml, xml);
+    More.license(poml, xml);
     result(
       "    <license>" + nl +
       "      <name>The Apache License, Version 2.0</name>" + nl +
@@ -22,9 +22,9 @@ public class LicenseTest extends ConvTestCase {
       "    </license>" + nl
     );
   }
-  
+
   @Test public void usr() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "license=$bsd2" + nl +
       "$bsd2=" + nl +
       "  name>The New BSD License," + nl +
@@ -32,7 +32,7 @@ public class LicenseTest extends ConvTestCase {
       "  distribution>repo," + nl +
       "  comments>The 2-Clause BSD License" + nl
     ));
-    conv.convert(poml, xml);
+    More.license(poml, xml);
     result(
       "    <license>" + nl +
       "      <name>The New BSD License</name>" + nl +
@@ -42,15 +42,15 @@ public class LicenseTest extends ConvTestCase {
       "    </license>" + nl
     );
   }
-  
+
   @Test public void multi() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "license=$wtfpl, &mit" + nl +
       "$wtfpl=" + nl +
       "  name>WTFPL," + nl +
       "  url>http://www.wtfpl.net/" + nl
     ));
-    conv.convert(poml, xml);
+    More.license(poml, xml);
     result(
       "    <license>" + nl +
       "      <name>WTFPL</name>" + nl +
@@ -64,12 +64,12 @@ public class LicenseTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml.conf.parse(data(
+    poml = Poml.parse(data(
       "license=$ng" + nl +
       "$ng=bad" + nl
     ));
-    try { 
-      conv.convert(poml, xml);
+    try {
+      More.license(poml, xml);
       fail();
     } catch (IllegalStateException e) {
       msg(e).starts("Bad config");

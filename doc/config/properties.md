@@ -1,37 +1,42 @@
-This converter covers following tag of `pom.xml`.
+# properties {{properties}}
+```
+properties=k>v, k>v, ...
+```
 
-- /project/properties
+
+## Embedded Property
+- `&encoding`
+- `&compiler`
 
 
-## Example
+## Examples
+### Config
 **poml**
 ```
-property=
-  $encoding:UTF-8,
-  $compiler:1.8,
-  gpg.skip:true
----
-{{property}}
+properties=gpg.skip>true, &encoding>UTF-8
 ```
 
 **converted**
 ```
   <properties>
+    <gpg.skip>true</gpg.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <gpg.skip>true</gpg.skip>
   </properties>
 ```
 
-
-## Config
+### Config + Layout
+**poml**
 ```
-property=k1:v1, k2:v2
+properties=&compiler>1.8
+---
+{{properties}}
 ```
 
-- **Val**: Map(`k:v, k:v, ... k:v`)
-- Optional:
-    - $encoding: converted to tags `project.build.sourceEncoding` and `project.reporting.outputEncoding`
-    - $compiler: converted to tags `maven.compiler.source` and `maven.compiler.target`
+**converted**
+```
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+```
