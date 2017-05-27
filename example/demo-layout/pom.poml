@@ -11,4 +11,4 @@ properties=&encoding>UTF-8, &compiler>1.8
     {{depend}}
   </dependencies>&
   {{properties}}
-</project>
+{{/prj}}

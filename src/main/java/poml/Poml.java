@@ -26,12 +26,12 @@ public class Poml {
     if (conf.hasLayout) {
       Layout.convert(this, xml);
     } else {  // no layout
-      Prj.to(xml);
+      Prj.start(xml);
       Basic.all(this, xml);
       Build.all(this, xml);
       More.all(this, xml);
       Env.all(this, xml);
-      xml.txt("</project>");
+      Prj.end(xml);
     }
     return xml.toString();
   }

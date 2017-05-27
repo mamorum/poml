@@ -75,4 +75,4 @@ dist=&ossrh
   {{issue}}&
   {{scm}}&
   {{dist}}
-</project>
+{{/prj}}

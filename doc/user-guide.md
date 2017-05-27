@@ -30,7 +30,7 @@ properties=&encoding>UTF-8, &compiler>1.8
     {{depend}}
   </dependencies>&
   {{properties}}
-</project>
+{{/prj}}
 ```
 
 Above file is "[poml/example/demo-layout/pom.poml](../example/demo-layout/pom.poml)".  
@@ -95,7 +95,7 @@ In this section, we can write XML elements, placeholders and ampersand.
     {{depend}}
   </dependencies>&
   {{properties}}
-</project>
+{{/prj}}
 ```
 
 ### 4.1. XML Elements

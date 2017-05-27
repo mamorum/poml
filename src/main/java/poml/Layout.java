@@ -31,7 +31,8 @@ public class Layout {
     }
   }
   private static void convert(String k, Poml i, Xml o) {
-    if ("prj".equals(k)) Prj.to(o);
+    if (Prj.start.equals(k)) Prj.start(o);
+    else if (Prj.end.equals(k)) Prj.end(o);
     else if (Basic.pkg.equals(k)) Basic.pkg(i, o);
     else if (Basic.parent.equals(k)) Basic.parent(i, o);
     else if (Basic.dep.equals(k)) Basic.depend(i, o);
