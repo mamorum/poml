@@ -1,17 +1,15 @@
-package poml;
+package poml.io;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import poml.Throw;
+
 public class Config {
-  boolean hasLayout = false;
-  private Map<String, String> p = new HashMap<>();
-  private Map<String, List<String>> tags = new HashMap<>();
+  Map<String, String> p = new HashMap<>();
+  Map<String, List<String>> tags = new HashMap<>();
 
   // -> For checking config key.
   public boolean has(String key) {
@@ -95,69 +93,5 @@ public class Config {
     char[] c = s.toCharArray();
     while ((i < len) && (c[i] <= ' ')) i++;
     return (i > 0 ? s.substring(i) : s);
-  }
-
-  // -> for parsing config section of pom.poml.
-  public void parse(BufferedReader lines) {
-    this.lines = lines;
-    try { parse(); }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-  private BufferedReader lines;
-  private void parse() throws IOException {
-    String line;
-    while ((line = lines.readLine()) != null) {
-      if (line.length() == 0) continue;  // none
-      if (line.charAt(0) == '#') continue;  // comment
-      if (line.equals("---")) {  // layout
-        hasLayout = true; break;
-      }
-      char last = line.charAt(line.length()-1);
-      if (last == '{') addTags(line);
-      else if (isContinuing(last)) addLines(line);
-      else addLine(line);
-    }
-  }
-
-  private void addTags(String firstLine) throws IOException {
-    // first line
-    int pos = firstLine.indexOf('=');
-    if (pos == -1) return;
-    String key = firstLine.substring(0, pos).trim();
-    // second+ lines
-    ArrayList<String> val = new ArrayList<>();
-    String line; char last;
-    while ((line = lines.readLine()) != null) {
-      last = line.charAt(line.length()-1);
-      if (last == '}') break;  // end
-      else val.add(line);
-    }
-    tags.put(key, val);
-  }
-
-  private boolean isContinuing(char last) {
-    if (last == '=') return true;
-    if (last == ',') return true;
-    return false;
-  }
-  private void addLines(String firstLine) throws IOException {
-    StringBuilder sb = new StringBuilder(firstLine);
-    String line; char last;
-    while ((line = lines.readLine()) != null) {
-      sb.append(line);
-      last = line.charAt(line.length()-1);
-      if (isContinuing(last)) continue;
-      else break;
-    }
-    addLine(sb.toString());
-  }
-  private void addLine(String line) {
-    int pos = line.indexOf('=');
-    if (pos == -1) return;
-    String k = line.substring(0, pos).trim();
-    String v = line.substring(pos + 1);
-    p.put(k, v);
   }
 }

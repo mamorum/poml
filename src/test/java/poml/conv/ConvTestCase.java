@@ -1,13 +1,14 @@
 package poml.conv;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.StringReader;
 
 import org.junit.Assert;
 import org.junit.Before;
 
-import poml.Poml;
-import poml.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public class ConvTestCase {
   public Poml poml;
@@ -18,10 +19,14 @@ public class ConvTestCase {
     xml = new Xml();
   }
 
-  public BufferedReader data(String lines) {
-    return new BufferedReader(
-      new StringReader(lines)
-    );
+  public void poml(String lines) {
+    try {
+      this.poml = Poml.of(
+        new BufferedReader(new StringReader(lines)
+      ));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
   public void result(String expected) {
     Assert.assertEquals(expected, xml.toString());

@@ -4,16 +4,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.Env;
 
 public class IssueTest extends ConvTestCase {
 
   @Test public void url() {
-    poml = Poml.parse(data(
+    poml(
       "issue=url>https://github.com/mamorum/poml/issues"
-    ));
+    );
     Env.issue(poml, xml);
     result(
       "  <issueManagement>" + nl +
@@ -23,11 +22,11 @@ public class IssueTest extends ConvTestCase {
   }
 
   @Test public void all() {
-    poml = Poml.parse(data(
+    poml(
       "issue=" + nl +
       "  system>GitHub Issues," + nl +
       "  url>https://github.com/mamorum/poml/issues" + nl
-    ));
+    );
     Env.issue(poml, xml);
     result(
       "  <issueManagement>" + nl +
@@ -38,9 +37,9 @@ public class IssueTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data(
+    poml(
       "issue=bad"
-    ));
+    );
     try {
       Env.issue(poml, xml);
       fail();

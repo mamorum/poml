@@ -1,4 +1,4 @@
-package poml;
+package poml.io;
 
 import java.util.Map;
 

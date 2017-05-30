@@ -9,21 +9,20 @@ import java.io.PrintStream;
 import poml.convert.Basic;
 
 public class Opt {
-  private static final PrintStream out = System.out;
-  private static final String nl = System.lineSeparator();
+  private static final PrintStream o = System.out;
   public void help() {
-    out.println("Convert pom.poml to pom.xml");
-    out.println();
-    out.println("Usage: poml [option]");
-    out.println();
-    out.println("Option:");
-    out.println("  -h, help   \t   print this help");
-    out.println("  -v, version\t   print poml version");
-    out.println("  mkdirs     \t   create src dirs for maven project");
-    out.println("  init       \t   create pom.poml, pom.xml and src dirs");
+    o.println("Convert pom.poml to pom.xml");
+    o.println();
+    o.println("Usage: poml [option]");
+    o.println();
+    o.println("Option:");
+    o.println("  -h, help   \t   print this help");
+    o.println("  -v, version\t   print poml version");
+    o.println("  mkdirs     \t   create src dirs for maven project");
+    o.println("  init       \t   create pom.poml, pom.xml and src dirs");
   }
   public void version() {
-    out.println(
+    o.println(
       Main.class.getPackage()
         .getImplementationVersion()
     );
@@ -39,39 +38,38 @@ public class Opt {
     (new File(mr)).mkdirs();
     (new File(tj)).mkdirs();
     (new File(tr)).mkdirs();
-    out.println("[POML:INFO] Created dirs");
-    out.println(smj);
-    out.println(smr);
-    out.println(stj);
-    out.println(str);
+    o.println("[INFO] Created dirs");
+    o.println(smj);
+    o.println(smr);
+    o.println(stj);
+    o.println(str);
   }
   // init ->
-  private BufferedReader in;
   public void init() throws Throwable {
-    in = new BufferedReader(new InputStreamReader(System.in));
-    out.println("This option creates pom.poml and maven project.");
-    out.println("Please answer some questions. (Press ^C to quit.)");
-    out.println();
+    o.println("This option creates pom.poml and maven project.");
+    o.println("Please answer some questions. (Press ^C to quit.)");
+    o.println();
     String poml = askPoml();
-    out.println();
-    out.println("content of pom.poml: ");
-    out.println();
-    out.println(poml);
-    out.println();
+    o.println();
+    o.println("content of pom.poml: ");
+    o.println();
+    o.println(poml);
+    o.println();
     String ok = ask("ok?", "yes");
     if ("yes".equals(ok)) createPrj(poml);
-    else out.println("Quit.");
+    else o.println("Quit.");
   }
   private String askPoml() throws IOException {
-    String dir = (
-      new File(".")
+    String cdir = (
+      new File(".")  // current dir path
     ).getAbsoluteFile().getParentFile().getName();
+    in = new BufferedReader(new InputStreamReader(System.in));
     return (new StringBuilder(
       ).append(Basic.pkg).append("="
       ).append(ask("groupId", "com.domain")).append(":"
-      ).append(ask("artifactId", dir)).append(":"
+      ).append(ask("artifactId", cdir)).append(":"
       ).append(ask("version", "1.0.0")).append(":"
-      ).append(ask("packaging", "jar")).append(nl
+      ).append(ask("packaging", "jar")).append(System.lineSeparator()
       ).append(Basic.props).append("="
       ).append(Basic.enc).append(">"
       ).append(ask("encoding", "UTF-8")).append(", "
@@ -79,19 +77,19 @@ public class Opt {
       ).append(ask("jdk version", "1.8"))
     ).toString();
   }
+  private BufferedReader in;
   private String ask(String item, String defVal) throws IOException {
-    String prompt = (new StringBuilder(
+    o.print((new StringBuilder(  // question
       ).append(item).append(": (").append(defVal).append(") ")
-    ).toString();
-    out.print(prompt);
+    ).toString());
     String usrVal = in.readLine();
     return "".equals(usrVal) ? defVal : usrVal;
   }
   private void createPrj(String poml) throws Throwable {
     Main.save(poml, "pom.poml");
-    out.println();
-    out.println("[POML:INFO] Created pom.poml");
-    Main.main("pom.poml", "pom.xml"); // convert poml to xml
+    o.println();
+    o.println("[INFO] Created pom.poml");
+    Main.convert("pom.poml", "pom.xml");
     mkdirs();
   }
 }

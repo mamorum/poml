@@ -4,16 +4,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.More;
 
 public class InfoTest extends ConvTestCase {
 
   @Test public void name() {
-    poml = Poml.parse(data(
+    poml(
       "info=name>INFO"
-    ));
+    );
     More.info(poml, xml);
     result(
       "  <name>INFO</name>" + nl
@@ -21,13 +20,13 @@ public class InfoTest extends ConvTestCase {
   }
 
   @Test public void all() {
-    poml = Poml.parse(data(
+    poml(
       "info=" + nl +
       "  name>INFO," + nl +
       "  description>More Project Infomation," + nl +
       "  url>https://github.com/mamorum/poml," + nl +
       "  inceptionYear>2016" + nl
-    ));
+    );
     More.info(poml, xml);
     result(
         "  <name>INFO</name>" + nl +
@@ -38,9 +37,9 @@ public class InfoTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data(
+    poml(
       "info=bad-conf"
-    ));
+    );
     try {
       More.info(poml, xml);
       fail();

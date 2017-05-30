@@ -4,17 +4,16 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.Env;
 
 public class ScmTest extends ConvTestCase {
 
   @Test public void url() {
-    poml = Poml.parse(data(
+    poml(
       "scm=" + nl +
       "  url>https://github.com/mamorum/poml/" + nl
-    ));
+    );
     Env.scm(poml, xml);
     result(
       "  <scm>" + nl +
@@ -24,13 +23,13 @@ public class ScmTest extends ConvTestCase {
   }
 
   @Test public void all() {
-    poml = Poml.parse(data(
+    poml(
       "scm=" + nl +
       "  connection>scm:git:https://github.com/mamorum/poml.git," + nl +
       "  developerConnection>scm:git:git@github.com:mamorum/poml.git," + nl +
       "  tag>HEAD," + nl +
       "  url>https://github.com/mamorum/poml" + nl
-    ));
+    );
     Env.scm(poml, xml);
     result(
       "  <scm>" + nl +
@@ -43,9 +42,9 @@ public class ScmTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data(
+    poml(
       "scm=badconf"
-    ));
+    );
     try {
       Env.scm(poml, xml);
       fail();

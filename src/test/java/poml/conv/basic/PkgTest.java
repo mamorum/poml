@@ -4,16 +4,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.Basic;
 
 public class PkgTest extends ConvTestCase {
 
   @Test public void id_ver() {
-    poml = Poml.parse(data(
+    poml(
       "pkg=group.com:artifact:0.0.1"
-    ));
+    );
     Basic.pkg(poml, xml);
     result(
       "  <groupId>group.com</groupId>" + nl +
@@ -23,9 +22,9 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void id_ver_pkg() {
-    poml = Poml.parse(data(
+    poml(
       "pkg=group.com:artifact:0.0.1:jar"
-    ));
+    );
     Basic.pkg(poml, xml);
     result(
       "  <groupId>group.com</groupId>" + nl +
@@ -36,7 +35,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml = Poml.parse(data(""));
+    poml("");
     try {
       Basic.pkg(poml, xml);
       fail();
@@ -46,7 +45,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml = Poml.parse(data("pkg="));
+    poml("pkg=");
     try {
       Basic.pkg(poml, xml);
       fail();
@@ -56,7 +55,7 @@ public class PkgTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data("pkg=group.com:::"));
+    poml("pkg=group.com:::");
     try {
       Basic.pkg(poml, xml);
       fail();

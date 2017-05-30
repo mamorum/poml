@@ -4,20 +4,19 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.More;
 
 public class DeveloperTest extends ConvTestCase {
 
   @Test public void single() {
-    poml = Poml.parse(data(
+    poml(
       "developer=$jdoe" + nl +
       "$jdoe=" + nl +
       "  id>jdoe, name>John Doe," + nl +
       "  email>jdoe@example.com," + nl +
       "  url>http://www.example.com/jdoe" + nl
-    ));
+    );
     More.developer(poml, xml);
     result(
       "    <developer>" + nl +
@@ -30,14 +29,14 @@ public class DeveloperTest extends ConvTestCase {
   }
 
   @Test public void multi() {
-    poml = Poml.parse(data(
+    poml(
       "developer=$jdoe, $ken" + nl +
       "$jdoe=" + nl +
       "  id>jdoe, name>John Doe," + nl +
       "  email>jdoe@example.com," + nl +
       "  url>http://www.example.com/jdoe" + nl +
       "$ken=id>ken" + nl
-    ));
+    );
     More.developer(poml, xml);
     result(
       "    <developer>" + nl +
@@ -53,10 +52,10 @@ public class DeveloperTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data(
+    poml(
       "developer=$ng" + nl +
       "$ng=bad" + nl
-    ));
+    );
     try {
       More.developer(poml, xml);
       fail();

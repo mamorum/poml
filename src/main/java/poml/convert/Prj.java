@@ -1,6 +1,6 @@
 package poml.convert;
 
-import poml.Xml;
+import poml.io.Xml;
 
 public class Prj {
   public static final String start="prj", end="/prj";

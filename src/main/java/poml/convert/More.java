@@ -2,8 +2,8 @@ package poml.convert;
 
 import java.util.Map;
 
-import poml.Poml;
-import poml.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public class More {
   public static final String

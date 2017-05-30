@@ -4,16 +4,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.More;
 
 public class LicenseTest extends ConvTestCase {
 
   @Test public void apache2() {
-    poml = Poml.parse(data(
+    poml(
       "license=&apache2"
-    ));
+    );
     More.license(poml, xml);
     result(
       "    <license>" + nl +
@@ -24,14 +23,14 @@ public class LicenseTest extends ConvTestCase {
   }
 
   @Test public void usr() {
-    poml = Poml.parse(data(
+    poml(
       "license=$bsd2" + nl +
       "$bsd2=" + nl +
       "  name>The New BSD License," + nl +
       "  url>http://www.opensource.org/licenses/bsd-license.php," + nl +
       "  distribution>repo," + nl +
       "  comments>The 2-Clause BSD License" + nl
-    ));
+    );
     More.license(poml, xml);
     result(
       "    <license>" + nl +
@@ -44,12 +43,12 @@ public class LicenseTest extends ConvTestCase {
   }
 
   @Test public void multi() {
-    poml = Poml.parse(data(
+    poml(
       "license=$wtfpl, &mit" + nl +
       "$wtfpl=" + nl +
       "  name>WTFPL," + nl +
       "  url>http://www.wtfpl.net/" + nl
-    ));
+    );
     More.license(poml, xml);
     result(
       "    <license>" + nl +
@@ -64,10 +63,10 @@ public class LicenseTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data(
+    poml(
       "license=$ng" + nl +
       "$ng=bad" + nl
-    ));
+    );
     try {
       More.license(poml, xml);
       fail();

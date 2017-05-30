@@ -2,15 +2,14 @@ package poml.conv.build;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.Build;
 
 public class PluginOssrhTest extends ConvTestCase {
   @Test public void test() {
-    poml = Poml.parse(data(
-        "plugin=&ossrh" + nl
-      ));
+    poml(
+      "plugin=&ossrh" + nl
+    );
     Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +

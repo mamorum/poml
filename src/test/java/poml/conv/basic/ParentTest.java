@@ -4,16 +4,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.Basic;
 
 public class ParentTest extends ConvTestCase {
 
   @Test public void id_ver() {
-    poml = Poml.parse(data(
+    poml(
       "parent=parent.com:parent:1.0.0"
-    ));
+    );
     Basic.parent(poml, xml);
     result(
       "  <parent>" + nl +
@@ -25,7 +24,7 @@ public class ParentTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml = Poml.parse(data(""));
+    poml("");
     try {
       Basic.parent(poml, xml);
       fail();
@@ -35,7 +34,7 @@ public class ParentTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml = Poml.parse(data("parent="));
+    poml("parent=");
     try {
       Basic.parent(poml, xml);
       fail();
@@ -45,7 +44,7 @@ public class ParentTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data("parent=parent.com::"));
+    poml("parent=parent.com::");
     try {
       Basic.parent(poml, xml);
       fail();

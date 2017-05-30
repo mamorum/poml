@@ -2,18 +2,17 @@ package poml.conv.build;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.Build;
 
 public class PluginFatjarTest extends ConvTestCase {
 
   @Test public void defaultVer() {
-    poml = Poml.parse(data(
+    poml(
       "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
       "  mainClass>org.sample.Main"+ nl
-    ));
+    );
     Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
@@ -45,13 +44,13 @@ public class PluginFatjarTest extends ConvTestCase {
   }
 
   @Test public void ver_jar() {
-    poml = Poml.parse(data(
+    poml(
       "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
       "  ver>1.0.0,"+ nl +
       "  jarName>sample.jar,"+ nl +
       "  mainClass>org.sample.Main"+ nl
-    ));
+    );
     Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +
@@ -83,7 +82,7 @@ public class PluginFatjarTest extends ConvTestCase {
   }
 
   @Test public void addConfArch() {
-    poml = Poml.parse(data(
+    poml(
       "plugin=&fatjar" + nl +
       "&fatjar=mainClass>org.sample.Main"+ nl +
       "&fatjar.conf+={"+ nl +
@@ -99,7 +98,7 @@ public class PluginFatjarTest extends ConvTestCase {
       "  </manifestEntries>"+ nl +
       "  <index>true</index>"+ nl +
       "}"+ nl
-    ));
+    );
     Build.plugin(poml, xml);
     result(
       "      <plugin>" + nl +

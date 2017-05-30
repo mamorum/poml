@@ -9,9 +9,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 
+import poml.io.Poml;
+
 public class Main {
-  private static void exit(int i) { System.exit(i); }
-  private static void ng(Opt opt) { opt.help(); exit(1); }
+  private static void ng(Opt opt) { opt.help(); System.exit(1); }
 
   // cmd "poml option"
   private static void option(Opt opt, String arg) throws Throwable {
@@ -25,63 +26,63 @@ public class Main {
   }
 
   public static void main(String[] args) throws Throwable {
-    if (args.length == 2) main(args[0], args[1]);
+    if (args.length == 2) convert(args[0], args[1]);
     else if (args.length == 1) option(new Opt(), args[0]);
     else ng(new Opt()); // invalid args
   }
 
   // cmd "poml pom.poml pom.xml"
-  static void
-    main(String pomlPath, String xmlPath)
-  throws Throwable
+  static void convert(
+    String pomlPath, String xmlPath) throws Throwable
   {
-    long time = begin(pomlPath);
+    long time = start(pomlPath);
     try (BufferedReader in = open(pomlPath)) {
-      String xml = Poml.parse(in).toXml();
+      String xml = Poml.of(in).toXml();
       save(xml, xmlPath);
     }
     catch (Throwable e) {
-      error(e, xmlPath);
+      err(e, xmlPath);
       throw e;
     }
-    success(xmlPath, time);
+    ok(xmlPath, time);
   }
 
-  // cmd messages
-  private static final PrintStream out = System.out;
-  private static long begin(String pomlPath) {
+  // messages
+  private static final PrintStream o = System.out;
+  private static long start(String pomlPath) {
     long time = System.currentTimeMillis();
-    out.print("[POML:INFO] Converting ");
-    out.println(pomlPath);
+    o.print("[INFO] Converting ");
+    o.println(pomlPath);
     return time;
   }
-  private static void success(String xmlPath, long time) {
+  private static void ok(String xmlPath, long time) {
     String uptime = String.valueOf(
       (System.currentTimeMillis() - time)
     );
-    out.print("[POML:INFO] Created ");
-    out.print(xmlPath);
-    out.print(" @");
-    out.print(uptime);
-    out.println("ms");
+    o.print("[INFO] Created ");
+    o.print(xmlPath);
+    o.print(" @");
+    o.print(uptime);
+    o.println("ms");
   }
-  private static void error(Throwable e, String xmlPath) {
-    out.print("[POML:ERROR] ");
-    out.println(e.getMessage());
-    out.print("[POML:ERROR] Could not create ");
-    out.println(xmlPath);
+  private static void err(Throwable e, String xmlPath) {
+    o.print("[ERROR] ");
+    o.println(e.getMessage());
+    o.print("[ERROR] Could not create ");
+    o.println(xmlPath);
   }
 
   // file operations
+  private static final String utf8 = "UTF-8";
   static BufferedReader open(String path) throws IOException {
     return new BufferedReader(new InputStreamReader
-      (new FileInputStream(path), "UTF-8")
+      (new FileInputStream(path), utf8)
     );
   }
   static void save(String txt, String path) throws IOException {
     try (BufferedWriter file =
       new BufferedWriter(new OutputStreamWriter(
-        new FileOutputStream(path), "UTF-8"))
+        new FileOutputStream(path), utf8))
     ) {
       file.write(txt);
     }

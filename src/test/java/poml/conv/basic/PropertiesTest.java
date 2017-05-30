@@ -4,16 +4,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.Basic;
 
 public class PropertiesTest extends ConvTestCase {
 
   @Test public void single() {
-    poml = Poml.parse(data(
+    poml(
       "properties=project.build.sourceEncoding>UTF-8"
-    ));
+    );
     Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
@@ -23,11 +22,11 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void multi() {
-    poml = Poml.parse(data(
+    poml(
       "properties=" + nl +
       "  property>value," + nl +
       "  project.build.sourceEncoding>UTF-8"
-    ));
+    );
     Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
@@ -38,9 +37,9 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void replaceEncoding() {
-    poml = Poml.parse(data(
+    poml(
       "properties=&encoding>UTF-8"
-    ));
+    );
     Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
@@ -50,9 +49,9 @@ public class PropertiesTest extends ConvTestCase {
     );
   }
   @Test public void replaceCompiler() {
-    poml = Poml.parse(data(
+    poml(
       "properties=&compiler>1.8"
-    ));
+    );
     Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
@@ -63,14 +62,14 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void replaceMulti() {
-    poml = Poml.parse(data(
+    poml(
       "properties=" + nl +
       "  property1>value1," + nl +
       "  &encoding>UTF-8," + nl +
       "  property2>value2," + nl +
       "  &compiler>1.8," + nl +
       "  property3>value3"
-    ));
+    );
     Basic.properties(poml, xml);
     result(
       "  <properties>" + nl +
@@ -86,7 +85,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_noConf() {
-    poml = Poml.parse(data(""));
+    poml("");
     try {
       Basic.properties(poml, xml);
       fail();
@@ -96,7 +95,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_emptyConf() {
-    poml = Poml.parse(data("properties="));
+    poml("properties=");
     try {
       Basic.properties(poml, xml);
       fail();
@@ -106,7 +105,7 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data("properties=:"));
+    poml("properties=:");
     try {
       Basic.properties(poml, xml);
       fail();
@@ -116,11 +115,11 @@ public class PropertiesTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf2() {
-    poml = Poml.parse(data(
+    poml(
       "properties=" + nl +
       "  key:val," + nl +
       "  keyval"
-    ));
+    );
     try {
       Basic.properties(poml, xml);
       fail();

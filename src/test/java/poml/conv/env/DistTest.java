@@ -4,16 +4,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.Poml;
 import poml.conv.ConvTestCase;
 import poml.convert.Env;
 
 public class DistTest extends ConvTestCase {
 
   @Test public void ossrh() {
-    poml = Poml.parse(data(
+    poml(
       "dist=&ossrh"
-    ));
+    );
     Env.dist(poml, xml);
     result(
       "  <distributionManagement>" + nl +
@@ -30,9 +29,9 @@ public class DistTest extends ConvTestCase {
   }
 
   @Test public void ng_badConf() {
-    poml = Poml.parse(data(
+    poml(
       "dist=oss"
-    ));
+    );
     try {
       Env.dist(poml, xml);
       fail();
