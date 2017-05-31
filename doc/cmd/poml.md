@@ -41,4 +41,5 @@ This option asks some questions to create `pom.poml`.
 poml && mvn <goal>
 ```
 
-Above executes `mvn` with successfully converted `pom.xml`.  Operater `&&` seems available also in the Windows. (see [Command shell overview - MS TechNet](https://technet.microsoft.com/en-us/library/bb490954.aspx).)
+Above executes `mvn` with successfully converted `pom.xml`.  
+Operater `&&` seems available also in the Windows. (see [Command shell overview - MS TechNet](https://technet.microsoft.com/en-us/library/bb490954.aspx).)
