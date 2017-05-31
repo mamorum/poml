@@ -16,3 +16,6 @@
     - [issue](config/issue.md)
     - [scm](config/scm.md)
     - [dist](config/dist.md)
+
+## Command
+- [poml](cmd/poml.md)

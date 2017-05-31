@@ -1,34 +1,44 @@
+# poml
+## Usage
+```
+poml
+```
 
-Convert `pom.poml` to `pom.xml`.
+This command converts `./pom.poml` to `./pom.xml`.
 
 
-### Usage
+## Option Usage
 ```
 poml [option]
 ```
 
+### `-h`, `help`
+Print usage and options.
 
-### Options
-##### `-h`, `help`
-Print command line usage and options.
-
-##### `-v`, `version`
+### `-v`, `version`
 Print poml version.
 
-##### `mkdirs`
-Create following directories for maven project
+### `mkdirs`
+Create following src directories for maven project
 
 - src/main/java
 - src/main/resources
 - src/test/java
 - src/test/resources
 
+### `init`
+Create following resources to init maven project.
 
-### Note: With Maven Command
-Combined command like `poml && mvn test` is convenient to execute Maven with successfully generated `pom.xml`. 
+- `pom.poml`
+- `pom.xml` (converted from  `pom.poml`)
+- src directories (created by `mkdirs`)
 
+This option asks some questions to create `pom.poml`.
+
+
+## Note: With Maven Command
 ```
-demo$ poml && mvn <goal>
+poml && mvn <goal>
 ```
 
-Operater `&&` seems available also in the Windows (see [Command shell overview - MS TechNet](https://technet.microsoft.com/en-us/library/bb490954.aspx)).
+Above executes `mvn` with successfully converted `pom.xml`.  Operater `&&` seems available also in the Windows. (see [Command shell overview - MS TechNet](https://technet.microsoft.com/en-us/library/bb490954.aspx).)
