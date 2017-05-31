@@ -4,18 +4,22 @@ import java.util.Map;
 
 // pom.xml
 public class Xml {
-  private StringBuilder out = new StringBuilder();
+  public static final String  // indent
+    sp2="  ", sp4="    ", sp6="      ",
+    sp8="        ", sp10="          ";
 
-  // -> api for adding element to xml.
+  private StringBuilder xml = new StringBuilder();
+
+  // -> api to add xml element.
   public Xml txt(String s) {
-    out.append(s);
+    xml.append(s);
     return this;
   }
   public void nl() {
-    out.append(System.lineSeparator());
+    xml.append(System.lineSeparator());
   }
   public void line(String l) {
-    out.append(l); nl();
+    xml.append(l); nl();
   }
 
   public void tags(
@@ -34,15 +38,15 @@ public class Xml {
     String space, String key, String val
   ) {
     if (val == null || "".equals(val)) return;
-    out.append(space);
-    out.append("<").append(key).append(">");
-    out.append(val);
-    out.append("</").append(key).append(">");
+    xml.append(space);
+    xml.append("<").append(key).append(">");
+    xml.append(val);
+    xml.append("</").append(key).append(">");
     nl();
   }
 
   // -> return xml content
   @Override public String toString() {
-    return out.toString();
+    return xml.toString();
   }
 }

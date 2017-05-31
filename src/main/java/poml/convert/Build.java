@@ -7,9 +7,7 @@ import poml.io.Poml;
 import poml.io.Xml;
 
 public class Build {
-  public static final String
-    plugin="plugin",
-    sp6="      ", sp8=sp6+"  ", sp10=sp8+"  ";
+  public static final String plugin="plugin";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has("plugin")) {
@@ -41,7 +39,7 @@ public class Build {
     String val = in.conf.val($plg);
     String[] vals = val.split(":");
     out.line("      <plugin>");
-    out.tags(sp8, keys, vals);  // groupId - inherited
+    out.tags(Xml.sp8, keys, vals);  // groupId - inherited
     $conf($plg, in, out);
     $depends($plg, in, out);
     $execs($plg, in, out);
@@ -51,7 +49,7 @@ public class Build {
     String key = (new StringBuilder($plg)).append(".conf").toString();
     if (in.conf.hasTag(key)) {
       out.line("        <configuration>");
-      out.txt(in.conf.tag(key, sp8));
+      out.txt(in.conf.tag(key, Xml.sp8));
       out.line("        </configuration>");
     }
   }
@@ -59,7 +57,7 @@ public class Build {
     String key = (new StringBuilder($plg)).append(".depends").toString();
     if (in.conf.hasTag(key)) {
       out.line("        <dependencies>");
-      out.txt(in.conf.tag(key, sp8));
+      out.txt(in.conf.tag(key, Xml.sp8));
       out.line("        </dependencies>");
     }
   }
@@ -67,7 +65,7 @@ public class Build {
     String key = (new StringBuilder($plg)).append(".execs").toString();
     if (in.conf.hasTag(key)) {
       out.line("        <executions>");
-      out.txt(in.conf.tag(key, sp8));
+      out.txt(in.conf.tag(key, Xml.sp8));
       out.line("        </executions>");
     }
   }
@@ -99,12 +97,12 @@ public class Build {
     out.line("            </manifest>");
     String confArc = "&fatjar.conf.archive+";
     if (in.conf.hasTag(confArc)) {
-      out.txt(in.conf.tag(confArc, sp10));
+      out.txt(in.conf.tag(confArc, Xml.sp10));
     }
     out.line("          </archive>");
     String conf = "&fatjar.conf+";
     if (in.conf.hasTag(conf)) {
-      out.txt(in.conf.tag(conf, sp8));
+      out.txt(in.conf.tag(conf, Xml.sp8));
     }
     out.line("        </configuration>");
     out.line("        <executions>");

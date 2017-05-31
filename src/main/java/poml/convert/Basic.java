@@ -9,8 +9,7 @@ import poml.io.Xml;
 public class Basic {
   public static final String
     pkg="pkg", parent="parent",
-    dep="depend", props = "properties",
-    sp4="    ";
+    dep="depend", props = "properties";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has(pkg)) {out.nl(); pkg(in, out);}
@@ -49,7 +48,7 @@ public class Basic {
       Throw.badConf(parent, val);
     }
     out.line("  <parent>");
-    out.tags(sp4, parentTags, vals);
+    out.tags(Xml.sp4, parentTags, vals);
     out.line("  </parent>");
   }
 
@@ -79,16 +78,16 @@ public class Basic {
     for (String k: kv.keySet()) {
       if (enc.equals(k)) enc(out, kv.get(k));
       else if (jdk.equals(k)) javac(out, kv.get(k));
-      else out.tag(sp4, k, kv.get(k));
+      else out.tag(Xml.sp4, k, kv.get(k));
     }
     out.line("  </properties>");
   }
   private static void enc(Xml out, String v) {
-    out.tag(sp4, "project.build.sourceEncoding", v);
-    out.tag(sp4, "project.reporting.outputEncoding", v);
+    out.tag(Xml.sp4, "project.build.sourceEncoding", v);
+    out.tag(Xml.sp4, "project.reporting.outputEncoding", v);
   }
   private static void javac(Xml out, String v) {
-    out.tag(sp4, "maven.compiler.source", v);
-    out.tag(sp4, "maven.compiler.target", v);
+    out.tag(Xml.sp4, "maven.compiler.source", v);
+    out.tag(Xml.sp4, "maven.compiler.target", v);
   }
 }

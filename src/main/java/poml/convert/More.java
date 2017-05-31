@@ -7,8 +7,7 @@ import poml.io.Xml;
 
 public class More {
   public static final String
-    info="info", license="license", dev="developer",
-    sp2="  ", sp6="      ";
+    info="info", license="license", dev="developer";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has(info)) {out.nl(); More.info(in, out);}
@@ -31,7 +30,7 @@ public class More {
   };
   public static void info(Poml in, Xml out) {
     Map<String, String> kv = in.conf.map(info);
-    out.tags(sp2, infoTags, kv);
+    out.tags(Xml.sp2, infoTags, kv);
   }
 
   //-> license
@@ -55,7 +54,7 @@ public class More {
   }
   private static void $license(String lic, Poml in, Xml out) {
     Map<String, String> kv = in.conf.map(lic);
-    out.tags(sp6, licenseTags, kv);
+    out.tags(Xml.sp6, licenseTags, kv);
   }
   private static final String[] licenseTags = {
     "name", "url", "distribution", "comments"
@@ -69,7 +68,7 @@ public class More {
     for (String $dev: devs) {
       Map<String, String> kv = in.conf.map($dev);
       out.line("    <developer>");
-      out.tags(sp6, devTags, kv);
+      out.tags(Xml.sp6, devTags, kv);
       out.line("    </developer>");
     }
   }

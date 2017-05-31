@@ -8,8 +8,7 @@ import poml.io.Xml;
 
 public class Env {
   public static final String
-    issue="issue", scm="scm", dist="dist",
-    sp4="    ";
+    issue="issue", scm="scm", dist="dist";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has(issue)) {out.nl(); issue(in, out);}
@@ -23,7 +22,7 @@ public class Env {
   public static void issue(Poml in, Xml out) {
     Map<String, String> kv = in.conf.map(issue);
     out.line("  <issueManagement>");
-    out.tags(sp4, issueTags, kv);
+    out.tags(Xml.sp4, issueTags, kv);
     out.line("  </issueManagement>");
   }
 
@@ -34,7 +33,7 @@ public class Env {
   public static void scm(Poml in, Xml out) {
     Map<String, String> kv = in.conf.map(scm);
     out.line("  <scm>");
-    out.tags(sp4, scmTags, kv);
+    out.tags(Xml.sp4, scmTags, kv);
     out.line("  </scm>");
   }
 
