@@ -83,7 +83,7 @@ In the following directories, `pom.poml` and converted `pom.xml` exist.
 
 
 ## Showcase
-- [poml](.): This project. Eats own poml.
+- This project: Eats own poml.
 
 <!--
 - [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): Web application, packaged as fatjar.
