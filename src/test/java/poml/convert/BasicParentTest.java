@@ -1,20 +1,17 @@
-package poml.conv.basic;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.Basic;
-
-public class ParentTest extends ConvTestCase {
+public class BasicParentTest extends TestCase {
 
   @Test public void id_ver() {
     poml(
       "parent=parent.com:parent:1.0.0"
     );
     Basic.parent(poml, xml);
-    result(
+    xml(
       "  <parent>" + nl +
       "    <groupId>parent.com</groupId>" + nl +
       "    <artifactId>parent</artifactId>" + nl +

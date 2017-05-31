@@ -1,20 +1,17 @@
-package poml.conv.more;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.More;
-
-public class InfoTest extends ConvTestCase {
+public class MoreInfoTest extends TestCase {
 
   @Test public void name() {
     poml(
       "info=name>INFO"
     );
     More.info(poml, xml);
-    result(
+    xml(
       "  <name>INFO</name>" + nl
     );
   }
@@ -28,7 +25,7 @@ public class InfoTest extends ConvTestCase {
       "  inceptionYear>2016" + nl
     );
     More.info(poml, xml);
-    result(
+    xml(
         "  <name>INFO</name>" + nl +
         "  <description>More Project Infomation</description>" + nl +
         "  <url>https://github.com/mamorum/poml</url>" + nl +

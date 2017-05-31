@@ -1,20 +1,17 @@
-package poml.conv.basic;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.Basic;
-
-public class DependTest extends ConvTestCase {
+public class BasicDependTest extends TestCase {
 
   @Test public void id2art() {
     poml(
       "depend=group.com:artifact"
     );
     Basic.depend(poml, xml);
-    result(
+    xml(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
       "      <artifactId>artifact</artifactId>" + nl +
@@ -27,7 +24,7 @@ public class DependTest extends ConvTestCase {
       "depend=group.com:artifact:0.0.1"
     );
     Basic.depend(poml, xml);
-    result(
+    xml(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
       "      <artifactId>artifact</artifactId>" + nl +
@@ -41,7 +38,7 @@ public class DependTest extends ConvTestCase {
       "depend=group.com:artifact:0.0.1:::jar"
     );
     Basic.depend(poml, xml);
-    result(
+    xml(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
       "      <artifactId>artifact</artifactId>" + nl +
@@ -56,7 +53,7 @@ public class DependTest extends ConvTestCase {
       "depend=group.com:artifact:0.0.1::false"
     );
     Basic.depend(poml, xml);
-    result(
+    xml(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
       "      <artifactId>artifact</artifactId>" + nl +
@@ -71,7 +68,7 @@ public class DependTest extends ConvTestCase {
       "depend=group.com:artifact:0.0.1:test:true:jar"
     );
     Basic.depend(poml, xml);
-    result(
+    xml(
       "    <dependency>" + nl +
       "      <groupId>group.com</groupId>" + nl +
       "      <artifactId>artifact</artifactId>" + nl +
@@ -92,7 +89,7 @@ public class DependTest extends ConvTestCase {
       "  group.com:artifact:0.0.1:test:true:jar"
     );
     Basic.depend(poml, xml);
-    result(
+    xml(
       "    <dependency>" + nl +
       "      <groupId>demo.com</groupId>" + nl +
       "      <artifactId>demo2</artifactId>" + nl +

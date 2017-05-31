@@ -1,20 +1,17 @@
-package poml.conv.env;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.Env;
-
-public class DistTest extends ConvTestCase {
+public class EnvDistTest extends TestCase {
 
   @Test public void ossrh() {
     poml(
       "dist=&ossrh"
     );
     Env.dist(poml, xml);
-    result(
+    xml(
       "  <distributionManagement>" + nl +
       "    <snapshotRepository>" + nl +
       "      <id>ossrh</id>" + nl +

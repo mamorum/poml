@@ -1,11 +1,8 @@
-package poml.conv.build;
+package poml.convert;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.Build;
-
-public class PluginTest extends ConvTestCase {
+public class BuildPluginTest extends TestCase {
   // $
   @Test public void grp_art() {
     poml(
@@ -13,7 +10,7 @@ public class PluginTest extends ConvTestCase {
       "$sbp=org.springframework.boot:spring-boot-maven-plugin"
     );
     Build.plugin(poml, xml);
-    result(
+    xml(
       "      <plugin>" + nl +
       "        <groupId>org.springframework.boot</groupId>" + nl +
       "        <artifactId>spring-boot-maven-plugin</artifactId>" + nl +
@@ -43,7 +40,7 @@ public class PluginTest extends ConvTestCase {
       "}" + nl
     );
     Build.plugin(poml, xml);
-    result(
+    xml(
         "      <plugin>" + nl +
         "        <groupId>org.apache.maven.plugins</groupId>" + nl +
         "        <artifactId>maven-jar-plugin</artifactId>" + nl +
@@ -77,7 +74,7 @@ public class PluginTest extends ConvTestCase {
       "&fatjar=mainClass>poml.Main"
     );
     Build.plugin(poml, xml);
-    result(
+    xml(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
@@ -154,7 +151,7 @@ public class PluginTest extends ConvTestCase {
       "}" + nl
     );
     Build.plugin(poml, xml);
-    result(
+    xml(
       "      <plugin>" + nl +
       "        <artifactId>maven-antrun-plugin</artifactId>" + nl +
       "        <version>1.1</version>" + nl +

@@ -1,20 +1,17 @@
-package poml.conv.basic;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.Basic;
-
-public class PkgTest extends ConvTestCase {
+public class BasicPkgTest extends TestCase {
 
   @Test public void id_ver() {
     poml(
       "pkg=group.com:artifact:0.0.1"
     );
     Basic.pkg(poml, xml);
-    result(
+    xml(
       "  <groupId>group.com</groupId>" + nl +
       "  <artifactId>artifact</artifactId>" + nl +
       "  <version>0.0.1</version>" + nl
@@ -26,7 +23,7 @@ public class PkgTest extends ConvTestCase {
       "pkg=group.com:artifact:0.0.1:jar"
     );
     Basic.pkg(poml, xml);
-    result(
+    xml(
       "  <groupId>group.com</groupId>" + nl +
       "  <artifactId>artifact</artifactId>" + nl +
       "  <version>0.0.1</version>" + nl +

@@ -1,20 +1,17 @@
-package poml.conv.more;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.More;
-
-public class LicenseTest extends ConvTestCase {
+public class MoreLicenseTest extends TestCase {
 
   @Test public void apache2() {
     poml(
       "license=&apache2"
     );
     More.license(poml, xml);
-    result(
+    xml(
       "    <license>" + nl +
       "      <name>The Apache License, Version 2.0</name>" + nl +
       "      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>" + nl +
@@ -32,7 +29,7 @@ public class LicenseTest extends ConvTestCase {
       "  comments>The 2-Clause BSD License" + nl
     );
     More.license(poml, xml);
-    result(
+    xml(
       "    <license>" + nl +
       "      <name>The New BSD License</name>" + nl +
       "      <url>http://www.opensource.org/licenses/bsd-license.php</url>" + nl +
@@ -50,7 +47,7 @@ public class LicenseTest extends ConvTestCase {
       "  url>http://www.wtfpl.net/" + nl
     );
     More.license(poml, xml);
-    result(
+    xml(
       "    <license>" + nl +
       "      <name>WTFPL</name>" + nl +
       "      <url>http://www.wtfpl.net/</url>" + nl +

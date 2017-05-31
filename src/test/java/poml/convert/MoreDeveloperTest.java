@@ -1,13 +1,10 @@
-package poml.conv.more;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.More;
-
-public class DeveloperTest extends ConvTestCase {
+public class MoreDeveloperTest extends TestCase {
 
   @Test public void single() {
     poml(
@@ -18,7 +15,7 @@ public class DeveloperTest extends ConvTestCase {
       "  url>http://www.example.com/jdoe" + nl
     );
     More.developer(poml, xml);
-    result(
+    xml(
       "    <developer>" + nl +
       "      <id>jdoe</id>" + nl +
       "      <name>John Doe</name>" + nl +
@@ -38,7 +35,7 @@ public class DeveloperTest extends ConvTestCase {
       "$ken=id>ken" + nl
     );
     More.developer(poml, xml);
-    result(
+    xml(
       "    <developer>" + nl +
       "      <id>jdoe</id>" + nl +
       "      <name>John Doe</name>" + nl +

@@ -1,20 +1,17 @@
-package poml.conv.env;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.Env;
-
-public class IssueTest extends ConvTestCase {
+public class EnvIssueTest extends TestCase {
 
   @Test public void url() {
     poml(
       "issue=url>https://github.com/mamorum/poml/issues"
     );
     Env.issue(poml, xml);
-    result(
+    xml(
       "  <issueManagement>" + nl +
       "    <url>https://github.com/mamorum/poml/issues</url>" + nl +
       "  </issueManagement>" + nl
@@ -28,7 +25,7 @@ public class IssueTest extends ConvTestCase {
       "  url>https://github.com/mamorum/poml/issues" + nl
     );
     Env.issue(poml, xml);
-    result(
+    xml(
       "  <issueManagement>" + nl +
       "    <system>GitHub Issues</system>" + nl +
       "    <url>https://github.com/mamorum/poml/issues</url>" + nl +

@@ -1,20 +1,17 @@
-package poml.conv.basic;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.Basic;
-
-public class PropertiesTest extends ConvTestCase {
+public class BasicPropertiesTest extends TestCase {
 
   @Test public void single() {
     poml(
       "properties=project.build.sourceEncoding>UTF-8"
     );
     Basic.properties(poml, xml);
-    result(
+    xml(
       "  <properties>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "  </properties>" + nl
@@ -28,7 +25,7 @@ public class PropertiesTest extends ConvTestCase {
       "  project.build.sourceEncoding>UTF-8"
     );
     Basic.properties(poml, xml);
-    result(
+    xml(
       "  <properties>" + nl +
       "    <property>value</property>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
@@ -41,7 +38,7 @@ public class PropertiesTest extends ConvTestCase {
       "properties=&encoding>UTF-8"
     );
     Basic.properties(poml, xml);
-    result(
+    xml(
       "  <properties>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +
       "    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>" + nl +
@@ -53,7 +50,7 @@ public class PropertiesTest extends ConvTestCase {
       "properties=&compiler>1.8"
     );
     Basic.properties(poml, xml);
-    result(
+    xml(
       "  <properties>" + nl +
       "    <maven.compiler.source>1.8</maven.compiler.source>" + nl +
       "    <maven.compiler.target>1.8</maven.compiler.target>" + nl +
@@ -71,7 +68,7 @@ public class PropertiesTest extends ConvTestCase {
       "  property3>value3"
     );
     Basic.properties(poml, xml);
-    result(
+    xml(
       "  <properties>" + nl +
       "    <property1>value1</property1>" + nl +
       "    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>" + nl +

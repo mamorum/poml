@@ -1,13 +1,10 @@
-package poml.conv.env;
+package poml.convert;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import poml.conv.ConvTestCase;
-import poml.convert.Env;
-
-public class ScmTest extends ConvTestCase {
+public class EnvScmTest extends TestCase {
 
   @Test public void url() {
     poml(
@@ -15,7 +12,7 @@ public class ScmTest extends ConvTestCase {
       "  url>https://github.com/mamorum/poml/" + nl
     );
     Env.scm(poml, xml);
-    result(
+    xml(
       "  <scm>" + nl +
       "    <url>https://github.com/mamorum/poml/</url>" + nl +
       "  </scm>" + nl
@@ -31,7 +28,7 @@ public class ScmTest extends ConvTestCase {
       "  url>https://github.com/mamorum/poml" + nl
     );
     Env.scm(poml, xml);
-    result(
+    xml(
       "  <scm>" + nl +
       "    <connection>scm:git:https://github.com/mamorum/poml.git</connection>" + nl +
       "    <developerConnection>scm:git:git@github.com:mamorum/poml.git</developerConnection>" + nl +

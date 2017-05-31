@@ -1,4 +1,4 @@
-package poml.conv;
+package poml.convert;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import org.junit.Before;
 import poml.io.Poml;
 import poml.io.Xml;
 
-public class ConvTestCase {
+public class TestCase {
   public Poml poml;
   public Xml xml;
   public static String nl = System.lineSeparator();
@@ -28,7 +28,7 @@ public class ConvTestCase {
       throw new RuntimeException(e);
     }
   }
-  public void result(String expected) {
+  public void xml(String expected) {
     Assert.assertEquals(expected, xml.toString());
   }
   public Msg msg(Exception e) {
