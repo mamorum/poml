@@ -19,14 +19,14 @@ The delimiter needs newlines on its front and behind.
 ```
 pkg=com.example:demo:0.0.1:jar
 depend=
-  com.google.guava:guava:21.0,
+  org.slf4j:slf4j-api:1.7.25,
   junit:junit:[4.12\,):test
 properties=&encoding>UTF-8, &compiler>1.8
 ---
 {{prj}}&
   {{pkg}}&
   <dependencies>
-    <!-- guava, junit -->
+    <!-- slf4j, junit -->
     {{depend}}
   </dependencies>&
   {{properties}}
@@ -48,7 +48,7 @@ In this section, we can write the `key=val` as a configuration.
 ```
 pkg=com.example:demo:0.0.1:jar
 depend=
-  com.google.guava:guava:21.0,
+  org.slf4j:slf4j-api:1.7.25,
   junit:junit:[4.12\,):test
 properties=&encoding>UTF-8, &compiler>1.8
 ```
@@ -62,14 +62,14 @@ If a line ends with `=` or `,`, configuration continues to the next line.
 
 ```
 depend=
-  com.google.guava:guava:21.0,
+  org.slf4j:slf4j-api:1.7.25,
   junit:junit:[4.12\,):test
 ```
 
 In the above case,
 
 - key: `depend`
-- val: `com.google.guava:guava:21.0,  junit:junit:[4.12\,):test`
+- val: `org.slf4j:slf4j-api:1.7.25,  junit:junit:[4.12\,):test`
 
 Please do **NOT** ends line with a space,  if it continues.  
 Spaces at the end of line are not trimed.
@@ -91,7 +91,7 @@ In this section, we can write XML elements, placeholders and ampersand.
 {{prj}}&
   {{pkg}}&
   <dependencies>
-    <!-- guava, junit -->
+    <!-- slf4j, junit -->
     {{depend}}
   </dependencies>&
   {{properties}}
@@ -106,5 +106,5 @@ We can write one placeholder `{{key}}` per one line.
 Poml converts placeholders to XML tags, using `key=val` configurations.
 
 ### 4.3. Ampersand
-We can add one `&` to the end of line.  
-Poml converts `&` to newline.
+We can write one `&` at the end of line, for adding blank line to XML.  
+Poml converts `&` to newline. 
