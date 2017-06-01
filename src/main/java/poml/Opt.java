@@ -11,9 +11,9 @@ import poml.convert.Basic;
 public class Opt {
   private static final PrintStream o = System.out;
   public void help() {
-    o.println("Convert pom.poml to pom.xml");
-    o.println();
     o.println("Usage: poml [option]");
+    o.println();
+    o.println("  Convert pom.poml to pom.xml (if no option is specified)");
     o.println();
     o.println("Option:");
     o.println("  -h, help   \t   print this help");
@@ -23,8 +23,7 @@ public class Opt {
   }
   public void version() {
     o.println(
-      Main.class.getPackage()
-        .getImplementationVersion()
+      Opt.class.getPackage().getImplementationVersion()
     );
   }
   // mkdirs ->
