@@ -72,7 +72,7 @@ public class Opt {
       ).append(Basic.props).append("="
       ).append(Basic.enc).append(">"
       ).append(ask("encoding", "UTF-8")).append(", "
-      ).append(Basic.jdk).append(">"
+      ).append(Basic.javac).append(">"
       ).append(ask("jdk version", "1.8"))
     ).toString();
   }

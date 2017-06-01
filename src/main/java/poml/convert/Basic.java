@@ -64,20 +64,20 @@ public class Basic {
         Throw.badConf(dep, lib);
       }
       out.line("    <dependency>");
-      out.tags("      ", depTags, vals);
+      out.tags(Xml.sp6, depTags, vals);
       out.line("    </dependency>");
     }
   }
 
   // -> properties
   public static final String
-    enc="&encoding", jdk="&compiler";
+    enc="&encoding", javac="&compiler";
   public static void properties(Poml in, Xml out) {
     Map<String, String> kv = in.conf.map(props);
     out.line("  <properties>");
     for (String k: kv.keySet()) {
       if (enc.equals(k)) enc(out, kv.get(k));
-      else if (jdk.equals(k)) javac(out, kv.get(k));
+      else if (javac.equals(k)) javac(out, kv.get(k));
       else out.tag(Xml.sp4, k, kv.get(k));
     }
     out.line("  </properties>");
