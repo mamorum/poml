@@ -52,6 +52,6 @@ public class Env {
       out.line("    </repository>");
       out.line("  </distributionManagement>");
     }
-    else Throw.badConf(dist, val);
+    else Throw.val(dist, val);
   }
 }

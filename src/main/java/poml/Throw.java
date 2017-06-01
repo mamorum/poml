@@ -2,11 +2,14 @@ package poml;
 
 // TODO Needs message harmony of all methods.
 public class Throw {
-  public static void noConv(String name) {
+  // -> config error
+  public static void val(String key, String val) {
     throw new IllegalStateException(
-      "Converter not found [name=" + name + "]"
+      "Invalid config val [key=" + key +"] [val=" + val + "]"
+      // TODO add? "Please check the poml reference"
     );
   }
+
   public static void noConf(String key) {
     throw new IllegalStateException(
       "Config not found [key=" + key + "]"

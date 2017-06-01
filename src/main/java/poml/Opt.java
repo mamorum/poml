@@ -73,7 +73,7 @@ public class Opt {
       ).append(Basic.enc).append(">"
       ).append(ask("encoding", "UTF-8")).append(", "
       ).append(Basic.javac).append(">"
-      ).append(ask("jdk version", "1.8"))
+      ).append(ask("javac version", "1.8"))
     ).toString();
   }
   private BufferedReader in;

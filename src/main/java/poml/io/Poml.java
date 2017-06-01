@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import poml.Throw;
 import poml.convert.Basic;
 import poml.convert.Build;
 import poml.convert.Env;
@@ -128,6 +127,8 @@ public class Poml {
     else if (Env.issue.equals(key)) Env.issue(this, o);
     else if (Env.scm.equals(key)) Env.scm(this, o);
     else if (Env.dist.equals(key)) Env.dist(this, o);
-    else Throw.noConv(key);
+    else throw new IllegalStateException(
+      "{{" + key  + "}} cannot be used in poml"
+    );
   }
 }

@@ -12,7 +12,11 @@ import java.io.PrintStream;
 import poml.io.Poml;
 
 public class Main {
-  private static void ng(Opt opt) { opt.help(); System.exit(1); }
+  public static void main(String[] args) throws Throwable {
+    if (args.length == 2) convert(args[0], args[1]);
+    else if (args.length == 1) option(new Opt(), args[0]);
+    else ng(new Opt()); // invalid args
+  }
 
   // cmd "poml option"
   private static void option(Opt opt, String arg) throws Throwable {
@@ -24,12 +28,7 @@ public class Main {
     else if ("init".equals(arg)) opt.init();
     else ng(opt); // not found
   }
-
-  public static void main(String[] args) throws Throwable {
-    if (args.length == 2) convert(args[0], args[1]);
-    else if (args.length == 1) option(new Opt(), args[0]);
-    else ng(new Opt()); // invalid args
-  }
+  private static void ng(Opt opt) { opt.help(); System.exit(1); }
 
   // cmd "poml pom.poml pom.xml"
   static void convert(
@@ -55,14 +54,13 @@ public class Main {
     o.println(pomlPath);
     return time;
   }
-  private static void ok(String xmlPath, long time) {
-    String uptime = String.valueOf(
-      (System.currentTimeMillis() - time)
-    );
+  private static void ok(String xmlPath, long starTime) {
     o.print("[INFO] Created ");
     o.print(xmlPath);
     o.print(" @");
-    o.print(uptime);
+    o.print(String.valueOf(
+      (System.currentTimeMillis() - starTime)
+    ));  // poml uptime
     o.println("ms");
   }
   private static void err(Throwable e, String xmlPath) {
