@@ -71,21 +71,9 @@ public class Config {
     map.put(k.trim(), ltrim(v));
     return true;
   }
-  // -> for getting config tags from "{ <k>v</k>  ... }"
-  private static final String nl = System.lineSeparator();
-  public String tag(String key, String space) {
-    String val = val(key, false);
-    StringBuilder tag = new StringBuilder();
-    for (int s=0, e=0;;) {
-      e = val.indexOf(nl, s);
-      if (e == -1) break;
-      e = e+nl.length();
-      tag.append(space).append(
-        val.substring(s, e)
-      );
-      s = e;
-    }
-    return tag.toString();
+  // -> for getting config xml from "{ <k>v</k>  ... }"
+  public String xml(String key) {
+    return val(key, false);
   }
   private static boolean none(String s) {
     if (s == null || "".equals(s)) return true;

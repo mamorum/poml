@@ -14,6 +14,7 @@ public class Poml {
   public Config conf = new Config();
   private boolean hasLayout = false;
   private BufferedReader in;
+  private String line;
 
   private Poml(BufferedReader in) {this.in = in;}
   public static Poml of(BufferedReader in) throws IOException {
@@ -31,7 +32,6 @@ public class Poml {
 
   //-> Config Section
   private void parseConfig() throws IOException {
-    String line;
     while ((line = in.readLine()) != null) {
       if (line.length() == 0) continue;  // none
       if (line.charAt(0) == '#') continue;  // comment
@@ -40,26 +40,23 @@ public class Poml {
         break;
       }
       char last = line.charAt(line.length()-1);
-      if (last == '{') addTags(line);
-      else if (isContinuing(last)) addLines(line);
+      if (last == '{') addXml();
+      else if (isContinuing(last)) addLines();
       else addLine(line);
     }
   }
-  private void addTags(String firstLine) throws IOException {
+  private void addXml() throws IOException {
     // first line
-    int pos = firstLine.indexOf('=');
-    if (pos == -1) return;
-    String key = firstLine.substring(0, pos).trim();
+    int pos = line.indexOf('=');
+    if (pos == -1) return;  // TODO no key -> throw?
+    String key = line.substring(0, pos).trim();
     // second+ lines
     StringBuilder tags = new StringBuilder();
-    String line; char last;
     while ((line = in.readLine()) != null) {
-      last = line.charAt(line.length()-1);
-      if (last == '}') break;
-      else {
-        tags.append(line);
-        tags.append(System.lineSeparator());
-      }
+      if ("}".equals(line)) break;
+      tags.append(line).append(
+        System.lineSeparator()
+      );
     }
     conf.p.put(key, tags.toString());
   }
@@ -68,22 +65,22 @@ public class Poml {
     if (last == ',') return true;
     return false;
   }
-  private void addLines(String firstLine) throws IOException {
-    StringBuilder sb = new StringBuilder(firstLine);
-    String line; char last;
+  private void addLines() throws IOException {
+    StringBuilder sb = new StringBuilder(line);
+    char last;
     while ((line = in.readLine()) != null) {
       sb.append(line);
       last = line.charAt(line.length()-1);
       if (isContinuing(last)) continue;
-      else break;
+      break;
     }
     addLine(sb.toString());
   }
-  private void addLine(String line) {
-    int pos = line.indexOf('=');
-    if (pos == -1) return;
-    String k = line.substring(0, pos).trim();
-    String v = line.substring(pos + 1);
+  private void addLine(String l) {
+    int pos = l.indexOf('=');
+    if (pos == -1) return;  // TODO no key -> throw?
+    String k = l.substring(0, pos).trim();
+    String v = l.substring(pos + 1);
     conf.p.put(k, v);
   }
 
@@ -98,7 +95,7 @@ public class Poml {
   }
 
   private void layoutTo(Xml xml) throws IOException {
-    String line; boolean nl;
+    boolean nl;
     while ((line = in.readLine()) != null) {
       nl = line.endsWith("&");
       if (nl) line = line.substring(
@@ -108,14 +105,14 @@ public class Poml {
       if (nl) xml.nl();
     }
   }
-  private void render(String line, Xml o) {
-    int str = line.indexOf("{{");
-    int end = line.indexOf("}}");
+  private void render(String l, Xml o) {
+    int str = l.indexOf("{{");
+    int end = l.indexOf("}}");
     if (str == -1 || end == -1) {
-      o.line(line); return;  // no placeholder
+      o.line(l); return;  // no placeholder
     }
     // convert placeholder {{key}}
-    String key = line.substring(str+2, end);
+    String key = l.substring(str+2, end);
     if (Prj.start.equals(key)) Prj.start(o);
     else if (Prj.end.equals(key)) Prj.end(o);
     else if (Basic.pkg.equals(key)) Basic.pkg(this, o);

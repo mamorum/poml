@@ -49,7 +49,7 @@ public class Build {
     String key = (new StringBuilder($plg)).append(".conf").toString();
     if (in.conf.has(key)) {
       out.line("        <configuration>");
-      out.txt(in.conf.tag(key, Xml.sp8));
+      out.xml(Xml.sp8, in.conf.xml(key));
       out.line("        </configuration>");
     }
   }
@@ -57,7 +57,7 @@ public class Build {
     String key = (new StringBuilder($plg)).append(".depends").toString();
     if (in.conf.has(key)) {
       out.line("        <dependencies>");
-      out.txt(in.conf.tag(key, Xml.sp8));
+      out.xml(Xml.sp8, in.conf.xml(key));
       out.line("        </dependencies>");
     }
   }
@@ -65,7 +65,7 @@ public class Build {
     String key = (new StringBuilder($plg)).append(".execs").toString();
     if (in.conf.has(key)) {
       out.line("        <executions>");
-      out.txt(in.conf.tag(key, Xml.sp8));
+      out.xml(Xml.sp8, in.conf.xml(key));
       out.line("        </executions>");
     }
   }
@@ -97,12 +97,12 @@ public class Build {
     out.line("            </manifest>");
     String confArc = "&fatjar.conf.archive+";
     if (in.conf.has(confArc)) {
-      out.txt(in.conf.tag(confArc, Xml.sp10));
+      out.xml(Xml.sp10, in.conf.xml(confArc));
     }
     out.line("          </archive>");
     String conf = "&fatjar.conf+";
     if (in.conf.has(conf)) {
-      out.txt(in.conf.tag(conf, Xml.sp8));
+      out.xml(Xml.sp8, in.conf.xml(conf));
     }
     out.line("        </configuration>");
     out.line("        <executions>");

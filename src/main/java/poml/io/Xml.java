@@ -4,9 +4,11 @@ import java.util.Map;
 
 // pom.xml
 public class Xml {
-  public static final String  // indent
+  public static final String
     sp2="  ", sp4="    ", sp6="      ",
-    sp8="        ", sp10="          ";
+    sp8="        ", sp10="          ", // <-indent
+    nl=System.lineSeparator();
+  private static final int nlLen=nl.length();
 
   private StringBuilder xml = new StringBuilder();
 
@@ -16,12 +18,21 @@ public class Xml {
     return this;
   }
   public void nl() {
-    xml.append(System.lineSeparator());
+    xml.append(nl);
   }
   public void line(String l) {
-    xml.append(l); nl();
+    xml.append(l).append(nl);
   }
-
+  public void xml(String space, String x) {
+    for (int s=0, e=0;;s = e) {
+      e = x.indexOf(nl, s);
+      if (e == -1) break;
+      e = e+nlLen;
+      xml.append(space).append(
+        x.substring(s, e)
+      );
+    }
+  }
   public void tags(
     String space, String[] key, Map<String, String> val
   ) {
