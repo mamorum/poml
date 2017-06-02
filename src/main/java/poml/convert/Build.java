@@ -74,7 +74,7 @@ public class Build {
   private static void fatjar(Poml in, Xml out) {
     Map<String, String> map = in.conf.map(fatjar);
     String main = map.get("mainClass");  // required
-    if (main == null) Throw.noKv(fatjar, "mainClass");
+    if (main == null) Throw.val(fatjar, in.conf.val(fatjar));
     String ver = map.get("ver");
     if (ver == null) ver = "2.6";
     String jar = map.get("jarName");

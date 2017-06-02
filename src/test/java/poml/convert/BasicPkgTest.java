@@ -51,13 +51,15 @@ public class BasicPkgTest extends TestCase {
     }
   }
 
-  @Test public void ng_badConf() {
+  @Test public void ng_val() {
     poml("pkg=group.com:::");
     try {
       Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).is(
+        "Invalid config val [key=pkg] [val=group.com:::]"
+      );
     }
   }
 }

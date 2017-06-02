@@ -136,7 +136,7 @@ public class BasicDependTest extends TestCase {
     }
   }
 
-  @Test public void ng_badConf() {
+  @Test public void ng_val() {
     poml(
       "depend=group.com:"
     );
@@ -144,11 +144,13 @@ public class BasicDependTest extends TestCase {
       Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).is(
+        "Invalid config val [key=depend] [val=group.com:]"
+      );
     }
   }
 
-  @Test public void ng_badConf2() {
+  @Test public void ng_val2() {
     poml(
       "depend=" + nl +
       "  group.com:artifact:1.0," + nl +
@@ -158,7 +160,9 @@ public class BasicDependTest extends TestCase {
       Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).is(
+        "Invalid config val [key=depend] [val=group.com:]"
+      );
     }
   }
 

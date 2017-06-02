@@ -25,15 +25,15 @@ public class EnvDistTest extends TestCase {
     );
   }
 
-  @Test public void ng_badConf() {
-    poml(
-      "dist=oss"
-    );
+  @Test public void ng_val() {
+    poml("dist=oss");
     try {
       Env.dist(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).is(
+        "Invalid config val [key=dist] [val=oss]"
+      );
     }
   }
 }
