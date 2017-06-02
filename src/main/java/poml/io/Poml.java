@@ -2,7 +2,6 @@ package poml.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import poml.convert.Basic;
 import poml.convert.Build;
@@ -52,14 +51,17 @@ public class Poml {
     if (pos == -1) return;
     String key = firstLine.substring(0, pos).trim();
     // second+ lines
-    ArrayList<String> val = new ArrayList<>();
+    StringBuilder tags = new StringBuilder();
     String line; char last;
     while ((line = in.readLine()) != null) {
       last = line.charAt(line.length()-1);
-      if (last == '}') break;  // end
-      else val.add(line);
+      if (last == '}') break;
+      else {
+        tags.append(line);
+        tags.append(System.lineSeparator());
+      }
     }
-    conf.tags.put(key, val);
+    conf.p.put(key, tags.toString());
   }
   private boolean isContinuing(char last) {
     if (last == '=') return true;

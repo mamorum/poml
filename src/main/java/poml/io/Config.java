@@ -2,21 +2,16 @@ package poml.io;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import poml.Throw;
 
 public class Config {
   Map<String, String> p = new HashMap<>();
-  Map<String, List<String>> tags = new HashMap<>();
 
   // -> For checking config key.
   public boolean has(String key) {
     return p.containsKey(key);
-  }
-  public boolean hasTag(String key) {
-    return tags.containsKey(key);
   }
 
   // -> For getting config values.
@@ -24,9 +19,13 @@ public class Config {
   //  - throw: if val is null or blank
   //  - return: not null or blank
   public String val(String key) {
+    return val(key, true);
+  }
+  private String val(String key, boolean ltrim) {
     String val = p.get(key);
     if (none(val)) Throw.noConf(key);
-    return ltrim(val);
+    if (ltrim) return ltrim(val);
+    else return val;
   }
   // key=val, val, ...
   //  - throw: if array element is null or blank
@@ -73,16 +72,20 @@ public class Config {
     return true;
   }
   // -> for getting config tags from "{ <k>v</k>  ... }"
+  private static final String nl = System.lineSeparator();
   public String tag(String key, String space) {
-    List<String> lines = tags.get(key);
-    if (lines == null) Throw.noConf(key);
-    // TODO check if lines exist ?
-    StringBuilder sb = new StringBuilder();
-    for (String line: lines) {
-      sb.append(space).append(line)
-        .append(System.lineSeparator());
+    String val = val(key, false);
+    StringBuilder tag = new StringBuilder();
+    for (int s=0, e=0;;) {
+      e = val.indexOf(nl, s);
+      if (e == -1) break;
+      e = e+nl.length();
+      tag.append(space).append(
+        val.substring(s, e)
+      );
+      s = e;
     }
-    return sb.toString();
+    return tag.toString();
   }
   private static boolean none(String s) {
     if (s == null || "".equals(s)) return true;
