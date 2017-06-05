@@ -70,10 +70,8 @@ public class Opt {
       ).append(ask("version", "1.0.0")).append(":"
       ).append(ask("packaging", "jar")).append(System.lineSeparator()
       ).append(Basic.props).append("="
-      ).append(Basic.enc).append(">"
-      ).append(ask("encoding", "UTF-8")).append(", "
-      ).append(Basic.javac).append(">"
-      ).append(ask("javac version", "1.8"))
+      ).append(Basic.enc)).append(ask("encoding", "UTF-8")).append(", "
+      ).append(Basic.javac).append(ask("javac version", "1.8")
     ).toString();
   }
   private BufferedReader in;

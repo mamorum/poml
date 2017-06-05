@@ -41,7 +41,9 @@ public class EnvIssueTest extends TestCase {
       Env.issue(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config", true);
+      msg(e).is(
+        "Invalid config val [key=issue] [val=bad]"
+      );
     }
   }
 }

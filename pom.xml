@@ -80,8 +80,8 @@
   </issueManagement>
 
   <scm>
+    <url>https://github.com/mamorum/poml</url>
     <connection>scm:git:https://github.com/mamorum/poml.git</connection>
     <developerConnection>scm:git:git@github.com:mamorum/poml.git</developerConnection>
-    <url>https://github.com/mamorum/poml</url>
   </scm>
 </project>

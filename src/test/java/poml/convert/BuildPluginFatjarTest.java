@@ -44,8 +44,8 @@ public class BuildPluginFatjarTest extends TestCase {
     poml(
       "plugin=&fatjar" + nl +
       "&fatjar="+ nl +
-      "  ver>1.0.0,"+ nl +
-      "  jarName>sample.jar,"+ nl +
+      "  version>1.0.0,"+ nl +
+      "  finalName>sample.jar,"+ nl +
       "  mainClass>org.sample.Main"+ nl
     );
     Build.plugin(poml, xml);

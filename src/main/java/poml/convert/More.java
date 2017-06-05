@@ -1,7 +1,5 @@
 package poml.convert;
 
-import java.util.Map;
-
 import poml.io.Poml;
 import poml.io.Xml;
 
@@ -24,13 +22,9 @@ public class More {
       out.line("  </developers>");
     }
   }
-  //-> info
-  private static final String[] infoTags = {
-    "name", "description", "url", "inceptionYear"
-  };
-  public static void info(Poml in, Xml out) {
-    Map<String, String> kv = in.conf.map(info);
-    out.tags(Xml.sp2, infoTags, kv);
+  //-> info: name, description, url, inceptionYear
+  public static void info(Poml in, Xml out) {;
+    out.kvs(Xml.sp2, in.conf.vals(info), info);
   }
 
   //-> license
@@ -52,23 +46,17 @@ public class More {
     out.line("      <name>MIT License</name>");
     out.line("      <url>https://opensource.org/licenses/MIT</url>");
   }
+  // name, url, distribution, comments
   private static void $license(String lic, Poml in, Xml out) {
-    Map<String, String> kv = in.conf.map(lic);
-    out.tags(Xml.sp6, licenseTags, kv);
+    out.kvs(Xml.sp6, in.conf.vals(lic), lic);
   }
-  private static final String[] licenseTags = {
-    "name", "url", "distribution", "comments"
-  };
 
-  //-> developer
-  private static final String[]
-    devTags = { "id", "name","email", "url"};
+  //-> developer: id, name, email, url
   public static void developer(Poml in, Xml out) {
     String[] devs = in.conf.vals(dev);
     for (String $dev: devs) {
-      Map<String, String> kv = in.conf.map($dev);
       out.line("    <developer>");
-      out.tags(Xml.sp6, devTags, kv);
+      out.kvs(Xml.sp6, in.conf.vals($dev), $dev);
       out.line("    </developer>");
     }
   }

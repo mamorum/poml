@@ -1,7 +1,5 @@
 package poml.convert;
 
-import java.util.Map;
-
 import poml.Throw;
 import poml.io.Poml;
 import poml.io.Xml;
@@ -72,20 +70,22 @@ public class Build {
 
   // -> &fatjar : render assembly-plugin
   private static void fatjar(Poml in, Xml out) {
-    Map<String, String> map = in.conf.map(fatjar);
-    String main = map.get("mainClass");  // required
-    if (main == null) Throw.val(fatjar, in.conf.val(fatjar));
-    String ver = map.get("ver");
-    if (ver == null) ver = "2.6";
-    String jar = map.get("jarName");
-    if (jar == null) jar = "${project.artifactId}";
+    String ver=null, jar=null, main=null;
+    for (String k: in.conf.vals(fatjar)) {
+      if (k.startsWith("version")) ver=k;
+      else if (k.startsWith("finalName")) jar=k;
+      else if (k.startsWith("mainClass")) main=k;
+    }
+    if (ver == null) ver = "version>2.6";
+    if (jar == null) jar = "finalName>${project.artifactId}";
+    if (main == null) Throw.val(fatjar, in.conf.val(fatjar)); // required
     // -> render
     out.line("      <plugin>");
     out.line("        <groupId>org.apache.maven.plugins</groupId>");
     out.line("        <artifactId>maven-assembly-plugin</artifactId>");
-    out.txt("        <version>").txt(ver).txt("</version>").nl();
+    out.txt("        <").txt(ver).txt("</version>").nl();
     out.line("        <configuration>");
-    out.txt("          <finalName>").txt(jar).txt("</finalName>").nl();
+    out.txt("          <").txt(jar).txt("</finalName>").nl();
     out.line("          <descriptorRefs>");
     out.line("            <descriptorRef>jar-with-dependencies</descriptorRef>");
     out.line("          </descriptorRefs>");
@@ -93,7 +93,7 @@ public class Build {
     out.line("          <attach>false</attach>");
     out.line("          <archive>");
     out.line("            <manifest>");
-    out.txt("              <mainClass>").txt(main).txt("</mainClass>").nl();
+    out.txt("              <").txt(main).txt("</mainClass>").nl();
     out.line("            </manifest>");
     String confArc = "&fatjar.conf.archive+";
     if (in.conf.has(confArc)) {

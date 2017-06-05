@@ -1,7 +1,5 @@
 package poml.convert;
 
-import java.util.Map;
-
 import poml.Throw;
 import poml.io.Poml;
 import poml.io.Xml;
@@ -16,24 +14,17 @@ public class Env {
     if (in.conf.has(dist)) {out.nl(); dist(in, out);}
   }
 
-  //-> issue
-  private static final String[]
-    issueTags = { "system", "url" };
+  //-> issue (system, url)
   public static void issue(Poml in, Xml out) {
-    Map<String, String> kv = in.conf.map(issue);
     out.line("  <issueManagement>");
-    out.tags(Xml.sp4, issueTags, kv);
+    out.kvs(Xml.sp4, in.conf.vals(issue), issue);
     out.line("  </issueManagement>");
   }
 
-  //-> scm
-  private static final String[] scmTags = {
-    "connection", "developerConnection", "tag", "url"
-  };
+  //-> scm (connection, developerConnection, tag, url)
   public static void scm(Poml in, Xml out) {
-    Map<String, String> kv = in.conf.map(scm);
     out.line("  <scm>");
-    out.tags(Xml.sp4, scmTags, kv);
+    out.kvs(Xml.sp4, in.conf.vals(scm), scm);
     out.line("  </scm>");
   }
 

@@ -48,9 +48,9 @@ issue=
   system>GitHub Issues,
   url>https://github.com/user/repo/issues
 scm=
-  tag>HEAD, url>https://github.com/user/repo,
   connection>scm:git:https://github.com/user/repo.git,
-  developerConnection>scm:git:git@github.com:user/repo.git
+  developerConnection>scm:git:git@github.com:user/repo.git,
+  tag>HEAD, url>https://github.com/user/repo
 dist=&ossrh
 ---
 {{prj}}&

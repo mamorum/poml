@@ -46,7 +46,9 @@ public class EnvScmTest extends TestCase {
       Env.scm(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config", false);
+      msg(e).is(
+        "Invalid config val [key=scm] [val=badconf]"
+      );
     }
   }
 }

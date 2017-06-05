@@ -1,6 +1,6 @@
 package poml.io;
 
-import java.util.Map;
+import poml.Throw;
 
 // pom.xml
 public class Xml {
@@ -33,10 +33,16 @@ public class Xml {
       );
     }
   }
-  public void tags(
-    String space, String[] key, Map<String, String> val
-  ) {
-    for (String k: key) tag(space, k, val.get(k));
+  public void kvs(String space, String[] kvs, String confKey) {
+    for (String kv: kvs) kv(space, kv, confKey);
+  }
+  public void kv(String space, String kv, String confKey) {
+    int gt = kv.indexOf('>');
+    if (gt == -1) Throw.val(confKey, kv);
+    String k = kv.substring(0, gt);
+    xml.append(space).append(
+      "<").append(kv).append("</").append(k).append(">"
+    ).append(nl);
   }
   public void tags(
     String space, String[] key, String[] val

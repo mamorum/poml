@@ -1,13 +1,11 @@
 package poml.io;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import poml.Throw;
 
 public class Config {
-  Map<String, String> p = new HashMap<>();
+  HashMap<String, String> p = new HashMap<>();
 
   // -> For checking config key.
   public boolean has(String key) {
@@ -45,31 +43,6 @@ public class Config {
       vals[i] = ltrim(vals[i]);
     }
     return vals;
-  }
-  // key=k>v, k>v, ...
-  //  - throw: if map element is null or blank
-  //  - return: map (size 1+)
-  public Map<String, String> map(String key) {
-    String val = val(key);
-    Map<String, String> map = new LinkedHashMap<>();
-    for (String kv: split(key, val)) {
-      if (!put(kv, map)) Throw.badConf(key, val);
-    }
-    return map;
-  }
-  //// "k>v" -> put("k", "v")
-  ////" k > v " -> put("k", "v ")
-  private static boolean put(
-    String kv, Map<String, String> map
-  ) {
-    int pos = kv.indexOf('>');
-    if (pos == -1) return false;
-    String k = kv.substring(0, pos);
-    String v = kv.substring(pos + 1);
-    if (none(k)) return false;
-    if (none(v)) return false;
-    map.put(k.trim(), ltrim(v));
-    return true;
   }
   // -> for getting config xml from "{ <k>v</k>  ... }"
   public String xml(String key) {

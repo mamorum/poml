@@ -107,21 +107,25 @@ public class BasicPropertiesTest extends TestCase {
       Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).is(
+        "Invalid config val [key=properties] [val=:]"
+      );
     }
   }
 
   @Test public void ng_badConf2() {
     poml(
       "properties=" + nl +
-      "  key:val," + nl +
+      "  key>val," + nl +
       "  keyval"
     );
     try {
       Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Bad config");
+      msg(e).is(
+        "Invalid config val [key=properties] [val=keyval]"
+      );
     }
   }
 }

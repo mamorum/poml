@@ -1,15 +1,17 @@
 package poml.convert;
 
-import java.util.Map;
-
 import poml.Throw;
 import poml.io.Poml;
 import poml.io.Xml;
 
 public class Basic {
-  public static final String
+  public static final String //-> config name
     pkg="pkg", parent="parent",
     dep="depend", props = "properties";
+  public static final String //-> tag name
+    groupId="groupId",
+    artifactId="artifactId",
+    version="version";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has(pkg)) {out.nl(); pkg(in, out);}
@@ -25,7 +27,7 @@ public class Basic {
 
   // -> pkg
   private static final String[] pkgTags = {
-    "groupId", "artifactId", "version",  // required
+    groupId, artifactId, version,  // required
     "packaging"  // optional
   };
   public static void pkg(Poml in, Xml out) {
@@ -37,7 +39,7 @@ public class Basic {
 
   // -> parent
   private static final String[] parentTags = {
-    "groupId", "artifactId", "version",  // required
+    groupId, artifactId, version,  // required
   };
   public static void parent(Poml in, Xml out) {
     String val = in.conf.val(parent);
@@ -50,8 +52,8 @@ public class Basic {
 
   // -> depend
   private static final String[] depTags = {
-    "groupId", "artifactId", // required
-    "version", "scope", "optional", "type"  // optional
+    groupId, artifactId, // required
+    version, "scope", "optional", "type"  // optional
   };
   public static void depend(Poml in, Xml out) {
     for (String lib: in.conf.vals(dep)) {
@@ -65,14 +67,13 @@ public class Basic {
 
   // -> properties
   public static final String
-    enc="&encoding", javac="&compiler";
+    enc="&encoding>", javac="&compiler>";
   public static void properties(Poml in, Xml out) {
-    Map<String, String> kv = in.conf.map(props);
     out.line("  <properties>");
-    for (String k: kv.keySet()) {
-      if (enc.equals(k)) enc(out, kv.get(k));
-      else if (javac.equals(k)) javac(out, kv.get(k));
-      else out.tag(Xml.sp4, k, kv.get(k));
+    for (String kv: in.conf.vals(props)) {
+      if (kv.startsWith(enc)) enc(out, v(kv));
+      else if (kv.startsWith(javac)) javac(out, v(kv));
+      else out.kv(Xml.sp4, kv, props);
     }
     out.line("  </properties>");
   }
@@ -83,5 +84,8 @@ public class Basic {
   private static void javac(Xml out, String v) {
     out.tag(Xml.sp4, "maven.compiler.source", v);
     out.tag(Xml.sp4, "maven.compiler.target", v);
+  }
+  private static String v(String kv) {
+    return kv.substring(kv.indexOf('>')+1);
   }
 }
