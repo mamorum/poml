@@ -1,6 +1,6 @@
 package poml.convert;
 
-import poml.Throw;
+import poml.io.Conf;
 import poml.io.Poml;
 import poml.io.Xml;
 
@@ -78,7 +78,7 @@ public class Build {
     }
     if (ver == null) ver = "version>2.6";
     if (jar == null) jar = "finalName>${project.artifactId}";
-    if (main == null) Throw.val(fatjar, in.conf.val(fatjar)); // required
+    if (main == null) Conf.err(fatjar, in.conf.val(fatjar)); // required
     // -> render
     out.line("      <plugin>");
     out.line("        <groupId>org.apache.maven.plugins</groupId>");

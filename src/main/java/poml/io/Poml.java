@@ -11,7 +11,7 @@ import poml.convert.Prj;
 
 // pom.poml
 public class Poml {
-  public Config conf = new Config();
+  public Conf conf = new Conf();
   private boolean hasLayout = false;
   private BufferedReader in;
   private String line;
@@ -58,7 +58,7 @@ public class Poml {
         System.lineSeparator()
       );
     }
-    conf.p.put(key, tags.toString());
+    conf.kv.put(key, tags.toString());
   }
   private boolean isContinuing(char last) {
     if (last == '=') return true;
@@ -81,7 +81,7 @@ public class Poml {
     if (pos == -1) return;  // TODO no key -> throw?
     String k = l.substring(0, pos).trim();
     String v = l.substring(pos + 1);
-    conf.p.put(k, v);
+    conf.kv.put(k, v);
   }
 
   //-> Layout Section

@@ -1,7 +1,5 @@
 package poml.io;
 
-import poml.Throw;
-
 // pom.xml
 public class Xml {
   public static final String
@@ -38,7 +36,7 @@ public class Xml {
   }
   public void kv(String space, String kv, String confKey) {
     int gt = kv.indexOf('>');
-    if (gt == -1) Throw.val(confKey, kv);
+    if (gt == -1) Conf.err(confKey, kv);
     String k = kv.substring(0, gt);
     xml.append(space).append(
       "<").append(kv).append("</").append(k).append(">"

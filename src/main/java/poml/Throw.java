@@ -1,8 +1,6 @@
 package poml;
 
-// TODO Needs message harmony of all methods.
 public class Throw {
-  // -> config error
   public static void val(String key, String val) {
     throw new IllegalStateException(
       "Invalid config val [key=" + key +"] [val=" + val + "]"
@@ -10,15 +8,9 @@ public class Throw {
       // TODO add? "Please check the poml reference"
     );
   }
-
   public static void noConf(String key) {
     throw new IllegalStateException(
       "Config not found [key=" + key + "]"
-    );
-  }
-  public static void badConf(String key, String val) {
-    throw new IllegalStateException(
-      "Bad config [key=" + key +"] [val=" + val + "]"
     );
   }
 }

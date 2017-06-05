@@ -42,7 +42,7 @@ public class EnvIssueTest extends TestCase {
       fail();
     } catch (IllegalStateException e) {
       msg(e).is(
-        "Invalid config val [key=issue] [val=bad]"
+        "Invalid config [key=issue] [val=bad]"
       );
     }
   }

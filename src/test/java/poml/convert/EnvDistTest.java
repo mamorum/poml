@@ -32,7 +32,7 @@ public class EnvDistTest extends TestCase {
       fail();
     } catch (IllegalStateException e) {
       msg(e).is(
-        "Invalid config val [key=dist] [val=oss]"
+        "Invalid config [key=dist] [val=oss]"
       );
     }
   }

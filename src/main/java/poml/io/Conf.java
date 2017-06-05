@@ -2,14 +2,13 @@ package poml.io;
 
 import java.util.HashMap;
 
-import poml.Throw;
-
-public class Config {
-  HashMap<String, String> p = new HashMap<>();
+// ConfigSection. keys and vals.
+public class Conf {
+  HashMap<String, String> kv = new HashMap<>();
 
   // -> For checking config key.
   public boolean has(String key) {
-    return p.containsKey(key);
+    return kv.containsKey(key);
   }
 
   // -> For getting config values.
@@ -20,8 +19,8 @@ public class Config {
     return val(key, true);
   }
   private String val(String key, boolean ltrim) {
-    String val = p.get(key);
-    if (none(val)) Throw.noConf(key);
+    String val = kv.get(key);
+    if (none(val)) err(key, val);
     if (ltrim) return ltrim(val);
     else return val;
   }
@@ -38,7 +37,7 @@ public class Config {
     String delim = hasEsc ? "(?<!\\\\)," : ",";
     String[] vals = val.split(delim);
     for (int i=0; i<vals.length; i++) {
-      if (none(vals[i])) Throw.badConf(key, val);
+      if (none(vals[i])) err(key, val);
       if(hasEsc) vals[i] = vals[i].replace(esc, ",");
       vals[i] = ltrim(vals[i]);
     }
@@ -57,5 +56,12 @@ public class Config {
     char[] c = s.toCharArray();
     while ((i < len) && (c[i] <= ' ')) i++;
     return (i > 0 ? s.substring(i) : s);
+  }
+
+  //-> throw for config error
+  public static void err(String k, String v) {
+    throw new IllegalStateException(
+      "Invalid config [key=" + k +"] [val=" + v + "]"
+    );
   }
 }

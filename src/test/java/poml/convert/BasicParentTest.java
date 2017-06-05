@@ -26,7 +26,9 @@ public class BasicParentTest extends TestCase {
       Basic.parent(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Config not found");
+      msg(e).is(
+        "Invalid config [key=parent] [val=null]"
+      );
     }
   }
 
@@ -36,7 +38,9 @@ public class BasicParentTest extends TestCase {
       Basic.parent(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Config not found");
+      msg(e).is(
+        "Invalid config [key=parent] [val=]"
+      );
     }
   }
 
@@ -47,7 +51,7 @@ public class BasicParentTest extends TestCase {
       fail();
     } catch (IllegalStateException e) {
       msg(e).is(
-        "Invalid config val [key=parent] [val=parent.com::]"
+        "Invalid config [key=parent] [val=parent.com::]"
       );
     }
   }

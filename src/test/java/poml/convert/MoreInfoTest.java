@@ -42,7 +42,7 @@ public class MoreInfoTest extends TestCase {
       fail();
     } catch (IllegalStateException e) {
       msg(e).is(
-        "Invalid config val [key=info] [val=bad-conf]"
+        "Invalid config [key=info] [val=bad-conf]"
       );
     }
   }

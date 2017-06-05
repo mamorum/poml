@@ -37,7 +37,9 @@ public class BasicPkgTest extends TestCase {
       Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Config not found");
+      msg(e).is(
+        "Invalid config [key=pkg] [val=null]"
+      );
     }
   }
 
@@ -47,7 +49,9 @@ public class BasicPkgTest extends TestCase {
       Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Config not found");
+      msg(e).is(
+        "Invalid config [key=pkg] [val=]"
+      );
     }
   }
 
@@ -58,7 +62,7 @@ public class BasicPkgTest extends TestCase {
       fail();
     } catch (IllegalStateException e) {
       msg(e).is(
-        "Invalid config val [key=pkg] [val=group.com:::]"
+        "Invalid config [key=pkg] [val=group.com:::]"
       );
     }
   }

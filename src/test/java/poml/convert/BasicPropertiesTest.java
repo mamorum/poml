@@ -87,7 +87,9 @@ public class BasicPropertiesTest extends TestCase {
       Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Config not found");
+      msg(e).is(
+        "Invalid config [key=properties] [val=null]"
+      );
     }
   }
 
@@ -97,7 +99,9 @@ public class BasicPropertiesTest extends TestCase {
       Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).starts("Config not found");
+      msg(e).is(
+        "Invalid config [key=properties] [val=]"
+      );
     }
   }
 
@@ -108,7 +112,7 @@ public class BasicPropertiesTest extends TestCase {
       fail();
     } catch (IllegalStateException e) {
       msg(e).is(
-        "Invalid config val [key=properties] [val=:]"
+        "Invalid config [key=properties] [val=:]"
       );
     }
   }
@@ -124,7 +128,7 @@ public class BasicPropertiesTest extends TestCase {
       fail();
     } catch (IllegalStateException e) {
       msg(e).is(
-        "Invalid config val [key=properties] [val=keyval]"
+        "Invalid config [key=properties] [val=keyval]"
       );
     }
   }

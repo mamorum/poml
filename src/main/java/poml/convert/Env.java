@@ -1,6 +1,6 @@
 package poml.convert;
 
-import poml.Throw;
+import poml.io.Conf;
 import poml.io.Poml;
 import poml.io.Xml;
 
@@ -43,6 +43,6 @@ public class Env {
       out.line("    </repository>");
       out.line("  </distributionManagement>");
     }
-    else Throw.val(dist, val);
+    else Conf.err(dist, val);
   }
 }

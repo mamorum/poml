@@ -1,6 +1,6 @@
 package poml.convert;
 
-import poml.Throw;
+import poml.io.Conf;
 import poml.io.Poml;
 import poml.io.Xml;
 
@@ -33,7 +33,7 @@ public class Basic {
   public static void pkg(Poml in, Xml out) {
     String val = in.conf.val(pkg);
     String[] vals = val.split(":");
-    if (vals.length < 3) Throw.val(pkg, val);
+    if (vals.length < 3) Conf.err(pkg, val);
     out.tags(Xml.sp2, pkgTags, vals);
   }
 
@@ -44,7 +44,7 @@ public class Basic {
   public static void parent(Poml in, Xml out) {
     String val = in.conf.val(parent);
     String[] vals = val.split(":");
-    if (vals.length < 3) Throw.val(parent, val);
+    if (vals.length < 3) Conf.err(parent, val);
     out.line("  <parent>");
     out.tags(Xml.sp4, parentTags, vals);
     out.line("  </parent>");
@@ -58,7 +58,7 @@ public class Basic {
   public static void depend(Poml in, Xml out) {
     for (String lib: in.conf.vals(dep)) {
       String[] vals = lib.split(":");
-      if (vals.length < 2) Throw.val(dep, lib);
+      if (vals.length < 2) Conf.err(dep, lib);
       out.line("    <dependency>");
       out.tags(Xml.sp6, depTags, vals);
       out.line("    </dependency>");
