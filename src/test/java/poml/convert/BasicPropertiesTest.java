@@ -87,9 +87,7 @@ public class BasicPropertiesTest extends TestCase {
       Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=properties] [val=null]"
-      );
+      err("Invalid config [key=properties] [val=null]", e);
     }
   }
 
@@ -99,9 +97,7 @@ public class BasicPropertiesTest extends TestCase {
       Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=properties] [val=]"
-      );
+      err("Invalid config [key=properties] [val=]", e);
     }
   }
 
@@ -111,9 +107,7 @@ public class BasicPropertiesTest extends TestCase {
       Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=properties] [val=:]"
-      );
+      err("Invalid config [key=properties] [val=:]", e);
     }
   }
 
@@ -127,9 +121,7 @@ public class BasicPropertiesTest extends TestCase {
       Basic.properties(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=properties] [val=keyval]"
-      );
+      err("Invalid config [key=properties] [val=keyval]", e);
     }
   }
 }

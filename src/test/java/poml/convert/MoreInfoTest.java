@@ -41,9 +41,7 @@ public class MoreInfoTest extends TestCase {
       More.info(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=info] [val=bad-conf]"
-      );
+      err("Invalid config [key=info] [val=bad-conf]", e);
     }
   }
 }

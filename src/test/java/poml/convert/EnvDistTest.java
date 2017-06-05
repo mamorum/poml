@@ -31,9 +31,7 @@ public class EnvDistTest extends TestCase {
       Env.dist(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=dist] [val=oss]"
-      );
+      err("Invalid config [key=dist] [val=oss]", e);
     }
   }
 }

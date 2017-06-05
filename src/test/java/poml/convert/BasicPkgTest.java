@@ -31,27 +31,23 @@ public class BasicPkgTest extends TestCase {
     );
   }
 
-  @Test public void ng_noConf() {
+  @Test public void ng_none() {
     poml("");
     try {
       Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=pkg] [val=null]"
-      );
+      err("Invalid config [key=pkg] [val=null]", e);
     }
   }
 
-  @Test public void ng_emptyConf() {
+  @Test public void ng_empty() {
     poml("pkg=");
     try {
       Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=pkg] [val=]"
-      );
+      err("Invalid config [key=pkg] [val=]", e);
     }
   }
 
@@ -61,9 +57,7 @@ public class BasicPkgTest extends TestCase {
       Basic.pkg(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=pkg] [val=group.com:::]"
-      );
+      err("Invalid config [key=pkg] [val=group.com:::]", e);
     }
   }
 }

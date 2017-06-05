@@ -68,9 +68,7 @@ public class MoreLicenseTest extends TestCase {
       More.license(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=$ng] [val=bad]"
-      );
+      err("Invalid config [key=$ng] [val=bad]", e);
     }
   }
 }

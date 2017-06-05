@@ -24,6 +24,7 @@ public class TestCase {
     if (this.br != null) br.close();
   }
 
+  //-> test data
   public void poml(String poml) {
     this.br = new BufferedReader(new StringReader(poml));
     try { this.poml = Poml.of(this.br); }
@@ -31,32 +32,13 @@ public class TestCase {
       throw new RuntimeException(e);
     }
   }
+
+  //-> assertion
   public void xml(String expected) {
     Assert.assertEquals(expected, xml.toString());
   }
-  public void msg(String expected) {
-    Assert.assertEquals(expected, xml.toString());
-  }
-
-  // TODO-> delete
-  public Msg msg(Exception e) {
-    return new Msg(e.getMessage());
-  }
-  public class Msg {
-    String msg;
-    Msg(String msg) { this.msg=msg; }
-    public void is(String expected) {
-      System.out.println(this.msg);
-      Assert.assertEquals(expected, this.msg);
-    }
-
-    // TODO delete ->
-    public void starts(String prefix) {
-      starts(prefix, false);
-    }
-    public void starts(String prefix, boolean debug) {
-      if (debug) System.out.println(this.msg);
-      Assert.assertTrue(this.msg.startsWith(prefix));
-    }
+  public void err(String expected, Exception e) {
+    Assert.assertEquals(expected, e.getMessage());
+    //e.printStackTrace(System.out); -> for debug
   }
 }

@@ -20,27 +20,23 @@ public class BasicParentTest extends TestCase {
     );
   }
 
-  @Test public void ng_noConf() {
+  @Test public void ng_none() {
     poml("");
     try {
       Basic.parent(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=parent] [val=null]"
-      );
+      err("Invalid config [key=parent] [val=null]", e);
     }
   }
 
-  @Test public void ng_emptyConf() {
+  @Test public void ng_empty() {
     poml("parent=");
     try {
       Basic.parent(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=parent] [val=]"
-      );
+      err("Invalid config [key=parent] [val=]", e);
     }
   }
 
@@ -50,9 +46,7 @@ public class BasicParentTest extends TestCase {
       Basic.parent(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=parent] [val=parent.com::]"
-      );
+      err("Invalid config [key=parent] [val=parent.com::]", e);
     }
   }
 }

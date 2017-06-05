@@ -34,7 +34,7 @@ public class Build {
     "groupId", "artifactId", "version", "extensions", "inherited"
   };
   private static void $plugin(String $plg, Poml in, Xml out) {
-    String val = in.conf.val($plg);
+    String val = in.conf.val($plg, true);
     String[] vals = val.split(":");
     out.line("      <plugin>");
     out.tags(Xml.sp8, keys, vals);  // groupId - inherited
@@ -78,7 +78,9 @@ public class Build {
     }
     if (ver == null) ver = "version>2.6";
     if (jar == null) jar = "finalName>${project.artifactId}";
-    if (main == null) Conf.err(fatjar, in.conf.val(fatjar)); // required
+    if (main == null) { // required
+      Conf.err(fatjar, in.conf.val(fatjar, true));
+    }
     // -> render
     out.line("      <plugin>");
     out.line("        <groupId>org.apache.maven.plugins</groupId>");

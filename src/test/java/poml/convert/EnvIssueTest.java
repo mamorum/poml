@@ -34,16 +34,12 @@ public class EnvIssueTest extends TestCase {
   }
 
   @Test public void ng_badConf() {
-    poml(
-      "issue=bad"
-    );
+    poml("issue=bad");
     try {
       Env.issue(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=issue] [val=bad]"
-      );
+      err("Invalid config [key=issue] [val=bad]", e);
     }
   }
 }

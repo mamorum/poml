@@ -31,7 +31,7 @@ public class Basic {
     "packaging"  // optional
   };
   public static void pkg(Poml in, Xml out) {
-    String val = in.conf.val(pkg);
+    String val = in.conf.val(pkg, true);
     String[] vals = val.split(":");
     if (vals.length < 3) Conf.err(pkg, val);
     out.tags(Xml.sp2, pkgTags, vals);
@@ -42,7 +42,7 @@ public class Basic {
     groupId, artifactId, version,  // required
   };
   public static void parent(Poml in, Xml out) {
-    String val = in.conf.val(parent);
+    String val = in.conf.val(parent, true);
     String[] vals = val.split(":");
     if (vals.length < 3) Conf.err(parent, val);
     out.line("  <parent>");

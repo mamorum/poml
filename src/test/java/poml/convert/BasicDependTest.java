@@ -122,9 +122,7 @@ public class BasicDependTest extends TestCase {
       Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=depend] [val=null]"
-      );
+      err("Invalid config [key=depend] [val=null]", e);
     }
   }
 
@@ -134,9 +132,7 @@ public class BasicDependTest extends TestCase {
       Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=depend] [val=]"
-      );
+      err("Invalid config [key=depend] [val=]", e);
     }
   }
 
@@ -148,9 +144,7 @@ public class BasicDependTest extends TestCase {
       Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=depend] [val=group.com:]"
-      );
+      err("Invalid config [key=depend] [val=group.com:]", e);
     }
   }
 
@@ -164,9 +158,7 @@ public class BasicDependTest extends TestCase {
       Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=depend] [val=group.com:]"
-      );
+      err("Invalid config [key=depend] [val=group.com:]", e);
     }
   }
 
@@ -179,8 +171,9 @@ public class BasicDependTest extends TestCase {
       Basic.depend(poml, xml);
       fail();
     } catch (IllegalStateException e) {
-      msg(e).is(
-        "Invalid config [key=depend] [val=, ,  group.com:artifact:1.0]"
+      err(
+        "Invalid config [key=depend] [val=, ,  group.com:artifact:1.0]",
+        e
       );
     }
   }

@@ -15,10 +15,7 @@ public class Conf {
   // key=val
   //  - throw: if val is null or blank
   //  - return: not null or blank
-  public String val(String key) {
-    return val(key, true);
-  }
-  private String val(String key, boolean ltrim) {
+  public String val(String key, boolean ltrim) {
     String val = kv.get(key);
     if (none(val)) err(key, val);
     if (ltrim) return ltrim(val);
@@ -28,7 +25,7 @@ public class Conf {
   //  - throw: if array element is null or blank
   //  - return: array (size 1+, element length 1+)
   public String[] vals(String key) {
-    return split(key, val(key));
+    return split(key, val(key, true));
   }
   //// split val with "," -> replace "\\," to ","
   private static final String esc = "\\,";
