@@ -1,10 +1,10 @@
 package poml.convert;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
 
-public class BasicPkgTest extends TestCase {
+import poml.UtCase;
+
+public class BasicPkgTest extends UtCase {
 
   @Test public void id_ver() {
     poml(
@@ -29,35 +29,5 @@ public class BasicPkgTest extends TestCase {
       "  <version>0.0.1</version>" + nl +
       "  <packaging>jar</packaging>" + nl
     );
-  }
-
-  @Test public void ng_none() {
-    poml("");
-    try {
-      Basic.pkg(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      err("Invalid config [key=pkg] [val=null]", e);
-    }
-  }
-
-  @Test public void ng_empty() {
-    poml("pkg=");
-    try {
-      Basic.pkg(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      err("Invalid config [key=pkg] [val=]", e);
-    }
-  }
-
-  @Test public void ng_val() {
-    poml("pkg=group.com:::");
-    try {
-      Basic.pkg(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      err("Invalid config [key=pkg] [val=group.com:::]", e);
-    }
   }
 }

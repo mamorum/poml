@@ -4,7 +4,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-public class BasicPropertiesTest extends TestCase {
+import poml.UtCase;
+
+public class BasicPropertiesTest extends UtCase {
 
   @Test public void single() {
     poml(

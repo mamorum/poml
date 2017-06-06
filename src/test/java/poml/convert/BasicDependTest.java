@@ -4,7 +4,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-public class BasicDependTest extends TestCase {
+import poml.UtCase;
+
+public class BasicDependTest extends UtCase {
 
   @Test public void id2art() {
     poml(
@@ -114,52 +116,6 @@ public class BasicDependTest extends TestCase {
       "      <type>jar</type>" + nl +
       "    </dependency>" + nl
     );
-  }
-
-  @Test public void ng_noConf() {
-    poml("");
-    try {
-      Basic.depend(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      err("Invalid config [key=depend] [val=null]", e);
-    }
-  }
-
-  @Test public void ng_emptyConf() {
-    poml("depend=");
-    try {
-      Basic.depend(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      err("Invalid config [key=depend] [val=]", e);
-    }
-  }
-
-  @Test public void ng_val() {
-    poml(
-      "depend=group.com:"
-    );
-    try {
-      Basic.depend(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      err("Invalid config [key=depend] [val=group.com:]", e);
-    }
-  }
-
-  @Test public void ng_val2() {
-    poml(
-      "depend=" + nl +
-      "  group.com:artifact:1.0," + nl +
-      "  group.com:"
-    );
-    try {
-      Basic.depend(poml, xml);
-      fail();
-    } catch (IllegalStateException e) {
-      err("Invalid config [key=depend] [val=group.com:]", e);
-    }
   }
 
   @Test public void ng_badConf3() {

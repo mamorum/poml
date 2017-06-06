@@ -4,7 +4,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-public class MoreInfoTest extends TestCase {
+import poml.UtCase;
+
+public class MoreInfoTest extends UtCase {
 
   @Test public void name() {
     poml(

@@ -1,6 +1,5 @@
 package poml.convert;
 
-import poml.io.Conf;
 import poml.io.Poml;
 import poml.io.Xml;
 
@@ -9,9 +8,7 @@ public class Basic {
     pkg="pkg", parent="parent",
     dep="depend", props = "properties";
   public static final String //-> tag name
-    groupId="groupId",
-    artifactId="artifactId",
-    version="version";
+    grpId="groupId", artId="artifactId", ver="version";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has(pkg)) {out.nl(); pkg(in, out);}
@@ -25,52 +22,42 @@ public class Basic {
     if (in.conf.has(props)) {out.nl(); properties(in, out);}
   }
 
-  // -> pkg
-  private static final String[] pkgTags = {
-    groupId, artifactId, version,  // required
-    "packaging"  // optional
-  };
+  // -> pkg=v:v:v...
+  private static final String[] pkgTags =
+    {grpId, artId, ver, "packaging"};
   public static void pkg(Poml in, Xml out) {
-    String val = in.conf.val(pkg, true);
-    String[] vals = val.split(":");
-    if (vals.length < 3) Conf.err(pkg, val);
-    out.tags(Xml.sp2, pkgTags, vals);
+    String[] v = in.conf.clnsv(pkg);
+    out.tags(Xml.sp2, pkgTags, v);
   }
 
-  // -> parent
-  private static final String[] parentTags = {
-    groupId, artifactId, version,  // required
-  };
+  // -> parent=v:v:v
+  private static final String[] parentTags =
+    {grpId, artId, ver};
   public static void parent(Poml in, Xml out) {
-    String val = in.conf.val(parent, true);
-    String[] vals = val.split(":");
-    if (vals.length < 3) Conf.err(parent, val);
+    String[] v = in.conf.clnsv(parent);
     out.line("  <parent>");
-    out.tags(Xml.sp4, parentTags, vals);
+    out.tags(Xml.sp4, parentTags, v);
     out.line("  </parent>");
   }
 
-  // -> depend
-  private static final String[] depTags = {
-    groupId, artifactId, // required
-    version, "scope", "optional", "type"  // optional
-  };
+  // -> depend=v:v:v..., v:v:v...
+  private static final String[] depTags =
+    {grpId, artId, ver, "scope", "optional", "type"};
   public static void depend(Poml in, Xml out) {
-    for (String lib: in.conf.vals(dep)) {
+    for (String lib: in.conf.csv(dep)) {
       String[] vals = lib.split(":");
-      if (vals.length < 2) Conf.err(dep, lib);
       out.line("    <dependency>");
       out.tags(Xml.sp6, depTags, vals);
       out.line("    </dependency>");
     }
   }
 
-  // -> properties
+  // -> properties=k>v, k>v ...
   public static final String
     enc="&encoding>", javac="&compiler>";
   public static void properties(Poml in, Xml out) {
     out.line("  <properties>");
-    for (String kv: in.conf.vals(props)) {
+    for (String kv: in.conf.csv(props)) {
       if (kv.startsWith(enc)) enc(out, v(kv));
       else if (kv.startsWith(javac)) javac(out, v(kv));
       else out.kv(Xml.sp4, kv, props);

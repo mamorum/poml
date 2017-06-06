@@ -4,7 +4,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-public class EnvIssueTest extends TestCase {
+import poml.UtCase;
+
+public class EnvIssueTest extends UtCase {
 
   @Test public void url() {
     poml(

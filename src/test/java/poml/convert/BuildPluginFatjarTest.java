@@ -2,7 +2,9 @@ package poml.convert;
 
 import org.junit.Test;
 
-public class BuildPluginFatjarTest extends TestCase {
+import poml.UtCase;
+
+public class BuildPluginFatjarTest extends UtCase {
 
   @Test public void defaultVer() {
     poml(

@@ -2,7 +2,9 @@ package poml.convert;
 
 import org.junit.Test;
 
-public class BuildPluginOssrhTest extends TestCase {
+import poml.UtCase;
+
+public class BuildPluginOssrhTest extends UtCase {
   @Test public void test() {
     poml(
       "plugin=&ossrh" + nl

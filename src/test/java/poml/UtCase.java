@@ -1,4 +1,4 @@
-package poml.convert;
+package poml;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import org.junit.Before;
 import poml.io.Poml;
 import poml.io.Xml;
 
-public class TestCase {
+public class UtCase {
   public static final String nl = System.lineSeparator();
   public Poml poml;
   public Xml xml;
@@ -39,6 +39,6 @@ public class TestCase {
   }
   public void err(String expected, Exception e) {
     Assert.assertEquals(expected, e.getMessage());
-    //e.printStackTrace(System.out); -> for debug
+    e.printStackTrace(System.out);
   }
 }

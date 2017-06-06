@@ -14,23 +14,27 @@ public class Env {
     if (in.conf.has(dist)) {out.nl(); dist(in, out);}
   }
 
-  //-> issue (system, url)
+  //-> issue=k>v, k>v ...
   public static void issue(Poml in, Xml out) {
     out.line("  <issueManagement>");
-    out.kvs(Xml.sp4, in.conf.vals(issue), issue);
+    String kv[] = in.conf.csv(issue);
+    out.kvs(Xml.sp4, kv, issue);
     out.line("  </issueManagement>");
   }
 
-  //-> scm (connection, developerConnection, tag, url)
+  //-> scm=k>v, k>v ...
   public static void scm(Poml in, Xml out) {
     out.line("  <scm>");
-    out.kvs(Xml.sp4, in.conf.vals(scm), scm);
+    String[] kv = in.conf.csv(scm);
+    out.kvs(Xml.sp4, kv, scm);
     out.line("  </scm>");
   }
 
-  //-> dist
+  //-> dist=&ossrh
   public static void dist(Poml in, Xml out) {
-    String val = in.conf.val(dist, true);
+    String val = Conf.ltrim(
+      in.conf.val(dist)
+    );
     if ("&ossrh".equals(val)) {
       out.line("  <distributionManagement>");
       out.line("    <snapshotRepository>");

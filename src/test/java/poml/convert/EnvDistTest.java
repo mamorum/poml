@@ -4,7 +4,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-public class EnvDistTest extends TestCase {
+import poml.UtCase;
+
+public class EnvDistTest extends UtCase {
 
   @Test public void ossrh() {
     poml(

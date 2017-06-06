@@ -4,7 +4,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-public class MoreLicenseTest extends TestCase {
+import poml.UtCase;
+
+public class MoreLicenseTest extends UtCase {
 
   @Test public void apache2() {
     poml(

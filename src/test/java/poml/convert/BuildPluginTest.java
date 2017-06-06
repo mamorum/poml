@@ -2,8 +2,10 @@ package poml.convert;
 
 import org.junit.Test;
 
+import poml.UtCase;
+
 // $
-public class BuildPluginTest extends TestCase {
+public class BuildPluginTest extends UtCase {
   @Test public void grp_art() {
     poml(
       "plugin=$sbp" + nl +

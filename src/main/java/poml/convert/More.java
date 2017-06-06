@@ -5,11 +5,11 @@ import poml.io.Xml;
 
 public class More {
   public static final String
-    info="info", license="license", dev="developer";
+    info="info", lic="license", dev="developer";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has(info)) {out.nl(); More.info(in, out);}
-    if (in.conf.has(license)) {
+    if (in.conf.has(lic)) {
       out.nl();
       out.line("  <licenses>");
       More.license(in, out);
@@ -22,42 +22,44 @@ public class More {
       out.line("  </developers>");
     }
   }
-  //-> info: name, description, url, inceptionYear
+  //-> info=k>v, k>v ...
   public static void info(Poml in, Xml out) {;
-    out.kvs(Xml.sp2, in.conf.vals(info), info);
+    out.kvs(Xml.sp2, in.conf.csv(info), info);
   }
 
-  //-> license
+  //-> license=v, v ...
   public static void license(Poml in, Xml out) {
-    String[] lics = in.conf.vals(license);
-    for (String lic: lics) {
+    for (String v: in.conf.csv(lic)) {
       out.line("    <license>");
-      if ("&apache2".equals(lic)) apache(out);
-      else if ("&mit".equals(lic)) mit(out);
-      else $license(lic, in, out);
+      if ("&apache2".equals(v)) apache(out);
+      else if ("&mit".equals(v)) mit(out);
+      else $lic(v, in, out);
       out.line("    </license>");
     }
   }
-  private static void apache(Xml out) {
-    out.line("      <name>The Apache License, Version 2.0</name>");
-    out.line("      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>");
+  //// $key=k>v, k>v ...
+  private static void $lic(String $key, Poml in, Xml out) {
+    String[] kv = in.conf.csv($key);
+    out.kvs(Xml.sp6, kv, $key);
   }
   private static void mit(Xml out) {
     out.line("      <name>MIT License</name>");
     out.line("      <url>https://opensource.org/licenses/MIT</url>");
   }
-  // name, url, distribution, comments
-  private static void $license(String lic, Poml in, Xml out) {
-    out.kvs(Xml.sp6, in.conf.vals(lic), lic);
+  private static void apache(Xml out) {
+    out.line("      <name>The Apache License, Version 2.0</name>");
+    out.line("      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>");
   }
 
-  //-> developer: id, name, email, url
+  //-> developer=v, v ...
   public static void developer(Poml in, Xml out) {
-    String[] devs = in.conf.vals(dev);
-    for (String $dev: devs) {
-      out.line("    <developer>");
-      out.kvs(Xml.sp6, in.conf.vals($dev), $dev);
-      out.line("    </developer>");
-    }
+    for (String v: in.conf.csv(dev)) $dev(v, in, out);
+  }
+  //// $key=k>v, k>v ...
+  private static void $dev(String $key, Poml in, Xml out) {
+    out.line("    <developer>");
+    String[] kv = in.conf.csv($key);
+    out.kvs(Xml.sp6, kv, $key);
+    out.line("    </developer>");
   }
 }
