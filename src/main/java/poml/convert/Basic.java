@@ -6,7 +6,7 @@ import poml.io.Xml;
 public class Basic {
   public static final String //-> config name
     pkg="pkg", parent="parent",
-    dep="depend", props = "properties";
+    dep="depend", prop = "properties";
   public static final String //-> tag name
     grpId="groupId", artId="artifactId", ver="version";
 
@@ -19,7 +19,7 @@ public class Basic {
       depend(in, out);
       out.line("  </dependencies>");
     }
-    if (in.conf.has(props)) {out.nl(); properties(in, out);}
+    if (in.conf.has(prop)) {out.nl(); properties(in, out);}
   }
 
   // -> pkg=v:v:v...
@@ -57,10 +57,10 @@ public class Basic {
     enc="&encoding>", javac="&compiler>";
   public static void properties(Poml in, Xml out) {
     out.line("  <properties>");
-    for (String kv: in.conf.csv(props)) {
+    for (String kv: in.conf.csv(prop)) {
       if (kv.startsWith(enc)) enc(out, v(kv));
       else if (kv.startsWith(javac)) javac(out, v(kv));
-      else out.kv(Xml.sp4, kv, props);
+      else out.kv(Xml.sp4, kv, prop);
     }
     out.line("  </properties>");
   }
