@@ -32,9 +32,7 @@ public class Env {
 
   //-> dist=&ossrh
   public static void dist(Poml in, Xml out) {
-    String val = Conf.ltrim(
-      in.conf.val(dist)
-    );
+    String val = in.conf.val(dist);
     if ("&ossrh".equals(val)) {
       out.line("  <distributionManagement>");
       out.line("    <snapshotRepository>");

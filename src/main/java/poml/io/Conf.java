@@ -15,18 +15,16 @@ public class Conf {
   // key=val
   //// - throw: if val is null or blank
   //// - return: not null or blank
-  public String val(String key) {
+  private String get(String key) {
     String val = kv.get(key);
     if (none(val)) err(key, val);
     return val;
   }
-  // key=v:v:v... (colon-separated v)
-  //// - throw: same as #val(String)
-  //// - return: not null (length 1+)
-  public String[] clnsv(String key) {
-    String[] vals = val(key).split(":");
-    vals[0] = ltrim(vals[0]);
-    return vals;
+  public String val(String key) {
+    return ltrim(get(key));
+  }
+  public String xml(String key) {
+    return get(key);
   }
   // key=v, v, ... (comma-separated v)
   ////  - throw:
@@ -37,7 +35,7 @@ public class Conf {
   ////    - v replaced "\," to ","
   private static final String esc="\\,", cn=",";
   public String[] csv(String key) {
-    String val = val(key);
+    String val = get(key);
     boolean hasEsc = (val.indexOf(esc) > -1);
     String delim = hasEsc ? "(?<!\\\\)," : cn;
     String[] vals = val.split(delim);
@@ -52,14 +50,14 @@ public class Conf {
     if (s == null || "".equals(s)) return true;
     return false;
   }
-
-  //-> util
-  public static String ltrim(String s) {
+  private static String ltrim(String s) {
     int len=s.length(), i=0;
     char[] c = s.toCharArray();
     while ((i < len) && (c[i] <= ' ')) i++;
     return (i > 0 ? s.substring(i) : s);
   }
+
+  //-> to throw
   public static void err(String k, String v) {
     throw new IllegalStateException(
       "Invalid config [key=" + k +"] [val=" + v + "]"

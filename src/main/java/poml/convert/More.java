@@ -5,42 +5,43 @@ import poml.io.Xml;
 
 public class More {
   public static final String
-    info="info", lic="license", dev="developer";
+    info="info", license="license", developer="developer";
 
   public static void all(Poml in, Xml out) {
-    if (in.conf.has(info)) {out.nl(); More.info(in, out);}
-    if (in.conf.has(lic)) {
+    if (in.conf.has(info)) {out.nl(); info(in, out);}
+    if (in.conf.has(license)) {
       out.nl();
       out.line("  <licenses>");
-      More.license(in, out);
+      license(in, out);
       out.line("  </licenses>");
     }
-    if (in.conf.has(dev)) {
+    if (in.conf.has(developer)) {
       out.nl();
       out.line("  <developers>");
-      More.developer(in, out);
+      developer(in, out);
       out.line("  </developers>");
     }
   }
   //-> info=k>v, k>v ...
   public static void info(Poml in, Xml out) {;
-    out.kvs(Xml.sp2, in.conf.csv(info), info);
+    String[] kv = in.conf.csv(info);
+    out.kvs(Xml.sp2, kv, info);
   }
 
-  //-> license=v, v ...
+  //-> license=lic, lic ...
   public static void license(Poml in, Xml out) {
-    for (String v: in.conf.csv(lic)) {
+    for (String lic: in.conf.csv(license)) {
       out.line("    <license>");
-      if ("&apache2".equals(v)) apache(out);
-      else if ("&mit".equals(v)) mit(out);
-      else $lic(v, in, out);
+      if (lic.equals("&apache2")) apache(out);
+      else if (lic.equals("&mit")) mit(out);
+      else lic(lic, in, out);
       out.line("    </license>");
     }
   }
-  //// $key=k>v, k>v ...
-  private static void $lic(String $key, Poml in, Xml out) {
-    String[] kv = in.conf.csv($key);
-    out.kvs(Xml.sp6, kv, $key);
+  /// lic=k>v, k>v ...
+  private static void lic(String lic, Poml in, Xml out) {
+    String[] kv = in.conf.csv(lic);
+    out.kvs(Xml.sp6, kv, lic);
   }
   private static void mit(Xml out) {
     out.line("      <name>MIT License</name>");
@@ -51,15 +52,17 @@ public class More {
     out.line("      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>");
   }
 
-  //-> developer=v, v ...
+  //-> developer=dev, dev ...
   public static void developer(Poml in, Xml out) {
-    for (String v: in.conf.csv(dev)) $dev(v, in, out);
+    for (String dev: in.conf.csv(developer)) {
+      dev(dev, in, out);
+    }
   }
-  //// $key=k>v, k>v ...
-  private static void $dev(String $key, Poml in, Xml out) {
+  /// dev=k>v, k>v ...
+  private static void dev(String dev, Poml in, Xml out) {
     out.line("    <developer>");
-    String[] kv = in.conf.csv($key);
-    out.kvs(Xml.sp6, kv, $key);
+    String[] kv = in.conf.csv(dev);
+    out.kvs(Xml.sp6, kv, dev);
     out.line("    </developer>");
   }
 }

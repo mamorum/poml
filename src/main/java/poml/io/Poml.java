@@ -117,12 +117,12 @@ public class Poml {
     else if (Prj.end.equals(key)) Prj.end(o);
     else if (Basic.pkg.equals(key)) Basic.pkg(this, o);
     else if (Basic.parent.equals(key)) Basic.parent(this, o);
-    else if (Basic.dep.equals(key)) Basic.depend(this, o);
-    else if (Basic.prop.equals(key)) Basic.properties(this, o);
+    else if (Basic.depend.equals(key)) Basic.depend(this, o);
+    else if (Basic.properties.equals(key)) Basic.properties(this, o);
     else if (Build.plugin.equals(key)) Build.plugin(this, o);
     else if (More.info.equals(key)) More.info(this, o);
-    else if (More.lic.equals(key)) More.license(this, o);
-    else if (More.dev.equals(key)) More.developer(this, o);
+    else if (More.license.equals(key)) More.license(this, o);
+    else if (More.developer.equals(key)) More.developer(this, o);
     else if (Env.issue.equals(key)) Env.issue(this, o);
     else if (Env.scm.equals(key)) Env.scm(this, o);
     else if (Env.dist.equals(key)) Env.dist(this, o);

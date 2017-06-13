@@ -59,7 +59,7 @@ public class Opt {
       ).append(grp).append(":").append(art).append(":"
       ).append(ver).append(":").append(pkg
       ).append(System.lineSeparator()
-      ).append(Basic.prop).append("="
+      ).append(Basic.properties).append("="
       ).append(Basic.enc)).append(enc).append(", "
       ).append(Basic.javac).append(jvc
     ).toString();
