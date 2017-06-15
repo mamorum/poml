@@ -30,7 +30,7 @@ public class Poml {
     return xml.toString();
   }
 
-  //-> Config Section
+  //-> Parse: Config Section
   private void parseConfig() throws IOException {
     while ((line = in.readLine()) != null) {
       if (line.length() == 0) continue;  // none
@@ -48,17 +48,17 @@ public class Poml {
   private void addXml() throws IOException {
     // first line
     int pos = line.indexOf('=');
-    if (pos == -1) return;  // TODO no key -> throw?
+    if (pos == -1) errkv();
     String key = line.substring(0, pos).trim();
     // second+ lines
-    StringBuilder tags = new StringBuilder();
+    StringBuilder xml = new StringBuilder();
     while ((line = in.readLine()) != null) {
       if ("}".equals(line)) break;
-      tags.append(line).append(
+      else xml.append(line).append(
         System.lineSeparator()
       );
     }
-    conf.kv.put(key, tags.toString());
+    conf.kv.put(key, xml.toString());
   }
   private boolean isContinuing(char last) {
     if (last == '=') return true;
@@ -72,28 +72,24 @@ public class Poml {
       sb.append(line);
       last = line.charAt(line.length()-1);
       if (isContinuing(last)) continue;
-      break;
+      else break;
     }
     addLine(sb.toString());
   }
   private void addLine(String l) {
     int pos = l.indexOf('=');
-    if (pos == -1) return;  // TODO no key -> throw?
+    if (pos == -1) errkv();
     String k = l.substring(0, pos).trim();
     String v = l.substring(pos + 1);
     conf.kv.put(k, v);
   }
-
-  //-> Layout Section
-  private void noLayoutTo(Xml xml) {
-    Prj.start(xml);
-    Basic.all(this, xml);
-    Build.all(this, xml);
-    More.all(this, xml);
-    Env.all(this, xml);
-    Prj.end(xml);
+  private void errkv() {
+    throw new IllegalArgumentException(
+      "Config (key=val) not found [line=" + line + "]"
+    );
   }
 
+  //-> Render: Layout Section
   private void layoutTo(Xml xml) throws IOException {
     boolean nl;
     while ((line = in.readLine()) != null) {
@@ -129,5 +125,14 @@ public class Poml {
     else throw new IllegalStateException(
       "{{" + key  + "}} cannot be used in poml"
     );
+  }
+
+  private void noLayoutTo(Xml xml) {
+    Prj.start(xml);
+    Basic.all(this, xml);
+    Build.all(this, xml);
+    More.all(this, xml);
+    Env.all(this, xml);
+    Prj.end(xml);
   }
 }

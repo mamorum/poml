@@ -4,8 +4,9 @@ package poml.io;
 public class Xml {
   public static final String
     sp2="  ", sp4="    ", sp6="      ",
-    sp8="        ", sp10="          ", // <-indent
-    nl=System.lineSeparator();
+    sp8="        ", sp10="          ";
+
+  private static final String nl=System.lineSeparator();
   private static final int nlLen=nl.length();
 
   private StringBuilder xml = new StringBuilder();
@@ -22,7 +23,7 @@ public class Xml {
     xml.append(l).append(nl);
   }
   public void xml(String space, String x) {
-    for (int s=0, e=0;;s = e) {
+    for (int s=0, e=0; ;s=e) {
       e = x.indexOf(nl, s);
       if (e == -1) break;
       e = e+nlLen;
