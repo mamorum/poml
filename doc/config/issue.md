@@ -3,8 +3,6 @@
 issue=system>v, url>v
 ```
 
-- **Optional**: system, url
-
 
 ## Examples
 ## Config
