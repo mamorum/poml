@@ -1,6 +1,5 @@
 package poml.convert;
 
-import poml.io.Conf;
 import poml.io.Poml;
 import poml.io.Xml;
 
@@ -16,17 +15,17 @@ public class Env {
 
   //-> issue=k>v, k>v ...
   public static void issue(Poml in, Xml out) {
-    out.line("  <issueManagement>");
     String kv[] = in.conf.csv(issue);
-    out.kvs(Xml.sp4, kv, issue);
+    out.line("  <issueManagement>");
+    out.kv(Xml.sp4, kv);
     out.line("  </issueManagement>");
   }
 
   //-> scm=k>v, k>v ...
   public static void scm(Poml in, Xml out) {
-    out.line("  <scm>");
     String[] kv = in.conf.csv(scm);
-    out.kvs(Xml.sp4, kv, scm);
+    out.line("  <scm>");
+    out.kv(Xml.sp4, kv);
     out.line("  </scm>");
   }
 
@@ -45,6 +44,5 @@ public class Env {
       out.line("    </repository>");
       out.line("  </distributionManagement>");
     }
-    else Conf.err(dist, val);
   }
 }

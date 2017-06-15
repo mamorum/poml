@@ -25,7 +25,7 @@ public class More {
   //-> info=k>v, k>v ...
   public static void info(Poml in, Xml out) {;
     String[] kv = in.conf.csv(info);
-    out.kvs(Xml.sp2, kv, info);
+    out.kv(Xml.sp2, kv);
   }
 
   //-> license=lic, lic ...
@@ -41,7 +41,7 @@ public class More {
   /// lic=k>v, k>v ...
   private static void lic(String lic, Poml in, Xml out) {
     String[] kv = in.conf.csv(lic);
-    out.kvs(Xml.sp6, kv, lic);
+    out.kv(Xml.sp6, kv);
   }
   private static void mit(Xml out) {
     out.line("      <name>MIT License</name>");
@@ -62,7 +62,7 @@ public class More {
   private static void dev(String dev, Poml in, Xml out) {
     out.line("    <developer>");
     String[] kv = in.conf.csv(dev);
-    out.kvs(Xml.sp6, kv, dev);
+    out.kv(Xml.sp6, kv);
     out.line("    </developer>");
   }
 }

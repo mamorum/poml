@@ -63,7 +63,7 @@ public class Basic {
     for (String kv: in.conf.csv(properties)) {
       if (kv.startsWith(enc)) enc(out, v(kv));
       else if (kv.startsWith(javac)) javac(out, v(kv));
-      else out.kv(Xml.sp4, kv, properties);
+      else out.kv(Xml.sp4, kv);
     }
     out.line("  </properties>");
   }

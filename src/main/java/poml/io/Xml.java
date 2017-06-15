@@ -32,16 +32,23 @@ public class Xml {
       );
     }
   }
-  public void kvs(String space, String[] kvs, String confKey) {
-    for (String kv: kvs) kv(space, kv, confKey);
+  public void kv(String space, String[] kv) {
+    for (int i=0; i<kv.length; i++) {
+      kv(space, kv[i]);
+    }
   }
-  public void kv(String space, String kv, String confKey) {
+  public void kv(String space, String kv) {
     int gt = kv.indexOf('>');
-    if (gt == -1) Conf.err(confKey, kv);
-    String k = kv.substring(0, gt);
-    xml.append(space).append(
-      "<").append(kv).append("</").append(k).append(">"
-    ).append(nl);
+    if (gt == -1) { // only "k" -> "<k />"
+      xml.append(
+        "<").append(kv).append(" />"
+      ).append(nl);
+    } else { // "k>v" -> "<k>v</k>"
+      String k = kv.substring(0, gt);
+      xml.append(space).append(
+        "<").append(kv).append("</").append(k).append(">"
+      ).append(nl);
+    }
   }
   public void tags(
     String space, String[] key, String[] val
