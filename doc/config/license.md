@@ -6,8 +6,6 @@ $2=name>v, url>v, distribution>v, comments>v
 ...
 ```
 
-- **Optional**: name, url, distribution, comments
-
 
 ## Embedded License
 - `&apache2`
@@ -49,7 +47,7 @@ $bsd2=
 **poml**
 ```
 license=$wtfpl
-$wtfpl=name>WTFPL, url>http://www.wtfpl.net
+$wtfpl=name>WTFPL, url>http://www.wtfpl.net/
 ---
   <licenses>
     {{license}}
@@ -65,7 +63,7 @@ $wtfpl=name>WTFPL, url>http://www.wtfpl.net
   <licenses>
     <license>
       <name>WTFPL</name>
-      <url>http://www.wtfpl.net</url>
+      <url>http://www.wtfpl.net/</url>
     </license>
     <license>
       <name>The New BSD License</name>

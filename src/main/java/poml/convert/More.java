@@ -60,8 +60,8 @@ public class More {
   }
   /// dev=k>v, k>v ...
   private static void dev(String dev, Poml in, Xml out) {
-    out.line("    <developer>");
     String[] kv = in.conf.csv(dev);
+    out.line("    <developer>");
     out.kv(Xml.sp6, kv);
     out.line("    </developer>");
   }

@@ -48,7 +48,7 @@ public class Poml {
   private void addXml() throws IOException {
     // first line
     int pos = line.indexOf('=');
-    if (pos == -1) errkv();
+    if (pos == -1) errkv(line);
     String key = line.substring(0, pos).trim();
     // second+ lines
     StringBuilder xml = new StringBuilder();
@@ -78,14 +78,14 @@ public class Poml {
   }
   private void addLine(String l) {
     int pos = l.indexOf('=');
-    if (pos == -1) errkv();
+    if (pos == -1) errkv(l);
     String k = l.substring(0, pos).trim();
     String v = l.substring(pos + 1);
     conf.kv.put(k, v);
   }
-  private void errkv() {
+  private void errkv(String l) {
     throw new IllegalArgumentException(
-      "Config (key=val) not found [line=" + line + "]"
+      "Config (key=val) not found [poml=" + l + "]"
     );
   }
 
