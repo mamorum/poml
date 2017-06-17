@@ -17,11 +17,6 @@ $1.execs={
 $2=...
 ```
 
-- **Optional**: 
-    - groupId, artifactId, version, extensions, inherited
-    - conf, depends, execs
-
-
 ## Embedded Plugin
 - [&fatjar](./plugin-fatjar.md)
 - [&ossrh](./plugin-ossrh.md)

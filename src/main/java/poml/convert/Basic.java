@@ -67,10 +67,12 @@ public class Basic {
     }
     out.line("  </properties>");
   }
+  /// properties=&encoding>v
   private static void enc(Xml out, String v) {
     out.tag(Xml.sp4, "project.build.sourceEncoding", v);
     out.tag(Xml.sp4, "project.reporting.outputEncoding", v);
   }
+  /// properties=&compiler>v
   private static void javac(Xml out, String v) {
     out.tag(Xml.sp4, "maven.compiler.source", v);
     out.tag(Xml.sp4, "maven.compiler.target", v);

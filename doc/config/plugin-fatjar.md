@@ -1,7 +1,7 @@
 # plugin=&fatjar
 ```
 plugin=&fatjar
-&fatjar=mainClass:v, ver:v, jarName:v
+&fatjar=version>v, finalName>v, mainClass>v
 &fatjar.conf+={
   <key>val</key>
   ...
@@ -12,12 +12,11 @@ plugin=&fatjar
 }
 ```
 
-- **Required**: mainClass
-- **Optional**:
-    - ver: version of maven-assembly-plugin (default is `2.6`)
-    - jarName: fatjar name (default is `${project.artifactId}`)
-    - conf+: tags added to `plugin/configuration`
-    - conf.archive+: tags added to `plugin/configuration/archive`
+- version: version of maven-assembly-plugin (default is `2.6`)
+- finalName: fatjar name (default is `${project.artifactId}`)
+- mainClass: value of manifest `Main-Class` (default is none)
+- conf+: markup added to `plugin/configuration`
+- conf.archive+: markup added to `plugin/configuration/archive`
 
 
 ## Examples
@@ -25,16 +24,6 @@ plugin=&fatjar
 **poml**
 ```
 plugin=&fatjar
-&fatjar=mainClass>poml.Main
-&fatjar.conf+={
-  <outputDirectory>dist</outputDirectory>
-}
-&fatjar.conf.archive+={
-  <manifestEntries>
-    <Implementation-Version>${project.version}</Implementation-Version>
-    <Built-By>Poml Authors</Built-By>
-  </manifestEntries>
-}
 ```
 
 **converted**
@@ -52,6 +41,53 @@ plugin=&fatjar
           </descriptorRefs>
           <appendAssemblyId>false</appendAssemblyId>
           <attach>false</attach>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals><goal>single</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+### Config + Layout
+**poml**
+```
+plugin=&fatjar
+&fatjar=
+  version>3.0.0, finalName>poml, mainClass>poml.Main
+&fatjar.conf+={
+  <outputDirectory>dist</outputDirectory>
+}
+&fatjar.conf.archive+={
+  <manifestEntries>
+    <Implementation-Version>${project.version}</Implementation-Version>
+    <Built-By>Poml Authors</Built-By>
+  </manifestEntries>
+}
+---
+  <build>
+    <plugins>
+      {{plugin}}
+    </plugins>
+  </build>
+```
+
+**converted**
+```
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <finalName>poml</finalName>
+          <outputDirectory>dist</outputDirectory>
           <archive>
             <manifest>
               <mainClass>poml.Main</mainClass>
@@ -61,7 +97,11 @@ plugin=&fatjar
               <Built-By>Poml Authors</Built-By>
             </manifestEntries>
           </archive>
-          <outputDirectory>dist</outputDirectory>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <appendAssemblyId>false</appendAssemblyId>
+          <attach>false</attach>
         </configuration>
         <executions>
           <execution>

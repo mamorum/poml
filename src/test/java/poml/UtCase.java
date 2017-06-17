@@ -39,6 +39,6 @@ public class UtCase {
   }
   public void err(String expected, Exception e) {
     Assert.assertEquals(expected, e.getMessage());
-    e.printStackTrace(System.out);
+    //e.printStackTrace(System.out);
   }
 }

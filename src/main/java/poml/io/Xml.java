@@ -5,11 +5,13 @@ public class Xml {
   public static final String
     sp2="  ", sp4="    ", sp6="      ",
     sp8="        ", sp10="          ";
-
-  private static final String nl=System.lineSeparator();
-  private static final int nlLen=nl.length();
+  private static final String nl = System.lineSeparator();
+  private static final int nlLen = nl.length();
 
   private StringBuilder xml = new StringBuilder();
+  @Override public String toString() {
+    return xml.toString();
+  }
 
   // -> api to add xml element.
   public Xml txt(String s) {
@@ -66,10 +68,5 @@ public class Xml {
     xml.append(val);
     xml.append("</").append(key).append(">");
     nl();
-  }
-
-  // -> return xml content
-  @Override public String toString() {
-    return xml.toString();
   }
 }

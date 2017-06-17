@@ -110,11 +110,7 @@
         <version>2.6</version>
         <configuration>
           <finalName>${project.artifactId}</finalName>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <appendAssemblyId>false</appendAssemblyId>
-          <attach>false</attach>
+          <outputDirectory>dist</outputDirectory>
           <archive>
             <manifest>
               <mainClass>demo.Main</mainClass>
@@ -123,7 +119,11 @@
               <Built-By>Demo Authors</Built-By>
             </manifestEntries>
           </archive>
-          <outputDirectory>dist</outputDirectory>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <appendAssemblyId>false</appendAssemblyId>
+          <attach>false</attach>
         </configuration>
         <executions>
           <execution>

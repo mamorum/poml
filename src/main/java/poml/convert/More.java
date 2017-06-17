@@ -43,10 +43,12 @@ public class More {
     String[] kv = in.conf.csv(lic);
     out.kv(Xml.sp6, kv);
   }
+  /// license=&mit
   private static void mit(Xml out) {
     out.line("      <name>MIT License</name>");
     out.line("      <url>https://opensource.org/licenses/MIT</url>");
   }
+  /// license=&apache2
   private static void apache(Xml out) {
     out.line("      <name>The Apache License, Version 2.0</name>");
     out.line("      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>");

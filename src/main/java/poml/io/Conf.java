@@ -56,9 +56,7 @@ public class Conf {
     while ((i < len) && (c[i] <= ' ')) i++;
     return (i > 0 ? s.substring(i) : s);
   }
-
-  //-> to throw
-  public static void err(String k, String v) {
+  private static void err(String k, String v) {
     throw new IllegalStateException(
       "Invalid config [key=" + k +"] [val=" + v + "]"
     );
