@@ -27,10 +27,8 @@ $clean.execs={
     <Built-By>Demo Authors</Built-By>
   </manifestEntries>
 }
-info=
-  name>Demo, description>Demo App,
-  url>http://demo-app.com/,
-  inceptionYear>2016
+info=name>Demo, description>Demo App,
+  url>http://demo-app.com/, inceptionYear>2016
 license=&apache2, &mit, $bsd2
 $bsd2=
   name>The New BSD License,

@@ -15,6 +15,7 @@ public class Poml {
   private boolean hasLayout = false;
   private BufferedReader in;
   private String line;
+  private char last;
 
   private Poml(BufferedReader in) {this.in = in;}
   public static Poml of(BufferedReader in) throws IOException {
@@ -39,17 +40,17 @@ public class Poml {
         this.hasLayout = true;
         break;
       }
-      char last = line.charAt(line.length()-1);
+      last = line.charAt(line.length()-1);
       if (last == '{') addXml();
       else if (isContinuing(last)) addLines();
       else addLine(line);
     }
   }
   private void addXml() throws IOException {
-    // first line
-    int pos = line.indexOf('=');
-    if (pos == -1) errkv(line);
-    String key = line.substring(0, pos).trim();
+    // first line -> "key={"
+    int eq = line.length()-2;
+    if (line.charAt(eq) != '=') errkv(line);
+    String key = line.substring(0, eq);
     // second+ lines
     StringBuilder xml = new StringBuilder();
     while ((line = in.readLine()) != null) {
@@ -60,14 +61,13 @@ public class Poml {
     }
     conf.kv.put(key, xml.toString());
   }
-  private boolean isContinuing(char last) {
-    if (last == '=') return true;
-    if (last == ',') return true;
+  private boolean isContinuing(char c) {
+    if (c == '=') return true;
+    if (c == ',') return true;
     return false;
   }
   private void addLines() throws IOException {
     StringBuilder sb = new StringBuilder(line);
-    char last;
     while ((line = in.readLine()) != null) {
       sb.append(line);
       last = line.charAt(line.length()-1);
@@ -77,10 +77,10 @@ public class Poml {
     addLine(sb.toString());
   }
   private void addLine(String l) {
-    int pos = l.indexOf('=');
-    if (pos == -1) errkv(l);
-    String k = l.substring(0, pos).trim();
-    String v = l.substring(pos + 1);
+    int eq = l.indexOf('=');
+    if (eq == -1) errkv(l);
+    String k = l.substring(0, eq);
+    String v = l.substring(eq + 1);
     conf.kv.put(k, v);
   }
   private void errkv(String l) {
