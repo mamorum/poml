@@ -2,37 +2,28 @@ package poml.io;
 
 import java.util.HashMap;
 
-// ConfigSection. keys and vals.
+// config section. keys and vals.
 public class Conf {
   HashMap<String, String> kv = new HashMap<>();
 
-  //-> to check key.
   public boolean has(String key) {
     return kv.containsKey(key);
   }
-
-  //-> to get val.
-  // key=val
-  //// - throw: if val is null or blank
-  //// - return: not null or blank
   private String get(String key) {
     String val = kv.get(key);
     if (none(val)) err(key, val);
     return val;
   }
+
+  // "key=  val"
+  /// - return: "val" (left trimed)
+  /// - throw: if val is null or empty
   public String val(String key) {
     return ltrim(get(key));
   }
-  public String xml(String key) {
-    return get(key);
-  }
-  // key=v, v, ... (comma-separated v)
-  ////  - throw:
-  ////    - same as #val(String)
-  ////    - if array element is null or blank
-  ////  - return:
-  ////    - not null (length 1+)
-  ////    - v replaced "\," to ","
+  // "key=  v, v, ..." (val is comma-separated-v)
+  /// - return: {"v", "v", ...} (left trimed, "\," is replaced to ",")
+  /// - throw: if val or v are null or empty
   private static final String esc="\\,", cn=",";
   public String[] csv(String key) {
     String val = get(key);
@@ -46,6 +37,13 @@ public class Conf {
     }
     return vals;
   }
+  // "key=  <k>..." (val is xml)
+  /// - return: "  <k>..." (not trimed)
+  /// - throw: if val is null or empty
+  public String xml(String key) {
+    return get(key);
+  }
+
   private static boolean none(String s) {
     if (s == null || "".equals(s)) return true;
     return false;
