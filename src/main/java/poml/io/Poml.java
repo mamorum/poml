@@ -9,13 +9,13 @@ import poml.convert.Env;
 import poml.convert.More;
 import poml.convert.Prj;
 
-// pom.poml
+// pom.poml & conversion tool (parse, render)
 public class Poml {
   public Conf conf = new Conf();
-  private boolean hasLayout = false;
+  boolean hasLayout = false;
   private BufferedReader in;
   private String line;
-  private char last;
+  private int ieq;
 
   private Poml(BufferedReader in) {this.in = in;}
   public static Poml of(BufferedReader in) throws IOException {
@@ -23,7 +23,6 @@ public class Poml {
     p.parseConfig();
     return p;
   }
-
   public String toXml() throws IOException {
     Xml xml = new Xml();
     if (hasLayout) layoutTo(xml);
@@ -37,21 +36,44 @@ public class Poml {
       if (line.length() == 0) continue;  // none
       if (line.charAt(0) == '#') continue;  // comment
       if (line.equals("---")) {  // layout
-        this.hasLayout = true;
-        break;
+        this.hasLayout = true; break;
       }
-      last = line.charAt(line.length()-1);
-      if (last == '{') addXml();
-      else if (isContinuing(last)) addLines();
-      else addLine(line);
+      ieq = line.indexOf('=');
+      if (ieq <= 0) noKey(line);
+      String key = line.substring(0, ieq);
+      String val = line.substring(ieq+1);
+      if (eqEnd()) val = lines(""); // key=
+      else if (csvEnd()) val = lines(val); // key=.... ,
+      else if (xmlEnd()) val = xml(); // key={
+      conf.kv.put(key, val); // key=val
     }
   }
-  private void addXml() throws IOException {
-    // first line -> "key={"
-    int eq = line.length()-2;
-    if (line.charAt(eq) != '=') errkv(line);
-    String key = line.substring(0, eq);
-    // second+ lines
+  private boolean eqEnd() {
+    int ilast = line.length() - 1;
+    return (ilast == ieq);
+  }
+  private boolean csvEnd() {
+    char last1 = line.charAt(line.length() - 1);
+    char last2 = line.charAt(line.length() - 2);
+    if (last2 != '\\' && last1 == ',') return true;
+    return false;
+  }
+  private String lines(String l) throws IOException {
+    StringBuilder lines = new StringBuilder(l);
+    while ((line = in.readLine()) != null) {
+      lines.append(line);
+      if (csvEnd()) continue;
+      else break;
+    }
+    return lines.toString();
+  }
+  private boolean xmlEnd() {
+    int ilast2 = line.length() - 2;
+    char last1 = line.charAt(line.length() - 1);
+    if (ilast2 == ieq && last1 == '{') return true;
+    return false;
+  }
+  private String xml() throws IOException {
     StringBuilder xml = new StringBuilder();
     while ((line = in.readLine()) != null) {
       if ("}".equals(line)) break;
@@ -59,33 +81,11 @@ public class Poml {
         System.lineSeparator()
       );
     }
-    conf.kv.put(key, xml.toString());
+    return xml.toString();
   }
-  private boolean isContinuing(char c) {
-    if (c == '=') return true;
-    if (c == ',') return true;
-    return false;
-  }
-  private void addLines() throws IOException {
-    StringBuilder sb = new StringBuilder(line);
-    while ((line = in.readLine()) != null) {
-      sb.append(line);
-      last = line.charAt(line.length()-1);
-      if (isContinuing(last)) continue;
-      else break;
-    }
-    addLine(sb.toString());
-  }
-  private void addLine(String l) {
-    int eq = l.indexOf('=');
-    if (eq == -1) errkv(l);
-    String k = l.substring(0, eq);
-    String v = l.substring(eq + 1);
-    conf.kv.put(k, v);
-  }
-  private void errkv(String l) {
-    throw new IllegalArgumentException(
-      "Config (key=val) not found [poml=" + l + "]"
+  private void noKey(String l) {
+    throw new RuntimeException(
+      "Invalid config [line=" + l + "]"
     );
   }
 
@@ -126,7 +126,6 @@ public class Poml {
       "{{" + key  + "}} cannot be used in poml"
     );
   }
-
   private void noLayoutTo(Xml xml) {
     Prj.start(xml);
     Basic.all(this, xml);

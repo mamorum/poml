@@ -33,7 +33,7 @@ public class ConfTest extends UtCase {
     try {
       poml.conf.val("key");
       fail();
-    } catch (IllegalStateException e) {
+    } catch (RuntimeException e) {
       err("Invalid config [key=key] [val=null]", e);
     }
   }
@@ -42,7 +42,7 @@ public class ConfTest extends UtCase {
     try {
       poml.conf.val("key");
       fail();
-    } catch (IllegalStateException e) {
+    } catch (RuntimeException e) {
       err("Invalid config [key=key] [val=]", e);
     }
   }
@@ -81,7 +81,7 @@ public class ConfTest extends UtCase {
     try {
       poml.conf.csv("key");
       fail();
-    } catch (IllegalStateException e) {
+    } catch (RuntimeException e) {
       err("Invalid config [key=key] [val= , v]", e);
     }
   }
@@ -105,7 +105,7 @@ public class ConfTest extends UtCase {
     try {
       poml.conf.xml("k");
       fail();
-    } catch (IllegalStateException e) {
+    } catch (RuntimeException e) {
       err("Invalid config [key=k] [val=null]", e);
     }
   }
@@ -117,7 +117,7 @@ public class ConfTest extends UtCase {
     try {
       poml.conf.xml("k");
       fail();
-    } catch (IllegalStateException e) {
+    } catch (RuntimeException e) {
       err("Invalid config [key=k] [val=]", e);
     }
   }

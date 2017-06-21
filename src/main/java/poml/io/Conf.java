@@ -55,7 +55,7 @@ public class Conf {
     return (i > 0 ? s.substring(i) : s);
   }
   private static void err(String k, String v) {
-    throw new IllegalStateException(
+    throw new RuntimeException(
       "Invalid config [key=" + k +"] [val=" + v + "]"
     );
   }
