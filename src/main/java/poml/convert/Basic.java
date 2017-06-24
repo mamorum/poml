@@ -1,94 +1,83 @@
 package poml.convert;
 
-import java.util.Map;
-
-import poml.Poml;
-import poml.Throw;
-import poml.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public class Basic {
   public static final String
     pkg="pkg", parent="parent",
-    dep="depend", props = "properties",
-    sp4="    ";
+    depend="depend", properties = "properties";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has(pkg)) {out.nl(); pkg(in, out);}
     if (in.conf.has(parent)) {out.nl(); parent(in, out);}
-    if (in.conf.has(dep)) {
+    if (in.conf.has(depend)) {
       out.nl();
       out.line("  <dependencies>");
       depend(in, out);
       out.line("  </dependencies>");
     }
-    if (in.conf.has(props)) {out.nl(); properties(in, out);}
+    if (in.conf.has(properties)) {out.nl(); properties(in, out);}
   }
 
-  // -> pkg
-  private static final String[] pkgTags = {
-    "groupId", "artifactId", "version",  // required
-    "packaging"  // optional
-  };
+  private static final String
+    groupId="groupId", artifactId="artifactId", version="version";
+
+  //-> pkg=v:v:v...
+  private static final String[] pkgTags =
+    {groupId, artifactId, version, "packaging"};
   public static void pkg(Poml in, Xml out) {
     String val = in.conf.val(pkg);
-    String[] vals = val.split(":");
-    if (vals.length < 3) {
-      Throw.badConf(pkg, val);
-    }
-    out.tags("  ", pkgTags, vals);
+    String[] v = val.split(":");
+    out.tags(Xml.sp2, pkgTags, v);
   }
 
-  // -> parent
-  private static final String[] parentTags = {
-    "groupId", "artifactId", "version",  // required
-  };
+  // -> parent=v:v:v
+  private static final String[] parentTags =
+    {groupId, artifactId, version};
   public static void parent(Poml in, Xml out) {
     String val = in.conf.val(parent);
-    String[] vals = val.split(":");
-    if (vals.length < 3) {
-      Throw.badConf(parent, val);
-    }
+    String[] v = val.split(":");
     out.line("  <parent>");
-    out.tags(sp4, parentTags, vals);
+    out.tags(Xml.sp4, parentTags, v);
     out.line("  </parent>");
   }
 
-  // -> depend
-  private static final String[] depTags = {
-    "groupId", "artifactId", // required
-    "version", "scope", "optional", "type"  // optional
-  };
+  // -> depend=lib, lib... (lib=v:v:v...)
+  private static final String[] depTags =
+    {groupId, artifactId, version, "scope", "optional", "type"};
   public static void depend(Poml in, Xml out) {
-    for (String lib: in.conf.vals(dep)) {
-      String[] vals = lib.split(":");
-      if (vals.length < 2) {
-        Throw.badConf(dep, lib);
-      }
+    for (String lib: in.conf.csv(depend)) {
+      String[] v = lib.split(":");
       out.line("    <dependency>");
-      out.tags("      ", depTags, vals);
+      out.tags(Xml.sp6, depTags, v);
       out.line("    </dependency>");
     }
   }
 
-  // -> properties
+  // -> properties=k>v, k>v ...
   public static final String
-    enc="&encoding", jdk="&compiler";
+    enc="&encoding>", javac="&compiler>";
   public static void properties(Poml in, Xml out) {
-    Map<String, String> kv = in.conf.map(props);
     out.line("  <properties>");
-    for (String k: kv.keySet()) {
-      if (enc.equals(k)) enc(out, kv.get(k));
-      else if (jdk.equals(k)) javac(out, kv.get(k));
-      else out.tag(sp4, k, kv.get(k));
+    for (String kv: in.conf.csv(properties)) {
+      if (kv.startsWith(enc)) enc(out, v(kv));
+      else if (kv.startsWith(javac)) javac(out, v(kv));
+      else out.kv(Xml.sp4, kv);
     }
     out.line("  </properties>");
   }
+  /// properties=&encoding>v
   private static void enc(Xml out, String v) {
-    out.tag(sp4, "project.build.sourceEncoding", v);
-    out.tag(sp4, "project.reporting.outputEncoding", v);
+    out.tag(Xml.sp4, "project.build.sourceEncoding", v);
+    out.tag(Xml.sp4, "project.reporting.outputEncoding", v);
   }
+  /// properties=&compiler>v
   private static void javac(Xml out, String v) {
-    out.tag(sp4, "maven.compiler.source", v);
-    out.tag(sp4, "maven.compiler.target", v);
+    out.tag(Xml.sp4, "maven.compiler.source", v);
+    out.tag(Xml.sp4, "maven.compiler.target", v);
+  }
+  private static String v(String kv) {
+    return kv.substring(kv.indexOf('>')+1);
   }
 }

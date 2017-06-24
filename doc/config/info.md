@@ -3,8 +3,6 @@
 info=name>v, description>v, url>v, inceptionYear>v
 ```
 
-- **Optional**: name, description, url, inceptionYear
-
 
 ## Examples
 ### Config

@@ -1,11 +1,9 @@
 pkg=com.example:demo:0.0.1:jar
-parent=org.springframework.boot:spring-boot-starter-parent:1.5.1.RELEASE
+parent=org.sonatype.oss:oss-parent:7
 depend=
   org.slf4j:slf4j-api:1.7.21,
   junit:junit:[4.12\,):test,
-  org.assertj:assertj-core:3.2.0:test:true,
-  ch.qos.logback:logback-classic:1.1.7:test:true:jar,
-  org.springframework.boot:spring-boot-starter-web
+  ch.qos.logback:logback-classic:1.1.7:test:true:jar
 properties=
   &encoding>UTF-8, &compiler>1.8, gpg.skip>true
 plugin=$clean, &ossrh, &fatjar
@@ -29,10 +27,8 @@ $clean.execs={
     <Built-By>Demo Authors</Built-By>
   </manifestEntries>
 }
-info=
-  name>Demo, description>Demo App,
-  url>http://demo-app.com/,
-  inceptionYear>2016
+info=name>Demo, description>Demo App,
+  url>http://demo-app.com/, inceptionYear>2016
 license=&apache2, &mit, $bsd2
 $bsd2=
   name>The New BSD License,
@@ -48,7 +44,7 @@ issue=
   system>GitHub Issues,
   url>https://github.com/user/repo/issues
 scm=
-  tag>HEAD, url>https://github.com/user/repo,
   connection>scm:git:https://github.com/user/repo.git,
-  developerConnection>scm:git:git@github.com:user/repo.git
+  developerConnection>scm:git:git@github.com:user/repo.git,
+  tag>HEAD, url>https://github.com/user/repo
 dist=&ossrh

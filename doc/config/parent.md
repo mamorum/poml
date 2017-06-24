@@ -3,8 +3,6 @@
 parent=groupId:artifactId:version
 ```
 
-- **Required**: groupId, artifactId, version
-
 
 ## Examples
 ## Config

@@ -3,9 +3,6 @@
 pkg=groupId:artifactId:version:packaging
 ```
 
-- **Required**: groupId, artifactId, version
-- **Optional**: packaging
-
 
 ## Examples
 ### Config

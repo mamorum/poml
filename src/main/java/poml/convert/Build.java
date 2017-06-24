@@ -1,15 +1,10 @@
 package poml.convert;
 
-import java.util.Map;
-
-import poml.Poml;
-import poml.Throw;
-import poml.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public class Build {
-  public static final String
-    plugin="plugin",
-    sp6="      ", sp8=sp6+"  ", sp10=sp8+"  ";
+  public static final String plugin="plugin";
 
   public static void all(Poml in, Xml out) {
     if (in.conf.has("plugin")) {
@@ -22,90 +17,83 @@ public class Build {
     }
   }
 
-  // -> plugin
+  // -> plugin=plg, plg ...
   private static final String fatjar="&fatjar", ossrh="&ossrh";
   public static void plugin(Poml in, Xml out) {
-    String[] plgs = in.conf.vals(plugin);
-    for (String plg: plgs) {
-      if (fatjar.equals(plg)) fatjar(in, out);
-      else if (ossrh.equals(plg)) ossrh(out);
-      else $plugin(plg, in, out);
+    for (String plg: in.conf.csv(plugin)) {
+      if (plg.equals(fatjar)) fatjar(in, out);
+      else if (plg.equals(ossrh)) ossrh(out);
+      else plg(plg, in, out);
     }
   }
-
-  // -> $plugin :  ex. $compiler
-  private static final String[] keys = {
-    "groupId", "artifactId", "version", "extensions", "inherited"
-  };
-  private static void $plugin(String $plg, Poml in, Xml out) {
-    String val = in.conf.val($plg);
-    String[] vals = val.split(":");
+  /// plg=v:v:v...
+  /// plg.conf={
+  ///   <key>val</key>
+  /// }
+  /// plg.depends={
+  ///   <key>val</key>
+  /// }
+  /// plg.execs={
+  ///   <key>val</key>
+  /// }
+  private static final String[] plgTags = {
+    "groupId", "artifactId", "version", "extensions", "inherited"};
+  private static void plg(String plg, Poml in, Xml out) {
     out.line("      <plugin>");
-    out.tags(sp8, keys, vals);  // groupId - inherited
-    $conf($plg, in, out);
-    $depends($plg, in, out);
-    $execs($plg, in, out);
+    String val = in.conf.val(plg);
+    String[] v = val.split(":");
+    out.tags(Xml.sp8, plgTags, v);
+    String conf = key(plg, ".conf");
+    String depends = key(plg, ".depends");
+    String execs = key(plg, ".execs");
+    xml(conf, "configuration", in, out);
+    xml(depends, "dependencies", in, out);
+    xml(execs, "executions", in, out);
     out.line("      </plugin>");
   }
-  private static void $conf(String $plg, Poml in, Xml out) {
-    String key = (new StringBuilder($plg)).append(".conf").toString();
-    if (in.conf.hasTag(key)) {
-      out.line("        <configuration>");
-      out.txt(in.conf.tag(key, sp8));
-      out.line("        </configuration>");
-    }
+  private static String key(String plg, String suffix) {
+    return (new StringBuilder(plg)).append(suffix).toString();
   }
-  private static void $depends(String $plg, Poml in, Xml out) {
-    String key = (new StringBuilder($plg)).append(".depends").toString();
-    if (in.conf.hasTag(key)) {
-      out.line("        <dependencies>");
-      out.txt(in.conf.tag(key, sp8));
-      out.line("        </dependencies>");
-    }
-  }
-  private static void $execs(String $plg, Poml in, Xml out) {
-    String key = (new StringBuilder($plg)).append(".execs").toString();
-    if (in.conf.hasTag(key)) {
-      out.line("        <executions>");
-      out.txt(in.conf.tag(key, sp8));
-      out.line("        </executions>");
+  private static void xml(String key, String tag, Poml in, Xml out) {
+    if (in.conf.has(key)) {
+      out.txt("        <").txt(tag).line(">");
+      out.xml(Xml.sp8, in.conf.xml(key));
+      out.txt("        </").txt(tag).line(">");
     }
   }
 
-  // -> &fatjar : render assembly-plugin
+  /// plugin=&fatjar
+  /// &fatjar=k>v, k>v ...
+  /// &fatjar.conf+={
+  ///   <key>val</key>
+  /// }
+  /// &fatjar.conf.archive+={
+  ///   <key>val</key>
+  /// }
   private static void fatjar(Poml in, Xml out) {
-    Map<String, String> map = in.conf.map(fatjar);
-    String main = map.get("mainClass");  // required
-    if (main == null) Throw.noKv(fatjar, "mainClass");
-    String ver = map.get("ver");
-    if (ver == null) ver = "2.6";
-    String jar = map.get("jarName");
-    if (jar == null) jar = "${project.artifactId}";
-    // -> render
+    String ver=null, name=null, main=null;
+    if (in.conf.has(fatjar)) {
+      for (String kv: in.conf.csv(fatjar)) {
+        if (kv.startsWith("version>")) ver=kv;
+        else if (kv.startsWith("finalName>")) name=kv;
+        else if (kv.startsWith("mainClass>")) main=kv;
+      }
+    }
+    if (ver == null) ver = "version>2.6";
+    if (name == null) name = "finalName>${project.artifactId}";
     out.line("      <plugin>");
     out.line("        <groupId>org.apache.maven.plugins</groupId>");
     out.line("        <artifactId>maven-assembly-plugin</artifactId>");
-    out.txt("        <version>").txt(ver).txt("</version>").nl();
+    out.txt("        <").txt(ver).txt("</version>").nl();
     out.line("        <configuration>");
-    out.txt("          <finalName>").txt(jar).txt("</finalName>").nl();
+    out.txt("          <").txt(name).txt("</finalName>").nl();
+    fatjarConf(in, out);
+    fatjarConfArchive(in, out, main);
     out.line("          <descriptorRefs>");
     out.line("            <descriptorRef>jar-with-dependencies</descriptorRef>");
     out.line("          </descriptorRefs>");
     out.line("          <appendAssemblyId>false</appendAssemblyId>");
     out.line("          <attach>false</attach>");
-    out.line("          <archive>");
-    out.line("            <manifest>");
-    out.txt("              <mainClass>").txt(main).txt("</mainClass>").nl();
-    out.line("            </manifest>");
-    String confArc = "&fatjar.conf.archive+";
-    if (in.conf.hasTag(confArc)) {
-      out.txt(in.conf.tag(confArc, sp10));
-    }
-    out.line("          </archive>");
-    String conf = "&fatjar.conf+";
-    if (in.conf.hasTag(conf)) {
-      out.txt(in.conf.tag(conf, sp8));
-    }
     out.line("        </configuration>");
     out.line("        <executions>");
     out.line("          <execution>");
@@ -116,9 +104,30 @@ public class Build {
     out.line("        </executions>");
     out.line("      </plugin>");
   }
+  private static final String fatjarConf = "&fatjar.conf+";
+  private static void fatjarConf(Poml in, Xml out) {
+    if (in.conf.has(fatjarConf)) {
+      out.xml(Xml.sp8, in.conf.xml(fatjarConf));
+    }
+  }
+  private static final String fatjarConfArchive = "&fatjar.conf.archive+";
+  private static void fatjarConfArchive(Poml in, Xml out, String main) {
+    boolean hasMain = (main != null);
+    boolean hasAdding = in.conf.has(fatjarConfArchive);
+    if (!hasMain && !hasAdding) return;
+    out.line("          <archive>");
+    if (hasMain) {
+      out.line("            <manifest>");
+      out.txt("              <").txt(main).txt("</mainClass>").nl();
+      out.line("            </manifest>");
+    }
+    if (hasAdding) {
+      out.xml(Xml.sp10, in.conf.xml(fatjarConfArchive));
+    }
+    out.line("          </archive>");
+  }
 
-  // -> &ossrh : render javadoc, source, and gpg
-  // http://central.sonatype.org/pages/apache-maven.html
+  /// plugin=&ossrh
   private static void ossrh(Xml out) {
     out.line("      <plugin>");
     out.line("        <groupId>org.apache.maven.plugins</groupId>");

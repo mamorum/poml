@@ -1,14 +1,26 @@
 pkg=com.example:demo:0.0.1:jar
 depend=
-  com.google.guava:guava:21.0,
+  org.slf4j:slf4j-api:1.7.25,
   junit:junit:[4.12\,):test
 properties=&encoding>UTF-8, &compiler>1.8
+plugin=$compiler
+$compiler=org.apache.maven.plugins:maven-compiler-plugin:3.6.1
+$compiler.conf={
+  <compilerArgs>
+    <arg>-verbose</arg>
+  </compilerArgs>
+}
 ---
 {{prj}}&
   {{pkg}}&
   <dependencies>
-    <!-- guava, junit -->
     {{depend}}
   </dependencies>&
-  {{properties}}
+  {{properties}}&
+  <build>
+    <plugins>
+      <!-- compiler -->
+      {{plugin}}
+    </plugins>
+  </build>
 {{/prj}}

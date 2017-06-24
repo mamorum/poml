@@ -1,76 +1,70 @@
 package poml.convert;
 
-import java.util.Map;
-
-import poml.Poml;
-import poml.Xml;
+import poml.io.Poml;
+import poml.io.Xml;
 
 public class More {
   public static final String
-    info="info", license="license", dev="developer",
-    sp2="  ", sp6="      ";
+    info="info", license="license", developer="developer";
 
   public static void all(Poml in, Xml out) {
-    if (in.conf.has(info)) {out.nl(); More.info(in, out);}
+    if (in.conf.has(info)) {out.nl(); info(in, out);}
     if (in.conf.has(license)) {
       out.nl();
       out.line("  <licenses>");
-      More.license(in, out);
+      license(in, out);
       out.line("  </licenses>");
     }
-    if (in.conf.has(dev)) {
+    if (in.conf.has(developer)) {
       out.nl();
       out.line("  <developers>");
-      More.developer(in, out);
+      developer(in, out);
       out.line("  </developers>");
     }
   }
-  //-> info
-  private static final String[] infoTags = {
-    "name", "description", "url", "inceptionYear"
-  };
-  public static void info(Poml in, Xml out) {
-    Map<String, String> kv = in.conf.map(info);
-    out.tags(sp2, infoTags, kv);
+  //-> info=k>v, k>v ...
+  public static void info(Poml in, Xml out) {;
+    String[] kv = in.conf.csv(info);
+    out.kv(Xml.sp2, kv);
   }
 
-  //-> license
+  //-> license=lic, lic ...
   public static void license(Poml in, Xml out) {
-    String[] lics = in.conf.vals(license);
-    for (String lic: lics) {
+    for (String lic: in.conf.csv(license)) {
       out.line("    <license>");
-      if ("&apache2".equals(lic)) apache(out);
-      else if ("&mit".equals(lic)) mit(out);
-      else $license(lic, in, out);
+      if (lic.equals("&apache2")) apache(out);
+      else if (lic.equals("&mit")) mit(out);
+      else lic(lic, in, out);
       out.line("    </license>");
     }
   }
-  private static void apache(Xml out) {
-    out.line("      <name>The Apache License, Version 2.0</name>");
-    out.line("      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>");
+  /// lic=k>v, k>v ...
+  private static void lic(String lic, Poml in, Xml out) {
+    String[] kv = in.conf.csv(lic);
+    out.kv(Xml.sp6, kv);
   }
+  /// license=&mit
   private static void mit(Xml out) {
     out.line("      <name>MIT License</name>");
     out.line("      <url>https://opensource.org/licenses/MIT</url>");
   }
-  private static void $license(String lic, Poml in, Xml out) {
-    Map<String, String> kv = in.conf.map(lic);
-    out.tags(sp6, licenseTags, kv);
+  /// license=&apache2
+  private static void apache(Xml out) {
+    out.line("      <name>The Apache License, Version 2.0</name>");
+    out.line("      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>");
   }
-  private static final String[] licenseTags = {
-    "name", "url", "distribution", "comments"
-  };
 
-  //-> developer
-  private static final String[]
-    devTags = { "id", "name","email", "url"};
+  //-> developer=dev, dev ...
   public static void developer(Poml in, Xml out) {
-    String[] devs = in.conf.vals(dev);
-    for (String $dev: devs) {
-      Map<String, String> kv = in.conf.map($dev);
-      out.line("    <developer>");
-      out.tags(sp6, devTags, kv);
-      out.line("    </developer>");
+    for (String dev: in.conf.csv(developer)) {
+      dev(dev, in, out);
     }
+  }
+  /// dev=k>v, k>v ...
+  private static void dev(String dev, Poml in, Xml out) {
+    String[] kv = in.conf.csv(dev);
+    out.line("    <developer>");
+    out.kv(Xml.sp6, kv);
+    out.line("    </developer>");
   }
 }

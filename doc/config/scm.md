@@ -3,8 +3,6 @@
 scm=connection>v, developerConnection>v, tag>v, url>v
 ```
 
-- **Optional**: connection, developerConnection, tag, url
-
 
 ## Examples
 ### Config

@@ -1,29 +1,39 @@
-package poml.conv.build;
+package poml.convert;
 
 import org.junit.Test;
 
-import poml.Poml;
-import poml.conv.ConvTestCase;
-import poml.convert.Build;
+import poml.UtCase;
 
-public class PluginTest extends ConvTestCase {
-  // $
-  @Test public void grp_art() {
-    poml = Poml.parse(data(
-      "plugin=$sbp" + nl +
-      "$sbp=org.springframework.boot:spring-boot-maven-plugin"
-    ));
+public class BuildTest extends UtCase {
+
+  //-> plugin=$1, $2, ...
+  @Test public void plugin_multi() {
+    poml(
+      "plugin=$demo, $compiler" + nl +
+      "$demo=org.demo:demo-plugin" + nl +
+      "$compiler=:maven-compiler-plugin:3.6.1" + nl +
+      "$compiler.conf={" + nl +
+      "  <fork>true</fork>" + nl +
+      "}" + nl
+    );
     Build.plugin(poml, xml);
-    result(
+    xml(
       "      <plugin>" + nl +
-      "        <groupId>org.springframework.boot</groupId>" + nl +
-      "        <artifactId>spring-boot-maven-plugin</artifactId>" + nl +
+      "        <groupId>org.demo</groupId>" + nl +
+      "        <artifactId>demo-plugin</artifactId>" + nl +
+      "      </plugin>" + nl +
+      "      <plugin>" + nl +
+      "        <artifactId>maven-compiler-plugin</artifactId>" + nl +
+      "        <version>3.6.1</version>" + nl +
+      "        <configuration>" + nl +
+      "          <fork>true</fork>" + nl +
+      "        </configuration>" + nl +
       "      </plugin>" + nl
     );
   }
 
-  @Test public void grp_exec() {
-    poml = Poml.parse(data(
+  @Test public void plugin_single_all_conf() {
+    poml(
       "plugin=$jar" + nl +
       "$jar=org.apache.maven.plugins:maven-jar-plugin:2.6:false:true" + nl +
       "$jar.conf={" + nl +
@@ -42,9 +52,9 @@ public class PluginTest extends ConvTestCase {
       "    <phase>jar</phase>" + nl +
       "  </execution>" + nl +
       "}" + nl
-    ));
+    );
     Build.plugin(poml, xml);
-    result(
+    xml(
         "      <plugin>" + nl +
         "        <groupId>org.apache.maven.plugins</groupId>" + nl +
         "        <artifactId>maven-jar-plugin</artifactId>" + nl +
@@ -71,14 +81,13 @@ public class PluginTest extends ConvTestCase {
     );
   }
 
-  // &
-  @Test public void fatjar_ossrh() {
-    poml = Poml.parse(data(
-      "plugin=&fatjar, &ossrh" + nl +
-      "&fatjar=mainClass>poml.Main"
-    ));
+  // -> &fatjar
+  @Test public void plugin_fatjar_default() {
+    poml(
+      "plugin=&fatjar" + nl
+    );
     Build.plugin(poml, xml);
-    result(
+    xml(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
@@ -90,11 +99,6 @@ public class PluginTest extends ConvTestCase {
       "          </descriptorRefs>" + nl +
       "          <appendAssemblyId>false</appendAssemblyId>" + nl +
       "          <attach>false</attach>" + nl +
-      "          <archive>" + nl +
-      "            <manifest>" + nl +
-      "              <mainClass>poml.Main</mainClass>" + nl +
-      "            </manifest>" + nl +
-      "          </archive>" + nl +
       "        </configuration>" + nl +
       "        <executions>" + nl +
       "          <execution>" + nl +
@@ -103,69 +107,66 @@ public class PluginTest extends ConvTestCase {
       "            <goals><goal>single</goal></goals>" + nl +
       "          </execution>" + nl +
       "        </executions>" + nl +
-      "      </plugin>" + nl +
+      "      </plugin>" + nl
+    );
+  }
+  @Test public void plugin_fatjar_all_conf() {
+    poml(
+      "plugin=&fatjar" + nl +
+      "&fatjar=" + nl +
+      "  version>3.0.0, finalName>poml, mainClass>poml.Main"+ nl +
+      "&fatjar.conf+={"+ nl +
+      "  <outputDirectory>dist</outputDirectory>"+ nl +
+      "}"+ nl +
+      "&fatjar.conf.archive+={"+ nl +
+      "  <manifestEntries>"+ nl +
+      "    <Implementation-Version>${project.version}</Implementation-Version>"+ nl +
+      "    <Built-By>Poml Authors</Built-By>"+ nl +
+      "  </manifestEntries>"+ nl +
+      "}"+ nl
+    );
+    Build.plugin(poml, xml);
+    xml(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
-      "        <artifactId>maven-source-plugin</artifactId>" + nl +
-      "        <version>2.2.1</version>" + nl +
+      "        <artifactId>maven-assembly-plugin</artifactId>" + nl +
+      "        <version>3.0.0</version>" + nl +
+      "        <configuration>" + nl +
+      "          <finalName>poml</finalName>" + nl +
+      "          <outputDirectory>dist</outputDirectory>" + nl +
+      "          <archive>" + nl +
+      "            <manifest>" + nl +
+      "              <mainClass>poml.Main</mainClass>" + nl +
+      "            </manifest>" + nl +
+      "            <manifestEntries>" + nl +
+      "              <Implementation-Version>${project.version}</Implementation-Version>"+ nl +
+      "              <Built-By>Poml Authors</Built-By>" + nl +
+      "            </manifestEntries>" + nl +
+      "          </archive>" + nl +
+      "          <descriptorRefs>" + nl +
+      "            <descriptorRef>jar-with-dependencies</descriptorRef>" + nl +
+      "          </descriptorRefs>" + nl +
+      "          <appendAssemblyId>false</appendAssemblyId>" + nl +
+      "          <attach>false</attach>" + nl +
+      "        </configuration>" + nl +
       "        <executions>" + nl +
       "          <execution>" + nl +
-      "            <id>attach-sources</id>" + nl +
-      "            <goals><goal>jar-no-fork</goal></goals>" + nl +
-      "          </execution>" + nl +
-      "        </executions>" + nl +
-      "      </plugin>" + nl +
-      "      <plugin>" + nl +
-      "        <groupId>org.apache.maven.plugins</groupId>" + nl +
-      "        <artifactId>maven-javadoc-plugin</artifactId>" + nl +
-      "        <version>2.9.1</version>" + nl +
-      "        <executions>" + nl +
-      "          <execution>" + nl +
-      "            <id>attach-javadocs</id>" + nl +
-      "            <goals><goal>jar</goal></goals>" + nl +
-      "          </execution>" + nl +
-      "        </executions>" + nl +
-      "      </plugin>" + nl +
-      "      <plugin>" + nl +
-      "        <groupId>org.apache.maven.plugins</groupId>" + nl +
-      "        <artifactId>maven-gpg-plugin</artifactId>" + nl +
-      "        <version>1.5</version>" + nl +
-      "        <executions>" + nl +
-      "          <execution>" + nl +
-      "            <id>sign-artifacts</id>" + nl +
-      "            <phase>verify</phase>" + nl +
-      "            <goals><goal>sign</goal></goals>" + nl +
+      "            <id>make-assembly</id>" + nl +
+      "            <phase>package</phase>" + nl +
+      "            <goals><goal>single</goal></goals>" + nl +
       "          </execution>" + nl +
       "        </executions>" + nl +
       "      </plugin>" + nl
     );
   }
 
-
-  // $, &
-  @Test public void combi() {
-    poml = Poml.parse(data(
-      "plugin=$ant, &ossrh" + nl +
-      "$ant=:maven-antrun-plugin:1.1" + nl +
-      "$ant.execs={" + nl +
-      "  <execution>" + nl +
-      "    <id>echodir</id>" + nl +
-      "    <!-- ... -->" + nl +
-      "  </execution>" + nl +
-      "}" + nl
-    ));
+  // -> &ossrh
+  @Test public void plugin_ossrh() {
+    poml(
+      "plugin=&ossrh" + nl
+    );
     Build.plugin(poml, xml);
-    result(
-      "      <plugin>" + nl +
-      "        <artifactId>maven-antrun-plugin</artifactId>" + nl +
-      "        <version>1.1</version>" + nl +
-      "        <executions>" + nl +
-      "          <execution>" + nl +
-      "            <id>echodir</id>" + nl +
-      "            <!-- ... -->" + nl +
-      "          </execution>" + nl +
-      "        </executions>" + nl +
-      "      </plugin>" + nl +
+    xml(
       "      <plugin>" + nl +
       "        <groupId>org.apache.maven.plugins</groupId>" + nl +
       "        <artifactId>maven-source-plugin</artifactId>" + nl +

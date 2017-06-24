@@ -6,9 +6,6 @@ depend=
   groupId:artifactId
 ```
 
-- **Required**: groupId, artifactId
-- **Optional**: version, scope, optional, type
-
 
 ## Examples
 ### Config
@@ -16,9 +13,9 @@ depend=
 
 ```
 depend=
-  group.com:artifact1:0.0.1:test:true:jar,
-  group.com:artifact2::::jar,
-  group.com:artifact3,
+  com.example:artifact1:0.0.1:test:true:jar,
+  com.example:artifact2::::jar,
+  com.example:artifact3
 ```
 
 **converted**
@@ -26,7 +23,7 @@ depend=
 ```
   <dependencies>
     <dependency>
-      <groupId>group.com</groupId>
+      <groupId>com.example</groupId>
       <artifactId>artifact1</artifactId>
       <version>0.0.1</version>
       <scope>test</scope>
@@ -34,12 +31,12 @@ depend=
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>group.com</groupId>
+      <groupId>com.example</groupId>
       <artifactId>artifact2</artifactId>
       <type>jar</type>
     </dependency>
     <dependency>
-      <groupId>group.com</groupId>
+      <groupId>com.example</groupId>
       <artifactId>artifact3</artifactId>
     </dependency>
   </dependencies>

@@ -3,7 +3,7 @@
 
   <groupId>com.github.mamorum</groupId>
   <artifactId>poml</artifactId>
-  <version>0.3.3</version>
+  <version>0.4.0</version>
   <packaging>jar</packaging>
 
   <dependencies>
@@ -30,11 +30,7 @@
         <version>2.6</version>
         <configuration>
           <finalName>${project.artifactId}</finalName>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <appendAssemblyId>false</appendAssemblyId>
-          <attach>false</attach>
+          <outputDirectory>dist</outputDirectory>
           <archive>
             <manifest>
               <mainClass>poml.Main</mainClass>
@@ -44,7 +40,11 @@
               <Built-By>Poml Authors</Built-By>
             </manifestEntries>
           </archive>
-          <outputDirectory>dist</outputDirectory>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <appendAssemblyId>false</appendAssemblyId>
+          <attach>false</attach>
         </configuration>
         <executions>
           <execution>
@@ -80,8 +80,8 @@
   </issueManagement>
 
   <scm>
+    <url>https://github.com/mamorum/poml</url>
     <connection>scm:git:https://github.com/mamorum/poml.git</connection>
     <developerConnection>scm:git:git@github.com:mamorum/poml.git</developerConnection>
-    <url>https://github.com/mamorum/poml</url>
   </scm>
 </project>

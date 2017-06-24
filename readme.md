@@ -21,7 +21,7 @@ Create a `pom.poml` and save the following text. (ex. in the `demo` directory.)
 ```txt
 pkg=com.example:demo:0.0.1:jar
 depend=
-  com.google.guava:guava:21.0,
+  org.slf4j:slf4j-api:1.7.25,
   junit:junit:4.12:test
 properties=&encoding>UTF-8, &compiler>1.8
 ```
@@ -32,8 +32,8 @@ Execute `poml`. ( After [Installing Poml](doc/installation-guide.md). )
 
 ```
 demo$ poml
-[POML:INFO] Converting pom.poml
-[POML:INFO] Created pom.xml @30ms
+[INFO] Converting pom.poml
+[INFO] Created pom.xml @30ms
 ```
 
 ### 3. Check Pom XML
@@ -50,9 +50,9 @@ Following `pom.xml` is created.
 
   <dependencies>
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>21.0</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -71,15 +71,20 @@ Following `pom.xml` is created.
 </project>
 ```
 
+Above `pom.poml` and `pom.xml` are in [example/demo](example/demo).
 
-## Examples
+
+## Example
 In the following directories, `pom.poml` and converted `pom.xml` exist.
 
 - [example/all](example/all): Using all configs of Poml
 - [example/all-layout](example/all-layout): Using all configs and "Layout Section"
+- [example/demo-layout](example/demo-layout): Using "Layout Section"
+
+
+## Showcase
+- This project: Eats own poml.
 
 <!--
-## Showcase
 - [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): Web application, packaged as fatjar.
-- [poml](https://github.com/mamorum/poml): Eating own poml.
 -->

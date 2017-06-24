@@ -5,8 +5,6 @@ $1=id>v, name>v, email>v, url>v
 $2=id>v, name>v, email>v, url>v
 ```
 
-- **Optional**: id, name, email, url
-
 
 ## Examples
 ### Config
