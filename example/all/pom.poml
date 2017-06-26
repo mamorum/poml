@@ -1,5 +1,5 @@
 pkg=com.example:demo:0.0.1:jar
-parent=org.sonatype.oss:oss-parent:7:../../pom.xml
+parent=org.sonatype.oss:oss-parent:7
 depend=
   org.slf4j:slf4j-api:1.7.21,
   junit:junit:[4.12\,):test,

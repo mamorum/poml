@@ -24,28 +24,26 @@ public class Basic {
     groupId="groupId", artifactId="artifactId", version="version";
 
   //-> pkg=v:v:v...
-  private static final String[] tPkg =
+  private static final String[] pkgTags =
     {groupId, artifactId, version, "packaging"};
   public static void pkg(Poml in, Xml out) {
     String val = in.conf.val(pkg);
-    out.clnsvx(
-      Xml.sp2, tPkg, val.toCharArray()
-    );
+    String[] v = val.split(":");
+    out.tags(Xml.sp2, pkgTags, v);
   }
 
-  //-> parent=v:v:v...
-  private static final String[] tParent =
-    {groupId, artifactId, version, "relativePath"};
+  // -> parent=v:v:v
+  private static final String[] parentTags =
+    {groupId, artifactId, version};
   public static void parent(Poml in, Xml out) {
     String val = in.conf.val(parent);
+    String[] v = val.split(":");
     out.line("  <parent>");
-    out.clnsvx(
-      Xml.sp4, tParent, val.toCharArray()
-    );
+    out.tags(Xml.sp4, parentTags, v);
     out.line("  </parent>");
   }
 
-  //-> depend=lib, lib... (lib=v:v:v...)
+  // -> depend=lib, lib... (lib=v:v:v...)
   private static final String[] depTags =
     {groupId, artifactId, version, "scope", "optional", "type"};
   public static void depend(Poml in, Xml out) {
@@ -70,24 +68,14 @@ public class Basic {
     out.line("  </properties>");
   }
   /// properties=&encoding>v
-  private static final String
-    sse="    <project.build.sourceEncoding>",
-    ese="</project.build.sourceEncoding>",
-    soe="    <project.reporting.outputEncoding>",
-    eoe="</project.reporting.outputEncoding>";
   private static void enc(Xml out, String v) {
-    out.txt(sse).txt(v).line(ese);
-    out.txt(soe).txt(v).line(eoe);
+    out.tag(Xml.sp4, "project.build.sourceEncoding", v);
+    out.tag(Xml.sp4, "project.reporting.outputEncoding", v);
   }
   /// properties=&compiler>v
-  private static final String
-    scs="    <maven.compiler.source>",
-    ecs="</maven.compiler.source>",
-    sct="    <maven.compiler.target>",
-    ect="</maven.compiler.target>";
   private static void javac(Xml out, String v) {
-    out.txt(scs).txt(v).line(ecs);
-    out.txt(sct).txt(v).line(ect);
+    out.tag(Xml.sp4, "maven.compiler.source", v);
+    out.tag(Xml.sp4, "maven.compiler.target", v);
   }
   private static String v(String kv) {
     return kv.substring(kv.indexOf('>')+1);

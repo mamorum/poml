@@ -59,26 +59,6 @@ public class Xml {
       tag(space, key[i], val[i]);
     }
   }
-
-  //-> CoLoN Separated Val to XML
-  // sp: "  "
-  // tag: {"groupId", "artifactId", "version"}
-  // val: "com.example:demo:0.0.1"
-  // xml: "  <groupId>com.example</groupId>...."
-  public void clnsvx(String sp, String[] tag, char[] val) {
-    char c;
-    int s=0, t=0, l=val.length;  // start, times, length
-    for (int  i=0; i<l; i++) {
-      c = val[i];
-      if (c == ':') {
-        tag(sp, tag[t], new String(val, s, i-s));
-        s = i+1;
-        t = t+1;
-      }
-    }
-    tag(sp, tag[t], new String(val, s, l-s));
-  }
-
   public void tag(
     String space, String key, String val
   ) {
