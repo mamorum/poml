@@ -45,6 +45,20 @@ public class BasicTest extends UtCase {
       "  </parent>" + nl
     );
   }
+  @Test public void parent_id2rel() {
+    poml(
+      "parent=com.example:demo-parent:0.0.1:../pom.xml"
+    );
+    Basic.parent(poml, xml);
+    xml(
+      "  <parent>" + nl +
+      "    <groupId>com.example</groupId>" + nl +
+      "    <artifactId>demo-parent</artifactId>" + nl +
+      "    <version>0.0.1</version>" + nl +
+      "    <relativePath>../pom.xml</relativePath>" + nl +
+      "  </parent>" + nl
+    );
+  }
 
   //-> depend
   @Test public void depend_multi() {

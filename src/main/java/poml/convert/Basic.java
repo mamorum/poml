@@ -32,9 +32,9 @@ public class Basic {
     out.tags(Xml.sp2, pkgTags, v);
   }
 
-  // -> parent=v:v:v
+  //-> parent=v:v:v...
   private static final String[] parentTags =
-    {groupId, artifactId, version};
+    {groupId, artifactId, version, "relativePath"};
   public static void parent(Poml in, Xml out) {
     String val = in.conf.val(parent);
     String[] v = val.split(":");
@@ -43,7 +43,7 @@ public class Basic {
     out.line("  </parent>");
   }
 
-  // -> depend=lib, lib... (lib=v:v:v...)
+  //-> depend=lib, lib... (lib=v:v:v...)
   private static final String[] depTags =
     {groupId, artifactId, version, "scope", "optional", "type"};
   public static void depend(Poml in, Xml out) {
@@ -68,14 +68,24 @@ public class Basic {
     out.line("  </properties>");
   }
   /// properties=&encoding>v
+  private static final String
+    sse="    <project.build.sourceEncoding>",
+    ese="</project.build.sourceEncoding>",
+    soe="    <project.reporting.outputEncoding>",
+    eoe="</project.reporting.outputEncoding>";
   private static void enc(Xml out, String v) {
-    out.tag(Xml.sp4, "project.build.sourceEncoding", v);
-    out.tag(Xml.sp4, "project.reporting.outputEncoding", v);
+    out.txt(sse).txt(v).line(ese);
+    out.txt(soe).txt(v).line(eoe);
   }
   /// properties=&compiler>v
+  private static final String
+    scs="    <maven.compiler.source>",
+    ecs="</maven.compiler.source>",
+    sct="    <maven.compiler.target>",
+    ect="</maven.compiler.target>";
   private static void javac(Xml out, String v) {
-    out.tag(Xml.sp4, "maven.compiler.source", v);
-    out.tag(Xml.sp4, "maven.compiler.target", v);
+    out.txt(scs).txt(v).line(ecs);
+    out.txt(sct).txt(v).line(ect);
   }
   private static String v(String kv) {
     return kv.substring(kv.indexOf('>')+1);

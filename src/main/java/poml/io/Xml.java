@@ -56,17 +56,12 @@ public class Xml {
     String space, String[] key, String[] val
   ) {
     for (int i = 0; i < val.length; i++) {
-      tag(space, key[i], val[i]);
+      if (val[i] == null || "".equals(val[i])) continue;
+      xml.append(space);
+      xml.append("<").append(key[i]).append(">");
+      xml.append(val[i]);
+      xml.append("</").append(key[i]).append(">");
+      nl();
     }
-  }
-  public void tag(
-    String space, String key, String val
-  ) {
-    if (val == null || "".equals(val)) return;
-    xml.append(space);
-    xml.append("<").append(key).append(">");
-    xml.append(val);
-    xml.append("</").append(key).append(">");
-    nl();
   }
 }

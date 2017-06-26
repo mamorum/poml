@@ -23,7 +23,7 @@ parent=com.example:demo-parent:0.0.1
 ## Config + Layout
 **poml**
 ```
-parent=com.example:demo-parent:0.0.1
+parent=com.example:demo-parent:0.0.1:../pom.xml
 ---
 {{parent}}
 ```
@@ -34,5 +34,6 @@ parent=com.example:demo-parent:0.0.1
     <groupId>com.example</groupId>
     <artifactId>demo-parent</artifactId>
     <version>0.0.1</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 ```

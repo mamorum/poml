@@ -1,4 +1,4 @@
-pkg=com.github.mamorum:poml:0.4.0:jar
+pkg=com.github.mamorum:poml:1.0.0:jar
 depend=junit:junit:4.12:test
 properties=&encoding>UTF-8, &compiler>1.8
 info=
