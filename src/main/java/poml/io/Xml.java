@@ -24,44 +24,58 @@ public class Xml {
   public void line(String l) {
     xml.append(l).append(nl);
   }
-  public void xml(String space, String x) {
-    for (int s=0, e=0; ;s=e) {
-      e = x.indexOf(nl, s);
-      if (e == -1) break;
-      e = e+nlLen;
-      xml.append(space).append(
-        x.substring(s, e)
-      );
-    }
-  }
-  public void kv(String space, String[] kv) {
-    for (int i=0; i<kv.length; i++) {
-      kv(space, kv[i]);
-    }
-  }
-  public void kv(String space, String kv) {
-    int gt = kv.indexOf('>');
-    if (gt == -1) { // only "k" -> "<k />"
-      xml.append(
-        "<").append(kv).append(" />"
-      ).append(nl);
-    } else { // "k>v" -> "<k>v</k>"
-      String k = kv.substring(0, gt);
-      xml.append(space).append(
-        "<").append(kv).append("</").append(k).append(">"
-      ).append(nl);
-    }
-  }
+
+  // sp="  "
+  // key={"k1", "k2", ...}
+  // val={"v1", "v2", ...}
+  //   -> "  <k1>v1</k1>" + nl + "  <k2>v2..."
   public void tags(
-    String space, String[] key, String[] val
+    String sp, String[] key, String[] val
   ) {
     for (int i = 0; i < val.length; i++) {
       if (val[i] == null || "".equals(val[i])) continue;
-      xml.append(space);
+      xml.append(sp);
       xml.append("<").append(key[i]).append(">");
       xml.append(val[i]);
       xml.append("</").append(key[i]).append(">");
       nl();
+    }
+  }
+  // sp="  "
+  // kv={"k1>v1", "k2>v2", ...}
+  //   -> "  <k1>v1</k1>" + nl + "  <k2>v2..."
+  public void kv(String sp, String[] kv) {
+    for (int i=0; i<kv.length; i++) {
+      kv(sp, kv[i]);
+    }
+  }
+  // sp="  "
+  // kv="k>v"
+  //  -> "  <k>v</k>"
+  public void kv(String sp, String kv) {
+    int gt = kv.indexOf('>');
+    if (gt == -1) { // only "k" -> "<k />"
+      xml.append(sp).append(
+        "<").append(kv).append(" />"
+      ).append(nl);
+    } else { // "k>v" -> "<k>v</k>"
+      String k = kv.substring(0, gt);
+      xml.append(sp).append(
+        "<").append(kv).append("</").append(k).append(">"
+      ).append(nl);
+    }
+  }
+  // sp="  "
+  // x="  <k1>v1</k1>" + nl + "  <k2>v2..."
+  //   -> "    <k1>v1</k1>" + nl + "    <k2>v2..."
+  public void xml(String sp, String x) {
+    for (int s=0, e=0; ;s=e) {
+      e = x.indexOf(nl, s);
+      if (e == -1) break;
+      e = e+nlLen;
+      xml.append(sp).append(
+        x.substring(s, e)
+      );
     }
   }
 }
