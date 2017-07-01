@@ -46,13 +46,15 @@ public class Opt {
     o.println("This option creates pom.poml and maven project.");
     o.println("Please answer some questions. (Press ^C to quit.)");
     o.println();
-    in = new BufferedReader(new InputStreamReader(System.in));
-    String grp = ask("groupId", "com.domain");
-    String art = ask("artifactId", name(new File("."))); // current dir
-    String ver = ask("version", "1.0.0");
-    String pkg = ask("packaging", "jar");
-    String enc = ask("encoding", "UTF-8");
-    String jvc = ask("javac version", "1.8");
+    BufferedReader in = new BufferedReader(
+      new InputStreamReader(System.in)
+    );
+    String grp = ask("groupId", "com.domain", in);
+    String art = ask("artifactId", name(new File(".")), in);
+    String ver = ask("version", "1.0.0", in);
+    String pkg = ask("packaging", "jar", in);
+    String enc = ask("encoding", "UTF-8", in);
+    String jvc = ask("javac version", "1.8", in);
     o.println();
     String poml = (new StringBuilder(
       ).append(Basic.pkg).append("="
@@ -67,15 +69,16 @@ public class Opt {
     o.println();
     o.println(poml);
     o.println();
-    String ok = ask("ok?", "yes");
+    String ok = ask("ok?", "yes", in);
     if ("yes".equals(ok)) project(poml);
     else o.println("Quit.");
   }
-  private static BufferedReader in;
-  private static String ask(String item, String defVal) throws IOException {
-    o.print((new StringBuilder(  // Question -> "item: (defval) "
+  private static String ask(
+    String item, String defVal, BufferedReader in
+  ) throws IOException {
+    o.print((new StringBuilder(
       ).append(item).append(": (").append(defVal).append(") ")
-    ).toString());
+    ).toString());  //-> "item: (defval) "
     String usrVal = in.readLine();
     return "".equals(usrVal) ? defVal : usrVal;
   }

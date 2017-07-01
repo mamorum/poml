@@ -72,7 +72,7 @@ public class Main {
 
   // file operations
   private static final String utf8 = "UTF-8";
-  static BufferedReader open(String path) throws IOException {
+  private static BufferedReader open(String path) throws IOException {
     return new BufferedReader(new InputStreamReader
       (new FileInputStream(path), utf8)
     );

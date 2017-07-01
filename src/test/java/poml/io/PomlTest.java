@@ -18,10 +18,6 @@ public class PomlTest extends UtCase {
     poml("# comment");
     Assert.assertEquals(0, poml.conf.kv.size());
   }
-  @Test public void layout() {
-    poml("---");
-    Assert.assertTrue(poml.hasLayout);
-  }
   @Test public void ng_noKey1() {
     try {
       poml("aaa");

@@ -9,9 +9,7 @@ public class Xml {
   private static final int nlLen = nl.length();
 
   private StringBuilder xml = new StringBuilder();
-  @Override public String toString() {
-    return xml.toString();
-  }
+  public String toString() { return xml.toString(); }
 
   // -> api to add xml element.
   public Xml txt(String s) {

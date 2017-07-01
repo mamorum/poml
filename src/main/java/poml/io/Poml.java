@@ -12,7 +12,7 @@ import poml.convert.Prj;
 // pom.poml & conversion tool (parse, render)
 public class Poml {
   public Conf conf = new Conf();
-  boolean hasLayout = false;
+  private boolean hasLayout = false;
   private BufferedReader in;
   private String line;
   private int ieq;
