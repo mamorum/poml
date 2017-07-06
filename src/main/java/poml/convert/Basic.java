@@ -68,24 +68,18 @@ public class Basic {
     out.line("  </properties>");
   }
   /// properties=&encoding>v
-  private static final String
-    sse="    <project.build.sourceEncoding>",
-    ese="</project.build.sourceEncoding>",
-    soe="    <project.reporting.outputEncoding>",
-    eoe="</project.reporting.outputEncoding>";
   private static void enc(Xml out, String v) {
-    out.txt(sse).txt(v).line(ese);
-    out.txt(soe).txt(v).line(eoe);
+    out.txt("    <project.build.sourceEncoding>")
+      .txt(v).line("</project.build.sourceEncoding>");
+    out.txt("    <project.reporting.outputEncoding>")
+      .txt(v).line("</project.reporting.outputEncoding>");
   }
   /// properties=&compiler>v
-  private static final String
-    scs="    <maven.compiler.source>",
-    ecs="</maven.compiler.source>",
-    sct="    <maven.compiler.target>",
-    ect="</maven.compiler.target>";
   private static void javac(Xml out, String v) {
-    out.txt(scs).txt(v).line(ecs);
-    out.txt(sct).txt(v).line(ect);
+    out.txt("    <maven.compiler.source>")
+      .txt(v).line("</maven.compiler.source>");
+    out.txt("    <maven.compiler.target>")
+      .txt(v).line("</maven.compiler.target>");
   }
   private static String v(String kv) {
     return kv.substring(kv.indexOf('>')+1);

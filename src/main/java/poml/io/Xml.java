@@ -52,16 +52,11 @@ public class Xml {
   //  -> "  <k>v</k>"
   public void kv(String sp, String kv) {
     int gt = kv.indexOf('>');
-    if (gt == -1) { // only "k" -> "<k />"
-      xml.append(sp).append(
-        "<").append(kv).append(" />"
-      ).append(nl);
-    } else { // "k>v" -> "<k>v</k>"
-      String k = kv.substring(0, gt);
-      xml.append(sp).append(
-        "<").append(kv).append("</").append(k).append(">"
-      ).append(nl);
-    }
+    if (gt == -1) return;  // not k>v
+    String k = kv.substring(0, gt);
+    xml.append(sp).append(
+      "<").append(kv).append("</").append(k).append(">"
+    ).append(nl);
   }
   // sp="  "
   // x="  <k1>v1</k1>" + nl + "  <k2>v2..."

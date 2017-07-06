@@ -80,7 +80,7 @@ public class XmlTest {
   @Test public void kv_no_v() {
     xml.kv("  ", "k");
     assertEquals(
-      "  <k />" + nl, xml.toString()
+      "", xml.toString()
     );
   }
 
