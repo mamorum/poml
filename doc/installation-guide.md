@@ -9,13 +9,13 @@ java version "1.8.0_...
 ```
 
 ## Install
-Following commands is for version `0.3.0`. Please replace `0.3.0` with the version which you will install.
+Following commands is for version `1.0.0`. Please replace `1.0.0` with the version which you will install.
 
 ### 1. Download
 Get a file from [Release Page](https://github.com/mamorum/poml/releases). (not "Source code" file.)
 
 ```
-# wget https://github.com/mamorum/poml/releases/download/v0.3.0/poml-0.3.0.tar.gz
+# wget https://github.com/mamorum/poml/releases/download/v1.0.0/poml-1.0.0.tar.gz
 ```
 
 
@@ -23,7 +23,7 @@ Get a file from [Release Page](https://github.com/mamorum/poml/releases). (not "
 Extract it in any directory.
 
 ```
-# tar zxvf poml-0.3.0.tar.gz
+# tar zxvf poml-1.0.0.tar.gz
 ```
 
 
@@ -31,7 +31,7 @@ Extract it in any directory.
 Add the extracted directory to the `PATH` (or `Path`).
 
 ```
-$ export PATH=$PATH:/opt/poml-0.3.0
+$ export PATH=$PATH:/opt/poml-1.0.0
 ```
 
 
@@ -40,7 +40,7 @@ Execute `poml -v` command.
 
 ```
 $ poml -v
-0.3.0
+1.0.0
 ```
 
 
