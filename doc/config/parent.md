@@ -1,6 +1,6 @@
 # parent {{parent}}
 ```
-parent=groupId:artifactId:version
+parent=groupId:artifactId:version:relativePath
 ```
 
 
