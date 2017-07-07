@@ -14,21 +14,21 @@ import poml.io.Poml;
 public class Main {
   public static void main(String[] args) throws Throwable {
     if (args.length == 2) convert(args[0], args[1]);
-    else if (args.length == 1) option(new Opt(), args[0]);
-    else ng(new Opt()); // invalid args
+    else if (args.length == 1) option(args[0]);
+    else ng(); // invalid args
   }
 
   // cmd "poml option"
-  private static void option(Opt opt, String arg) throws Throwable {
-    if ("-h".equals(arg)) opt.help();
-    else if ("help".equals(arg)) opt.help();
-    else if ("-v".equals(arg)) opt.version();
-    else if ("version".equals(arg)) opt.version();
-    else if ("mkdirs".equals(arg)) opt.mkdirs();
-    else if ("init".equals(arg)) opt.init();
-    else ng(opt); // not found
+  private static void option(String arg) throws Throwable {
+    if ("-h".equals(arg)) Opt.help();
+    else if ("help".equals(arg)) Opt.help();
+    else if ("-v".equals(arg)) Opt.version();
+    else if ("version".equals(arg)) Opt.version();
+    else if ("mkdirs".equals(arg)) Opt.mkdirs();
+    else if ("init".equals(arg)) Opt.init();
+    else ng(); // not found
   }
-  private static void ng(Opt opt) { opt.help(); System.exit(1); }
+  private static void ng() { Opt.help(); System.exit(1); }
 
   // cmd "poml pom.poml pom.xml"
   static void convert(
@@ -72,7 +72,7 @@ public class Main {
 
   // file operations
   private static final String utf8 = "UTF-8";
-  static BufferedReader open(String path) throws IOException {
+  private static BufferedReader open(String path) throws IOException {
     return new BufferedReader(new InputStreamReader
       (new FileInputStream(path), utf8)
     );

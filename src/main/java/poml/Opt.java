@@ -10,7 +10,7 @@ import poml.convert.Basic;
 
 public class Opt {
   private static final PrintStream o = System.out;
-  public void help() {
+  static void help() {
     o.println("Usage: poml [option]");
     o.println();
     o.println("  Convert pom.poml to pom.xml (if no option is specified)");
@@ -21,7 +21,7 @@ public class Opt {
     o.println("  mkdirs     \t   create src dirs for maven project");
     o.println("  init       \t   create pom.poml, pom.xml and src dirs");
   }
-  public void version() {
+  static void version() {
     o.println(
       Opt.class.getPackage().getImplementationVersion()
     );
@@ -30,7 +30,7 @@ public class Opt {
   private static final String
     mj="src/main/java", mr="src/main/resources",
     tj="src/test/java", tr="src/test/resources";
-  public void mkdirs() {
+  static void mkdirs() {
     (new File(mj)).mkdirs();
     (new File(mr)).mkdirs();
     (new File(tj)).mkdirs();
@@ -42,17 +42,19 @@ public class Opt {
     o.print(" "); o.println(tr);
   }
   // init ->
-  public void init() throws Throwable {
+  static void init() throws Throwable {
     o.println("This option creates pom.poml and maven project.");
     o.println("Please answer some questions. (Press ^C to quit.)");
     o.println();
-    this.in = new BufferedReader(new InputStreamReader(System.in));
-    String grp = ask("groupId", "com.domain");
-    String art = ask("artifactId", name(new File("."))); // current dir
-    String ver = ask("version", "1.0.0");
-    String pkg = ask("packaging", "jar");
-    String enc = ask("encoding", "UTF-8");
-    String jvc = ask("javac version", "1.8");
+    BufferedReader in = new BufferedReader(
+      new InputStreamReader(System.in)
+    );
+    String grp = ask("groupId", "com.domain", in);
+    String art = ask("artifactId", name(new File(".")), in);
+    String ver = ask("version", "1.0.0", in);
+    String pkg = ask("packaging", "jar", in);
+    String enc = ask("encoding", "UTF-8", in);
+    String jvc = ask("javac version", "1.8", in);
     o.println();
     String poml = (new StringBuilder(
       ).append(Basic.pkg).append("="
@@ -67,22 +69,23 @@ public class Opt {
     o.println();
     o.println(poml);
     o.println();
-    String ok = ask("ok?", "yes");
+    String ok = ask("ok?", "yes", in);
     if ("yes".equals(ok)) project(poml);
     else o.println("Quit.");
   }
-  private BufferedReader in;
-  private String ask(String item, String defVal) throws IOException {
-    o.print((new StringBuilder(  // Question -> "item: (defval) "
+  private static String ask(
+    String item, String defVal, BufferedReader in
+  ) throws IOException {
+    o.print((new StringBuilder(
       ).append(item).append(": (").append(defVal).append(") ")
-    ).toString());
+    ).toString());  //-> "item: (defval) "
     String usrVal = in.readLine();
     return "".equals(usrVal) ? defVal : usrVal;
   }
-  private String name(File f) {
+  private static String name(File f) {
     return f.getAbsoluteFile().getParentFile().getName();
   }
-  private void project(String poml) throws Throwable {
+  private static void project(String poml) throws Throwable {
     Main.save(poml, "pom.poml");
     o.println();
     o.println("[INFO] Created pom.poml");
