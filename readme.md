@@ -83,8 +83,16 @@ In the following directories, `pom.poml` and converted `pom.xml` exist.
 
 
 ## Showcase
-- This project: Eats own poml.
+- [poml](https://github.com/mamorum/poml): eats own poml.
+- [kaze](https://github.com/mamorum/kaze): java framework, deployed to the maven central repository.
+- [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): kaze web app, packaged as fatjar.
 
-<!--
-- [kaze-sample-rdb](https://github.com/mamorum/kaze-sample/tree/master/rdb): Web application, packaged as fatjar.
--->
+
+## Versioning
+Number is `MAJOR.MINOR.PATCH`, based on [Semantic Versioning 2.0.0](http://semver.org/).
+
+Increment the:
+
+1. `MAJOR` for incompatible changes on poml syntax or command,
+2. `MINOR` for backwards-compatible changes on those, and
+3. `PATCH` for backwards-compatible bug fixes.
