@@ -44,6 +44,8 @@
   </properties>
 
   <build>
+    <defaultGoal>install</defaultGoal>
+    <finalName>${artifactId}-${version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

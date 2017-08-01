@@ -6,6 +6,7 @@ depend=
   ch.qos.logback:logback-classic:1.1.7:test:true:jar
 properties=
   &encoding>UTF-8, &compiler>1.8, gpg.skip>true
+builds=defaultGoal>install, finalName>${artifactId}-${version}
 plugin=$clean, &ossrh, &fatjar
 $clean=org.apache.maven.plugins:maven-clean-plugin:3.0.0
 $clean.conf={

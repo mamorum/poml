@@ -5,6 +5,80 @@ import org.junit.Test;
 import poml.UtCase;
 
 public class BuildTest extends UtCase {
+  //-> Build#all
+  @Test public void all_builds() {
+    poml(
+      "builds=finalName>demo" + nl
+    );
+    Build.all(poml, xml);
+    xml(
+      nl +
+      "  <build>" + nl +
+      "    <finalName>demo</finalName>" + nl +
+      "  </build>" + nl
+    );
+  }
+  @Test public void all_plugin() {
+    poml(
+      "plugin=$war" + nl +
+      "$war=:maven-war-plugin:3.1.0" + nl
+    );
+    Build.all(poml, xml);
+    xml(
+      nl +
+      "  <build>" + nl +
+      "    <plugins>" + nl +
+      "      <plugin>" + nl +
+      "        <artifactId>maven-war-plugin</artifactId>" + nl +
+      "        <version>3.1.0</version>" + nl +
+      "      </plugin>" + nl +
+      "    </plugins>" + nl +
+      "  </build>" + nl
+    );
+  }
+
+  @Test public void all_builds_plugin() {
+    poml(
+      "builds=finalName>demo" + nl +
+      "plugin=$war" + nl +
+      "$war=:maven-war-plugin:3.1.0" + nl
+    );
+    Build.all(poml, xml);
+    xml(
+      nl +
+      "  <build>" + nl +
+      "    <finalName>demo</finalName>" + nl +
+      "    <plugins>" + nl +
+      "      <plugin>" + nl +
+      "        <artifactId>maven-war-plugin</artifactId>" + nl +
+      "        <version>3.1.0</version>" + nl +
+      "      </plugin>" + nl +
+      "    </plugins>" + nl +
+      "  </build>" + nl
+    );
+  }
+
+  //-> builds=k>v, k>v, ...
+  @Test public void builds_multi() {
+    poml(
+      "builds=" + nl +
+      " defaultGoal>test, finalName>demo" + nl
+    );
+    Build.builds(poml, xml);
+    xml(
+      "    <defaultGoal>test</defaultGoal>" + nl +
+      "    <finalName>demo</finalName>" + nl
+    );
+  }
+  @Test public void builds_single() {
+    poml(
+      "builds=finalName>demo" + nl
+    );
+    Build.builds(poml, xml);
+    xml(
+      "    <finalName>demo</finalName>" + nl
+    );
+  }
 
   //-> plugin=$1, $2, ...
   @Test public void plugin_multi() {
