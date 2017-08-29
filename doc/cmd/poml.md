@@ -18,20 +18,26 @@ Print usage and options.
 ### `-v`, `version`
 Print poml version.
 
-### `mkdirs`
-Create following src directories for maven project
+### `jardir`, `mkdirs`
+Create following src directories for maven jar project.
 
 - src/main/java
 - src/main/resources
 - src/test/java
 - src/test/resources
 
+### `wardir`
+Create following src directories for maven war project.
+
+- src/main/webapp/WEB-INF
+- dirs created by `jardir`
+
 ### `init`
 Create following resources to init maven project.
 
 - `pom.poml`
 - `pom.xml` (converted from  `pom.poml`)
-- src directories (created by `mkdirs`)
+- src directories (created by `jardir` or `wardir`, depending on project's packaging)
 
 This option asks some questions to create `pom.poml`.
 

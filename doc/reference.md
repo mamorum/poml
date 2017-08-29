@@ -6,7 +6,8 @@
     - [parent](config/parent.md)
     - [depend](config/depend.md)
     - [properties](config/properties.md)
-- Build Plugins
+- Build
+    - [build.base](config/build_base.md)
     - [plugin](config/plugin.md)
 - More Project Info
     - [info](config/info.md)
