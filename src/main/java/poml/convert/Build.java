@@ -4,17 +4,17 @@ import poml.io.Poml;
 import poml.io.Xml;
 
 public class Build {
-  public static final String builds="builds";
+  public static final String base="build.base";
   public static final String plugin="plugin";
 
   public static void all(Poml in, Xml out) {
-    boolean b = in.conf.has(builds);
+    boolean b = in.conf.has(base);
     boolean p = in.conf.has(plugin);
     boolean exist = b || p;
     if (exist) {
       out.nl();
       out.line("  <build>");
-      if (b) builds(in, out);
+      if (b) base(in, out);
       if (p) {
         out.line("    <plugins>");
         plugin(in, out);
@@ -24,9 +24,9 @@ public class Build {
     }
   }
 
-  // -> builds=k>v, k>v ...
-  public static void builds(Poml in, Xml out) {
-    String[] kv = in.conf.csv(builds);
+  // -> build.base=k>v, k>v ...
+  public static void base(Poml in, Xml out) {
+    String[] kv = in.conf.csv(base);
     out.kv(Xml.sp4, kv);
   }
 

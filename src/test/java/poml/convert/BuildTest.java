@@ -8,7 +8,7 @@ public class BuildTest extends UtCase {
   //-> Build#all
   @Test public void all_builds() {
     poml(
-      "builds=finalName>demo" + nl
+      "build.base=finalName>demo" + nl
     );
     Build.all(poml, xml);
     xml(
@@ -39,7 +39,7 @@ public class BuildTest extends UtCase {
 
   @Test public void all_builds_plugin() {
     poml(
-      "builds=finalName>demo" + nl +
+      "build.base=finalName>demo" + nl +
       "plugin=$war" + nl +
       "$war=:maven-war-plugin:3.1.0" + nl
     );
@@ -61,10 +61,10 @@ public class BuildTest extends UtCase {
   //-> builds=k>v, k>v, ...
   @Test public void builds_multi() {
     poml(
-      "builds=" + nl +
+      "build.base=" + nl +
       " defaultGoal>test, finalName>demo" + nl
     );
-    Build.builds(poml, xml);
+    Build.base(poml, xml);
     xml(
       "    <defaultGoal>test</defaultGoal>" + nl +
       "    <finalName>demo</finalName>" + nl
@@ -72,9 +72,9 @@ public class BuildTest extends UtCase {
   }
   @Test public void builds_single() {
     poml(
-      "builds=finalName>demo" + nl
+      "build.base=finalName>demo" + nl
     );
-    Build.builds(poml, xml);
+    Build.base(poml, xml);
     xml(
       "    <finalName>demo</finalName>" + nl
     );

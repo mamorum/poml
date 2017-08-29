@@ -115,7 +115,7 @@ public class Poml {
     else if (Basic.parent.equals(key)) Basic.parent(this, o);
     else if (Basic.depend.equals(key)) Basic.depend(this, o);
     else if (Basic.properties.equals(key)) Basic.properties(this, o);
-    else if (Build.builds.equals(key)) Build.builds(this, o);
+    else if (Build.base.equals(key)) Build.base(this, o);
     else if (Build.plugin.equals(key)) Build.plugin(this, o);
     else if (More.info.equals(key)) More.info(this, o);
     else if (More.license.equals(key)) More.license(this, o);
