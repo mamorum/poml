@@ -6,7 +6,7 @@ import poml.UtCase;
 
 public class BuildTest extends UtCase {
   //-> Build#all
-  @Test public void all_builds() {
+  @Test public void all_base() {
     poml(
       "build.base=finalName>demo" + nl
     );
@@ -37,7 +37,7 @@ public class BuildTest extends UtCase {
     );
   }
 
-  @Test public void all_builds_plugin() {
+  @Test public void all_base_plugin() {
     poml(
       "build.base=finalName>demo" + nl +
       "plugin=$war" + nl +
@@ -58,11 +58,11 @@ public class BuildTest extends UtCase {
     );
   }
 
-  //-> builds=k>v, k>v, ...
-  @Test public void builds_multi() {
+  //-> build.base=k>v, k>v, ...
+  @Test public void base_multi() {
     poml(
       "build.base=" + nl +
-      " defaultGoal>test, finalName>demo" + nl
+      "  defaultGoal>test, finalName>demo" + nl
     );
     Build.base(poml, xml);
     xml(
@@ -70,7 +70,7 @@ public class BuildTest extends UtCase {
       "    <finalName>demo</finalName>" + nl
     );
   }
-  @Test public void builds_single() {
+  @Test public void base_single() {
     poml(
       "build.base=finalName>demo" + nl
     );
