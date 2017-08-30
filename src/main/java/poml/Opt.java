@@ -18,8 +18,12 @@ public class Opt {
     o.println("Option:");
     o.println("  -h, help   \t   print this help");
     o.println("  -v, version\t   print poml version");
-    o.println("  mkdirs     \t   create src dirs for maven project");
+    o.println("  jardir     \t   create jar src dirs");
+    o.println("  wardir     \t   create war src dirs");
     o.println("  init       \t   create pom.poml, pom.xml and src dirs");
+    o.println();
+    o.println("Deprecated Option:");
+    o.println("  mkdirs    \t   same as jardir");
   }
   static void version() {
     o.println(
@@ -29,8 +33,9 @@ public class Opt {
   // mkdirs ->
   private static final String
     mj="src/main/java", mr="src/main/resources",
-    tj="src/test/java", tr="src/test/resources";
-  static void mkdirs() {
+    tj="src/test/java", tr="src/test/resources",
+    mw="src/main/webapp/WEB-INF";
+  static void jardir() {
     (new File(mj)).mkdirs();
     (new File(mr)).mkdirs();
     (new File(tj)).mkdirs();
@@ -40,6 +45,11 @@ public class Opt {
     o.print(" "); o.println(mr);
     o.print(" "); o.println(tj);
     o.print(" "); o.println(tr);
+  }
+  static void wardir() {
+    (new File(mw)).mkdirs();
+    jardir();
+    o.print(" "); o.println(mw);
   }
   // init ->
   static void init() throws Throwable {
@@ -70,7 +80,7 @@ public class Opt {
     o.println(poml);
     o.println();
     String ok = ask("ok?", "yes", in);
-    if ("yes".equals(ok)) project(poml);
+    if ("yes".equals(ok)) project(poml, pkg);
     else o.println("Quit.");
   }
   private static String ask(
@@ -85,11 +95,12 @@ public class Opt {
   private static String name(File f) {
     return f.getAbsoluteFile().getParentFile().getName();
   }
-  private static void project(String poml) throws Throwable {
+  private static void project(String poml, String pkg) throws Throwable {
     Main.save(poml, "pom.poml");
     o.println();
     o.println("[INFO] Created pom.poml");
     Main.convert("pom.poml", "pom.xml");
-    mkdirs();
+    if ("war".equals(pkg)) wardir();
+    else jardir();
   }
 }

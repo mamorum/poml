@@ -24,8 +24,11 @@ public class Main {
     else if ("help".equals(arg)) Opt.help();
     else if ("-v".equals(arg)) Opt.version();
     else if ("version".equals(arg)) Opt.version();
-    else if ("mkdirs".equals(arg)) Opt.mkdirs();
+    else if ("jardir".equals(arg)) Opt.jardir();
+    else if ("wardir".equals(arg)) Opt.wardir();
     else if ("init".equals(arg)) Opt.init();
+    // deprecated ->
+    else if ("mkdirs".equals(arg)) Opt.jardir();
     else ng(); // not found
   }
   private static void ng() { Opt.help(); System.exit(1); }

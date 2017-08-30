@@ -5,7 +5,7 @@ issue=system>v, url>v
 
 
 ## Examples
-## Config
+### Config
 **poml**
 ```
 issue=
@@ -21,7 +21,7 @@ issue=
   </issueManagement>
 ```
 
-## Config + Layout
+### Config + Layout
 **poml**
 ```
 issue=url>https://github.com/mamorum/poml/issues

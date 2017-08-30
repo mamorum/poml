@@ -5,7 +5,7 @@ parent=groupId:artifactId:version:relativePath
 
 
 ## Examples
-## Config
+### Config
 **poml**
 ```
 parent=com.example:demo-parent:0.0.1
@@ -20,7 +20,7 @@ parent=com.example:demo-parent:0.0.1
   </parent>
 ```
 
-## Config + Layout
+### Config + Layout
 **poml**
 ```
 parent=com.example:demo-parent:0.0.1:../pom.xml

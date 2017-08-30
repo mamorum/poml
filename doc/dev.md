@@ -1,11 +1,14 @@
 ## Task List for Release
 - Dev (coding, test)
-- Create archive (tar, zip)
-  - exec archive.sh
-  - check archives
 - Update document
   - readme.md
   - poml/doc/*
+- Pull request
+  - merge
+- Create archive (tar, zip)
+  - pull (@master)
+  - exec archive.sh
+  - check archives
 - Release (GitHub)
   - write changelog
   - upload tar, zip
