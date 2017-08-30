@@ -8,6 +8,7 @@ There are two things in Poml.
 
 
 ## Documents
+- [Releases (Download)](releases)
 - [Installation Guide](doc/installation-guide.md)
 - [User Guide](doc/user-guide.md)
 - [Reference](doc/reference.md)
