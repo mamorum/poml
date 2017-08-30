@@ -8,7 +8,7 @@ There are two things in Poml.
 
 
 ## Documents
-- [Releases (Download)](releases)
+- [Releases (Download)](/mamorum/poml/releases)
 - [Installation Guide](doc/installation-guide.md)
 - [User Guide](doc/user-guide.md)
 - [Reference](doc/reference.md)
