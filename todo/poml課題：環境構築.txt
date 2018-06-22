@@ -1,0 +1,13 @@
+- 完了：仮想環境構築（Winにインストール）
+  - VirtualBox, Vagrant, PuTTY ごった煮
+- 完了：リリース環境整備（Ubuntuにインストール）
+  - プロンプト設定, Git, JDK, Maven, Zip, nkf（readme.md に記録済）
+- 完了：Poml パッケージング（初回, ２回目～, readme.md に記録済）
+- 完了：ローカル開発環境整備
+  - 最新POML利用準備：C:\Users\m\git\poml\dist を Path に通す。
+  -> 作業は完了。どこかに記録する。
+  -> あと、リリース前にローカルでzipを解凍して、distにコピーしている。
+  -> GitHub でも distの変更がないか確認している。
+  -> poml（シェル）だけは、改行コードの問題で変更をdiscardしている。
+  -> Winに落とす時に、シェルの改行コードが変更されるため。
+  -> Winに落としたシェルのほうがサイズが大きい。

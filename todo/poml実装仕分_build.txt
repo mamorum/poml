@@ -1,0 +1,142 @@
+done: 実装完了
+○：実装予定
+△：要検討
+×：実装しない
+
+  <build>
+
+    ×<sourceDirectory/>
+    ×<scriptSourceDirectory/>
+    ×<testSourceDirectory/>
+    ×<outputDirectory/>
+    ×<testOutputDirectory/>
+    //-> わざわざ default dir を変えなくても良いかと。
+
+    // △調査
+    <extensions>
+      <extension>
+        <groupId/>
+        <artifactId/>
+        <version/>
+      </extension>
+    </extensions>
+
+    // 〇実装する
+    <defaultGoal/>
+    
+    // × default dir は変えなくても良いかと。
+    <resources>
+      <resource>
+        <targetPath/>
+        <filtering/>
+        <directory/>
+        <includes/>
+        <excludes/>
+      </resource>
+    </resources>
+    
+    // × default dir は変えなくても良いかと。
+    <testResources>
+      <testResource>
+        <targetPath/>
+        <filtering/>
+        <directory/>
+        <includes/>
+        <excludes/>
+      </testResource>
+    </testResources>
+    
+    // × default の target は変えなくても良いかと。
+    <directory/>
+
+    // ○ 実装する
+    <finalName/>
+
+    // × 加工したいプロパティファイル関連
+    //  -> 今のところは実装しなくて大丈夫そう。
+    <filters/>
+    
+    // △要調査
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId/>
+          <artifactId/>
+          <version/>
+          <extensions/>
+          <executions>
+            <execution>
+              <id/>
+              <phase/>
+              <goals/>
+              <inherited/>
+              <configuration/>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId/>
+              <artifactId/>
+              <version/>
+              <type/>
+              <classifier/>
+              <scope/>
+              <systemPath/>
+              <exclusions>
+                <exclusion>
+                  <artifactId/>
+                  <groupId/>
+                </exclusion>
+              </exclusions>
+              <optional/>
+            </dependency>
+          </dependencies>
+          <goals/>
+          <inherited/>
+          <configuration/>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    
+    // done: ただし、goalsとinheritedは実装してない。
+    // -> 必要に応じて調査する。
+    <plugins>
+      <plugin>
+        <groupId/>
+        <artifactId/>
+        <version/>
+        <extensions/>
+        <executions>
+          <execution>
+            <id/>
+            <phase/>
+            <goals/>
+            <inherited/>
+            <configuration/>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId/>
+            <artifactId/>
+            <version/>
+            <type/>
+            <classifier/>
+            <scope/>
+            <systemPath/>
+            <exclusions>
+              <exclusion>
+                <artifactId/>
+                <groupId/>
+              </exclusion>
+            </exclusions>
+            <optional/>
+          </dependency>
+        </dependencies>
+        <goals/>
+        <inherited/>
+        <configuration/>
+      </plugin>
+    </plugins>
+
+  </build>

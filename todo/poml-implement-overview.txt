@@ -1,0 +1,53 @@
+Overview of POM 
+  from https://maven.apache.org/pom.html#Quick_Overview
+
+済<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  済<modelVersion>4.0.0</modelVersion>
+ 
+  <!-- The Basics -->
+  済pkg<groupId>...</groupId>
+  済pkg<artifactId>...</artifactId>
+  済pkg<version>...</version>
+  済pkg<packaging>...</packaging>
+  済depend<dependencies>...</dependencies>
+                           -> systemPath は実装しない。
+  済parent<parent>...</parent>
+  未<dependencyManagement>...</dependencyManagement>
+        ->relativePath は実装しない。
+  未<modules>...</modules>
+  済properties<properties>...</properties>
+ 
+  <!-- Build Settings -->
+  <build>
+    <plugins>
+      済plugin<plugin>...</plugin>
+    </pugins>
+  </build>
+  
+  未<reporting>...</reporting>
+ 
+  <!-- More Project Information -->
+  済info<name>...</name>
+  済info<description>...</description>
+  済info<url>...</url>
+  済info<inceptionYear>...</inceptionYear>
+  済license<licenses>...</licenses>
+  実装しない<organization>...</organization>
+  済developer<developers>...</developers>
+  実装しない<contributors>...</contributors>
+ 
+  <!-- Environment Settings -->
+  済issue<issueManagement>...</issueManagement>
+  実装しない<ciManagement>...</ciManagement>
+  実装しない<mailingLists>...</mailingLists>
+  済scm<scm>...</scm>
+  <prerequisites>...</prerequisites>
+  <repositories>...</repositories>
+  <pluginRepositories>...</pluginRepositories>
+  済dist<distributionManagement>...
+  <profiles>...</profiles>
+
+済</project>
