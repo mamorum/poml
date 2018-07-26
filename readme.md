@@ -1,6 +1,4 @@
 # POML: POM's Minimal Language
-[![Build Status](https://travis-ci.org/mamorum/poml.svg?branch=master)](https://travis-ci.org/mamorum/poml)
-
 There are two things in Poml.
 
 1. Syntax for writing Poml file named `pom.poml`.
@@ -96,3 +94,7 @@ Increment the:
 1. `MAJOR` for incompatible changes on poml syntax or command,
 2. `MINOR` for backwards-compatible changes on those, and
 3. `PATCH` for backwards-compatible bug fixes.
+
+
+## Build Status
+- [Travis CI](https://travis-ci.org/mamorum/poml)
